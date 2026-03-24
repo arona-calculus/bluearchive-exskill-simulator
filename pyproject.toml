@@ -1,0 +1,32 @@
+[project]
+name = "bluearchive-exskill-simulator"
+version = "0.1.0"
+description = "Timeline Simulator for Blue Archive: An algebraic engine for EX skill sequences."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=2.3.5",
+    "numba>=0.63.1",
+    "pandas>=2.3.3",
+    "pyyaml>=6.0.3",
+    "scipy>=1.16.3",
+    "typing-extensions>=4.12.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ["py313"]
+
+[tool.uv]
+# ワークスペース内での開発用
+dev-dependencies = [
+    "black>=24.0.0",
+    "flake8>=7.0.0",
+]
