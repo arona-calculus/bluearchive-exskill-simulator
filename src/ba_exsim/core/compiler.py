@@ -23,11 +23,38 @@ class CharacterSpec:
     def on_active(self, state: State, k: int) -> State:
         """
         自分がEXスキルを使用した際の主作用。
-        デフォルトは通常通りの巡回置換 π_k^(L)。
+        使用されたカード(k)はデッキの最後尾に送られ、
+        デッキの先頭(3)のカードが、使用されたスロット(k)を埋める。
         """
-        L = state.get_env("L", 6)
-        p = get_cycle_permutation(k, L)
-        return state.update(cards=apply_permutation(state.cards, p))
+        cards = list(state.cards)
+        L = state.get_env("L", len(cards))
+
+        # 手札は0, 1, 2。山札は3からL-1まで
+        if L <= 3:  # 山札がない場合は何も起こらない
+            return state
+
+        # 1. 使用したカード(k)と、山札から引くカード(3)を特定
+        used_card = cards[k]
+        drawn_card = cards[3]
+
+        # 2. 山札を左に1つシフト
+        #    例: [d1, d2, d3] -> [d2, d3]
+        deck_cards = cards[4:L]
+
+        # 3. 新しいカードリストを構築
+        # 3a. まず手札部分を更新
+        new_cards = cards[:3]
+        new_cards[k] = drawn_card
+        
+        # 3b. 更新された山札と、末尾に追加された使用済みカードを結合
+        new_cards.extend(deck_cards)
+        new_cards.append(used_card)
+
+        # 3c. 不活性領域のカードがあれば追加
+        if len(cards) > L:
+            new_cards.extend(cards[L:])
+
+        return state.update(cards=tuple(new_cards))
 
     def on_passive(self, state: State, active_char: str, k: int) -> State:
         """
