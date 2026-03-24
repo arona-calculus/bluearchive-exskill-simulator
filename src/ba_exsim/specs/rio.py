@@ -1,65 +1,121 @@
 from __future__ import annotations
-from typing import Dict, Any
+from typing import List, Tuple, Callable
+
 from ba_exsim.core.state import State
 from ba_exsim.core.compiler import CharacterSpec
-from ba_exsim.core.algebra import get_cycle_permutation, apply_permutation
+from ba_exsim.core.algebra import Permutation, find_char
 
 
 class RioSpec(CharacterSpec):
     """
-    リオの代数的仕様定義。
-
-    主な特性:
-    1. 状態空間の次元 'L' (6 or 7) を操作する。
-    2. EXスキルを使用すると、通常の置換の後に L を 7 に設定する。
-    3. これにより、スロット7にいたトークンが次回の山札ローテーションに組み込まれる。
+    Rio's character specification based on the `get_actions` pattern.
+    Her EX skill summons a decoy unit, "AvantGarde".
     """
-
-    def __init__(self):
+    def __init__(self, decoy_name: str = "AvantGarde"):
         super().__init__(name="Rio")
+        self.decoy_name = decoy_name
 
-    def required_state(self) -> Dict[str, Any]:
-        """初期状態ではデッキ次元 L=6（トークンは不活性）から開始"""
-        return {"L": 6}
+    def get_actions(self, spec_idx: int, L: int, hand_size: int) -> List[Tuple[Callable, Callable]]:
+        return [
+            self._get_action_on_self(hand_size),
+            self._get_action_on_others(hand_size),
+        ]
 
-    def on_active(self, state: State, k: int) -> State:
-        """
-        リオのEXスキル発動（主作用）。
-        カードを回した直後、デッキの有効境界 L を 7 へ拡張する。
-        """
-        L_current = state.get_env("L", 6)
+    def _get_action_on_self(self, hand_size: int):
+        """Action when Rio's own skill is used."""
+        def condition(state: State, action_slot: int) -> bool:
+            my_slot, _ = find_char(state.cards, self.name)
+            return my_slot is not None and my_slot == action_slot
 
-        # 1. 現在の次元 L で巡回置換を適用（自身は山札の最後尾へ）
-        p = get_cycle_permutation(k, L_current)
-        new_cards = apply_permutation(state.cards, p)
+        def effect(state: State) -> State:
+            """Marks the current slot for a future overwrite by the summon."""
+            my_slot, _ = find_char(state.cards, self.name)
+            new_env = state.env.copy()
+            new_env['rio_overwrite_slot'] = my_slot
+            return state._replace(env=new_env)
 
-        # 2. 次元 L を 7 に書き換える（拡張）
-        # これにより、次に誰かがスキルを撃つとき p = get_cycle_permutation(k, 7) となる
-        return state.update(cards=new_cards, L=7)
+        return (condition, effect)
+
+    def _get_action_on_others(self, hand_size: int):
+        """Action when another character's skill is used."""
+        def condition(state: State, action_slot: int) -> bool:
+            my_slot, _ = find_char(state.cards, self.name)
+            return 'rio_overwrite_slot' in state.env and (my_slot is None or my_slot != action_slot)
+
+        def effect(state: State) -> State:
+            """
+            Performs the summon. Swaps the character in the marked slot
+            with the AvantGarde decoy from the deck.
+            """
+            env = state.env.copy()
+            overwrite_slot = env.pop('rio_overwrite_slot')
+            cards = state.cards
+
+            # Find the decoy and the character to be replaced
+            decoy_slot, _ = find_char(cards, self.decoy_name)
+            char_to_replace = cards[overwrite_slot]
+
+            if decoy_slot is None:
+                # Should not happen if specs are set up correctly
+                return state._replace(env=env)
+
+            # Store the original character's name for de-spawning
+            env['avant_garde_origin_char'] = char_to_replace
+            env['avant_garde_origin_slot'] = decoy_slot # Store where decoy was
+
+            # Swap the character with the decoy
+            swap_perm = Permutation.swap(overwrite_slot, decoy_slot)
+            new_cards = swap_perm.apply(cards)
+
+            return state._replace(cards=new_cards, env=env)
+
+        return (condition, effect)
 
 
 class AvantGardeSpec(CharacterSpec):
     """
-    リオによって召喚されるトークン（アバンギャルド君）の仕様定義。
-
-    主な特性:
-    1. 使用されると、自身の置換（π_k^7）の後に L を 6 に戻す。
-    2. これにより、自身はスロット7（不活性領域）へ追いやられ、実質的に除外される。
+    Specification for Rio's summon, AvantGarde.
+    Its skill use causes it to de-spawn.
     """
-
     def __init__(self):
         super().__init__(name="AvantGarde")
 
-    def on_active(self, state: State, k: int) -> State:
-        """
-        トークンの使用（主作用）。
-        自身を最後尾へ送った後、デッキ次元を縮小して自身を隔離する。
-        """
-        # トークンが存在する＝次元は 7 であるはず
-        # 1. 強制的に長さ7の置換を行い、自身を index 6 (スロット7) へ送る
-        p = get_cycle_permutation(k, 7)
-        new_cards = apply_permutation(state.cards, p)
+    def get_actions(self, spec_idx: int, L: int, hand_size: int) -> List[Tuple[Callable, Callable]]:
+        return [
+            self._get_action_on_self(hand_size),
+        ]
 
-        # 2. 次元 L を 6 に戻す（縮小）
-        # index 6 は不活性領域となり、通常のスキル回しから「見えなく」なる
-        return state.update(cards=new_cards, L=6)
+    def _get_action_on_self(self, hand_size: int):
+        """Action when AvantGarde's own skill is used."""
+        def condition(state: State, action_slot: int) -> bool:
+            my_slot, _ = find_char(state.cards, self.name)
+            return my_slot is not None and my_slot == action_slot
+
+        def effect(state: State) -> State:
+            """
+            De-spawns by swapping itself back with the original character
+            it replaced.
+            """
+            env = state.env.copy()
+            cards = state.cards
+
+            origin_char_name = env.pop('avant_garde_origin_char', None)
+            origin_char_original_slot = env.pop('avant_garde_origin_slot', None)
+
+            if not origin_char_name:
+                return state # Nothing to swap back to
+
+            # Find AvantGarde's current position and the original character's position
+            my_slot, _ = find_char(cards, self.name)
+            origin_char_current_slot, _ = find_char(cards, origin_char_name)
+
+            if my_slot is None or origin_char_current_slot is None:
+                return state._replace(env=env)
+
+            # Swap back
+            swap_perm = Permutation.swap(my_slot, origin_char_current_slot)
+            new_cards = swap_perm.apply(cards)
+
+            return state._replace(cards=new_cards, env=env)
+
+        return (condition, effect)

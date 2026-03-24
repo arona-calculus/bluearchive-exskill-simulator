@@ -37,11 +37,8 @@ class HanakoSwimsuitSpec(CharacterSpec):
             return state.update(hanako_gauge=new_gauge)
         else:
             # 【ケース2】ゲージが足りず、通常通り山札へ回る
-            # 数学的には「巡回置換 (π_k^L)」
-            L = state.get_env("L", 6)
-            p = get_cycle_permutation(k, L)
-            new_cards = apply_permutation(state.cards, p)
-            return state.update(cards=new_cards)
+            # 基底クラスのデフォルト動作（新しいカード循環）を呼び出す
+            return super().on_active(state, k)
 
     def on_passive(self, state: State, active_char: str, k: int) -> State:
         """
