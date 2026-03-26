@@ -7,11 +7,11 @@ class RioSpec(CharacterSpec):
     """
     ゲーム内仕様のリオ:
     EXを使用すると、指定した対象(target)のEXをコピーし、
-    手札の自身が即座に「AvantGarde（コピーEX）」に置換される。
+    手札の自身が即座に「Rio_copy（コピーEX）」に置換される。
     この時点ではデッキのドロー・サイクルは発生しない。
     """
 
-    def __init__(self, decoy_name: str = "AvantGarde"):
+    def __init__(self, decoy_name: str = "Rio_Copy"):
         super().__init__(name="Rio")
         self.decoy_name = decoy_name
 
@@ -19,19 +19,17 @@ class RioSpec(CharacterSpec):
         cards = list(state.cards)
         env = dict(state.env)
 
-        # アバンギャルド（不活性領域の仮想カード）を探す
+        # コピーEX（不活性領域の仮想カード）を探す
         try:
             ag_index = cards.index(self.decoy_name)
         except ValueError:
             return state
 
         # 1. コピー先のターゲット情報を保存
-        # （対象のSpecをAvantGardeが後で代理実行するために必要）
         if target:
-            env["avant_garde_copied_target"] = target
+            env["rio_copy_target"] = target
 
-        # [重要] super().on_active() は呼ばない！ (デッキは回さない)
-        # 手札のリオと、不活性領域のアバンギャルドを即座にスワップする
+        # 手札のリオと、不活性領域のコピーEXを即座にスワップする
         cards[k], cards[ag_index] = cards[ag_index], cards[k]
 
         # 2. 不活性領域に退避された「本来のリオ」のインデックスを記憶
@@ -40,17 +38,20 @@ class RioSpec(CharacterSpec):
         return state.update(cards=tuple(cards), **env)
 
 
-class AvantGardeSpec(CharacterSpec):
+class RioCopySpec(CharacterSpec):
     """
-    コピーEX（AvantGarde）の仕様:
+    コピーEX（Rio_copy）の仕様:
     """
     def __init__(self):
         # 自身がプロキシ（仮想カード）であることを明示する
-        super().__init__(name="AvantGarde", is_proxy=True)
+        super().__init__(name="Rio_Copy", is_proxy=True)
+
+    def get_proxy_target(self, state: State) -> str | None:
+        return state.env.get("rio_copy_target")
 
     def on_active(self, state: State, k: int, target: str = "") -> State:
         env = dict(state.env)
-        copied_name = env.get("avant_garde_copied_target")
+        copied_name = env.get("rio_copy_target")
 
         # --- 1. 代理実行（Delegate） ---
         if copied_name and copied_name in self.registry:
@@ -75,14 +76,15 @@ class AvantGardeSpec(CharacterSpec):
             L = current_env.get("L", 6)
             last_pos = L - 1
 
-            # リオとAvantGardeをスワップ
+            # リオとRio_copyをスワップ
             cards[last_pos], cards[rio_parked_index] = (
                 cards[rio_parked_index],
                 cards[last_pos],
             )
 
-            # コピー先のターゲット情報も役割を終えたので削除
-            current_env.pop("avant_garde_copied_target", None)
+            # [重要] パッシブ作用（HanakoSwimsuitSpecなど）で誰の代理かを
+            # 参照できるようにするため、ここでは rio_copy_target を削除しない。
+            # (次のリオ発動時に上書きされるため問題ない)
 
             # 【修正ポイント】
             # State.update() は「辞書の結合」でありキーを消せないため、

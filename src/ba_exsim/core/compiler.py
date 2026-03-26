@@ -1,7 +1,6 @@
 from __future__ import annotations
 from typing import Callable, Dict, List, Tuple, Any
 from ba_exsim.core.state import State
-from ba_exsim.core.algebra import get_cycle_permutation, apply_permutation
 
 # 状態遷移関数の型定義: (現在の状態, 使用スロット) -> 次の状態
 TransitionFunc = Callable[[State, int], State]
@@ -26,6 +25,12 @@ class CharacterSpec:
     def required_state(self) -> Dict[str, Any]:
         """このキャラが要求する初期内部状態（ゲージ等）"""
         return {}
+
+    def get_proxy_target(self, state: State) -> str | None:
+        """
+        このキャラクターがプロキシ（代理実行）である場合、現在誰の代理をしているかを返す。
+        """
+        return None
 
     def on_active(self, state: State, k: int, target: str = "") -> State:
         """

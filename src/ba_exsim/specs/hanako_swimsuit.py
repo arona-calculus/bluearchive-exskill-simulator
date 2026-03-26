@@ -44,8 +44,18 @@ class HanakoSwimsuitSpec(CharacterSpec):
         受動作用。自身以外のキャラクターがEXスキルを使った時にゲージが増加する。
         （コピーEXなどの仮想カードによる発動もゲージ増加のトリガーとして扱う）
         """
+        # 自身が発動した場合は何もしない
         if active_char == self.name:
             return state
+
+        # 発動したキャラクターのSpecを取得
+        active_spec = self.registry.get(active_char)
+
+        # プロキシによる代理実行で、その対象が自身である場合は何もしない
+        if active_spec and active_spec.is_proxy:
+            proxy_target = active_spec.get_proxy_target(state)
+            if proxy_target == self.name:
+                return state
 
         current_gauge = state.get_env("hanako_gauge", 0)
 
