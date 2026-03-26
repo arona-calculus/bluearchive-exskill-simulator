@@ -2,50 +2,58 @@ from __future__ import annotations
 from typing import Dict, Any
 from ba_exsim.core.state import State
 from ba_exsim.core.compiler import CharacterSpec
-from ba_exsim.core.algebra import get_cycle_permutation, apply_permutation
 
 
 class HanakoSwimsuitSpec(CharacterSpec):
     """
     水着ハナコの代数的仕様定義。
-
-    主な特性:
-    1. 内部状態 'hanako_gauge' (0-6) を要求する。
-    2. 他人がEXを使うとゲージが +2 (2/3相当) される。
-    3. 自身がEXを使う際、ゲージが3以上あれば消費して「恒等写像」として振る舞う。
-    4. ゲージが3未満なら「通常の巡回置換」として振る舞う。
+    水ゲージはハナコ本人の固有状態であり、コピーEX等からの代理実行では増減しない。
     """
 
     def __init__(self):
         super().__init__(name="Hanako")
 
     def required_state(self) -> Dict[str, Any]:
-        """ハナコ専用の次元を状態空間に追加"""
         return {"hanako_gauge": 0}
 
-    def on_active(self, state: State, k: int) -> State:
+    def on_active(self, state: State, k: int, target: str = "") -> State:
         """
-        ハナコ自身のEXスキル発動（主作用）。
-        ゲージ量によって、カードの置換が発生するかどうかが分岐する。
+        主作用。自身の実体が発動した時のみゲージを参照・消費する。
         """
+        # 1. 代理実行（Delegate）の検知
+        # 実際にスロットkにいるカード名が自分自身("Hanako")ではない場合、
+        # これはAvantGarde等による代理実行であると判断できる。
+        if state.cards[k] != self.name:
+            # ゲージには一切干渉せず、通常のスキルとしてサイクルさせる
+            return super().on_active(state, k, target)
+
+        # 2. ハナコ本人による発動
         current_gauge = state.get_env("hanako_gauge", 0)
 
         if current_gauge >= 3:
-            # 【ケース1】ゲージを消費して手札に留まる
-            # 数学的にはカード順列に対する「恒等写像 (e)」
+            # ゲージ消費＆恒等写像（手札に留まる）
             new_gauge = current_gauge - 3
             return state.update(hanako_gauge=new_gauge)
         else:
-            # 【ケース2】ゲージが足りず、通常通り山札へ回る
-            # 基底クラスのデフォルト動作（新しいカード循環）を呼び出す
-            return super().on_active(state, k)
+            # ゲージ不足時は通常サイクル
+            return super().on_active(state, k, target)
 
-    def on_passive(self, state: State, active_char: str, k: int) -> State:
+    def on_passive(
+        self, state: State, active_char: str, k: int, target: str = ""
+    ) -> State:
         """
-        他者がEXスキルを発動した際の挙動（受動作用）。
-        ハナコのゲージを増加させる。
+        受動作用。他の「生徒」がスキルを使った時のみゲージが増加する。
         """
-        # 他人のスキル発動1回につき、ゲージを2（2/3相当）増加させる（最大6）
+        # 自身のアクションの場合はスキップ
+        if active_char == self.name:
+            return state
+
+        # 3. 仮想ユニット（AvantGarde等）の除外
+        # コピーEXの発動は「味方のEX使用」としてカウントされない仕様の再現
+        if active_char == "AvantGarde":
+            return state
+
+        # ハナコ本人以外の通常の生徒がEXを使用した場合のみゲージ加算
         current_gauge = state.get_env("hanako_gauge", 0)
         new_gauge = min(current_gauge + 2, 6)
 

@@ -1,121 +1,94 @@
 from __future__ import annotations
-from typing import List, Tuple, Callable
-
 from ba_exsim.core.state import State
 from ba_exsim.core.compiler import CharacterSpec
-from ba_exsim.core.algebra import Permutation, find_char
 
 
 class RioSpec(CharacterSpec):
     """
-    Rio's character specification based on the `get_actions` pattern.
-    Her EX skill summons a decoy unit, "AvantGarde".
+    ゲーム内仕様のリオ:
+    EXを使用すると、指定した対象(target)のEXをコピーし、
+    手札の自身が即座に「AvantGarde（コピーEX）」に置換される。
+    この時点ではデッキのドロー・サイクルは発生しない。
     """
+
     def __init__(self, decoy_name: str = "AvantGarde"):
         super().__init__(name="Rio")
         self.decoy_name = decoy_name
 
-    def get_actions(self, spec_idx: int, L: int, hand_size: int) -> List[Tuple[Callable, Callable]]:
-        return [
-            self._get_action_on_self(hand_size),
-            self._get_action_on_others(hand_size),
-        ]
+    def on_active(self, state: State, k: int, target: str = "") -> State:
+        cards = list(state.cards)
+        env = dict(state.env)
 
-    def _get_action_on_self(self, hand_size: int):
-        """Action when Rio's own skill is used."""
-        def condition(state: State, action_slot: int) -> bool:
-            my_slot, _ = find_char(state.cards, self.name)
-            return my_slot is not None and my_slot == action_slot
+        # アバンギャルド（不活性領域の仮想カード）を探す
+        try:
+            ag_index = cards.index(self.decoy_name)
+        except ValueError:
+            return state
 
-        def effect(state: State) -> State:
-            """Marks the current slot for a future overwrite by the summon."""
-            my_slot, _ = find_char(state.cards, self.name)
-            new_env = state.env.copy()
-            new_env['rio_overwrite_slot'] = my_slot
-            return state._replace(env=new_env)
+        # 1. コピー先のターゲット情報を保存
+        # （対象のSpecをAvantGardeが後で代理実行するために必要）
+        if target:
+            env["avant_garde_copied_target"] = target
 
-        return (condition, effect)
+        # [重要] super().on_active() は呼ばない！ (デッキは回さない)
+        # 手札のリオと、不活性領域のアバンギャルドを即座にスワップする
+        cards[k], cards[ag_index] = cards[ag_index], cards[k]
 
-    def _get_action_on_others(self, hand_size: int):
-        """Action when another character's skill is used."""
-        def condition(state: State, action_slot: int) -> bool:
-            my_slot, _ = find_char(state.cards, self.name)
-            return 'rio_overwrite_slot' in state.env and (my_slot is None or my_slot != action_slot)
+        # 2. 不活性領域に退避された「本来のリオ」のインデックスを記憶
+        env["rio_parked_index"] = ag_index
 
-        def effect(state: State) -> State:
-            """
-            Performs the summon. Swaps the character in the marked slot
-            with the AvantGarde decoy from the deck.
-            """
-            env = state.env.copy()
-            overwrite_slot = env.pop('rio_overwrite_slot')
-            cards = state.cards
-
-            # Find the decoy and the character to be replaced
-            decoy_slot, _ = find_char(cards, self.decoy_name)
-            char_to_replace = cards[overwrite_slot]
-
-            if decoy_slot is None:
-                # Should not happen if specs are set up correctly
-                return state._replace(env=env)
-
-            # Store the original character's name for de-spawning
-            env['avant_garde_origin_char'] = char_to_replace
-            env['avant_garde_origin_slot'] = decoy_slot # Store where decoy was
-
-            # Swap the character with the decoy
-            swap_perm = Permutation.swap(overwrite_slot, decoy_slot)
-            new_cards = swap_perm.apply(cards)
-
-            return state._replace(cards=new_cards, env=env)
-
-        return (condition, effect)
+        return state.update(cards=tuple(cards), **env)
 
 
 class AvantGardeSpec(CharacterSpec):
     """
-    Specification for Rio's summon, AvantGarde.
-    Its skill use causes it to de-spawn.
+    コピーEX（AvantGarde）の仕様:
+    対象のSpecを代理実行（Delegate）し、その結果デッキが回った場合のみ、
+    術者であるリオを最後尾に送る（帰還処理）。
     """
+
     def __init__(self):
         super().__init__(name="AvantGarde")
 
-    def get_actions(self, spec_idx: int, L: int, hand_size: int) -> List[Tuple[Callable, Callable]]:
-        return [
-            self._get_action_on_self(hand_size),
-        ]
+    def on_active(self, state: State, k: int, target: str = "") -> State:
+        env = dict(state.env)
+        copied_name = env.get("avant_garde_copied_target")
 
-    def _get_action_on_self(self, hand_size: int):
-        """Action when AvantGarde's own skill is used."""
-        def condition(state: State, action_slot: int) -> bool:
-            my_slot, _ = find_char(state.cards, self.name)
-            return my_slot is not None and my_slot == action_slot
+        # --- 1. 代理実行（Delegate） ---
+        if copied_name and copied_name in self.registry:
+            copied_spec = self.registry[copied_name]
+            new_state = copied_spec.on_active(state, k, target)
+        else:
+            new_state = super().on_active(state, k, target)
 
-        def effect(state: State) -> State:
-            """
-            De-spawns by swapping itself back with the original character
-            it replaced.
-            """
-            env = state.env.copy()
-            cards = state.cards
+        # --- 2. 事後評価（Post-evaluation） ---
+        if new_state.cards[k] == self.name:
+            # 手札に留まった場合はそのまま終了
+            return new_state
 
-            origin_char_name = env.pop('avant_garde_origin_char', None)
-            origin_char_original_slot = env.pop('avant_garde_origin_slot', None)
+        # --- 3. 帰還処理（リオをデッキ最後尾へ） ---
+        current_env = dict(new_state.env)
 
-            if not origin_char_name:
-                return state # Nothing to swap back to
+        # pop() を用いて環境からフラグを完全に取り除く
+        rio_parked_index = current_env.pop("rio_parked_index", None)
 
-            # Find AvantGarde's current position and the original character's position
-            my_slot, _ = find_char(cards, self.name)
-            origin_char_current_slot, _ = find_char(cards, origin_char_name)
+        if rio_parked_index is not None:
+            cards = list(new_state.cards)
+            L = current_env.get("L", 6)
+            last_pos = L - 1
 
-            if my_slot is None or origin_char_current_slot is None:
-                return state._replace(env=env)
+            # リオとAvantGardeをスワップ
+            cards[last_pos], cards[rio_parked_index] = (
+                cards[rio_parked_index],
+                cards[last_pos],
+            )
 
-            # Swap back
-            swap_perm = Permutation.swap(my_slot, origin_char_current_slot)
-            new_cards = swap_perm.apply(cards)
+            # コピー先のターゲット情報も役割を終えたので削除
+            current_env.pop("avant_garde_copied_target", None)
 
-            return state._replace(cards=new_cards, env=env)
+            # 【修正ポイント】
+            # State.update() は「辞書の結合」でありキーを消せないため、
+            # 不要なキーをpopした current_env を用いて State を再生成する
+            new_state = State(cards=tuple(cards), env=current_env)
 
-        return (condition, effect)
+        return new_state

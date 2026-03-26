@@ -10,55 +10,56 @@ TransitionFunc = Callable[[State, int], State]
 class CharacterSpec:
     """
     各キャラクターの代数的挙動を定義する基底クラス。
-    ミレニアムの全生徒（および他校の生徒）はこのインターフェースを実装する。
     """
 
     def __init__(self, name: str):
         self.name = name
+        # 自身以外のSpecを参照するためのレジストリ（コンパイラから初期化時に注入される）
+        self.registry: Dict[str, CharacterSpec] = {}
+
+    def bind_registry(self, registry: Dict[str, CharacterSpec]) -> None:
+        """
+        コンパイラから全Specの辞書を受け取り、紐付ける。
+        コピーEX(AvantGarde)が他キャラのSpecを代理実行するために使用する。
+        """
+        self.registry = registry
 
     def required_state(self) -> Dict[str, Any]:
         """このキャラが要求する初期内部状態（ゲージ等）"""
         return {}
 
-    def on_active(self, state: State, k: int) -> State:
+    def on_active(self, state: State, k: int, target: str = "") -> State:
         """
         自分がEXスキルを使用した際の主作用。
-        使用されたカード(k)はデッキの最後尾に送られ、
-        デッキの先頭(3)のカードが、使用されたスロット(k)を埋める。
+        引数に target を追加し、対象指定による状態遷移の分岐を可能にした。
         """
         cards = list(state.cards)
         L = state.get_env("L", len(cards))
 
-        # 手札は0, 1, 2。山札は3からL-1まで
-        if L <= 3:  # 山札がない場合は何も起こらない
+        if L <= 3:
             return state
 
-        # 1. 使用したカード(k)と、山札から引くカード(3)を特定
         used_card = cards[k]
         drawn_card = cards[3]
-
-        # 2. 山札を左に1つシフト
-        #    例: [d1, d2, d3] -> [d2, d3]
         deck_cards = cards[4:L]
 
-        # 3. 新しいカードリストを構築
-        # 3a. まず手札部分を更新
         new_cards = cards[:3]
         new_cards[k] = drawn_card
-        
-        # 3b. 更新された山札と、末尾に追加された使用済みカードを結合
+
         new_cards.extend(deck_cards)
         new_cards.append(used_card)
 
-        # 3c. 不活性領域のカードがあれば追加
         if len(cards) > L:
             new_cards.extend(cards[L:])
 
         return state.update(cards=tuple(new_cards))
 
-    def on_passive(self, state: State, active_char: str, k: int) -> State:
+    def on_passive(
+        self, state: State, active_char: str, k: int, target: str = ""
+    ) -> State:
         """
         他人がEXスキルを使用した際の受動作用（フック）。
+        他人のターゲット情報（誰を回復したか等）によって誘発するギミックに備え target を追加。
         """
         return state
 
@@ -69,12 +70,14 @@ class TimelineCompiler:
     """
 
     def __init__(self, specs: List[CharacterSpec]):
-        # キャラ名からSpecへのマッピング
         self.specs: Dict[str, CharacterSpec] = {s.name: s for s in specs}
+
+        for spec in self.specs.values():
+            spec.bind_registry(self.specs)
 
     def build_initial_state(self, initial_cards: Tuple[str, ...]) -> State:
         """全キャラの要求状態をマージして初期状態を生成する"""
-        combined_env = {"L": 6}  # デフォルトのデッキ次元
+        combined_env = {"L": 6}
         for spec in self.specs.values():
             combined_env.update(spec.required_state())
         return State(cards=initial_cards, env=combined_env)
@@ -85,23 +88,20 @@ class TimelineCompiler:
         """
         specs = self.specs
 
-        def transition(state: State, k: int) -> State:
-            # 1. 発動したスキルの持ち主を特定
+        def transition(state: State, k: int, target: str = "") -> State:
             active_char_name = state.cards[k]
             active_spec = specs.get(active_char_name)
 
             if active_spec is None:
                 raise ValueError(f"Character '{active_char_name}' not found in specs.")
 
-            # 2. 主作用（Active Effect）の適用
-            # 例: ハナコなら「手札に留まるか否か」の分岐がここで行われる
-            new_state = active_spec.on_active(state, k)
+            # 2. 主作用（Active Effect）の適用（targetを伝播）
+            new_state = active_spec.on_active(state, k, target)
 
-            # 3. 全受動作用（Passive Effects）の合成
-            # 例: 他人が撃つたびにハナコのゲージを増やす、コスト回復速度を変える等
+            # 3. 全受動作用（Passive Effects）の合成（targetを伝播）
             for name, spec in specs.items():
                 if name != active_char_name:
-                    new_state = spec.on_passive(new_state, active_char_name, k)
+                    new_state = spec.on_passive(new_state, active_char_name, k, target)
 
             return new_state
 
