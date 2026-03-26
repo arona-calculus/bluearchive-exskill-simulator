@@ -6,7 +6,6 @@ from ba_exsim.core.compiler import CharacterSpec
 
 class HanakoSwimsuitSpec(CharacterSpec):
     """
-    水着ハナコの代数的仕様定義。
     水ゲージはハナコ本人の固有状態であり、コピーEX等からの代理実行では増減しない。
     """
 
@@ -14,6 +13,7 @@ class HanakoSwimsuitSpec(CharacterSpec):
         super().__init__(name="Hanako")
 
     def required_state(self) -> Dict[str, Any]:
+        # ゲージは整数で管理。100 = 1ゲージ分
         return {"hanako_gauge": 0}
 
     def on_active(self, state: State, k: int, target: str = "") -> State:
@@ -30,31 +30,26 @@ class HanakoSwimsuitSpec(CharacterSpec):
         # 2. ハナコ本人による発動
         current_gauge = state.get_env("hanako_gauge", 0)
 
-        if current_gauge >= 3:
+        # ゲージコストは1ゲージ分 (内部値100)
+        if current_gauge >= 100:
             # ゲージ消費＆恒等写像（手札に留まる）
-            new_gauge = current_gauge - 3
+            new_gauge = current_gauge - 100
             return state.update(hanako_gauge=new_gauge)
         else:
             # ゲージ不足時は通常サイクル
             return super().on_active(state, k, target)
 
-    def on_passive(
-        self, state: State, active_char: str, k: int, target: str = ""
-    ) -> State:
+    def on_passive(self, state: State, active_char: str, k: int, target: str = "") -> State:
         """
-        受動作用。他の「生徒」がスキルを使った時のみゲージが増加する。
+        受動作用。自身以外のキャラクターがEXスキルを使った時にゲージが増加する。
+        （コピーEXなどの仮想カードによる発動もゲージ増加のトリガーとして扱う）
         """
-        # 自身のアクションの場合はスキップ
         if active_char == self.name:
             return state
 
-        # 3. 仮想ユニット（AvantGarde等）の除外
-        # コピーEXの発動は「味方のEX使用」としてカウントされない仕様の再現
-        if active_char == "AvantGarde":
-            return state
-
-        # ハナコ本人以外の通常の生徒がEXを使用した場合のみゲージ加算
         current_gauge = state.get_env("hanako_gauge", 0)
-        new_gauge = min(current_gauge + 2, 6)
+
+        # 40%チャージ (内部値+40), 最大値は2ゲージ相当 (内部値200)
+        new_gauge = min(current_gauge + 40, 200)
 
         return state.update(hanako_gauge=new_gauge)

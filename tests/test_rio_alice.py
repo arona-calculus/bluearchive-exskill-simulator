@@ -1,9 +1,9 @@
 from __future__ import annotations
 from ba_exsim.core.state import State
 from ba_exsim.core.compiler import TimelineCompiler, CharacterSpec
+from ba_exsim.specs.generic import GenericSpec
 from ba_exsim.specs.rio import RioSpec, AvantGardeSpec
 from ba_exsim.specs.alice_battle import AliceBattleSpec
-from ba_exsim.specs.generic import GenericSpec
 
 
 # --- テストケース ---

@@ -11,10 +11,9 @@ class CharacterSpec:
     """
     各キャラクターの代数的挙動を定義する基底クラス。
     """
-
-    def __init__(self, name: str):
+    def __init__(self, name: str, is_proxy: bool = False):
         self.name = name
-        # 自身以外のSpecを参照するためのレジストリ（コンパイラから初期化時に注入される）
+        self.is_proxy = is_proxy  # トークンや代理実行カードであるかを示す属性
         self.registry: Dict[str, CharacterSpec] = {}
 
     def bind_registry(self, registry: Dict[str, CharacterSpec]) -> None:

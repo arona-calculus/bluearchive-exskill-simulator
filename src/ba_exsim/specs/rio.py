@@ -43,12 +43,10 @@ class RioSpec(CharacterSpec):
 class AvantGardeSpec(CharacterSpec):
     """
     コピーEX（AvantGarde）の仕様:
-    対象のSpecを代理実行（Delegate）し、その結果デッキが回った場合のみ、
-    術者であるリオを最後尾に送る（帰還処理）。
     """
-
     def __init__(self):
-        super().__init__(name="AvantGarde")
+        # 自身がプロキシ（仮想カード）であることを明示する
+        super().__init__(name="AvantGarde", is_proxy=True)
 
     def on_active(self, state: State, k: int, target: str = "") -> State:
         env = dict(state.env)

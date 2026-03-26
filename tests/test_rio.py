@@ -2,7 +2,7 @@ from __future__ import annotations
 from ba_exsim.core.state import State
 from ba_exsim.core.compiler import TimelineCompiler, CharacterSpec
 from ba_exsim.specs.rio import RioSpec, AvantGardeSpec
-from ba_exsim.specs.generic import GenericSpec  # 共通モジュールからインポート
+from ba_exsim.specs.generic import GenericSpec
 
 
 # --- テストケース ---
@@ -33,7 +33,6 @@ def test_rio_basic_copy():
     assert state_2.cards == ("Kayoko", "Aru", "Mutsuki", "Haruka", "Hoshino", "Rio", "AvantGarde")
     assert "rio_parked_index" not in state_2.env
     print("[OK] Step 2: AvantGarde使用。Aruの仕様が代理実行され、リオが最後尾に帰還した。\n")
-
 
 
 if __name__ == "__main__":
