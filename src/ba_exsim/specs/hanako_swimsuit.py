@@ -1,65 +1,55 @@
 from __future__ import annotations
-from typing import Dict, Any
+from typing import Optional, Tuple
+from ba_exsim.core.spec import CharacterSpec
 from ba_exsim.core.state import State
-from ba_exsim.core.compiler import CharacterSpec
 
 
 class HanakoSwimsuitSpec(CharacterSpec):
-    """
-    水ゲージはハナコ本人の固有状態であり、コピーEX等からの代理実行では増減しない。
-    """
-
     def __init__(self):
-        super().__init__(name="Hanako")
+        super().__init__("Hanako")
 
-    def required_state(self) -> Dict[str, Any]:
-        # ゲージは整数で管理。100 = 1ゲージ分
-        return {"hanako_gauge": 0}
-
-    def on_active(self, state: State, k: int, target: str = "") -> State:
-        """
-        主作用。自身の実体が発動した時のみゲージを参照・消費する。
-        """
-        # 1. 代理実行（Delegate）の検知
-        # 実際にスロットkにいるカード名が自分自身("Hanako")ではない場合、
-        # これはAvantGarde等による代理実行であると判断できる。
+    def should_cycle(self, state: State, k: int, target: str = "") -> bool:
+        # 代理実行時（スロットkが自分でない）はRio_Copy側のshould_cycleに委ねる
         if state.cards[k] != self.name:
-            # ゲージには一切干渉せず、通常のスキルとしてサイクルさせる
-            return super().on_active(state, k, target)
+            return True
 
-        # 2. ハナコ本人による発動
-        current_gauge = state.get_env("hanako_gauge", 0)
+        return state.get_env("hanako_gauge", 0) < 100
 
-        # ゲージコストは1ゲージ分 (内部値100)
-        if current_gauge >= 100:
-            # ゲージ消費＆恒等写像（手札に留まる）
-            new_gauge = current_gauge - 100
-            return state.update(hanako_gauge=new_gauge)
+    def apply_effect(self, state: State, k: int, target: str = "") -> State:
+        gauge = state.get_env("hanako_gauge", 0)
+
+        if state.cards[k] == self.name:
+            # 直接使用: ゲージが十分なら消費して手札に留まる（should_cycleが保証）
+            if gauge < 100:
+                return state
+            return state.update(hanako_gauge=gauge - 100)
+
         else:
-            # ゲージ不足時は通常サイクル
-            return super().on_active(state, k, target)
+            # 代理実行（Rio_Copy等）: 自身が手札にいない かつ ゲージ十分なら即ドロー要請
+            hanako_in_hand = self.name in state.cards[:3]
+            if hanako_in_hand or gauge < 100:
+                return state
+            return state.update(
+                hanako_gauge=gauge - 100,
+                pending_force_draw=self.name,
+            )
 
-    def on_passive(self, state: State, active_char: str, k: int, target: str = "") -> State:
-        """
-        受動作用。自身以外のキャラクターがEXスキルを使った時にゲージが増加する。
-        （コピーEXなどの仮想カードによる発動もゲージ増加のトリガーとして扱う）
-        """
-        # 自身が発動した場合は何もしない
+    def on_draw_intercept(
+        self, state: State, trigger: str
+    ) -> Tuple[Optional[str], State]:
+        pending_draw = state.get_env("pending_force_draw")
+        if pending_draw == self.name:
+            return self.name, state.update(pending_force_draw=None)
+        return None, state
+
+    def on_passive(self, state: State, active_char: str, target: str = "") -> State:
         if active_char == self.name:
             return state
 
-        # 発動したキャラクターのSpecを取得
-        active_spec = self.registry.get(active_char)
-
-        # プロキシによる代理実行で、その対象が自身である場合は何もしない
-        if active_spec and active_spec.is_proxy:
-            proxy_target = active_spec.get_proxy_target(state)
-            if proxy_target == self.name:
+        if self.registry:
+            active_spec = self.registry.get(active_char)
+            if active_spec and active_spec.is_proxy:
                 return state
 
-        current_gauge = state.get_env("hanako_gauge", 0)
-
-        # 40%チャージ (内部値+40), 最大値は2ゲージ相当 (内部値200)
-        new_gauge = min(current_gauge + 40, 200)
-
-        return state.update(hanako_gauge=new_gauge)
+        gauge = state.get_env("hanako_gauge", 0)
+        return state.update(hanako_gauge=min(gauge + 40, 200))

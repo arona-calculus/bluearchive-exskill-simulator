@@ -1,94 +1,54 @@
-from __future__ import annotations
+from typing import Optional, Tuple
+from ba_exsim.core.spec import CharacterSpec
 from ba_exsim.core.state import State
-from ba_exsim.core.compiler import CharacterSpec
 
 
 class RioSpec(CharacterSpec):
-    """
-    ゲーム内仕様のリオ:
-    EXを使用すると、指定した対象(target)のEXをコピーし、
-    手札の自身が即座に「Rio_copy（コピーEX）」に置換される。
-    この時点ではデッキのドロー・サイクルは発生しない。
-    """
+    def __init__(self):
+        super().__init__("Rio")
 
-    def __init__(self, decoy_name: str = "Rio_Copy"):
-        super().__init__(name="Rio")
-        self.decoy_name = decoy_name
+    def should_cycle(self, state: State, k: int, target: str = "") -> bool:
+        # 手札の中でトークンに変化するため、破棄・ドローを行わない
+        return False
 
-    def on_active(self, state: State, k: int, target: str = "") -> State:
+    def apply_effect(self, state: State, k: int, target: str = "") -> State:
+        # 手札の自分自身（スロットk）を Rio_Copy に直接書き換える
         cards = list(state.cards)
-        env = dict(state.env)
+        cards[k] = "Rio_Copy"
 
-        # コピーEX（不活性領域の仮想カード）を探す
-        try:
-            ag_index = cards.index(self.decoy_name)
-        except ValueError:
-            return state
-
-        # 1. コピー先のターゲット情報を保存
-        if target:
-            env["rio_copy_target"] = target
-
-        # 手札のリオと、不活性領域のコピーEXを即座にスワップする
-        cards[k], cards[ag_index] = cards[ag_index], cards[k]
-
-        # 2. 不活性領域に退避された「本来のリオ」のインデックスを記憶
-        env["rio_parked_index"] = ag_index
-
-        return state.update(cards=tuple(cards), **env)
+        # ターゲット情報を環境変数に保存しつつ、カード配列を更新
+        return state.update(
+            cards=tuple(cards), rio_copy_target=target if target else None
+        )
 
 
 class RioCopySpec(CharacterSpec):
-    """
-    コピーEX（Rio_copy）の仕様:
-    """
     def __init__(self):
-        # 自身がプロキシ（仮想カード）であることを明示する
-        super().__init__(name="Rio_Copy", is_proxy=True)
+        super().__init__("Rio_Copy", is_proxy=True)
 
-    def get_proxy_target(self, state: State) -> str | None:
-        return state.env.get("rio_copy_target")
+    def _get_target_spec(self, state: State) -> Optional[CharacterSpec]:
+        # 環境変数に記録されたターゲット名から、Registry経由で動的にSpecを取得する。
 
-    def on_active(self, state: State, k: int, target: str = "") -> State:
-        env = dict(state.env)
-        copied_name = env.get("rio_copy_target")
+        target_name = state.get_env("rio_copy_target")
+        if target_name and self.registry:
+            return self.registry.get(target_name)
+        return None
 
-        # --- 1. 代理実行（Delegate） ---
-        if copied_name and copied_name in self.registry:
-            copied_spec = self.registry[copied_name]
-            new_state = copied_spec.on_active(state, k, target)
-        else:
-            new_state = super().on_active(state, k, target)
+    def should_cycle(self, state: State, k: int, target: str = "") -> bool:
+        # コピーが使用された時は、通常通り破棄・ドローのサイクルを行う
+        return True
 
-        # --- 2. 事後評価（Post-evaluation） ---
-        if new_state.cards[k] == self.name:
-            # 手札に留まった場合はそのまま終了
-            return new_state
+    def apply_effect(self, state: State, k: int, target: str = "") -> State:
+        target_spec = self._get_target_spec(state)
 
-        # --- 3. 帰還処理（リオをデッキ最後尾へ） ---
-        current_env = dict(new_state.env)
+        if target_spec:
+            # コピー先のキャラの効果を実行する
+            state = target_spec.apply_effect(state, k, target)
 
-        # pop() を用いて環境からフラグを完全に取り除く
-        rio_parked_index = current_env.pop("rio_parked_index", None)
+        if self.should_cycle(state, k, target):
+            state = state.update(rio_copy_target=None)
 
-        if rio_parked_index is not None:
-            cards = list(new_state.cards)
-            L = current_env.get("L", 6)
-            last_pos = L - 1
+        return state
 
-            # リオとRio_copyをスワップ
-            cards[last_pos], cards[rio_parked_index] = (
-                cards[rio_parked_index],
-                cards[last_pos],
-            )
-
-            # [重要] パッシブ作用（HanakoSwimsuitSpecなど）で誰の代理かを
-            # 参照できるようにするため、ここでは rio_copy_target を削除しない。
-            # (次のリオ発動時に上書きされるため問題ない)
-
-            # 【修正ポイント】
-            # State.update() は「辞書の結合」でありキーを消せないため、
-            # 不要なキーをpopした current_env を用いて State を再生成する
-            new_state = State(cards=tuple(cards), env=current_env)
-
-        return new_state
+    def get_discard_transform(self, state: State) -> Optional[str]:
+        return "Rio"

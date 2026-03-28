@@ -1,44 +1,57 @@
 from __future__ import annotations
-from dataclasses import dataclass, field
-from typing import Tuple, Dict, Any, Mapping
+from dataclasses import dataclass, field, replace
+from typing import Dict, Any, Tuple, Optional
 
 
 @dataclass(frozen=True)
 class State:
     """
-    ブルーアーカイブのEXスキル回しにおける代数的状態空間 X を表現するクラス。
-    X = S_n (カード順列) × Env (拡張された内部状態の直積)
+    盤面の状態を保持するイミュータブルなデータクラス。
+    frozen=True により、インスタンス化後のプロパティ変更を禁止する。
     """
 
-    # カードの並び（置換群の元を表現するタプル）
-    # index 0,1,2: 手札 / 3...L-1: 山札 / L...: 不活性領域
-    cards: Tuple[str, ...]
-
-    # 各キャラクターの特殊ギミックが要求する内部状態の辞書（ゲージ、次元Lなど）
-    # 不変性を保つため、Mapping(読み取り専用辞書)として保持
-    env: Mapping[str, Any] = field(default_factory=dict)
-
-    def update(self, cards: Tuple[str, ...] | None = None, **env_updates: Any) -> State:
-        """
-        現在の状態に作用を適用し、新しい状態（点）を返す遷移関数。
-        数学的には s' = s・g を計算する。
-        """
-        new_cards = cards if cards is not None else self.cards
-
-        # 新しい環境状態の構築
-        new_env_dict = dict(self.env)
-        new_env_dict.update(env_updates)
-
-        return State(cards=new_cards, env=new_env_dict)
-
-    def get_hand(self) -> Tuple[str, ...]:
-        """現在の手札（スロット 1, 2, 3）を取得"""
-        return self.cards[:3]
+    cards: Tuple[Optional[str], ...]
+    env: Dict[str, Any] = field(default_factory=dict)
 
     def get_env(self, key: str, default: Any = None) -> Any:
-        """環境状態から特定の次元の値を取得"""
         return self.env.get(key, default)
 
-    def __repr__(self) -> str:
-        hand = " / ".join(self.get_hand())
-        return f"State(Hand=[{hand}], Env={dict(self.env)})"
+    def update(self, cards: Tuple[Optional[str], ...] = None, **kwargs) -> State:
+        """
+        cardsとenvを同時に、または個別に更新し、新しいStateを返すヘルパー。
+        例: state.update(cards=new_cards, hanako_gauge=100)
+        """
+
+        new_state = self
+        if cards is not None:
+            new_state = replace(new_state, cards=cards)
+
+        if kwargs:
+            new_env = new_state.env.copy()
+            new_env.update(kwargs)
+            new_state = replace(new_state, env=new_env)
+
+        return new_state
+
+    def discard_card(self, k: int, transform_to: Optional[str] = None) -> State:
+        """フェーズ1: カードを消費し、一時的な空き(None)を作る"""
+        cards_list = list(self.cards)
+        discarded = cards_list.pop(k)
+
+        cards_list.insert(k, None)  # Holeを作成
+        cards_list.append(transform_to if transform_to else discarded)
+
+        return replace(self, cards=tuple(cards_list))
+
+    def draw_card(self, k: int, force_card: Optional[str] = None) -> State:
+        """フェーズ2: 空き(None)を山札から補充する"""
+        cards_list = list(self.cards)
+
+        if force_card and force_card in cards_list:
+            cards_list.remove(force_card)
+            cards_list[k] = force_card
+        else:
+            top_card = cards_list.pop(3)
+            cards_list[k] = top_card
+
+        return replace(self, cards=tuple(cards_list))
