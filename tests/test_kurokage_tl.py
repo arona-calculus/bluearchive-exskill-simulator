@@ -1,6 +1,5 @@
 from __future__ import annotations
 from ba_exsim.core.simulator import Simulator
-from ba_exsim.core.state import State
 from ba_exsim.specs.generic import GenericSpec
 from ba_exsim.specs.hanako_swimsuit import HanakoSwimsuitSpec
 from ba_exsim.specs.rio import RioSpec, RioCopySpec
@@ -391,6 +390,6 @@ def test_rio_hanako_integration_kurokage():
     test_phase6()
     print("\n[OK] クロカゲ戦タイムライン完走 (手札外実行含む)")
 
+
 if __name__ == "__main__":
     test_rio_hanako_integration_kurokage()
- 

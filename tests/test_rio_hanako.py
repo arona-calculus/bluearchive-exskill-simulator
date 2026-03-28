@@ -86,5 +86,7 @@ def test_rio_hanako_integration():
     assert state.cards == ("Aru", "Rio", "Kisaki", "Kikyou", "Sena", "Hanako")
     assert state.get_env("hanako_gauge", 0) == 60
     print("[OK] Step 6: ハナコ自身がEXを使用。ゲージを100消費して手札に留まる（60）。")
+
+
 if __name__ == "__main__":
     test_rio_hanako_integration()
