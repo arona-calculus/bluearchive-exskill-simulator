@@ -134,7 +134,6 @@ def test_hanako_proxy_behavior():
     # --- Step 1: プロキシカードがハナコを代理実行 ---
     # 期待値: ゲージ100以上だが、代理実行なのでゲージは消費されず、プロキシカードは通常通りサイクルする
     state_1 = transition(state_0, 1)  # Use MockProxy from slot 1
-
     assert state_1.cards == ("Hanako", "Mutsuki", "Aru", "Kayoko", "Haruka", "MockProxy")
     assert state_1.env["hanako_gauge"] == 100  # ゲージが消費されていないこと！
     print("[OK] プロキシによる代理実行時、ハナコのゲージは消費されず通常サイクルしました。")
