@@ -24,9 +24,9 @@ where = ["src"]
 line-length = 88
 target-version = ["py313"]
 
-[tool.uv]
+[dependency-groups]
 # ワークスペース内での開発用
-dev-dependencies = [
+dev = [
     "black>=24.0.0",
     "flake8>=7.0.0",
 ]
