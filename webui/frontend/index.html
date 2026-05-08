@@ -11,7 +11,7 @@
     --blue: #3d8bcd; --blue-light: #58a6ff; --blue-dark: #1f5a8a;
     --green: #3fb950; --yellow: #d29922; --red: #f85149;
     --text: #e6edf3; --text-muted: #8b949e;
-    --card-w: 100px; --card-h: 136px;
+    --card-w: 100px; --card-h: 108px;
   }
   body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
@@ -97,18 +97,19 @@
   .step-label-current { color: var(--blue-light); }
   .step-label-badge { background: var(--blue-dark); color: var(--blue-light); border-radius: 10px; padding: 1px 8px; font-size: 0.68rem; }
 
-  /* All cards in one row */
-  .step-cards-row { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 10px; }
+  /* Body: cards | env | comment */
+  .step-body { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 10px; }
+  .step-cards-row { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; flex-shrink: 0; }
 
   .deck-divider {
     width: 1px; background: var(--border); align-self: stretch;
     margin: 0 8px; flex-shrink: 0; position: relative;
   }
-  .deck-divider::before {
+  /* .deck-divider::before {
     content: '控え'; position: absolute; top: -18px; left: 50%;
     transform: translateX(-50%); font-size: 0.58rem; color: var(--text-muted);
     white-space: nowrap; letter-spacing: 0.03em;
-  }
+  } */
 
   .card.deck-card { opacity: 0.55; border-style: dashed; cursor: default; }
 
@@ -117,7 +118,7 @@
     border-radius: 9px; border: 2px solid #2d6a9f;
     background: linear-gradient(160deg, #1a2a3a, #0d2137);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 8px 6px; text-align: center; position: relative;
+    padding: 5px 6px; text-align: center; position: relative;
     transition: border-color 0.12s, transform 0.1s, box-shadow 0.12s;
     user-select: none;
   }
@@ -125,7 +126,9 @@
   .card.interactive:hover { border-color: var(--blue-light); transform: translateY(-3px); box-shadow: 0 6px 16px rgba(61,139,205,0.28); }
   .card.interactive.selected { border-color: var(--yellow); box-shadow: 0 0 0 2px var(--yellow); transform: translateY(-3px); }
   .card.static { cursor: default; }
-  .card-icon { width: 56px; height: 56px; border-radius: 4px; object-fit: cover; margin-bottom: 4px; flex-shrink: 0; }
+  .card.played { border-color: #f08030; box-shadow: 0 0 0 1px rgba(240,128,48,0.4), 0 0 10px rgba(240,128,48,0.25); }
+  .card-played-tag { position: absolute; top: 4px; right: 5px; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.04em; color: #f08030; background: rgba(240,128,48,0.15); border: 1px solid rgba(240,128,48,0.4); border-radius: 4px; padding: 1px 4px; line-height: 1.4; }
+  .card-icon { width: 56px; height: 56px; border-radius: 2px; object-fit: cover; margin-bottom: 2px; flex-shrink: 0; }
   .card-icon.grayscale { filter: grayscale(100%); opacity: 0.7; }
   .card-name { font-size: 0.82rem; font-weight: 700; line-height: 1.2; word-break: break-word; color: #7fc8f8; }
   .card-idx { position: absolute; top: 4px; left: 6px; font-size: 0.6rem; color: var(--text-muted); }
@@ -139,17 +142,29 @@
 
   .deck-label { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 5px; }
 
-  /* Env row */
-  .step-env { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  /* Env column */
+  .step-env { display: flex; flex-direction: column; gap: 5px; flex-shrink: 0; }
   .env-chip {
     display: flex; align-items: center; gap: 6px;
     background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 20px; padding: 3px 10px; font-size: 0.78rem;
+    border-radius: 20px; padding: 3px 10px; font-size: 0.78rem; white-space: nowrap;
   }
   .env-chip-label { color: var(--text-muted); }
   .env-chip-val { font-weight: 700; font-family: monospace; color: var(--blue-light); }
   .env-chip-gauge { width: 48px; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
   .env-chip-gauge-fill { height: 100%; background: var(--blue); transition: width 0.25s; }
+
+  /* Comment */
+  .step-comment { flex: 1; min-width: 120px; display: flex; flex-direction: column; gap: 3px; }
+  .step-comment-label { font-size: 0.68rem; color: var(--text-muted); letter-spacing: 0.04em; }
+  .step-comment-area {
+    width: 100%; min-height: 76px; resize: vertical;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 6px; color: var(--text); padding: 6px 8px;
+    font-size: 0.8rem; font-family: inherit; line-height: 1.55;
+  }
+  .step-comment-area:focus { outline: none; border-color: var(--blue); }
+  .step-comment-area::placeholder { color: var(--text-muted); }
 
   /* Play panel */
   #play-panel {
@@ -305,6 +320,7 @@ let selectedSlot = null;
 let builtinInfo = { builtin: [], needs_target: [] };
 let BUILTIN_OPTIONS = [];
 let availableIcons = new Set();
+let frameComments = {}; // frameIdx → string
 
 // ===== INIT =====
 async function init() {
@@ -437,7 +453,7 @@ async function resetSession() {
     await fetch(API + '/api/session/' + sessionId, { method: 'DELETE' }).catch(function(){});
   }
   sessionId = null; currentState = null; initialState = null;
-  history = []; allCharacters = []; selectedSlot = null;
+  history = []; allCharacters = []; selectedSlot = null; frameComments = {};
   document.getElementById('setup-screen').style.display = 'block';
   document.getElementById('sim-screen').style.display = 'none';
   document.getElementById('setup-error').classList.remove('visible');
@@ -453,12 +469,15 @@ function renderTimeline() {
   const totalFrames = history.length + 1; // frame 0 = initial, frame N = after step N
 
   for (let frameIdx = 0; frameIdx < totalFrames; frameIdx++) {
-    if (frameIdx === 0) {
-      tl.appendChild(buildFrame(initialState, 0, 0, null));
-    } else {
-      tl.appendChild(buildConnector(history[frameIdx - 1]));
-      tl.appendChild(buildFrame(history[frameIdx - 1].state_after, history[frameIdx - 1].step, frameIdx, history[frameIdx - 1]));
-    }
+    const entryFrom = frameIdx > 0 ? history[frameIdx - 1] : null;
+    const entryTo   = frameIdx < history.length ? history[frameIdx] : null;
+    if (frameIdx > 0) tl.appendChild(buildConnector(entryFrom));
+    tl.appendChild(buildFrame(
+      frameIdx === 0 ? initialState : entryFrom.state_after,
+      frameIdx === 0 ? 0 : entryFrom.step,
+      frameIdx,
+      entryTo
+    ));
   }
 
   // Make the last frame current (interactive)
@@ -517,33 +536,38 @@ function buildFrame(state, stepNum, frameNum, entry) {
   labelDiv.appendChild(rewindBtn);
   div.appendChild(labelDiv);
 
+  // body: cards | env | comment
+  const body = document.createElement('div');
+  body.className = 'step-body';
+
   // hand + deck in one row
   const cardsRow = document.createElement('div');
   cardsRow.className = 'step-cards-row';
 
-  // hand cards
   (state.hand || []).forEach(function(name, i) {
     cardsRow.appendChild(buildCard(name, i, false, entry && entry.slot === i, state.env));
   });
 
-  // divider
   const divider = document.createElement('div');
   divider.className = 'deck-divider';
   cardsRow.appendChild(divider);
 
-  // deck cards (same card UI, static)
   (state.deck || []).forEach(function(name, i) {
     const card = buildCard(name, handSize + i, false, false, state.env);
     card.classList.add('deck-card');
     cardsRow.appendChild(card);
   });
 
-  div.appendChild(cardsRow);
+  body.appendChild(cardsRow);
 
-  // env
+  // env (right of deck, vertical)
   const envDiv = buildEnvRow(state.env || {});
-  if (envDiv) div.appendChild(envDiv);
+  if (envDiv) body.appendChild(envDiv);
 
+  // comment
+  body.appendChild(buildCommentArea(frameNum));
+
+  div.appendChild(body);
   return div;
 }
 
@@ -565,10 +589,6 @@ function buildCard(name, slot, interactive, wasPlayed, env) {
 
   if (selectedSlot === slot && interactive) div.classList.add('selected');
 
-  const idx = document.createElement('span');
-  idx.className = 'card-idx'; idx.textContent = slot + 1;
-  div.appendChild(idx);
-
   const icon = getIconSrc(name || '', env || {});
   const img = document.createElement('img');
   img.className = 'card-icon' + (icon.grayscale ? ' grayscale' : '');
@@ -581,19 +601,9 @@ function buildCard(name, slot, interactive, wasPlayed, env) {
   nameEl.className = 'card-name'; nameEl.textContent = name ? getDisplayName(name) : '—';
   div.appendChild(nameEl);
 
-  // if (name && (builtinInfo.builtin.includes(name) || name === 'Rio_Copy')) {
-  //   const badge = document.createElement('span');
-  //   badge.className = 'card-badge';
-  //   badge.textContent = name === 'Rio_Copy' ? 'COPY' : 'SPEC';
-  //   div.appendChild(badge);
-  // }
-
-  // if (wasPlayed) {
-    // const overlay = document.createElement('div');
-    // overlay.className = 'card-played-overlay';
-    // overlay.innerHTML = '<span>PLAYED</span>';
-    // div.appendChild(overlay);
-  // }
+  if (wasPlayed) {
+    div.classList.add('played');
+  }
 
   return div;
 }
@@ -604,9 +614,27 @@ function buildConnector(entry) {
   const pill = document.createElement('div');
   pill.className = 'played-pill';
   const targetStr = entry.target ? (' <span class="played-pill-target">→ ' + escHtml(getDisplayName(entry.target)) + '</span>') : '';
-  pill.innerHTML = '<span style="color:var(--text-muted);font-size:0.7rem">&#9654;</span> <span class="played-pill-card">' + escHtml(getDisplayName(entry.card)) + '</span>' + targetStr + ' <span style="color:var(--text-muted)">を使用</span>';
+  pill.innerHTML = '<span style="color:var(--text-muted);font-size:0.7rem">&#9654;</span> <span class="played-pill-card">' + escHtml(getDisplayName(entry.card)) + '</span>' + targetStr;
   div.appendChild(pill);
   return div;
+}
+
+function buildCommentArea(frameNum) {
+  const wrap = document.createElement('div');
+  wrap.className = 'step-comment';
+  const label = document.createElement('div');
+  label.className = 'step-comment-label';
+  label.textContent = 'メモ';
+  const ta = document.createElement('textarea');
+  ta.className = 'step-comment-area';
+  ta.placeholder = 'このステップのメモ...';
+  ta.value = frameComments[frameNum] || '';
+  ta.addEventListener('input', function() {
+    frameComments[frameNum] = ta.value;
+  });
+  wrap.appendChild(label);
+  wrap.appendChild(ta);
+  return wrap;
 }
 
 function buildEnvRow(env) {
@@ -807,6 +835,7 @@ function doSave() {
     initial_state: initialState,
     current_state: currentState,
     history: history,
+    frame_comments: frameComments,
   });
   putSaves(saves.slice(0, 20)); // 最大20件
   document.getElementById('save-panel').style.display = 'none';
@@ -875,6 +904,7 @@ async function loadSave(save) {
     history = data.history;
     allCharacters = data.characters;
     selectedSlot = null;
+    frameComments = save.frame_comments || {};
 
     document.getElementById('setup-screen').style.display = 'none';
     document.getElementById('sim-screen').style.display = 'block';
@@ -941,6 +971,7 @@ function doExport() {
       initial_state: initialState,
       current_state: currentState,
       history: history,
+      frame_comments: frameComments,
     };
   }
 
@@ -1010,6 +1041,7 @@ function handleImportFile(input) {
         initial_state: data.current_session.initial_state,
         current_state: data.current_session.current_state,
         history: data.current_session.history,
+        frame_comments: data.current_session.frame_comments || {},
       });
     }
   };
