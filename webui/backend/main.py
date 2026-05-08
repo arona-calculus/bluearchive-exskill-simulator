@@ -53,6 +53,7 @@ BUILTINS: Dict[str, BuiltinEntry] = {
     "Seia_Swimsuit":   BuiltinEntry("セイア(水着)",   GenericSpec),
     "Hanako_Swimsuit": BuiltinEntry("ハナコ(水着)",   HanakoSwimsuitSpec),
     "Hikari":          BuiltinEntry("ヒカリ",         GenericSpec),
+    "Michiru_Dress":            BuiltinEntry("ミチル(ドレス)",           GenericSpec),
     "Mine":            BuiltinEntry("ミネ",           GenericSpec),
     "Miyako":          BuiltinEntry("ミヤコ",         GenericSpec),
     "Miyako_Swimsuit": BuiltinEntry("ミヤコ(水着)",   GenericSpec),

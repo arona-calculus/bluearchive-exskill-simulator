@@ -699,7 +699,7 @@ function selectCard(slot) {
   const panel = document.getElementById('play-panel');
   if (!panel) return;
   panel.classList.add('visible');
-  document.getElementById('pp-title').textContent = '「' + getDisplayName(card) + '」をプレイ';
+  document.getElementById('pp-title').textContent = getDisplayName(card);
 
   const sel = document.getElementById('target-select');
   sel.innerHTML = '<option value="">なし</option>';
