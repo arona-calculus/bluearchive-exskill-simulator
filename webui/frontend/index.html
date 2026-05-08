@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BA EX Skill Simulator</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d1117; --surface: #161b22; --surface2: #21262d; --border: #30363d;
+    --blue: #3d8bcd; --blue-light: #58a6ff; --blue-dark: #1f5a8a;
+    --green: #3fb950; --yellow: #d29922; --red: #f85149;
+    --text: #e6edf3; --text-muted: #8b949e;
+    --card-w: 100px; --card-h: 136px;
+  }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  header {
+    background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px; display: flex; align-items: center; gap: 12px;
+  }
+  header h1 { font-size: 1.1rem; font-weight: 700; color: var(--blue-light); }
+  header span { color: var(--text-muted); font-size: 0.85rem; }
+
+  .btn { padding: 7px 18px; border-radius: 7px; border: none; cursor: pointer; font-size: 0.875rem; font-weight: 600; transition: opacity 0.12s, transform 0.1s; }
+  .btn:hover { opacity: 0.82; } .btn:active { transform: scale(0.97); }
+  .btn-primary { background: var(--blue); color: #fff; }
+  .btn-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+  .btn-sm { padding: 4px 12px; font-size: 0.8rem; }
+
+  /* ===== SETUP ===== */
+  #setup-screen { max-width: 640px; margin: 36px auto; padding: 0 16px; }
+  .setup-title { font-size: 1.15rem; font-weight: 600; color: var(--blue-light); margin-bottom: 20px; }
+
+  .config-row { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+  .config-item { display: flex; align-items: center; gap: 8px; }
+  .config-item label { font-size: 0.85rem; color: var(--text-muted); white-space: nowrap; }
+  .config-input {
+    width: 64px; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 6px; color: var(--text); padding: 5px 8px; font-size: 0.9rem; text-align: center;
+  }
+  .config-input:focus { outline: none; border-color: var(--blue); }
+
+  .section-label { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 14px 0 7px; }
+  .char-slots { display: flex; flex-direction: column; gap: 7px; }
+  .char-slot { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 7px 12px; }
+  .slot-num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; flex-shrink: 0; }
+  .slot-num.hand { background: var(--blue-dark); color: var(--text); }
+  .slot-num.deck { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+  .char-select { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 5px 9px; font-size: 0.875rem; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238b949e' d='M6 8L0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px; }
+  .char-select:focus { outline: none; border-color: var(--blue); }
+  .char-custom-input { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 5px 9px; font-size: 0.875rem; }
+  .char-custom-input:focus { outline: none; border-color: var(--blue); }
+  .builtin-badge { font-size: 0.68rem; padding: 2px 7px; border-radius: 9px; background: var(--blue-dark); color: var(--blue-light); white-space: nowrap; flex-shrink: 0; }
+
+  .error-msg { color: var(--red); font-size: 0.85rem; padding: 8px 12px; background: rgba(248,81,73,0.1); border: 1px solid rgba(248,81,73,0.4); border-radius: 6px; margin-top: 10px; display: none; }
+  .error-msg.visible { display: block; }
+
+  /* ===== SIM SCREEN ===== */
+  #sim-screen { display: none; }
+  .sim-topbar { display: flex; align-items: center; gap: 10px; padding: 10px 20px; border-bottom: 1px solid var(--border); background: var(--surface); }
+  .sim-topbar span { color: var(--text-muted); font-size: 0.82rem; flex: 1; }
+
+  /* ===== TIMELINE ===== */
+  #timeline { padding: 16px 20px; display: flex; flex-direction: column; gap: 0; }
+
+  .step-frame {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+  }
+  .step-frame.current { border-color: var(--blue); box-shadow: 0 0 0 1px rgba(61,139,205,0.2); }
+
+  .step-connector {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 20px; min-height: 36px;
+    position: relative;
+  }
+  .step-connector::before {
+    content: ''; position: absolute; left: 28px; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+  }
+  .played-pill {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 20px; padding: 4px 12px 4px 8px;
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.78rem; color: var(--text-muted);
+    position: relative; z-index: 1;
+  }
+  .played-pill-card { font-weight: 700; color: var(--blue-light); }
+  .played-pill-target { color: var(--text-muted); }
+
+  .step-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; width: 100%; }
+  .step-label-current { color: var(--blue-light); }
+  .step-label-badge { background: var(--blue-dark); color: var(--blue-light); border-radius: 10px; padding: 1px 8px; font-size: 0.68rem; }
+
+  /* All cards in one row */
+  .step-cards-row { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 10px; }
+
+  .deck-divider {
+    width: 1px; background: var(--border); align-self: stretch;
+    margin: 0 8px; flex-shrink: 0; position: relative;
+  }
+  .deck-divider::before {
+    content: '控え'; position: absolute; top: -18px; left: 50%;
+    transform: translateX(-50%); font-size: 0.58rem; color: var(--text-muted);
+    white-space: nowrap; letter-spacing: 0.03em;
+  }
+
+  .card.deck-card { opacity: 0.55; border-style: dashed; cursor: default; }
+
+  .card {
+    width: var(--card-w); min-height: var(--card-h);
+    border-radius: 9px; border: 2px solid #2d6a9f;
+    background: linear-gradient(160deg, #1a2a3a, #0d2137);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 8px 6px; text-align: center; position: relative;
+    transition: border-color 0.12s, transform 0.1s, box-shadow 0.12s;
+    user-select: none;
+  }
+  .card.interactive { cursor: pointer; }
+  .card.interactive:hover { border-color: var(--blue-light); transform: translateY(-3px); box-shadow: 0 6px 16px rgba(61,139,205,0.28); }
+  .card.interactive.selected { border-color: var(--yellow); box-shadow: 0 0 0 2px var(--yellow); transform: translateY(-3px); }
+  .card.static { cursor: default; }
+  .card-icon { width: 56px; height: 56px; border-radius: 4px; object-fit: cover; margin-bottom: 4px; flex-shrink: 0; }
+  .card-icon.grayscale { filter: grayscale(100%); opacity: 0.7; }
+  .card-name { font-size: 0.82rem; font-weight: 700; line-height: 1.2; word-break: break-word; color: #7fc8f8; }
+  .card-idx { position: absolute; top: 4px; left: 6px; font-size: 0.6rem; color: var(--text-muted); }
+  .card-badge { position: absolute; bottom: 4px; font-size: 0.58rem; padding: 1px 5px; border-radius: 7px; background: var(--blue-dark); color: var(--blue-light); }
+  .card-played-overlay {
+    position: absolute; inset: 0; border-radius: 7px;
+    background: rgba(0,0,0,0.45);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-played-overlay span { font-size: 0.65rem; color: var(--yellow); font-weight: 700; letter-spacing: 0.05em; }
+
+  .deck-label { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 5px; }
+
+  /* Env row */
+  .step-env { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .env-chip {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 20px; padding: 3px 10px; font-size: 0.78rem;
+  }
+  .env-chip-label { color: var(--text-muted); }
+  .env-chip-val { font-weight: 700; font-family: monospace; color: var(--blue-light); }
+  .env-chip-gauge { width: 48px; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .env-chip-gauge-fill { height: 100%; background: var(--blue); transition: width 0.25s; }
+
+  /* Play panel */
+  #play-panel {
+    border: 1px solid var(--yellow); border-radius: 9px;
+    padding: 12px 14px; margin-top: 12px; display: none;
+    background: rgba(210,153,34,0.05);
+  }
+  #play-panel.visible { display: block; }
+  .pp-title { font-size: 0.82rem; color: var(--yellow); font-weight: 600; margin-bottom: 9px; }
+  .pp-row { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
+  .pp-row label { font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; }
+  .pp-select { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 5px 8px; font-size: 0.82rem; }
+  .pp-select:focus { outline: none; border-color: var(--blue); }
+  .pp-btns { display: flex; gap: 8px; }
+  #sim-error { margin-top: 8px; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--surface2); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* Rewind button */
+  .rewind-btn {
+    font-size: 0.68rem; padding: 2px 9px; border-radius: 10px;
+    background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+    cursor: pointer; transition: all 0.12s; margin-left: auto;
+  }
+  .rewind-btn:hover { background: var(--surface2); border-color: var(--yellow); color: var(--yellow); }
+
+  /* Save/Load panels */
+  .side-panel {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 10px 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .side-panel-title { font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; }
+  .side-panel-row { display: flex; align-items: center; gap: 8px; flex: 1; }
+  .side-panel-input {
+    flex: 1; max-width: 280px; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 6px; color: var(--text); padding: 5px 9px; font-size: 0.82rem;
+  }
+  .side-panel-input:focus { outline: none; border-color: var(--blue); }
+
+  .load-item {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 7px; padding: 7px 10px; cursor: pointer; transition: border-color 0.12s;
+    margin-bottom: 6px;
+  }
+  .load-item:hover { border-color: var(--blue); }
+  .load-item-info { flex: 1; min-width: 0; }
+  .load-item-name { font-size: 0.85rem; font-weight: 600; }
+  .load-item-meta { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+  .load-item-del { background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 1rem; padding: 2px 6px; border-radius: 4px; }
+  .load-item-del:hover { color: var(--red); background: rgba(248,81,73,0.1); }
+  .load-empty { font-size: 0.82rem; color: var(--text-muted); font-style: italic; }
+
+  /* Export/Import */
+  .export-panel {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 10px 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .export-panel-title { font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; }
+  .export-save-list { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+  .export-save-item {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 6px; padding: 5px 10px; font-size: 0.78rem;
+  }
+  .export-save-item input[type=checkbox] { accent-color: var(--blue); flex-shrink: 0; }
+  .export-save-item-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .export-save-item-meta { color: var(--text-muted); font-size: 0.7rem; flex-shrink: 0; }
+  .export-btns { display: flex; gap: 8px; align-items: center; }
+  .import-notice { font-size: 0.78rem; color: var(--text-muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>BA EX Skill Simulator</h1>
+  <span>Blue Archive EXスキル タイムラインシミュレーター</span>
+</header>
+
+<!-- SETUP SCREEN -->
+<div id="setup-screen">
+  <div style="height:20px"></div>
+  <div class="setup-title">初期設定</div>
+
+  <div class="config-row">
+    <div class="config-item">
+      <label>総カード数</label>
+      <input id="total-count" class="config-input" type="number" min="2" max="20" value="6">
+    </div>
+    <div class="config-item">
+      <label>手札枚数</label>
+      <input id="hand-size" class="config-input" type="number" min="1" max="10" value="3">
+    </div>
+  </div>
+
+  <div id="char-slots-area"></div>
+
+  <div id="setup-error" class="error-msg"></div>
+
+  <div style="margin-top:18px; display:flex; gap:8px;">
+    <button class="btn btn-primary" onclick="startSession()">シミュレーション開始</button>
+  </div>
+</div>
+
+<!-- SIM SCREEN -->
+<div id="sim-screen">
+  <div class="sim-topbar">
+    <span id="sim-info">-</span>
+    <button class="btn btn-secondary btn-sm" onclick="toggleSavePanel()">保存</button>
+    <button class="btn btn-secondary btn-sm" onclick="toggleLoadPanel()">ロード</button>
+    <button class="btn btn-secondary btn-sm" onclick="toggleExportPanel()">エクスポート</button>
+    <button class="btn btn-secondary btn-sm" onclick="triggerImport()">インポート</button>
+    <input type="file" id="import-file-input" accept=".json" style="display:none" onchange="handleImportFile(this)">
+    <button class="btn btn-secondary btn-sm" onclick="resetSession()">リセット</button>
+  </div>
+  <div id="save-panel" class="side-panel" style="display:none">
+    <div class="side-panel-title">現在の状態を保存</div>
+    <div class="side-panel-row">
+      <input id="save-name-input" class="side-panel-input" type="text" placeholder="セーブ名 (例: Step3確認用)">
+      <button class="btn btn-primary btn-sm" onclick="doSave()">保存する</button>
+    </div>
+  </div>
+  <div id="load-panel" class="side-panel" style="display:none">
+    <div class="side-panel-title">セーブデータを読み込む</div>
+    <div id="load-list"></div>
+  </div>
+  <div id="export-panel" class="export-panel" style="display:none">
+    <div class="export-panel-title">エクスポート</div>
+    <div class="export-save-list" id="export-save-list"></div>
+    <div class="export-btns">
+      <button class="btn btn-primary btn-sm" onclick="doExport()">JSONでダウンロード</button>
+      <label style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--text-muted);cursor:pointer;">
+        <input type="checkbox" id="export-include-session" checked style="accent-color:var(--blue)">
+        現在のセッションを含む
+      </label>
+    </div>
+  </div>
+  <div id="timeline"></div>
+</div>
+
+<script>
+const BASE = window.location.pathname.startsWith('/exsim') ? '/exsim' : '';
+const API = BASE;
+
+let sessionId = null;
+let currentState = null;
+let history = [];
+let allCharacters = [];
+let handSize = 3;
+let initialState = null;
+let selectedSlot = null;
+let builtinInfo = { builtin: [], needs_target: [] };
+let BUILTIN_OPTIONS = [];
+let availableIcons = new Set();
+
+// ===== INIT =====
+async function init() {
+  try {
+    const res = await fetch(API + '/api/specs');
+    if (res.ok) {
+      builtinInfo = await res.json();
+      BUILTIN_OPTIONS = builtinInfo.builtin; // [{ value, label }, ...]
+    }
+  } catch(e) {}
+  try {
+    const res = await fetch(API + '/api/icons');
+    if (res.ok) {
+      const data = await res.json();
+      availableIcons = new Set(data.available);
+    }
+  } catch(e) {}
+  renderSetupSlots();
+}
+
+document.getElementById('total-count').addEventListener('input', renderSetupSlots);
+document.getElementById('hand-size').addEventListener('input', renderSetupSlots);
+
+
+function getDisplayName(name) {
+  const opt = BUILTIN_OPTIONS.find(function(o) { return o.value === name; });
+  if (opt) return opt.label;
+  if (name === 'Rio_Copy') return 'リオ(コピー)';
+  return name;
+}
+
+function renderSetupSlots() {
+  const total = Math.max(2, parseInt(document.getElementById('total-count').value) || 6);
+  const hs = Math.max(1, Math.min(total - 1, parseInt(document.getElementById('hand-size').value) || 3));
+
+  const area = document.getElementById('char-slots-area');
+  const prev = Array.from(area.querySelectorAll('.char-slot')).map(getSlotValue);
+
+  let html = '<div class="section-label">手札 (1〜' + hs + ')</div><div class="char-slots">';
+  for (let i = 0; i < hs; i++) {
+    const v = prev[i] !== undefined ? prev[i] : BUILTIN_OPTIONS[i % BUILTIN_OPTIONS.length].value;
+    html += slotHtml(i + 1, 'hand', v);
+  }
+  html += '</div><div class="section-label">デッキ (' + (hs + 1) + '〜' + total + ')</div><div class="char-slots">';
+  for (let i = hs; i < total; i++) {
+    const v = prev[i] !== undefined ? prev[i] : BUILTIN_OPTIONS[i % BUILTIN_OPTIONS.length].value;
+    html += slotHtml(i + 1, 'deck', v);
+  }
+  html += '</div>';
+  area.innerHTML = html;
+}
+
+function getSlotValue(slot) {
+  const sel = slot.querySelector('.char-select');
+  if (!sel) return '';
+  if (sel.value === '__custom__') {
+    const inp = slot.querySelector('.char-custom-input');
+    return inp ? inp.value.trim() : '';
+  }
+  return sel.value;
+}
+
+function onSlotSelectChange(sel) {
+  const slot = sel.closest('.char-slot');
+  const customInput = slot.querySelector('.char-custom-input');
+  if (sel.value === '__custom__') {
+    sel.style.flex = '0 0 auto';
+    customInput.style.display = '';
+    customInput.focus();
+  } else {
+    sel.style.flex = '';
+    customInput.style.display = 'none';
+    customInput.value = '';
+  }
+}
+
+function slotHtml(n, type, val) {
+  const isCustom = !BUILTIN_OPTIONS.some(function(o) { return o.value === val; });
+  const opts = BUILTIN_OPTIONS.map(function(o) {
+    return '<option value="' + o.value + '"' + (!isCustom && val === o.value ? ' selected' : '') + '>' + o.label + '</option>';
+  }).join('') + '<option value="__custom__"' + (isCustom ? ' selected' : '') + '>カスタム入力...</option>';
+  return '<div class="char-slot">' +
+    '<div class="slot-num ' + type + '">' + n + '</div>' +
+    '<select class="char-select" ' + (isCustom ? 'style="flex:0 0 auto" ' : '') + 'onchange="onSlotSelectChange(this)">' + opts + '</select>' +
+    '<input class="char-custom-input" type="text" placeholder="キャラ名"' +
+      (isCustom ? ' value="' + escHtml(val) + '"' : ' style="display:none"') + '>' +
+    '</div>';
+}
+
+// ===== SESSION =====
+async function startSession() {
+  const characters = Array.from(document.querySelectorAll('#char-slots-area .char-slot')).map(getSlotValue);
+  const hs = Math.max(1, parseInt(document.getElementById('hand-size').value) || 3);
+
+  if (characters.some(function(c) { return !c; })) {
+    showError('setup-error', 'すべてのキャラクター名を入力してください');
+    return;
+  }
+
+  try {
+    const res = await fetch(API + '/api/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ characters: characters, hand_size: hs }),
+    });
+    const data = await res.json();
+    if (!res.ok) { showError('setup-error', data.detail || 'エラー'); return; }
+
+    sessionId = data.session_id;
+    handSize = data.hand_size;
+    currentState = data.state;
+    initialState = data.state;
+    history = [];
+    allCharacters = data.characters;
+    selectedSlot = null;
+
+    document.getElementById('setup-screen').style.display = 'none';
+    document.getElementById('sim-screen').style.display = 'block';
+    document.getElementById('sim-info').textContent =
+      '手札 ' + handSize + '枚 / 総 ' + allCharacters.length + '枚';
+
+    renderTimeline();
+  } catch(e) {
+    showError('setup-error', '接続エラー: ' + e.message);
+  }
+}
+
+async function resetSession() {
+  if (sessionId) {
+    await fetch(API + '/api/session/' + sessionId, { method: 'DELETE' }).catch(function(){});
+  }
+  sessionId = null; currentState = null; initialState = null;
+  history = []; allCharacters = []; selectedSlot = null;
+  document.getElementById('setup-screen').style.display = 'block';
+  document.getElementById('sim-screen').style.display = 'none';
+  document.getElementById('setup-error').classList.remove('visible');
+  renderSetupSlots();
+}
+
+// ===== TIMELINE RENDER =====
+function renderTimeline() {
+  const tl = document.getElementById('timeline');
+  tl.innerHTML = '';
+
+  // All frames (initial + all history results)
+  const totalFrames = history.length + 1; // frame 0 = initial, frame N = after step N
+
+  for (let frameIdx = 0; frameIdx < totalFrames; frameIdx++) {
+    if (frameIdx === 0) {
+      tl.appendChild(buildFrame(initialState, 0, 0, null));
+    } else {
+      tl.appendChild(buildConnector(history[frameIdx - 1]));
+      tl.appendChild(buildFrame(history[frameIdx - 1].state_after, history[frameIdx - 1].step, frameIdx, history[frameIdx - 1]));
+    }
+  }
+
+  // Make the last frame current (interactive)
+  const frames = tl.querySelectorAll('.step-frame');
+  const lastFrame = frames[frames.length - 1];
+  if (lastFrame) {
+    lastFrame.classList.add('current');
+    // Remove rewind button from current frame
+    const rwBtn = lastFrame.querySelector('.rewind-btn');
+    if (rwBtn) rwBtn.remove();
+    // update label
+    const label = lastFrame.querySelector('.step-label');
+    if (label) {
+      // clear text but keep flex layout
+      label.childNodes.forEach(function(n) { if (n.nodeType === 3) n.textContent = ''; });
+      const span = document.createElement('span');
+      span.className = 'step-label-current';
+      span.textContent = '現在の手札';
+      label.prepend(span);
+    }
+    // make hand cards interactive
+    lastFrame.querySelectorAll('.card.static').forEach(function(card) {
+      const slot = parseInt(card.dataset.slot);
+      if (!isNaN(slot) && slot < handSize) {
+        card.classList.remove('static');
+        card.classList.add('interactive');
+        card.addEventListener('click', function() { selectCard(slot); });
+      }
+    });
+    // add play panel
+    const panel = buildPlayPanel();
+    lastFrame.appendChild(panel);
+  }
+
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+function buildFrame(state, stepNum, frameNum, entry) {
+  const div = document.createElement('div');
+  div.className = 'step-frame';
+  div.dataset.frame = frameNum;
+
+  // label
+  const labelDiv = document.createElement('div');
+  labelDiv.className = 'step-label';
+  if (stepNum === 0) {
+    labelDiv.textContent = '初期状態';
+  } else {
+    labelDiv.textContent = 'Step ' + stepNum;
+  }
+
+  const rewindBtn = document.createElement('button');
+  rewindBtn.className = 'rewind-btn';
+  rewindBtn.textContent = '↩ ここからやり直す';
+  rewindBtn.addEventListener('click', function(e) { e.stopPropagation(); rewindToFrame(frameNum); });
+  labelDiv.appendChild(rewindBtn);
+  div.appendChild(labelDiv);
+
+  // hand + deck in one row
+  const cardsRow = document.createElement('div');
+  cardsRow.className = 'step-cards-row';
+
+  // hand cards
+  (state.hand || []).forEach(function(name, i) {
+    cardsRow.appendChild(buildCard(name, i, false, entry && entry.slot === i, state.env));
+  });
+
+  // divider
+  const divider = document.createElement('div');
+  divider.className = 'deck-divider';
+  cardsRow.appendChild(divider);
+
+  // deck cards (same card UI, static)
+  (state.deck || []).forEach(function(name, i) {
+    const card = buildCard(name, handSize + i, false, false, state.env);
+    card.classList.add('deck-card');
+    cardsRow.appendChild(card);
+  });
+
+  div.appendChild(cardsRow);
+
+  // env
+  const envDiv = buildEnvRow(state.env || {});
+  if (envDiv) div.appendChild(envDiv);
+
+  return div;
+}
+
+function getIconSrc(name, env) {
+  if (name === 'Rio_Copy') {
+    const target = (env && env.rio_copy_target) || '';
+    const iconName = target && availableIcons.has(target) ? target : 'generic';
+    return { src: BASE + '/assets/icons/' + iconName + '.png', grayscale: true };
+  }
+  const iconName = availableIcons.has(name) ? name : 'generic';
+  return { src: BASE + '/assets/icons/' + iconName + '.png', grayscale: false };
+}
+
+function buildCard(name, slot, interactive, wasPlayed, env) {
+  const div = document.createElement('div');
+  div.className = 'card ' + (interactive ? 'interactive' : 'static');
+  div.dataset.char = name || '';
+  div.dataset.slot = slot;
+
+  if (selectedSlot === slot && interactive) div.classList.add('selected');
+
+  const idx = document.createElement('span');
+  idx.className = 'card-idx'; idx.textContent = slot + 1;
+  div.appendChild(idx);
+
+  const icon = getIconSrc(name || '', env || {});
+  const img = document.createElement('img');
+  img.className = 'card-icon' + (icon.grayscale ? ' grayscale' : '');
+  img.src = icon.src;
+  img.alt = '';
+  img.onerror = function() { this.style.display = 'none'; };
+  div.appendChild(img);
+
+  const nameEl = document.createElement('div');
+  nameEl.className = 'card-name'; nameEl.textContent = name ? getDisplayName(name) : '—';
+  div.appendChild(nameEl);
+
+  // if (name && (builtinInfo.builtin.includes(name) || name === 'Rio_Copy')) {
+  //   const badge = document.createElement('span');
+  //   badge.className = 'card-badge';
+  //   badge.textContent = name === 'Rio_Copy' ? 'COPY' : 'SPEC';
+  //   div.appendChild(badge);
+  // }
+
+  // if (wasPlayed) {
+    // const overlay = document.createElement('div');
+    // overlay.className = 'card-played-overlay';
+    // overlay.innerHTML = '<span>PLAYED</span>';
+    // div.appendChild(overlay);
+  // }
+
+  return div;
+}
+
+function buildConnector(entry) {
+  const div = document.createElement('div');
+  div.className = 'step-connector';
+  const pill = document.createElement('div');
+  pill.className = 'played-pill';
+  const targetStr = entry.target ? (' <span class="played-pill-target">→ ' + escHtml(getDisplayName(entry.target)) + '</span>') : '';
+  pill.innerHTML = '<span style="color:var(--text-muted);font-size:0.7rem">&#9654;</span> <span class="played-pill-card">' + escHtml(getDisplayName(entry.card)) + '</span>' + targetStr + ' <span style="color:var(--text-muted)">を使用</span>';
+  div.appendChild(pill);
+  return div;
+}
+
+function buildEnvRow(env) {
+  const keys = Object.keys(env);
+  if (keys.length === 0) return null;
+  const div = document.createElement('div');
+  div.className = 'step-env';
+  keys.forEach(function(key) {
+    const val = env[key];
+    const chip = document.createElement('div');
+    chip.className = 'env-chip';
+    chip.innerHTML = '<span class="env-chip-label">' + escHtml(envLabel(key)) + '</span>' + envChipVal(key, val);
+    div.appendChild(chip);
+  });
+  return div;
+}
+
+function envLabel(key) {
+  const map = { hanako_gauge: 'ゲージ', alice_charge: 'チャージ', rio_copy_target: 'コピー先' };
+  return map[key] || key;
+}
+
+function envChipVal(key, val) {
+  if (key === 'hanako_gauge') {
+    const pct = Math.min(100, (val / 200) * 100);
+    return '<div class="env-chip-gauge"><div class="env-chip-gauge-fill" style="width:' + pct + '%"></div></div><span class="env-chip-val">' + val + '/200</span>';
+  }
+  if (key === 'alice_charge') {
+    const pct = Math.min(100, (val / 2) * 100);
+    return '<div class="env-chip-gauge"><div class="env-chip-gauge-fill" style="width:' + pct + '%;background:#f87f7f"></div></div><span class="env-chip-val" style="color:#f87f7f">' + val + '/2</span>';
+  }
+  return '<span class="env-chip-val">' + escHtml(String(val)) + '</span>';
+}
+
+function buildPlayPanel() {
+  const panel = document.createElement('div');
+  panel.id = 'play-panel';
+
+  panel.innerHTML =
+    '<div class="pp-title" id="pp-title">カードを選択してください</div>' +
+    '<div class="pp-row"><label id="pp-target-label">ターゲット</label>' +
+    '<select class="pp-select" id="target-select"><option value="">なし</option></select></div>' +
+    '<div class="pp-btns">' +
+    '<button class="btn btn-primary btn-sm" onclick="confirmPlay()">プレイ</button>' +
+    '<button class="btn btn-secondary btn-sm" onclick="cancelPlay()">キャンセル</button>' +
+    '</div>' +
+    '<div id="sim-error" class="error-msg"></div>';
+
+  return panel;
+}
+
+// ===== REWIND =====
+async function rewindToFrame(frameNum) {
+  if (!sessionId) return;
+  const confirmMsg = frameNum === 0
+    ? '初期状態からやり直しますか？\n以降の履歴は削除されます。'
+    : 'Step ' + frameNum + ' の状態からやり直しますか？\n以降の履歴は削除されます。';
+  if (!confirm(confirmMsg)) return;
+  try {
+    const res = await fetch(API + '/api/session/' + sessionId + '/rewind', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ frame: frameNum }),
+    });
+    const data = await res.json();
+    if (!res.ok) { alert(data.detail || 'エラー'); return; }
+    currentState = data.state;
+    history = data.history;
+    selectedSlot = null;
+    renderTimeline();
+  } catch(e) {
+    alert('通信エラー: ' + e.message);
+  }
+}
+
+// ===== PLAY =====
+function selectCard(slot) {
+  const card = currentState.hand[slot];
+  if (!card) return;
+
+  if (selectedSlot === slot) { cancelPlay(); return; }
+
+  selectedSlot = slot;
+
+  // Update card highlights
+  document.querySelectorAll('.card.interactive').forEach(function(c) {
+    c.classList.toggle('selected', parseInt(c.dataset.slot) === slot);
+  });
+
+  const panel = document.getElementById('play-panel');
+  if (!panel) return;
+  panel.classList.add('visible');
+  document.getElementById('pp-title').textContent = '「' + getDisplayName(card) + '」をプレイ';
+
+  const sel = document.getElementById('target-select');
+  sel.innerHTML = '<option value="">なし</option>';
+
+  const known = new Set(allCharacters.concat(currentState.hand || []).concat(currentState.deck || []));
+  known.forEach(function(name) {
+    if (name && name !== card) {
+      const opt = document.createElement('option');
+      opt.value = name; opt.textContent = getDisplayName(name);
+      sel.appendChild(opt);
+    }
+  });
+
+  const lbl = document.getElementById('pp-target-label');
+  if (card === 'Rio') {
+    lbl.textContent = 'コピー先 *';
+  } else if (card === 'Alice_Battle') {
+    lbl.textContent = 'ターゲット *';
+    const selfOpt = document.createElement('option');
+    selfOpt.value = 'Alice_Battle'; selfOpt.textContent = getDisplayName('Alice_Battle') + ' (自身)';
+    sel.insertBefore(selfOpt, sel.children[1]);
+  } else {
+    lbl.textContent = 'ターゲット';
+  }
+
+  const errEl = document.getElementById('sim-error');
+  if (errEl) errEl.classList.remove('visible');
+}
+
+function cancelPlay() {
+  selectedSlot = null;
+  const panel = document.getElementById('play-panel');
+  if (panel) panel.classList.remove('visible');
+  document.querySelectorAll('.card.interactive').forEach(function(c) { c.classList.remove('selected'); });
+}
+
+async function confirmPlay() {
+  if (selectedSlot === null) return;
+  const card = currentState.hand[selectedSlot];
+  const sel = document.getElementById('target-select');
+  const target = sel ? sel.value : '';
+
+  if (card === 'Rio' && !target) {
+    showError('sim-error', 'リオのコピー先を選択してください');
+    return;
+  }
+
+  try {
+    const res = await fetch(API + '/api/session/' + sessionId + '/play', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slot: selectedSlot, target: target }),
+    });
+    const data = await res.json();
+    if (!res.ok) { showError('sim-error', data.detail || 'エラー'); return; }
+
+    currentState = data.state;
+    history = data.history;
+    selectedSlot = null;
+    renderTimeline();
+  } catch(e) {
+    showError('sim-error', '通信エラー: ' + e.message);
+  }
+}
+
+// ===== SAVE / LOAD =====
+const SAVE_KEY = 'ba_exsim_saves';
+
+function getSaves() {
+  try { return JSON.parse(localStorage.getItem(SAVE_KEY) || '[]'); } catch(e) { return []; }
+}
+function putSaves(saves) {
+  localStorage.setItem(SAVE_KEY, JSON.stringify(saves));
+}
+
+function toggleSavePanel() {
+  const sp = document.getElementById('save-panel');
+  const lp = document.getElementById('load-panel');
+  lp.style.display = 'none';
+  sp.style.display = sp.style.display === 'none' ? 'flex' : 'none';
+  if (sp.style.display !== 'none') {
+    const inp = document.getElementById('save-name-input');
+    inp.value = 'Step ' + history.length + ' の状態';
+    inp.focus();
+  }
+}
+
+function toggleLoadPanel() {
+  const lp = document.getElementById('load-panel');
+  const sp = document.getElementById('save-panel');
+  sp.style.display = 'none';
+  lp.style.display = lp.style.display === 'none' ? 'block' : 'none';
+  if (lp.style.display !== 'none') renderLoadList();
+}
+
+function doSave() {
+  const name = document.getElementById('save-name-input').value.trim() || ('Step ' + history.length + ' の状態');
+  const saves = getSaves();
+  saves.unshift({
+    id: Date.now().toString(36),
+    name: name,
+    timestamp: new Date().toISOString(),
+    characters: allCharacters,
+    hand_size: handSize,
+    initial_state: initialState,
+    current_state: currentState,
+    history: history,
+  });
+  putSaves(saves.slice(0, 20)); // 最大20件
+  document.getElementById('save-panel').style.display = 'none';
+}
+
+function renderLoadList() {
+  const saves = getSaves();
+  const list = document.getElementById('load-list');
+  if (saves.length === 0) {
+    list.innerHTML = '<div class="load-empty">セーブデータがありません</div>';
+    return;
+  }
+  list.innerHTML = '';
+  saves.forEach(function(save) {
+    const item = document.createElement('div');
+    item.className = 'load-item';
+    const ts = new Date(save.timestamp).toLocaleString('ja-JP');
+    const stepInfo = save.history.length > 0 ? 'Step ' + save.history.length + ' 後' : '初期状態';
+    item.innerHTML =
+      '<div class="load-item-info">' +
+        '<div class="load-item-name">' + escHtml(save.name) + '</div>' +
+        '<div class="load-item-meta">' + escHtml(stepInfo) + ' | ' + escHtml(save.characters.join(', ')) + ' | ' + ts + '</div>' +
+      '</div>' +
+      '<button class="load-item-del" title="削除" data-id="' + escHtml(save.id) + '">✕</button>';
+    item.querySelector('.load-item-del').addEventListener('click', function(e) {
+      e.stopPropagation();
+      deleteSave(save.id);
+    });
+    item.addEventListener('click', function() { loadSave(save); });
+    list.appendChild(item);
+  });
+}
+
+function deleteSave(id) {
+  const saves = getSaves().filter(function(s) { return s.id !== id; });
+  putSaves(saves);
+  renderLoadList();
+}
+
+async function loadSave(save) {
+  if (!confirm('"' + save.name + '" を読み込みますか？\n現在のセッションは破棄されます。')) return;
+
+  if (sessionId) {
+    await fetch(API + '/api/session/' + sessionId, { method: 'DELETE' }).catch(function(){});
+  }
+
+  try {
+    const res = await fetch(API + '/api/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        characters: save.characters,
+        hand_size: save.hand_size,
+        restore_current: save.current_state,
+        restore_initial: save.initial_state,
+        restore_history: save.history,
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok) { alert(data.detail || '読み込みエラー'); return; }
+
+    sessionId = data.session_id;
+    handSize = data.hand_size;
+    currentState = data.state;
+    initialState = data.initial_state;
+    history = data.history;
+    allCharacters = data.characters;
+    selectedSlot = null;
+
+    document.getElementById('setup-screen').style.display = 'none';
+    document.getElementById('sim-screen').style.display = 'block';
+    document.getElementById('load-panel').style.display = 'none';
+    document.getElementById('sim-info').textContent = '手札 ' + handSize + '枚 / 総 ' + allCharacters.length + '枚';
+    renderTimeline();
+  } catch(e) {
+    alert('通信エラー: ' + e.message);
+  }
+}
+
+// ===== EXPORT / IMPORT =====
+function toggleExportPanel() {
+  const ep = document.getElementById('export-panel');
+  const sp = document.getElementById('save-panel');
+  const lp = document.getElementById('load-panel');
+  sp.style.display = 'none';
+  lp.style.display = 'none';
+  ep.style.display = ep.style.display === 'none' ? 'flex' : 'none';
+  if (ep.style.display !== 'none') renderExportSaveList();
+}
+
+function renderExportSaveList() {
+  const saves = getSaves();
+  const list = document.getElementById('export-save-list');
+  if (saves.length === 0) {
+    list.innerHTML = '<div class="import-notice">セーブデータがありません（現在のセッションのみエクスポートできます）</div>';
+    return;
+  }
+  list.innerHTML = '<div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:4px;">エクスポートするセーブを選択:</div>';
+  saves.forEach(function(save) {
+    const ts = new Date(save.timestamp).toLocaleString('ja-JP');
+    const stepInfo = save.history.length > 0 ? 'Step ' + save.history.length + ' 後' : '初期状態';
+    const item = document.createElement('div');
+    item.className = 'export-save-item';
+    item.innerHTML =
+      '<input type="checkbox" checked data-id="' + escHtml(save.id) + '">' +
+      '<span class="export-save-item-name">' + escHtml(save.name) + '</span>' +
+      '<span class="export-save-item-meta">' + escHtml(stepInfo) + ' | ' + ts + '</span>';
+    list.appendChild(item);
+  });
+}
+
+function doExport() {
+  const saves = getSaves();
+  const checkedIds = new Set(
+    Array.from(document.querySelectorAll('#export-save-list input[type=checkbox][data-id]:checked'))
+      .map(function(el) { return el.dataset.id; })
+  );
+  const selectedSaves = saves.filter(function(s) { return checkedIds.has(s.id); });
+
+  const includeSession = document.getElementById('export-include-session').checked;
+  const exportData = {
+    version: 1,
+    exported_at: new Date().toISOString(),
+    saves: selectedSaves,
+  };
+
+  if (includeSession && sessionId) {
+    exportData.current_session = {
+      name: 'エクスポート時のセッション (' + new Date().toLocaleString('ja-JP') + ')',
+      characters: allCharacters,
+      hand_size: handSize,
+      initial_state: initialState,
+      current_state: currentState,
+      history: history,
+    };
+  }
+
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const ts = new Date().toISOString().slice(0, 16).replace('T', '_').replace(':', '');
+  a.href = url;
+  a.download = 'ba_exsim_export_' + ts + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  document.getElementById('export-panel').style.display = 'none';
+}
+
+function triggerImport() {
+  document.getElementById('import-file-input').value = '';
+  document.getElementById('import-file-input').click();
+}
+
+function handleImportFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    let data;
+    try {
+      data = JSON.parse(e.target.result);
+    } catch(err) {
+      alert('JSONの解析に失敗しました: ' + err.message);
+      return;
+    }
+    if (!data.version || !Array.isArray(data.saves)) {
+      alert('このファイルはBA EXシミュレーターのエクスポートファイルではありません');
+      return;
+    }
+
+    const importedSaves = data.saves || [];
+    const hasSession = !!data.current_session;
+
+    let msg = '';
+    if (importedSaves.length > 0) msg += 'セーブデータ ' + importedSaves.length + '件';
+    if (hasSession) msg += (msg ? ' と ' : '') + '現在のセッション';
+    if (!msg) { alert('インポートするデータが見つかりませんでした'); return; }
+
+    const choice = hasSession
+      ? confirm(msg + ' が含まれています。\n\n[OK] セーブデータを追加し、セッションを復元する\n[キャンセル] セーブデータのみ追加する')
+      : (importedSaves.length > 0 ? true : false);
+
+    if (importedSaves.length > 0) {
+      const existing = getSaves();
+      const existingIds = new Set(existing.map(function(s) { return s.id; }));
+      const newSaves = importedSaves.filter(function(s) { return !existingIds.has(s.id); });
+      const merged = newSaves.concat(existing).slice(0, 20);
+      putSaves(merged);
+      if (newSaves.length < importedSaves.length) {
+        alert((importedSaves.length - newSaves.length) + ' 件は既に存在するためスキップ、' + newSaves.length + ' 件を追加しました');
+      }
+    }
+
+    if (choice && hasSession) {
+      loadSave({
+        name: data.current_session.name,
+        characters: data.current_session.characters,
+        hand_size: data.current_session.hand_size,
+        initial_state: data.current_session.initial_state,
+        current_state: data.current_session.current_state,
+        history: data.current_session.history,
+      });
+    }
+  };
+  reader.readAsText(file, 'utf-8');
+}
+
+// ===== UTIL =====
+function showError(id, msg) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = msg; el.classList.add('visible');
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+init();
+</script>
+</body>
+</html>

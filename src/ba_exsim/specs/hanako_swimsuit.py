@@ -6,7 +6,7 @@ from ba_exsim.core.state import State
 
 class HanakoSwimsuitSpec(CharacterSpec):
     def __init__(self):
-        super().__init__("Hanako")
+        super().__init__("Hanako_Swimsuit")
 
     def should_cycle(self, state: State, k: int, target: str = "") -> bool:
         # 代理実行時（スロットkが自分でない）はRio_Copy側のshould_cycleに委ねる
