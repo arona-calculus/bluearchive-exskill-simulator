@@ -2728,6 +2728,33 @@
   },
   {
     "no": 102,
+    "name": "カスミ（水着）",
+    "base_name": "カスミ",
+    "costume": "水着",
+    "rarity": "★3",
+    "weapon_type": "HG",
+    "cover": "×",
+    "role": "SPECIAL",
+    "position": "BACK",
+    "class_type": "サポーター",
+    "school": "ゲヘナ",
+    "attack_type": "貫通",
+    "defense_type": "特殊装甲",
+    "street_adaptation": "5D",
+    "outdoor_adaptation": "3B",
+    "indoor_adaptation": "1S",
+    "range": "1000",
+    "equipment1": "グローブ",
+    "equipment2": "バッグ",
+    "equipment3": "腕時計",
+    "recruit_type": "○",
+    "obtain_type": "-",
+    "icon_file": "icon/カスミ（水着）.png",
+    "icon_label": "カスミ（水着）",
+    "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AB%E3%82%B9%E3%83%9F%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
+  },
+  {
+    "no": 103,
     "name": "カノエ",
     "base_name": "カノエ",
     "costume": "",
@@ -2754,7 +2781,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AB%E3%83%8E%E3%82%A8"
   },
   {
-    "no": 103,
+    "no": 104,
     "name": "カホ",
     "base_name": "カホ",
     "costume": "",
@@ -2781,7 +2808,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AB%E3%83%9B"
   },
   {
-    "no": 104,
+    "no": 105,
     "name": "カヨコ（正月）",
     "base_name": "カヨコ",
     "costume": "正月",
@@ -2808,7 +2835,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AB%E3%83%A8%E3%82%B3%EF%BC%88%E6%AD%A3%E6%9C%88%EF%BC%89"
   },
   {
-    "no": 105,
+    "no": 106,
     "name": "カヨコ（ドレス）",
     "base_name": "カヨコ",
     "costume": "ドレス",
@@ -2835,7 +2862,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AB%E3%83%A8%E3%82%B3%EF%BC%88%E3%83%89%E3%83%AC%E3%82%B9%EF%BC%89"
   },
   {
-    "no": 106,
+    "no": 107,
     "name": "カリン",
     "base_name": "カリン",
     "costume": "",
@@ -2862,7 +2889,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AB%E3%83%AA%E3%83%B3"
   },
   {
-    "no": 107,
+    "no": 108,
     "name": "カリン（バニーガール）",
     "base_name": "カリン",
     "costume": "バニーガール",
@@ -2889,7 +2916,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AB%E3%83%AA%E3%83%B3%EF%BC%88%E3%83%90%E3%83%8B%E3%83%BC%E3%82%AC%E3%83%BC%E3%83%AB%EF%BC%89"
   },
   {
-    "no": 108,
+    "no": 109,
     "name": "カンナ",
     "base_name": "カンナ",
     "costume": "",
@@ -2916,7 +2943,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AB%E3%83%B3%E3%83%8A"
   },
   {
-    "no": 109,
+    "no": 110,
     "name": "カンナ（水着）",
     "base_name": "カンナ",
     "costume": "水着",
@@ -2943,7 +2970,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AB%E3%83%B3%E3%83%8A%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 110,
+    "no": 111,
     "name": "キキョウ",
     "base_name": "キキョウ",
     "costume": "",
@@ -2970,7 +2997,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AD%E3%82%AD%E3%83%A7%E3%82%A6"
   },
   {
-    "no": 111,
+    "no": 112,
     "name": "キキョウ（水着）",
     "base_name": "キキョウ",
     "costume": "水着",
@@ -2997,7 +3024,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AD%E3%82%AD%E3%83%A7%E3%82%A6%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 112,
+    "no": 113,
     "name": "キサキ",
     "base_name": "キサキ",
     "costume": "",
@@ -3024,7 +3051,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AD%E3%82%B5%E3%82%AD"
   },
   {
-    "no": 113,
+    "no": 114,
     "name": "キサキ（水着）",
     "base_name": "キサキ",
     "costume": "水着",
@@ -3051,7 +3078,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AD%E3%82%B5%E3%82%AD%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 114,
+    "no": 115,
     "name": "キララ",
     "base_name": "キララ",
     "costume": "",
@@ -3078,7 +3105,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AD%E3%83%A9%E3%83%A9"
   },
   {
-    "no": 115,
+    "no": 116,
     "name": "クルミ",
     "base_name": "クルミ",
     "costume": "",
@@ -3105,7 +3132,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%AF%E3%83%AB%E3%83%9F"
   },
   {
-    "no": 116,
+    "no": 117,
     "name": "ケイ",
     "base_name": "ケイ",
     "costume": "",
@@ -3132,7 +3159,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B1%E3%82%A4"
   },
   {
-    "no": 117,
+    "no": 118,
     "name": "ココナ",
     "base_name": "ココナ",
     "costume": "",
@@ -3159,7 +3186,34 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B3%E3%82%B3%E3%83%8A"
   },
   {
-    "no": 118,
+    "no": 119,
+    "name": "ココロ",
+    "base_name": "ココロ",
+    "costume": "",
+    "rarity": "★3",
+    "weapon_type": "AR",
+    "cover": "×",
+    "role": "STRIKER",
+    "position": "MIDDLE",
+    "class_type": "サポーター",
+    "school": "オデュッセイア",
+    "attack_type": "神秘",
+    "defense_type": "特殊装甲",
+    "street_adaptation": "1S",
+    "outdoor_adaptation": "5D",
+    "indoor_adaptation": "3B",
+    "range": "650",
+    "equipment1": "シューズ",
+    "equipment2": "ヘアピン",
+    "equipment3": "腕時計",
+    "recruit_type": "○",
+    "obtain_type": "-",
+    "icon_file": "icon/ココロ.png",
+    "icon_label": "ココロ",
+    "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B3%E3%82%B3%E3%83%AD"
+  },
+  {
+    "no": 120,
     "name": "コタマ（キャンプ）",
     "base_name": "コタマ",
     "costume": "キャンプ",
@@ -3186,7 +3240,34 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B3%E3%82%BF%E3%83%9E%EF%BC%88%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%EF%BC%89"
   },
   {
-    "no": 119,
+    "no": 121,
+    "name": "コトネ",
+    "base_name": "コトネ",
+    "costume": "",
+    "rarity": "★3",
+    "weapon_type": "AR",
+    "cover": "○",
+    "role": "STRIKER",
+    "position": "FRONT",
+    "class_type": "タンク",
+    "school": "オデュッセイア",
+    "attack_type": "爆発",
+    "defense_type": "特殊装甲",
+    "street_adaptation": "3B",
+    "outdoor_adaptation": "5D",
+    "indoor_adaptation": "1S",
+    "range": "350",
+    "equipment1": "シューズ",
+    "equipment2": "バッグ",
+    "equipment3": "ネックレス",
+    "recruit_type": "○",
+    "obtain_type": "-",
+    "icon_file": "icon/コトネ.png",
+    "icon_label": "コトネ",
+    "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B3%E3%83%88%E3%83%8D"
+  },
+  {
+    "no": 122,
     "name": "コトリ（応援団）",
     "base_name": "コトリ",
     "costume": "応援団",
@@ -3213,7 +3294,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B3%E3%83%88%E3%83%AA%EF%BC%88%E5%BF%9C%E6%8F%B4%E5%9B%A3%EF%BC%89"
   },
   {
-    "no": 120,
+    "no": 123,
     "name": "コノカ",
     "base_name": "コノカ",
     "costume": "",
@@ -3240,7 +3321,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B3%E3%83%8E%E3%82%AB"
   },
   {
-    "no": 121,
+    "no": 124,
     "name": "コハル",
     "base_name": "コハル",
     "costume": "",
@@ -3267,7 +3348,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B3%E3%83%8F%E3%83%AB"
   },
   {
-    "no": 122,
+    "no": 125,
     "name": "コユキ",
     "base_name": "コユキ",
     "costume": "",
@@ -3294,7 +3375,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B3%E3%83%A6%E3%82%AD"
   },
   {
-    "no": 123,
+    "no": 126,
     "name": "コユキ（パジャマ）",
     "base_name": "コユキ",
     "costume": "パジャマ",
@@ -3321,7 +3402,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B3%E3%83%A6%E3%82%AD%EF%BC%88%E3%83%91%E3%82%B8%E3%83%A3%E3%83%9E%EF%BC%89"
   },
   {
-    "no": 124,
+    "no": 127,
     "name": "サオリ",
     "base_name": "サオリ",
     "costume": "",
@@ -3348,7 +3429,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B5%E3%82%AA%E3%83%AA"
   },
   {
-    "no": 125,
+    "no": 128,
     "name": "サオリ（水着）",
     "base_name": "サオリ",
     "costume": "水着",
@@ -3375,7 +3456,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B5%E3%82%AA%E3%83%AA%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 126,
+    "no": 129,
     "name": "サオリ（ドレス）",
     "base_name": "サオリ",
     "costume": "ドレス",
@@ -3402,7 +3483,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B5%E3%82%AA%E3%83%AA%EF%BC%88%E3%83%89%E3%83%AC%E3%82%B9%EF%BC%89"
   },
   {
-    "no": 127,
+    "no": 130,
     "name": "サキ",
     "base_name": "サキ",
     "costume": "",
@@ -3429,7 +3510,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B5%E3%82%AD"
   },
   {
-    "no": 128,
+    "no": 131,
     "name": "サキ（水着）",
     "base_name": "サキ",
     "costume": "水着",
@@ -3456,7 +3537,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B5%E3%82%AD%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 129,
+    "no": 132,
     "name": "サクラコ",
     "base_name": "サクラコ",
     "costume": "",
@@ -3483,7 +3564,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B5%E3%82%AF%E3%83%A9%E3%82%B3"
   },
   {
-    "no": 130,
+    "no": 133,
     "name": "サクラコ（アイドル）",
     "base_name": "サクラコ",
     "costume": "アイドル",
@@ -3510,7 +3591,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B5%E3%82%AF%E3%83%A9%E3%82%B3%EF%BC%88%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB%EF%BC%89"
   },
   {
-    "no": 131,
+    "no": 134,
     "name": "サツキ",
     "base_name": "サツキ",
     "costume": "",
@@ -3537,7 +3618,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B5%E3%83%84%E3%82%AD"
   },
   {
-    "no": 132,
+    "no": 135,
     "name": "サツキ（水着）",
     "base_name": "サツキ",
     "costume": "水着",
@@ -3564,7 +3645,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B5%E3%83%84%E3%82%AD%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 133,
+    "no": 136,
     "name": "サヤ",
     "base_name": "サヤ",
     "costume": "",
@@ -3591,7 +3672,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B5%E3%83%A4"
   },
   {
-    "no": 134,
+    "no": 137,
     "name": "サヤ（私服）",
     "base_name": "サヤ",
     "costume": "私服",
@@ -3618,7 +3699,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B5%E3%83%A4%EF%BC%88%E7%A7%81%E6%9C%8D%EF%BC%89"
   },
   {
-    "no": 135,
+    "no": 138,
     "name": "シグレ",
     "base_name": "シグレ",
     "costume": "",
@@ -3645,7 +3726,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B7%E3%82%B0%E3%83%AC"
   },
   {
-    "no": 136,
+    "no": 139,
     "name": "シグレ（温泉）",
     "base_name": "シグレ",
     "costume": "温泉",
@@ -3672,7 +3753,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B7%E3%82%B0%E3%83%AC%EF%BC%88%E6%B8%A9%E6%B3%89%EF%BC%89"
   },
   {
-    "no": 137,
+    "no": 140,
     "name": "ジュリ（アルバイト）",
     "base_name": "ジュリ",
     "costume": "アルバイト",
@@ -3699,7 +3780,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B8%E3%83%A5%E3%83%AA%EF%BC%88%E3%82%A2%E3%83%AB%E3%83%90%E3%82%A4%E3%83%88%EF%BC%89"
   },
   {
-    "no": 138,
+    "no": 141,
     "name": "シュン",
     "base_name": "シュン",
     "costume": "",
@@ -3726,7 +3807,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B7%E3%83%A5%E3%83%B3"
   },
   {
-    "no": 139,
+    "no": 142,
     "name": "シュン（幼女）",
     "base_name": "シュン",
     "costume": "幼女",
@@ -3753,7 +3834,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B7%E3%83%A5%E3%83%B3%EF%BC%88%E5%B9%BC%E5%A5%B3%EF%BC%89"
   },
   {
-    "no": 140,
+    "no": 143,
     "name": "シュン（水着）",
     "base_name": "シュン",
     "costume": "水着",
@@ -3780,7 +3861,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B7%E3%83%A5%E3%83%B3%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 141,
+    "no": 144,
     "name": "シュン（水着）",
     "base_name": "シュン",
     "costume": "水着",
@@ -3807,7 +3888,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B7%E3%83%A5%E3%83%B3%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 142,
+    "no": 145,
     "name": "シロコ",
     "base_name": "シロコ",
     "costume": "",
@@ -3834,7 +3915,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B7%E3%83%AD%E3%82%B3"
   },
   {
-    "no": 143,
+    "no": 146,
     "name": "シロコ（ライディング）",
     "base_name": "シロコ",
     "costume": "ライディング",
@@ -3861,7 +3942,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B7%E3%83%AD%E3%82%B3%EF%BC%88%E3%83%A9%E3%82%A4%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%EF%BC%89"
   },
   {
-    "no": 144,
+    "no": 147,
     "name": "シロコ（水着）",
     "base_name": "シロコ",
     "costume": "水着",
@@ -3888,7 +3969,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B7%E3%83%AD%E3%82%B3%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 145,
+    "no": 148,
     "name": "シロコ＊テラー",
     "base_name": "シロコ＊テラー",
     "costume": "",
@@ -3915,7 +3996,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B7%E3%83%AD%E3%82%B3%EF%BC%8A%E3%83%86%E3%83%A9%E3%83%BC"
   },
   {
-    "no": 146,
+    "no": 149,
     "name": "スズミ（マジカル）",
     "base_name": "スズミ",
     "costume": "マジカル",
@@ -3942,7 +4023,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B9%E3%82%BA%E3%83%9F%EF%BC%88%E3%83%9E%E3%82%B8%E3%82%AB%E3%83%AB%EF%BC%89"
   },
   {
-    "no": 147,
+    "no": 150,
     "name": "スバル",
     "base_name": "スバル",
     "costume": "",
@@ -3969,7 +4050,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B9%E3%83%90%E3%83%AB"
   },
   {
-    "no": 148,
+    "no": 151,
     "name": "スミレ",
     "base_name": "スミレ",
     "costume": "",
@@ -3996,7 +4077,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B9%E3%83%9F%E3%83%AC"
   },
   {
-    "no": 149,
+    "no": 152,
     "name": "スミレ（アルバイト）",
     "base_name": "スミレ",
     "costume": "アルバイト",
@@ -4023,7 +4104,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%B9%E3%83%9F%E3%83%AC%EF%BC%88%E3%82%A2%E3%83%AB%E3%83%90%E3%82%A4%E3%83%88%EF%BC%89"
   },
   {
-    "no": 150,
+    "no": 153,
     "name": "セイア",
     "base_name": "セイア",
     "costume": "",
@@ -4050,7 +4131,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%BB%E3%82%A4%E3%82%A2"
   },
   {
-    "no": 151,
+    "no": 154,
     "name": "セイア（水着）",
     "base_name": "セイア",
     "costume": "水着",
@@ -4077,7 +4158,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%BB%E3%82%A4%E3%82%A2%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 152,
+    "no": 155,
     "name": "セナ",
     "base_name": "セナ",
     "costume": "",
@@ -4104,7 +4185,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%BB%E3%83%8A"
   },
   {
-    "no": 153,
+    "no": 156,
     "name": "セナ（私服）",
     "base_name": "セナ",
     "costume": "私服",
@@ -4131,7 +4212,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%BB%E3%83%8A%EF%BC%88%E7%A7%81%E6%9C%8D%EF%BC%89"
   },
   {
-    "no": 154,
+    "no": 157,
     "name": "セリカ（正月）",
     "base_name": "セリカ",
     "costume": "正月",
@@ -4158,7 +4239,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%BB%E3%83%AA%E3%82%AB%EF%BC%88%E6%AD%A3%E6%9C%88%EF%BC%89"
   },
   {
-    "no": 155,
+    "no": 158,
     "name": "セリカ（水着）",
     "base_name": "セリカ",
     "costume": "水着",
@@ -4185,7 +4266,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%BB%E3%83%AA%E3%82%AB%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 156,
+    "no": 159,
     "name": "セリナ（クリスマス）",
     "base_name": "セリナ",
     "costume": "クリスマス",
@@ -4212,7 +4293,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%BB%E3%83%AA%E3%83%8A%EF%BC%88%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%9E%E3%82%B9%EF%BC%89"
   },
   {
-    "no": 157,
+    "no": 160,
     "name": "タカネ",
     "base_name": "タカネ",
     "costume": "",
@@ -4239,7 +4320,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%82%BF%E3%82%AB%E3%83%8D"
   },
   {
-    "no": 158,
+    "no": 161,
     "name": "チアキ",
     "base_name": "チアキ",
     "costume": "",
@@ -4266,7 +4347,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%81%E3%82%A2%E3%82%AD"
   },
   {
-    "no": 159,
+    "no": 162,
     "name": "チェリノ",
     "base_name": "チェリノ",
     "costume": "",
@@ -4293,7 +4374,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%81%E3%82%A7%E3%83%AA%E3%83%8E"
   },
   {
-    "no": 160,
+    "no": 163,
     "name": "チェリノ（温泉）",
     "base_name": "チェリノ",
     "costume": "温泉",
@@ -4320,7 +4401,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%81%E3%82%A7%E3%83%AA%E3%83%8E%EF%BC%88%E6%B8%A9%E6%B3%89%EF%BC%89"
   },
   {
-    "no": 161,
+    "no": 164,
     "name": "チセ（水着）",
     "base_name": "チセ",
     "costume": "水着",
@@ -4347,7 +4428,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%81%E3%82%BB%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 162,
+    "no": 165,
     "name": "チナツ（温泉）",
     "base_name": "チナツ",
     "costume": "温泉",
@@ -4374,7 +4455,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%81%E3%83%8A%E3%83%84%EF%BC%88%E6%B8%A9%E6%B3%89%EF%BC%89"
   },
   {
-    "no": 163,
+    "no": 166,
     "name": "チヒロ",
     "base_name": "チヒロ",
     "costume": "",
@@ -4401,7 +4482,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%81%E3%83%92%E3%83%AD"
   },
   {
-    "no": 164,
+    "no": 167,
     "name": "ツクヨ",
     "base_name": "ツクヨ",
     "costume": "",
@@ -4428,7 +4509,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%84%E3%82%AF%E3%83%A8"
   },
   {
-    "no": 165,
+    "no": 168,
     "name": "ツクヨ（ドレス）",
     "base_name": "ツクヨ",
     "costume": "ドレス",
@@ -4455,7 +4536,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%84%E3%82%AF%E3%83%A8%EF%BC%88%E3%83%89%E3%83%AC%E3%82%B9%EF%BC%89"
   },
   {
-    "no": 166,
+    "no": 169,
     "name": "ツバキ（ガイド）",
     "base_name": "ツバキ",
     "costume": "ガイド",
@@ -4482,7 +4563,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%84%E3%83%90%E3%82%AD%EF%BC%88%E3%82%AC%E3%82%A4%E3%83%89%EF%BC%89"
   },
   {
-    "no": 167,
+    "no": 170,
     "name": "ツルギ",
     "base_name": "ツルギ",
     "costume": "",
@@ -4509,7 +4590,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%84%E3%83%AB%E3%82%AE"
   },
   {
-    "no": 168,
+    "no": 171,
     "name": "トキ",
     "base_name": "トキ",
     "costume": "",
@@ -4536,7 +4617,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%88%E3%82%AD"
   },
   {
-    "no": 169,
+    "no": 172,
     "name": "トキ（バニーガール）",
     "base_name": "トキ",
     "costume": "バニーガール",
@@ -4563,7 +4644,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%88%E3%82%AD%EF%BC%88%E3%83%90%E3%83%8B%E3%83%BC%E3%82%AC%E3%83%BC%E3%83%AB%EF%BC%89"
   },
   {
-    "no": 170,
+    "no": 173,
     "name": "トモエ（チーパオ）",
     "base_name": "トモエ",
     "costume": "チーパオ",
@@ -4590,7 +4671,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%88%E3%83%A2%E3%82%A8%EF%BC%88%E3%83%81%E3%83%BC%E3%83%91%E3%82%AA%EF%BC%89"
   },
   {
-    "no": 171,
+    "no": 174,
     "name": "ナギサ",
     "base_name": "ナギサ",
     "costume": "",
@@ -4617,7 +4698,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8A%E3%82%AE%E3%82%B5"
   },
   {
-    "no": 172,
+    "no": 175,
     "name": "ナギサ（水着）",
     "base_name": "ナギサ",
     "costume": "水着",
@@ -4644,7 +4725,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8A%E3%82%AE%E3%82%B5%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 173,
+    "no": 176,
     "name": "ナグサ",
     "base_name": "ナグサ",
     "costume": "",
@@ -4671,7 +4752,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8A%E3%82%B0%E3%82%B5"
   },
   {
-    "no": 174,
+    "no": 177,
     "name": "ナグサ（水着）",
     "base_name": "ナグサ",
     "costume": "水着",
@@ -4698,7 +4779,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8A%E3%82%B0%E3%82%B5%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 175,
+    "no": 178,
     "name": "ナツ",
     "base_name": "ナツ",
     "costume": "",
@@ -4725,7 +4806,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8A%E3%83%84"
   },
   {
-    "no": 176,
+    "no": 179,
     "name": "ナツ（バンド）",
     "base_name": "ナツ",
     "costume": "バンド",
@@ -4752,7 +4833,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8A%E3%83%84%EF%BC%88%E3%83%90%E3%83%B3%E3%83%89%EF%BC%89"
   },
   {
-    "no": 177,
+    "no": 180,
     "name": "ニコ",
     "base_name": "ニコ",
     "costume": "",
@@ -4779,7 +4860,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8B%E3%82%B3"
   },
   {
-    "no": 178,
+    "no": 181,
     "name": "ニヤ",
     "base_name": "ニヤ",
     "costume": "",
@@ -4806,7 +4887,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8B%E3%83%A4"
   },
   {
-    "no": 179,
+    "no": 182,
     "name": "ネル",
     "base_name": "ネル",
     "costume": "",
@@ -4833,7 +4914,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8D%E3%83%AB"
   },
   {
-    "no": 180,
+    "no": 183,
     "name": "ネル（バニーガール）",
     "base_name": "ネル",
     "costume": "バニーガール",
@@ -4860,7 +4941,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8D%E3%83%AB%EF%BC%88%E3%83%90%E3%83%8B%E3%83%BC%E3%82%AC%E3%83%BC%E3%83%AB%EF%BC%89"
   },
   {
-    "no": 181,
+    "no": 184,
     "name": "ネル（制服）",
     "base_name": "ネル",
     "costume": "制服",
@@ -4887,7 +4968,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8D%E3%83%AB%EF%BC%88%E5%88%B6%E6%9C%8D%EF%BC%89"
   },
   {
-    "no": 182,
+    "no": 185,
     "name": "ノア",
     "base_name": "ノア",
     "costume": "",
@@ -4914,7 +4995,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8E%E3%82%A2"
   },
   {
-    "no": 183,
+    "no": 186,
     "name": "ノア（パジャマ）",
     "base_name": "ノア",
     "costume": "パジャマ",
@@ -4941,7 +5022,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8E%E3%82%A2%EF%BC%88%E3%83%91%E3%82%B8%E3%83%A3%E3%83%9E%EF%BC%89"
   },
   {
-    "no": 184,
+    "no": 187,
     "name": "ノゾミ",
     "base_name": "ノゾミ",
     "costume": "",
@@ -4968,7 +5049,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8E%E3%82%BE%E3%83%9F"
   },
   {
-    "no": 185,
+    "no": 188,
     "name": "ノドカ（温泉）",
     "base_name": "ノドカ",
     "costume": "温泉",
@@ -4995,7 +5076,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8E%E3%83%89%E3%82%AB%EF%BC%88%E6%B8%A9%E6%B3%89%EF%BC%89"
   },
   {
-    "no": 186,
+    "no": 189,
     "name": "ノノミ（水着）",
     "base_name": "ノノミ",
     "costume": "水着",
@@ -5022,7 +5103,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8E%E3%83%8E%E3%83%9F%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 187,
+    "no": 190,
     "name": "ハスミ（水着）",
     "base_name": "ハスミ",
     "costume": "水着",
@@ -5049,7 +5130,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8F%E3%82%B9%E3%83%9F%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 188,
+    "no": 191,
     "name": "ハナエ（クリスマス）",
     "base_name": "ハナエ",
     "costume": "クリスマス",
@@ -5076,7 +5157,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8F%E3%83%8A%E3%82%A8%EF%BC%88%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%9E%E3%82%B9%EF%BC%89"
   },
   {
-    "no": 189,
+    "no": 192,
     "name": "ハナコ（水着）",
     "base_name": "ハナコ",
     "costume": "水着",
@@ -5103,7 +5184,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8F%E3%83%8A%E3%82%B3%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 190,
+    "no": 193,
     "name": "ハルカ（正月）",
     "base_name": "ハルカ",
     "costume": "正月",
@@ -5130,7 +5211,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8F%E3%83%AB%E3%82%AB%EF%BC%88%E6%AD%A3%E6%9C%88%EF%BC%89"
   },
   {
-    "no": 191,
+    "no": 194,
     "name": "ハルカ（ドレス）",
     "base_name": "ハルカ",
     "costume": "ドレス",
@@ -5157,7 +5238,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8F%E3%83%AB%E3%82%AB%EF%BC%88%E3%83%89%E3%83%AC%E3%82%B9%EF%BC%89"
   },
   {
-    "no": 192,
+    "no": 195,
     "name": "ハルナ",
     "base_name": "ハルナ",
     "costume": "",
@@ -5184,7 +5265,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8F%E3%83%AB%E3%83%8A"
   },
   {
-    "no": 193,
+    "no": 196,
     "name": "ハルナ（正月）",
     "base_name": "ハルナ",
     "costume": "正月",
@@ -5211,7 +5292,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8F%E3%83%AB%E3%83%8A%EF%BC%88%E6%AD%A3%E6%9C%88%EF%BC%89"
   },
   {
-    "no": 194,
+    "no": 197,
     "name": "ハルナ（体操服）",
     "base_name": "ハルナ",
     "costume": "体操服",
@@ -5238,7 +5319,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8F%E3%83%AB%E3%83%8A%EF%BC%88%E4%BD%93%E6%93%8D%E6%9C%8D%EF%BC%89"
   },
   {
-    "no": 195,
+    "no": 198,
     "name": "ハレ（キャンプ）",
     "base_name": "ハレ",
     "costume": "キャンプ",
@@ -5265,7 +5346,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%8F%E3%83%AC%EF%BC%88%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%EF%BC%89"
   },
   {
-    "no": 196,
+    "no": 199,
     "name": "ヒカリ",
     "base_name": "ヒカリ",
     "costume": "",
@@ -5292,7 +5373,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%92%E3%82%AB%E3%83%AA"
   },
   {
-    "no": 197,
+    "no": 200,
     "name": "ヒナ",
     "base_name": "ヒナ",
     "costume": "",
@@ -5319,7 +5400,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%92%E3%83%8A"
   },
   {
-    "no": 198,
+    "no": 201,
     "name": "ヒナ（水着）",
     "base_name": "ヒナ",
     "costume": "水着",
@@ -5346,7 +5427,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%92%E3%83%8A%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 199,
+    "no": 202,
     "name": "ヒナ（ドレス）",
     "base_name": "ヒナ",
     "costume": "ドレス",
@@ -5373,7 +5454,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%92%E3%83%8A%EF%BC%88%E3%83%89%E3%83%AC%E3%82%B9%EF%BC%89"
   },
   {
-    "no": 200,
+    "no": 203,
     "name": "ヒナタ",
     "base_name": "ヒナタ",
     "costume": "",
@@ -5400,7 +5481,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%92%E3%83%8A%E3%82%BF"
   },
   {
-    "no": 201,
+    "no": 204,
     "name": "ヒナタ（水着）",
     "base_name": "ヒナタ",
     "costume": "水着",
@@ -5427,7 +5508,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%92%E3%83%8A%E3%82%BF%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 202,
+    "no": 205,
     "name": "ヒビキ",
     "base_name": "ヒビキ",
     "costume": "",
@@ -5454,7 +5535,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%92%E3%83%93%E3%82%AD"
   },
   {
-    "no": 203,
+    "no": 206,
     "name": "ヒフミ",
     "base_name": "ヒフミ",
     "costume": "",
@@ -5481,7 +5562,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%92%E3%83%95%E3%83%9F"
   },
   {
-    "no": 204,
+    "no": 207,
     "name": "ヒフミ（水着）",
     "base_name": "ヒフミ",
     "costume": "水着",
@@ -5508,7 +5589,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%92%E3%83%95%E3%83%9F%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 205,
+    "no": 208,
     "name": "ヒマリ",
     "base_name": "ヒマリ",
     "costume": "",
@@ -5535,7 +5616,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%92%E3%83%9E%E3%83%AA"
   },
   {
-    "no": 206,
+    "no": 209,
     "name": "ヒマリ（臨戦）",
     "base_name": "ヒマリ",
     "costume": "臨戦",
@@ -5562,7 +5643,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%92%E3%83%9E%E3%83%AA%EF%BC%88%E8%87%A8%E6%88%A6%EF%BC%89"
   },
   {
-    "no": 207,
+    "no": 210,
     "name": "ヒヨリ",
     "base_name": "ヒヨリ",
     "costume": "",
@@ -5589,7 +5670,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%92%E3%83%A8%E3%83%AA"
   },
   {
-    "no": 208,
+    "no": 211,
     "name": "ヒヨリ（水着）",
     "base_name": "ヒヨリ",
     "costume": "水着",
@@ -5616,7 +5697,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%92%E3%83%A8%E3%83%AA%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 209,
+    "no": 212,
     "name": "フィーナ（ガイド）",
     "base_name": "フィーナ",
     "costume": "ガイド",
@@ -5643,7 +5724,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%95%E3%82%A3%E3%83%BC%E3%83%8A%EF%BC%88%E3%82%AC%E3%82%A4%E3%83%89%EF%BC%89"
   },
   {
-    "no": 210,
+    "no": 213,
     "name": "フウカ（正月）",
     "base_name": "フウカ",
     "costume": "正月",
@@ -5670,7 +5751,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%95%E3%82%A6%E3%82%AB%EF%BC%88%E6%AD%A3%E6%9C%88%EF%BC%89"
   },
   {
-    "no": 211,
+    "no": 214,
     "name": "フブキ（水着）",
     "base_name": "フブキ",
     "costume": "水着",
@@ -5697,7 +5778,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%95%E3%83%96%E3%82%AD%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 212,
+    "no": 215,
     "name": "フユ",
     "base_name": "フユ",
     "costume": "",
@@ -5724,7 +5805,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%95%E3%83%A6"
   },
   {
-    "no": 213,
+    "no": 216,
     "name": "ホシノ",
     "base_name": "ホシノ",
     "costume": "",
@@ -5751,7 +5832,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9B%E3%82%B7%E3%83%8E"
   },
   {
-    "no": 214,
+    "no": 217,
     "name": "ホシノ（水着）",
     "base_name": "ホシノ",
     "costume": "水着",
@@ -5778,7 +5859,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9B%E3%82%B7%E3%83%8E%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 215,
+    "no": 218,
     "name": "ホシノ（臨戦）",
     "base_name": "ホシノ",
     "costume": "臨戦",
@@ -5805,7 +5886,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9B%E3%82%B7%E3%83%8E%EF%BC%88%E8%87%A8%E6%88%A6%EF%BC%89"
   },
   {
-    "no": 216,
+    "no": 219,
     "name": "ホシノ（臨戦）",
     "base_name": "ホシノ",
     "costume": "臨戦",
@@ -5832,7 +5913,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9B%E3%82%B7%E3%83%8E%EF%BC%88%E8%87%A8%E6%88%A6%EF%BC%89"
   },
   {
-    "no": 217,
+    "no": 220,
     "name": "マキ",
     "base_name": "マキ",
     "costume": "",
@@ -5859,7 +5940,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9E%E3%82%AD"
   },
   {
-    "no": 218,
+    "no": 221,
     "name": "マキ（キャンプ）",
     "base_name": "マキ",
     "costume": "キャンプ",
@@ -5886,7 +5967,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9E%E3%82%AD%EF%BC%88%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%EF%BC%89"
   },
   {
-    "no": 219,
+    "no": 222,
     "name": "マコト",
     "base_name": "マコト",
     "costume": "",
@@ -5913,7 +5994,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9E%E3%82%B3%E3%83%88"
   },
   {
-    "no": 220,
+    "no": 223,
     "name": "マコト（水着）",
     "base_name": "マコト",
     "costume": "水着",
@@ -5940,7 +6021,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9E%E3%82%B3%E3%83%88%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 221,
+    "no": 224,
     "name": "マシロ",
     "base_name": "マシロ",
     "costume": "",
@@ -5967,7 +6048,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9E%E3%82%B7%E3%83%AD"
   },
   {
-    "no": 222,
+    "no": 225,
     "name": "マシロ（水着）",
     "base_name": "マシロ",
     "costume": "水着",
@@ -5994,7 +6075,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9E%E3%82%B7%E3%83%AD%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 223,
+    "no": 226,
     "name": "マリー（体操服）",
     "base_name": "マリー",
     "costume": "体操服",
@@ -6021,7 +6102,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9E%E3%83%AA%E3%83%BC%EF%BC%88%E4%BD%93%E6%93%8D%E6%9C%8D%EF%BC%89"
   },
   {
-    "no": 224,
+    "no": 227,
     "name": "マリー（アイドル）",
     "base_name": "マリー",
     "costume": "アイドル",
@@ -6048,7 +6129,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9E%E3%83%AA%E3%83%BC%EF%BC%88%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB%EF%BC%89"
   },
   {
-    "no": 225,
+    "no": 228,
     "name": "マリナ",
     "base_name": "マリナ",
     "costume": "",
@@ -6075,7 +6156,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9E%E3%83%AA%E3%83%8A"
   },
   {
-    "no": 226,
+    "no": 229,
     "name": "マリナ（チーパオ）",
     "base_name": "マリナ",
     "costume": "チーパオ",
@@ -6102,7 +6183,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9E%E3%83%AA%E3%83%8A%EF%BC%88%E3%83%81%E3%83%BC%E3%83%91%E3%82%AA%EF%BC%89"
   },
   {
-    "no": 227,
+    "no": 230,
     "name": "ミカ",
     "base_name": "ミカ",
     "costume": "",
@@ -6129,7 +6210,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%82%AB"
   },
   {
-    "no": 228,
+    "no": 231,
     "name": "ミカ（水着）",
     "base_name": "ミカ",
     "costume": "水着",
@@ -6156,7 +6237,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%82%AB%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 229,
+    "no": 232,
     "name": "ミサキ",
     "base_name": "ミサキ",
     "costume": "",
@@ -6183,7 +6264,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%82%B5%E3%82%AD"
   },
   {
-    "no": 230,
+    "no": 233,
     "name": "ミサキ（水着）",
     "base_name": "ミサキ",
     "costume": "水着",
@@ -6210,7 +6291,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%82%B5%E3%82%AD%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 231,
+    "no": 234,
     "name": "ミチル（ドレス）",
     "base_name": "ミチル",
     "costume": "ドレス",
@@ -6237,7 +6318,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%83%81%E3%83%AB%EF%BC%88%E3%83%89%E3%83%AC%E3%82%B9%EF%BC%89"
   },
   {
-    "no": 232,
+    "no": 235,
     "name": "ミドリ",
     "base_name": "ミドリ",
     "costume": "",
@@ -6264,7 +6345,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%83%89%E3%83%AA"
   },
   {
-    "no": 233,
+    "no": 236,
     "name": "ミドリ（メイド）",
     "base_name": "ミドリ",
     "costume": "メイド",
@@ -6291,7 +6372,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%83%89%E3%83%AA%EF%BC%88%E3%83%A1%E3%82%A4%E3%83%89%EF%BC%89"
   },
   {
-    "no": 234,
+    "no": 237,
     "name": "ミナ",
     "base_name": "ミナ",
     "costume": "",
@@ -6318,7 +6399,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%83%8A"
   },
   {
-    "no": 235,
+    "no": 238,
     "name": "ミネ",
     "base_name": "ミネ",
     "costume": "",
@@ -6345,7 +6426,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%83%8D"
   },
   {
-    "no": 236,
+    "no": 239,
     "name": "ミノリ",
     "base_name": "ミノリ",
     "costume": "",
@@ -6372,7 +6453,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%83%8E%E3%83%AA"
   },
   {
-    "no": 237,
+    "no": 240,
     "name": "ミモリ",
     "base_name": "ミモリ",
     "costume": "",
@@ -6399,7 +6480,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%83%A2%E3%83%AA"
   },
   {
-    "no": 238,
+    "no": 241,
     "name": "ミモリ（水着）",
     "base_name": "ミモリ",
     "costume": "水着",
@@ -6426,7 +6507,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%83%A2%E3%83%AA%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 239,
+    "no": 242,
     "name": "ミヤコ",
     "base_name": "ミヤコ",
     "costume": "",
@@ -6453,7 +6534,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%83%A4%E3%82%B3"
   },
   {
-    "no": 240,
+    "no": 243,
     "name": "ミヤコ（水着）",
     "base_name": "ミヤコ",
     "costume": "水着",
@@ -6480,7 +6561,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%83%A4%E3%82%B3%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 241,
+    "no": 244,
     "name": "ミユ",
     "base_name": "ミユ",
     "costume": "",
@@ -6507,7 +6588,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%83%A6"
   },
   {
-    "no": 242,
+    "no": 245,
     "name": "ミヨ",
     "base_name": "ミヨ",
     "costume": "",
@@ -6534,7 +6615,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%9F%E3%83%A8"
   },
   {
-    "no": 243,
+    "no": 246,
     "name": "ムツキ（正月）",
     "base_name": "ムツキ",
     "costume": "正月",
@@ -6561,7 +6642,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A0%E3%83%84%E3%82%AD%EF%BC%88%E6%AD%A3%E6%9C%88%EF%BC%89"
   },
   {
-    "no": 244,
+    "no": 247,
     "name": "ムツキ（ドレス）",
     "base_name": "ムツキ",
     "costume": "ドレス",
@@ -6588,7 +6669,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A0%E3%83%84%E3%82%AD%EF%BC%88%E3%83%89%E3%83%AC%E3%82%B9%EF%BC%89"
   },
   {
-    "no": 245,
+    "no": 248,
     "name": "メグ",
     "base_name": "メグ",
     "costume": "",
@@ -6615,7 +6696,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A1%E3%82%B0"
   },
   {
-    "no": 246,
+    "no": 249,
     "name": "メル",
     "base_name": "メル",
     "costume": "",
@@ -6642,7 +6723,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A1%E3%83%AB"
   },
   {
-    "no": 247,
+    "no": 250,
     "name": "モエ",
     "base_name": "モエ",
     "costume": "",
@@ -6669,7 +6750,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A2%E3%82%A8"
   },
   {
-    "no": 248,
+    "no": 251,
     "name": "モエ（水着）",
     "base_name": "モエ",
     "costume": "水着",
@@ -6696,7 +6777,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A2%E3%82%A8%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 249,
+    "no": 252,
     "name": "モモイ（メイド）",
     "base_name": "モモイ",
     "costume": "メイド",
@@ -6723,7 +6804,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A2%E3%83%A2%E3%82%A4%EF%BC%88%E3%83%A1%E3%82%A4%E3%83%89%EF%BC%89"
   },
   {
-    "no": 250,
+    "no": 253,
     "name": "ヤクモ",
     "base_name": "ヤクモ",
     "costume": "",
@@ -6750,7 +6831,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A4%E3%82%AF%E3%83%A2"
   },
   {
-    "no": 251,
+    "no": 254,
     "name": "ユウカ（体操服）",
     "base_name": "ユウカ",
     "costume": "体操服",
@@ -6777,7 +6858,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A6%E3%82%A6%E3%82%AB%EF%BC%88%E4%BD%93%E6%93%8D%E6%9C%8D%EF%BC%89"
   },
   {
-    "no": 252,
+    "no": 255,
     "name": "ユウカ（パジャマ）",
     "base_name": "ユウカ",
     "costume": "パジャマ",
@@ -6804,7 +6885,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A6%E3%82%A6%E3%82%AB%EF%BC%88%E3%83%91%E3%82%B8%E3%83%A3%E3%83%9E%EF%BC%89"
   },
   {
-    "no": 253,
+    "no": 256,
     "name": "ユカリ",
     "base_name": "ユカリ",
     "costume": "",
@@ -6831,7 +6912,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A6%E3%82%AB%E3%83%AA"
   },
   {
-    "no": 254,
+    "no": 257,
     "name": "ユカリ（水着）",
     "base_name": "ユカリ",
     "costume": "水着",
@@ -6858,7 +6939,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A6%E3%82%AB%E3%83%AA%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 255,
+    "no": 258,
     "name": "ユズ",
     "base_name": "ユズ",
     "costume": "",
@@ -6885,7 +6966,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A6%E3%82%BA"
   },
   {
-    "no": 256,
+    "no": 259,
     "name": "ユズ（臨戦）",
     "base_name": "ユズ",
     "costume": "臨戦",
@@ -6912,7 +6993,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A6%E3%82%BA%EF%BC%88%E8%87%A8%E6%88%A6%EF%BC%89"
   },
   {
-    "no": 257,
+    "no": 260,
     "name": "ヨシミ（バンド）",
     "base_name": "ヨシミ",
     "costume": "バンド",
@@ -6939,7 +7020,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%A8%E3%82%B7%E3%83%9F%EF%BC%88%E3%83%90%E3%83%B3%E3%83%89%EF%BC%89"
   },
   {
-    "no": 258,
+    "no": 261,
     "name": "リオ",
     "base_name": "リオ",
     "costume": "",
@@ -6966,7 +7047,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%AA%E3%82%AA"
   },
   {
-    "no": 259,
+    "no": 262,
     "name": "リオ（臨戦）",
     "base_name": "リオ",
     "costume": "臨戦",
@@ -6993,7 +7074,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%AA%E3%82%AA%EF%BC%88%E8%87%A8%E6%88%A6%EF%BC%89"
   },
   {
-    "no": 260,
+    "no": 263,
     "name": "リツ",
     "base_name": "リツ",
     "costume": "",
@@ -7020,7 +7101,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%AA%E3%83%84"
   },
   {
-    "no": 261,
+    "no": 264,
     "name": "ルミ",
     "base_name": "ルミ",
     "costume": "",
@@ -7047,7 +7128,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%AB%E3%83%9F"
   },
   {
-    "no": 262,
+    "no": 265,
     "name": "レイ",
     "base_name": "レイ",
     "costume": "",
@@ -7074,7 +7155,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%AC%E3%82%A4"
   },
   {
-    "no": 263,
+    "no": 266,
     "name": "レイサ",
     "base_name": "レイサ",
     "costume": "",
@@ -7101,7 +7182,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%AC%E3%82%A4%E3%82%B5"
   },
   {
-    "no": 264,
+    "no": 267,
     "name": "レイサ（マジカル）",
     "base_name": "レイサ",
     "costume": "マジカル",
@@ -7128,7 +7209,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%AC%E3%82%A4%E3%82%B5%EF%BC%88%E3%83%9E%E3%82%B8%E3%82%AB%E3%83%AB%EF%BC%89"
   },
   {
-    "no": 265,
+    "no": 268,
     "name": "レイジョ",
     "base_name": "レイジョ",
     "costume": "",
@@ -7155,7 +7236,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%AC%E3%82%A4%E3%82%B8%E3%83%A7"
   },
   {
-    "no": 266,
+    "no": 269,
     "name": "レナ",
     "base_name": "レナ",
     "costume": "",
@@ -7182,7 +7263,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%AC%E3%83%8A"
   },
   {
-    "no": 267,
+    "no": 270,
     "name": "レンゲ",
     "base_name": "レンゲ",
     "costume": "",
@@ -7209,7 +7290,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%AC%E3%83%B3%E3%82%B2"
   },
   {
-    "no": 268,
+    "no": 271,
     "name": "ワカモ",
     "base_name": "ワカモ",
     "costume": "",
@@ -7236,7 +7317,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%AF%E3%82%AB%E3%83%A2"
   },
   {
-    "no": 269,
+    "no": 272,
     "name": "ワカモ（水着）",
     "base_name": "ワカモ",
     "costume": "水着",
@@ -7263,7 +7344,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E3%83%AF%E3%82%AB%E3%83%A2%EF%BC%88%E6%B0%B4%E7%9D%80%EF%BC%89"
   },
   {
-    "no": 270,
+    "no": 273,
     "name": "御坂美琴",
     "base_name": "御坂美琴",
     "costume": "",
@@ -7290,7 +7371,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E5%BE%A1%E5%9D%82%E7%BE%8E%E7%90%B4"
   },
   {
-    "no": 271,
+    "no": 274,
     "name": "初音ミク",
     "base_name": "初音ミク",
     "costume": "",
@@ -7317,7 +7398,7 @@
     "wiki_url": "https://bluearchive.wikiru.jp/?%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF"
   },
   {
-    "no": 272,
+    "no": 275,
     "name": "食蜂操祈",
     "base_name": "食蜂操祈",
     "costume": "",

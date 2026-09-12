@@ -2725,9 +2725,9 @@
     "label": "ココロ",
     "personal_name": "ココロ",
     "path_name": "kokoro",
-    "base_name": null,
-    "costume": null,
-    "icon_copied": false
+    "base_name": "ココロ",
+    "costume": "",
+    "icon_copied": true
   },
   {
     "id": 10150,
@@ -2735,9 +2735,9 @@
     "label": "コトネ",
     "personal_name": "コトネ",
     "path_name": "kotone",
-    "base_name": null,
-    "costume": null,
-    "icon_copied": false
+    "base_name": "コトネ",
+    "costume": "",
+    "icon_copied": true
   },
   {
     "id": 20061,
@@ -2745,8 +2745,8 @@
     "label": "カスミ（水着）",
     "personal_name": "カスミ",
     "path_name": "kasumi_swimsuit",
-    "base_name": null,
-    "costume": null,
-    "icon_copied": false
+    "base_name": "カスミ",
+    "costume": "水着",
+    "icon_copied": true
   }
 ]

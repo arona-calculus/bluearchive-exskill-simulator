@@ -1,12 +1,14 @@
 """キャラクターライブラリ生成スクリプト
 
 SchaleDB由来のID/PathName/Nameデータ(bluearchive-timeline-simulator)と、
-build_db.py(wikiruスクレイパー、scrape/配下)が生成したキャラクターデータ・
-アイコン実体(kivotos-db)を突き合わせ、webui用のキャラクターライブラリ
-(character_library/data/characters.json)とアイコン(webui/assets/icons/)を生成する。
+build_db.py(wikiruスクレイパー、scrape/配下。このリポジトリ内で完結し、
+外部リポジトリには依存しない)が生成したキャラクターデータ・アイコン実体を
+突き合わせ、webui用のキャラクターライブラリ(character_library/data/characters.json)
+とアイコン(webui/assets/icons/)を生成する。
 
 実行方法:
   cd bluearchive-exskill-simulator
+  python webui/backend/character_library/scrape/build_db.py  # 先にwikiru.jpから再取得
   python -m webui.backend.character_library.build_library
 """
 
@@ -26,13 +28,12 @@ _BACKEND_DIR = _THIS_DIR.parent
 _WEBUI_DIR = _BACKEND_DIR.parent
 _SIMULATOR_DIR = _WEBUI_DIR.parent
 _WORKSPACE_DIR = _SIMULATOR_DIR.parent  # millennium-science-school
-_DOCUMENTS_DIR = _WORKSPACE_DIR.parent  # kivotos-db等の兄弟リポジトリが並ぶ場所
 
 DEFAULT_SCHALEDB_PATH = (
     _WORKSPACE_DIR / "bluearchive-timeline-simulator" / "data" / "student_db_from_schaledb.json"
 )
 DEFAULT_SCRAPE_PATH = _THIS_DIR / "scrape" / "characters.json"
-DEFAULT_KIVOTOS_ICON_DIR = _DOCUMENTS_DIR / "kivotos-db" / "icon"
+DEFAULT_SCRAPE_ICON_DIR = _THIS_DIR / "scrape" / "icon"
 DEFAULT_OUTPUT_DIR = _THIS_DIR / "data"
 DEFAULT_ICONS_DIR = _WEBUI_DIR / "assets" / "icons"
 
@@ -63,7 +64,7 @@ def _keyword_score(path_name: str, candidate: Dict[str, Any]) -> int:
 def resolve_match(
     entry: Dict[str, Any], candidates: List[Dict[str, Any]]
 ) -> Optional[Dict[str, Any]]:
-    """SchaleDBの1エントリに対し、同名のkivotos-db候補群から最適な1件を選ぶ。
+    """SchaleDBの1エントリに対し、同名のスクレイプ候補群から最適な1件を選ぶ。
     一意に決定できない場合は None を返す(=要手動確認)。
     """
     if len(candidates) == 1:
@@ -95,7 +96,7 @@ def resolve_match(
 def build(
     schaledb_path: Path,
     scrape_path: Path,
-    kivotos_icon_dir: Path,
+    scrape_icon_dir: Path,
     output_dir: Path,
     icons_dir: Path,
     dry_run: bool = False,
@@ -130,7 +131,7 @@ def build(
 
         icon_copied = False
         if key and match and match.get("icon_file"):
-            src = kivotos_icon_dir / Path(match["icon_file"]).name
+            src = scrape_icon_dir / Path(match["icon_file"]).name
             dest = icons_dir / f"{key}.png"
             if src.is_file():
                 if dest.is_file():
@@ -184,7 +185,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--schaledb-path", type=Path, default=DEFAULT_SCHALEDB_PATH)
     parser.add_argument("--scrape-path", type=Path, default=DEFAULT_SCRAPE_PATH)
-    parser.add_argument("--kivotos-icon-dir", type=Path, default=DEFAULT_KIVOTOS_ICON_DIR)
+    parser.add_argument("--scrape-icon-dir", type=Path, default=DEFAULT_SCRAPE_ICON_DIR)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--icons-dir", type=Path, default=DEFAULT_ICONS_DIR)
     parser.add_argument(
@@ -195,7 +196,7 @@ def main() -> None:
     stats = build(
         schaledb_path=args.schaledb_path,
         scrape_path=args.scrape_path,
-        kivotos_icon_dir=args.kivotos_icon_dir,
+        scrape_icon_dir=args.scrape_icon_dir,
         output_dir=args.output_dir,
         icons_dir=args.icons_dir,
         dry_run=args.dry_run,
