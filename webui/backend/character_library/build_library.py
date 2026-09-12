@@ -146,6 +146,7 @@ def build(
             "id": entry.get("Id"),
             "key": key,
             "label": label,
+            "personal_name": entry.get("PersonalName") or "",
             "path_name": path_name,
             "base_name": match.get("base_name") if match else None,
             "costume": match.get("costume") if match else None,
@@ -156,6 +157,15 @@ def build(
             unmatched.append({**record, "candidate_count": len(candidates)})
         if icon_copied:
             copied += 1
+
+    # ラベルの重複を解消する(例: 双子キャラ「シュン(水着)」「シュエリン(水着)」は
+    # SchaleDBのName列がどちらも同じで、PersonalNameでしか区別できない)
+    label_counts: Dict[str, int] = {}
+    for r in library:
+        label_counts[r["label"]] = label_counts.get(r["label"], 0) + 1
+    for r in library:
+        if label_counts.get(r["label"], 0) > 1 and r.get("personal_name"):
+            r["label"] = f"{r['label']}[{r['personal_name']}]"
 
     if not dry_run:
         with (output_dir / "characters.json").open("w", encoding="utf-8") as f:
