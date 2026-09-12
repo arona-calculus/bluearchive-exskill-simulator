@@ -1,0 +1,2450 @@
+[
+  {
+    "id": 10000,
+    "key": "Aru",
+    "label": "アル",
+    "path_name": "aru",
+    "base_name": "アル",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10001,
+    "key": "Eimi",
+    "label": "エイミ",
+    "path_name": "eimi",
+    "base_name": "エイミ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10002,
+    "key": "Haruna",
+    "label": "ハルナ",
+    "path_name": "haruna",
+    "base_name": "ハルナ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10003,
+    "key": "Hifumi",
+    "label": "ヒフミ",
+    "path_name": "hifumi",
+    "base_name": "ヒフミ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10004,
+    "key": "Hina",
+    "label": "ヒナ",
+    "path_name": "hina",
+    "base_name": "ヒナ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10005,
+    "key": "Hoshino",
+    "label": "ホシノ",
+    "path_name": "hoshino",
+    "base_name": "ホシノ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10006,
+    "key": "Iori",
+    "label": "イオリ",
+    "path_name": "iori",
+    "base_name": "イオリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10007,
+    "key": "Maki",
+    "label": "マキ",
+    "path_name": "maki",
+    "base_name": "マキ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10008,
+    "key": "Neru",
+    "label": "ネル",
+    "path_name": "neru",
+    "base_name": "ネル",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10009,
+    "key": "Izumi",
+    "label": "イズミ",
+    "path_name": "izumi",
+    "base_name": "イズミ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10010,
+    "key": "Shiroko",
+    "label": "シロコ",
+    "path_name": "shiroko",
+    "base_name": "シロコ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10011,
+    "key": "Shun",
+    "label": "シュン",
+    "path_name": "shun",
+    "base_name": "シュン",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10012,
+    "key": "Sumire",
+    "label": "スミレ",
+    "path_name": "sumire",
+    "base_name": "スミレ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10013,
+    "key": "Tsurugi",
+    "label": "ツルギ",
+    "path_name": "tsurugi",
+    "base_name": "ツルギ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 13000,
+    "key": "Akane",
+    "label": "アカネ",
+    "path_name": "akane",
+    "base_name": "アカネ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 13001,
+    "key": "Chise",
+    "label": "チセ",
+    "path_name": "chise",
+    "base_name": "チセ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 13002,
+    "key": "Akari",
+    "label": "アカリ",
+    "path_name": "akari",
+    "base_name": "アカリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 13003,
+    "key": "Hasumi",
+    "label": "ハスミ",
+    "path_name": "hasumi",
+    "base_name": "ハスミ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 13004,
+    "key": "Nonomi",
+    "label": "ノノミ",
+    "path_name": "nonomi",
+    "base_name": "ノノミ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 13005,
+    "key": "Kayoko",
+    "label": "カヨコ",
+    "path_name": "kayoko",
+    "base_name": "カヨコ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 13006,
+    "key": "Mutsuki",
+    "label": "ムツキ",
+    "path_name": "mutsuki",
+    "base_name": "ムツキ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 13007,
+    "key": "Junko",
+    "label": "ジュンコ",
+    "path_name": "junko",
+    "base_name": "ジュンコ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 13008,
+    "key": "Serika",
+    "label": "セリカ",
+    "path_name": "serika",
+    "base_name": "セリカ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 13009,
+    "key": "Tsubaki",
+    "label": "ツバキ",
+    "path_name": "tsubaki",
+    "base_name": "ツバキ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 13010,
+    "key": "Yuuka",
+    "label": "ユウカ",
+    "path_name": "yuuka",
+    "base_name": "ユウカ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 16000,
+    "key": "Haruka",
+    "label": "ハルカ",
+    "path_name": "haruka",
+    "base_name": "ハルカ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 16001,
+    "key": "Asuna",
+    "label": "アスナ",
+    "path_name": "asuna",
+    "base_name": "アスナ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 16002,
+    "key": "Kotori",
+    "label": "コトリ",
+    "path_name": "kotori",
+    "base_name": "コトリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 16003,
+    "key": "Suzumi",
+    "label": "スズミ",
+    "path_name": "suzumi",
+    "base_name": "スズミ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 16004,
+    "key": "Pina",
+    "label": "フィーナ",
+    "path_name": "pina",
+    "base_name": "フィーナ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20000,
+    "key": "Hibiki",
+    "label": "ヒビキ",
+    "path_name": "hibiki",
+    "base_name": "ヒビキ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20001,
+    "key": "Karin",
+    "label": "カリン",
+    "path_name": "karin",
+    "base_name": "カリン",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20002,
+    "key": "Saya",
+    "label": "サヤ",
+    "path_name": "saya",
+    "base_name": "サヤ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 23000,
+    "key": "Airi",
+    "label": "アイリ",
+    "path_name": "airi",
+    "base_name": "アイリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 23001,
+    "key": "Fuuka",
+    "label": "フウカ",
+    "path_name": "fuuka",
+    "base_name": "フウカ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 23002,
+    "key": "Hanae",
+    "label": "ハナエ",
+    "path_name": "hanae",
+    "base_name": "ハナエ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 23003,
+    "key": "Hare",
+    "label": "ハレ",
+    "path_name": "hare",
+    "base_name": "ハレ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 23004,
+    "key": "Utaha",
+    "label": "ウタハ",
+    "path_name": "utaha",
+    "base_name": "ウタハ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 23005,
+    "key": "Ayane",
+    "label": "アヤネ",
+    "path_name": "ayane",
+    "base_name": "アヤネ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 26000,
+    "key": "Chinatsu",
+    "label": "チナツ",
+    "path_name": "chinatsu",
+    "base_name": "チナツ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 26001,
+    "key": "Kotama",
+    "label": "コタマ",
+    "path_name": "kotama",
+    "base_name": "コタマ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 26002,
+    "key": "Juri",
+    "label": "ジュリ",
+    "path_name": "juri",
+    "base_name": "ジュリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 26003,
+    "key": "Serina",
+    "label": "セリナ",
+    "path_name": "serina",
+    "base_name": "セリナ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 26004,
+    "key": "Shimiko",
+    "label": "シミコ",
+    "path_name": "shimiko",
+    "base_name": "シミコ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 26005,
+    "key": "Yoshimi",
+    "label": "ヨシミ",
+    "path_name": "yoshimi",
+    "base_name": "ヨシミ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20003,
+    "key": "Mashiro",
+    "label": "マシロ",
+    "path_name": "mashiro",
+    "base_name": "マシロ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10014,
+    "key": "Izuna",
+    "label": "イズナ",
+    "path_name": "izuna",
+    "base_name": "イズナ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 23006,
+    "key": "Shizuko",
+    "label": "シズコ",
+    "path_name": "shizuko",
+    "base_name": "シズコ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10015,
+    "key": "Aris",
+    "label": "アリス",
+    "path_name": "aris",
+    "base_name": "アリス",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10016,
+    "key": "Midori",
+    "label": "ミドリ",
+    "path_name": "midori",
+    "base_name": "ミドリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 13011,
+    "key": "Momoi",
+    "label": "モモイ",
+    "path_name": "momoi",
+    "base_name": "モモイ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10017,
+    "key": "Cherino",
+    "label": "チェリノ",
+    "path_name": "cherino",
+    "base_name": "チェリノ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 26006,
+    "key": "Nodoka",
+    "label": "ノドカ",
+    "path_name": "nodoka",
+    "base_name": "ノドカ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10018,
+    "key": "Yuzu",
+    "label": "ユズ",
+    "path_name": "yuzu",
+    "base_name": "ユズ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10019,
+    "key": "Azusa",
+    "label": "アズサ",
+    "path_name": "azusa",
+    "base_name": "アズサ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 23007,
+    "key": "Hanako",
+    "label": "ハナコ",
+    "path_name": "hanako",
+    "base_name": "ハナコ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10020,
+    "key": "Koharu",
+    "label": "コハル",
+    "path_name": "koharu",
+    "base_name": "コハル",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10021,
+    "key": "Azusa_Swimsuit",
+    "label": "アズサ（水着）",
+    "path_name": "azusa_swimsuit",
+    "base_name": "アズサ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 20004,
+    "key": "Mashiro_Swimsuit",
+    "label": "マシロ（水着）",
+    "path_name": "mashiro_swimsuit",
+    "base_name": "マシロ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 16005,
+    "key": "Tsurugi_Swimsuit",
+    "label": "ツルギ（水着）",
+    "path_name": "tsurugi_swimsuit",
+    "base_name": "ツルギ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 20005,
+    "key": "Hifumi_Swimsuit",
+    "label": "ヒフミ（水着）",
+    "path_name": "hifumi_swimsuit",
+    "base_name": "ヒフミ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10022,
+    "key": "Hina_Swimsuit",
+    "label": "ヒナ（水着）",
+    "path_name": "hina_swimsuit",
+    "base_name": "ヒナ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10023,
+    "key": "Iori_Swimsuit",
+    "label": "イオリ（水着）",
+    "path_name": "iori_swimsuit",
+    "base_name": "イオリ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 16006,
+    "key": "Izumi_Swimsuit",
+    "label": "イズミ（水着）",
+    "path_name": "izumi_swimsuit",
+    "base_name": "イズミ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10024,
+    "key": "Shiroko_Cycling",
+    "label": "シロコ（ライディング）",
+    "path_name": "shiroko_cycling",
+    "base_name": "シロコ",
+    "costume": "ライディング",
+    "icon_copied": true
+  },
+  {
+    "id": 10025,
+    "key": "Shun_Small",
+    "label": "シュン（幼女）",
+    "path_name": "shun_small",
+    "base_name": "シュン",
+    "costume": "幼女",
+    "icon_copied": true
+  },
+  {
+    "id": 13012,
+    "key": "Kirino",
+    "label": "キリノ",
+    "path_name": "kirino",
+    "base_name": "キリノ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20006,
+    "key": "Saya_Casual",
+    "label": "サヤ（私服）",
+    "path_name": "saya_casual",
+    "base_name": "サヤ",
+    "costume": "私服",
+    "icon_copied": true
+  },
+  {
+    "id": 10026,
+    "key": "Neru_Bunnygirl",
+    "label": "ネル（バニーガール）",
+    "path_name": "neru_bunnygirl",
+    "base_name": "ネル",
+    "costume": "バニーガール",
+    "icon_copied": true
+  },
+  {
+    "id": 10027,
+    "key": "Karin_Bunnygirl",
+    "label": "カリン（バニーガール）",
+    "path_name": "karin_bunnygirl",
+    "base_name": "カリン",
+    "costume": "バニーガール",
+    "icon_copied": true
+  },
+  {
+    "id": 10028,
+    "key": "Asuna_Bunnygirl",
+    "label": "アスナ（バニーガール）",
+    "path_name": "asuna_bunnygirl",
+    "base_name": "アスナ",
+    "costume": "バニーガール",
+    "icon_copied": true
+  },
+  {
+    "id": 10029,
+    "key": "Natsu",
+    "label": "ナツ",
+    "path_name": "natsu",
+    "base_name": "ナツ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 23008,
+    "key": "Mari",
+    "label": "マリー",
+    "path_name": "mari",
+    "base_name": "マリー",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20007,
+    "key": "Hatsune_Miku",
+    "label": "初音ミク",
+    "path_name": "hatsune_miku",
+    "base_name": "初音ミク",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20008,
+    "key": "Ako",
+    "label": "アコ",
+    "path_name": "ako",
+    "base_name": "アコ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20009,
+    "key": "Cherino_Onsen",
+    "label": "チェリノ（温泉）",
+    "path_name": "cherino_onsen",
+    "base_name": "チェリノ",
+    "costume": "温泉",
+    "icon_copied": true
+  },
+  {
+    "id": 10030,
+    "key": "Chinatsu_Onsen",
+    "label": "チナツ（温泉）",
+    "path_name": "chinatsu_onsen",
+    "base_name": "チナツ",
+    "costume": "温泉",
+    "icon_copied": true
+  },
+  {
+    "id": 16007,
+    "key": "Tomoe",
+    "label": "トモエ",
+    "path_name": "tomoe",
+    "base_name": "トモエ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20010,
+    "key": "Nodoka_Onsen",
+    "label": "ノドカ（温泉）",
+    "path_name": "nodoka_onsen",
+    "base_name": "ノドカ",
+    "costume": "温泉",
+    "icon_copied": true
+  },
+  {
+    "id": 10031,
+    "key": "Aru_Newyear",
+    "label": "アル（正月）",
+    "path_name": "aru_newyear",
+    "base_name": "アル",
+    "costume": "正月",
+    "icon_copied": true
+  },
+  {
+    "id": 10032,
+    "key": "Mutsuki_Newyear",
+    "label": "ムツキ（正月）",
+    "path_name": "mutsuki_newyear",
+    "base_name": "ムツキ",
+    "costume": "正月",
+    "icon_copied": true
+  },
+  {
+    "id": 20011,
+    "key": "Serika_Newyear",
+    "label": "セリカ（正月）",
+    "path_name": "serika_newyear",
+    "base_name": "セリカ",
+    "costume": "正月",
+    "icon_copied": true
+  },
+  {
+    "id": 10033,
+    "key": "Wakamo",
+    "label": "ワカモ",
+    "path_name": "wakamo",
+    "base_name": "ワカモ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 16008,
+    "key": "Fubuki",
+    "label": "フブキ",
+    "path_name": "fubuki",
+    "base_name": "フブキ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20012,
+    "key": "Sena",
+    "label": "セナ",
+    "path_name": "sena",
+    "base_name": "セナ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20013,
+    "key": "Chihiro",
+    "label": "チヒロ",
+    "path_name": "chihiro",
+    "base_name": "チヒロ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10034,
+    "key": "Mimori",
+    "label": "ミモリ",
+    "path_name": "mimori",
+    "base_name": "ミモリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10035,
+    "key": "Ui",
+    "label": "ウイ",
+    "path_name": "ui",
+    "base_name": "ウイ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10036,
+    "key": "Hinata",
+    "label": "ヒナタ",
+    "path_name": "hinata",
+    "base_name": "ヒナタ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10037,
+    "key": "Marina",
+    "label": "マリナ",
+    "path_name": "marina",
+    "base_name": "マリナ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10038,
+    "key": "Miyako",
+    "label": "ミヤコ",
+    "path_name": "miyako",
+    "base_name": "ミヤコ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20014,
+    "key": "Saki",
+    "label": "サキ",
+    "path_name": "saki",
+    "base_name": "サキ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10039,
+    "key": "Miyu",
+    "label": "ミユ",
+    "path_name": "miyu",
+    "base_name": "ミユ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20015,
+    "key": "Kaede",
+    "label": "カエデ",
+    "path_name": "kaede",
+    "base_name": "カエデ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20016,
+    "key": "Iroha",
+    "label": "イロハ",
+    "path_name": "iroha",
+    "base_name": "イロハ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 16009,
+    "key": "Michiru",
+    "label": "ミチル",
+    "path_name": "michiru",
+    "base_name": "ミチル",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10040,
+    "key": "Tsukuyo",
+    "label": "ツクヨ",
+    "path_name": "tsukuyo",
+    "base_name": "ツクヨ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10041,
+    "key": "Misaki",
+    "label": "ミサキ",
+    "path_name": "misaki",
+    "base_name": "ミサキ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20017,
+    "key": "Hiyori",
+    "label": "ヒヨリ",
+    "path_name": "hiyori",
+    "base_name": "ヒヨリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10042,
+    "key": "Atsuko",
+    "label": "アツコ",
+    "path_name": "atsuko",
+    "base_name": "アツコ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10043,
+    "key": "Wakamo_Swimsuit",
+    "label": "ワカモ（水着）",
+    "path_name": "wakamo_swimsuit",
+    "base_name": "ワカモ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10044,
+    "key": "Nonomi_Swimsuit",
+    "label": "ノノミ（水着）",
+    "path_name": "nonomi_swimsuit",
+    "base_name": "ノノミ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 26007,
+    "key": "Ayane_Swimsuit",
+    "label": "アヤネ（水着）",
+    "path_name": "ayane_swimsuit",
+    "base_name": "アヤネ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10045,
+    "key": "Hoshino_Swimsuit",
+    "label": "ホシノ（水着）",
+    "path_name": "hoshino_swimsuit",
+    "base_name": "ホシノ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 26008,
+    "key": "Shizuko_Swimsuit",
+    "label": "シズコ（水着）",
+    "path_name": "shizuko_swimsuit",
+    "base_name": "シズコ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10046,
+    "key": "Izuna_Swimsuit",
+    "label": "イズナ（水着）",
+    "path_name": "izuna_swimsuit",
+    "base_name": "イズナ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10047,
+    "key": "Chise_Swimsuit",
+    "label": "チセ（水着）",
+    "path_name": "chise_swimsuit",
+    "base_name": "チセ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10048,
+    "key": "Saori",
+    "label": "サオリ",
+    "path_name": "saori",
+    "base_name": "サオリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20018,
+    "key": "Moe",
+    "label": "モエ",
+    "path_name": "moe",
+    "base_name": "モエ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10049,
+    "key": "Kazusa",
+    "label": "カズサ",
+    "path_name": "kazusa",
+    "base_name": "カズサ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10050,
+    "key": "Kokona",
+    "label": "ココナ",
+    "path_name": "kokona",
+    "base_name": "ココナ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10051,
+    "key": "Utaha_Cheerleader",
+    "label": "ウタハ（応援団）",
+    "path_name": "utaha_cheerleader",
+    "base_name": "ウタハ",
+    "costume": "応援団",
+    "icon_copied": true
+  },
+  {
+    "id": 10052,
+    "key": "Noa",
+    "label": "ノア",
+    "path_name": "noa",
+    "base_name": "ノア",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 16010,
+    "key": "Hibiki_Cheerleader",
+    "label": "ヒビキ（応援団）",
+    "path_name": "hibiki_cheerleader",
+    "base_name": "ヒビキ",
+    "costume": "応援団",
+    "icon_copied": true
+  },
+  {
+    "id": 20019,
+    "key": "Akane_Bunnygirl",
+    "label": "アカネ（バニーガール）",
+    "path_name": "akane_bunnygirl",
+    "base_name": "アカネ",
+    "costume": "バニーガール",
+    "icon_copied": true
+  },
+  {
+    "id": 10053,
+    "key": "Yuuka_Track",
+    "label": "ユウカ（体操服）",
+    "path_name": "yuuka_track",
+    "base_name": "ユウカ",
+    "costume": "体操服",
+    "icon_copied": true
+  },
+  {
+    "id": 10054,
+    "key": "Mari_Track",
+    "label": "マリー（体操服）",
+    "path_name": "mari_track",
+    "base_name": "マリー",
+    "costume": "体操服",
+    "icon_copied": true
+  },
+  {
+    "id": 16011,
+    "key": "Hasumi_Track",
+    "label": "ハスミ（体操服）",
+    "path_name": "hasumi_track",
+    "base_name": "ハスミ",
+    "costume": "体操服",
+    "icon_copied": true
+  },
+  {
+    "id": 20020,
+    "key": "Himari",
+    "label": "ヒマリ",
+    "path_name": "himari",
+    "base_name": "ヒマリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10055,
+    "key": "Shigure",
+    "label": "シグレ",
+    "path_name": "shigure",
+    "base_name": "シグレ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10056,
+    "key": "Serina_Christmas",
+    "label": "セリナ（クリスマス）",
+    "path_name": "serina_christmas",
+    "base_name": "セリナ",
+    "costume": "クリスマス",
+    "icon_copied": true
+  },
+  {
+    "id": 20021,
+    "key": "Hanae_Christmas",
+    "label": "ハナエ（クリスマス）",
+    "path_name": "hanae_christmas",
+    "base_name": "ハナエ",
+    "costume": "クリスマス",
+    "icon_copied": true
+  },
+  {
+    "id": 10057,
+    "key": "Haruna_Newyear",
+    "label": "ハルナ（正月）",
+    "path_name": "haruna_newyear",
+    "base_name": "ハルナ",
+    "costume": "正月",
+    "icon_copied": true
+  },
+  {
+    "id": 20022,
+    "key": "Fuuka_Newyear",
+    "label": "フウカ（正月）",
+    "path_name": "fuuka_newyear",
+    "base_name": "フウカ",
+    "costume": "正月",
+    "icon_copied": true
+  },
+  {
+    "id": 16012,
+    "key": "Junko_Newyear",
+    "label": "ジュンコ（正月）",
+    "path_name": "junko_newyear",
+    "base_name": "ジュンコ",
+    "costume": "正月",
+    "icon_copied": true
+  },
+  {
+    "id": 10058,
+    "key": "Mine",
+    "label": "ミネ",
+    "path_name": "mine",
+    "base_name": "ミネ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10059,
+    "key": "Mika",
+    "label": "ミカ",
+    "path_name": "mika",
+    "base_name": "ミカ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10060,
+    "key": "Megu",
+    "label": "メグ",
+    "path_name": "megu",
+    "base_name": "メグ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20023,
+    "key": "Kanna",
+    "label": "カンナ",
+    "path_name": "kanna",
+    "base_name": "カンナ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10061,
+    "key": "Sakurako",
+    "label": "サクラコ",
+    "path_name": "sakurako",
+    "base_name": "サクラコ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10062,
+    "key": "Toki",
+    "label": "トキ",
+    "path_name": "toki",
+    "base_name": "トキ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20024,
+    "key": "Nagisa",
+    "label": "ナギサ",
+    "path_name": "nagisa",
+    "base_name": "ナギサ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10063,
+    "key": "Koyuki",
+    "label": "コユキ",
+    "path_name": "koyuki",
+    "base_name": "コユキ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10064,
+    "key": "Kayoko_Newyear",
+    "label": "カヨコ（正月）",
+    "path_name": "kayoko_newyear",
+    "base_name": "カヨコ",
+    "costume": "正月",
+    "icon_copied": true
+  },
+  {
+    "id": 20025,
+    "key": "Haruka_Newyear",
+    "label": "ハルカ（正月）",
+    "path_name": "haruka_newyear",
+    "base_name": "ハルカ",
+    "costume": "正月",
+    "icon_copied": true
+  },
+  {
+    "id": 10065,
+    "key": "Kaho",
+    "label": "カホ",
+    "path_name": "kaho",
+    "base_name": "カホ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10066,
+    "key": "Aris_Maid",
+    "label": "アリス（メイド）",
+    "path_name": "aris_maid",
+    "base_name": "アリス",
+    "costume": "メイド",
+    "icon_copied": true
+  },
+  {
+    "id": 10067,
+    "key": "Toki_Bunnygirl",
+    "label": "トキ（バニーガール）",
+    "path_name": "toki_bunnygirl",
+    "base_name": "トキ",
+    "costume": "バニーガール",
+    "icon_copied": true
+  },
+  {
+    "id": 26009,
+    "key": "Yuzu_Maid",
+    "label": "ユズ（メイド）",
+    "path_name": "yuzu_maid",
+    "base_name": "ユズ",
+    "costume": "メイド",
+    "icon_copied": true
+  },
+  {
+    "id": 10068,
+    "key": "Reisa",
+    "label": "レイサ",
+    "path_name": "reisa",
+    "base_name": "レイサ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10069,
+    "key": "Rumi",
+    "label": "ルミ",
+    "path_name": "rumi",
+    "base_name": "ルミ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10070,
+    "key": "Mina",
+    "label": "ミナ",
+    "path_name": "mina",
+    "base_name": "ミナ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20026,
+    "key": "Minori",
+    "label": "ミノリ",
+    "path_name": "minori",
+    "base_name": "ミノリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10071,
+    "key": "Miyako_Swimsuit",
+    "label": "ミヤコ（水着）",
+    "path_name": "miyako_swimsuit",
+    "base_name": "ミヤコ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10072,
+    "key": "Saki_Swimsuit",
+    "label": "サキ（水着）",
+    "path_name": "saki_swimsuit",
+    "base_name": "サキ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 26010,
+    "key": "Miyu_Swimsuit",
+    "label": "ミユ（水着）",
+    "path_name": "miyu_swimsuit",
+    "base_name": "ミユ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 20027,
+    "key": "Shiroko_Swimsuit",
+    "label": "シロコ（水着）",
+    "path_name": "shiroko_swimsuit",
+    "base_name": "シロコ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10073,
+    "key": "Ui_Swimsuit",
+    "label": "ウイ（水着）",
+    "path_name": "ui_swimsuit",
+    "base_name": "ウイ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 20028,
+    "key": "Hinata_Swimsuit",
+    "label": "ヒナタ（水着）",
+    "path_name": "hinata_swimsuit",
+    "base_name": "ヒナタ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 16013,
+    "key": "Koharu_Swimsuit",
+    "label": "コハル（水着）",
+    "path_name": "koharu_swimsuit",
+    "base_name": "コハル",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10074,
+    "key": "Hanako_Swimsuit",
+    "label": "ハナコ（水着）",
+    "path_name": "hanako_swimsuit",
+    "base_name": "ハナコ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 20029,
+    "key": "Mimori_Swimsuit",
+    "label": "ミモリ（水着）",
+    "path_name": "mimori_swimsuit",
+    "base_name": "ミモリ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10075,
+    "key": "Meru",
+    "label": "メル",
+    "path_name": "meru",
+    "base_name": "メル",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 13013,
+    "key": "Momiji",
+    "label": "モミジ",
+    "path_name": "momiji",
+    "base_name": "モミジ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10076,
+    "key": "Kotori_Cheerleader",
+    "label": "コトリ（応援団）",
+    "path_name": "kotori_cheerleader",
+    "base_name": "コトリ",
+    "costume": "応援団",
+    "icon_copied": true
+  },
+  {
+    "id": 20030,
+    "key": "Haruna_Track",
+    "label": "ハルナ（体操服）",
+    "path_name": "haruna_track",
+    "base_name": "ハルナ",
+    "costume": "体操服",
+    "icon_copied": true
+  },
+  {
+    "id": 10077,
+    "key": "Ichika",
+    "label": "イチカ",
+    "path_name": "ichika",
+    "base_name": "イチカ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10078,
+    "key": "Kasumi",
+    "label": "カスミ",
+    "path_name": "kasumi",
+    "base_name": "カスミ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20031,
+    "key": "Shigure_Onsen",
+    "label": "シグレ（温泉）",
+    "path_name": "shigure_onsen",
+    "base_name": "シグレ",
+    "costume": "温泉",
+    "icon_copied": true
+  },
+  {
+    "id": 10079,
+    "key": "Misaka_Mikoto",
+    "label": "御坂美琴",
+    "path_name": "misaka_mikoto",
+    "base_name": "御坂美琴",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10080,
+    "key": "Shokuhou_Misaki",
+    "label": "食蜂操祈",
+    "path_name": "shokuhou_misaki",
+    "base_name": "食蜂操祈",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 26011,
+    "key": "Saten_Ruiko",
+    "label": "佐天涙子",
+    "path_name": "saten_ruiko",
+    "base_name": "佐天涙子",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10081,
+    "key": "Yukari",
+    "label": "ユカリ",
+    "path_name": "yukari",
+    "base_name": "ユカリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10082,
+    "key": "Renge",
+    "label": "レンゲ",
+    "path_name": "renge",
+    "base_name": "レンゲ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10083,
+    "key": "Kikyou",
+    "label": "キキョウ",
+    "path_name": "kikyou",
+    "base_name": "キキョウ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20032,
+    "key": "Eimi_Swimsuit",
+    "label": "エイミ（水着）",
+    "path_name": "eimi_swimsuit",
+    "base_name": "エイミ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10084,
+    "key": "Kotama_Camp",
+    "label": "コタマ（キャンプ）",
+    "path_name": "kotama_camp",
+    "base_name": "コタマ",
+    "costume": "キャンプ",
+    "icon_copied": true
+  },
+  {
+    "id": 10085,
+    "key": "Hare_Camp",
+    "label": "ハレ（キャンプ）",
+    "path_name": "hare_camp",
+    "base_name": "ハレ",
+    "costume": "キャンプ",
+    "icon_copied": true
+  },
+  {
+    "id": 10087,
+    "key": "Ako_Dress",
+    "label": "アコ（ドレス）",
+    "path_name": "ako_dress",
+    "base_name": "アコ",
+    "costume": "ドレス",
+    "icon_copied": true
+  },
+  {
+    "id": 16014,
+    "key": "Ibuki",
+    "label": "イブキ",
+    "path_name": "ibuki",
+    "base_name": "イブキ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20033,
+    "key": "Makoto",
+    "label": "マコト",
+    "path_name": "makoto",
+    "base_name": "マコト",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10086,
+    "key": "Hina_Dress",
+    "label": "ヒナ（ドレス）",
+    "path_name": "hina_dress",
+    "base_name": "ヒナ",
+    "costume": "ドレス",
+    "icon_copied": true
+  },
+  {
+    "id": 10088,
+    "key": "Kayoko_Dress",
+    "label": "カヨコ（ドレス）",
+    "path_name": "kayoko_dress",
+    "base_name": "カヨコ",
+    "costume": "ドレス",
+    "icon_copied": true
+  },
+  {
+    "id": 10089,
+    "key": "Aru_Dress",
+    "label": "アル（ドレス）",
+    "path_name": "aru_dress",
+    "base_name": "アル",
+    "costume": "ドレス",
+    "icon_copied": true
+  },
+  {
+    "id": 20034,
+    "key": "Akari_Newyear",
+    "label": "アカリ（正月）",
+    "path_name": "akari_newyear",
+    "base_name": "アカリ",
+    "costume": "正月",
+    "icon_copied": true
+  },
+  {
+    "id": 10090,
+    "key": "Umika",
+    "label": "ウミカ",
+    "path_name": "umika",
+    "base_name": "ウミカ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20035,
+    "key": "Tsubaki_Guide",
+    "label": "ツバキ（ガイド）",
+    "path_name": "tsubaki_guide",
+    "base_name": "ツバキ",
+    "costume": "ガイド",
+    "icon_copied": true
+  },
+  {
+    "id": 10091,
+    "key": "Kazusa_Band",
+    "label": "カズサ（バンド）",
+    "path_name": "kazusa_band",
+    "base_name": "カズサ",
+    "costume": "バンド",
+    "icon_copied": true
+  },
+  {
+    "id": 10092,
+    "key": "Yoshimi_Band",
+    "label": "ヨシミ（バンド）",
+    "path_name": "yoshimi_band",
+    "base_name": "ヨシミ",
+    "costume": "バンド",
+    "icon_copied": true
+  },
+  {
+    "id": 16015,
+    "key": "Airi_Band",
+    "label": "アイリ（バンド）",
+    "path_name": "airi_band",
+    "base_name": "アイリ",
+    "costume": "バンド",
+    "icon_copied": true
+  },
+  {
+    "id": 10093,
+    "key": "Kirara",
+    "label": "キララ",
+    "path_name": "kirara",
+    "base_name": "キララ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10094,
+    "key": "Momoi_Maid",
+    "label": "モモイ（メイド）",
+    "path_name": "momoi_maid",
+    "base_name": "モモイ",
+    "costume": "メイド",
+    "icon_copied": true
+  },
+  {
+    "id": 10095,
+    "key": "Midori_Maid",
+    "label": "ミドリ（メイド）",
+    "path_name": "midori_maid",
+    "base_name": "ミドリ",
+    "costume": "メイド",
+    "icon_copied": true
+  },
+  {
+    "id": 20036,
+    "key": "Serika_Swimsuit",
+    "label": "セリカ（水着）",
+    "path_name": "serika_swimsuit",
+    "base_name": "セリカ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10096,
+    "key": "Kanna_Swimsuit",
+    "label": "カンナ（水着）",
+    "path_name": "kanna_swimsuit",
+    "base_name": "カンナ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 20037,
+    "key": "Fubuki_Swimsuit",
+    "label": "フブキ（水着）",
+    "path_name": "fubuki_swimsuit",
+    "base_name": "フブキ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 26012,
+    "key": "Kirino_Swimsuit",
+    "label": "キリノ（水着）",
+    "path_name": "kirino_swimsuit",
+    "base_name": "キリノ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10097,
+    "key": "Moe_Swimsuit",
+    "label": "モエ（水着）",
+    "path_name": "moe_swimsuit",
+    "base_name": "モエ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10098,
+    "key": "Hoshino_Battle_Defence",
+    "label": "ホシノ（臨戦）",
+    "path_name": "hoshino_battle_tank",
+    "base_name": "ホシノ",
+    "costume": "臨戦",
+    "icon_copied": true
+  },
+  {
+    "id": 10099,
+    "key": "Hoshino_Battle_Attack",
+    "label": "ホシノ（臨戦）",
+    "path_name": "hoshino_battle_dealer",
+    "base_name": "ホシノ",
+    "costume": "臨戦",
+    "icon_copied": true
+  },
+  {
+    "id": 10100,
+    "key": "Shiroko_Terror",
+    "label": "シロコ＊テラー",
+    "path_name": "shiroko_terror",
+    "base_name": "シロコ＊テラー",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 26013,
+    "key": "Atsuko_Swimsuit",
+    "label": "アツコ（水着）",
+    "path_name": "atsuko_swimsuit",
+    "base_name": "アツコ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10101,
+    "key": "Saori_Swimsuit",
+    "label": "サオリ（水着）",
+    "path_name": "saori_swimsuit",
+    "base_name": "サオリ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10102,
+    "key": "Hiyori_Swimsuit",
+    "label": "ヒヨリ（水着）",
+    "path_name": "hiyori_swimsuit",
+    "base_name": "ヒヨリ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10103,
+    "key": "Marina_Qipao",
+    "label": "マリナ（チーパオ）",
+    "path_name": "marina_qipao",
+    "base_name": "マリナ",
+    "costume": "チーパオ",
+    "icon_copied": true
+  },
+  {
+    "id": 20038,
+    "key": "Tomoe_Qipao",
+    "label": "トモエ（チーパオ）",
+    "path_name": "tomoe_qipao",
+    "base_name": "トモエ",
+    "costume": "チーパオ",
+    "icon_copied": true
+  },
+  {
+    "id": 10104,
+    "key": "Reijo",
+    "label": "レイジョ",
+    "path_name": "reijo",
+    "base_name": "レイジョ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20039,
+    "key": "Kisaki",
+    "label": "キサキ",
+    "path_name": "kisaki",
+    "base_name": "キサキ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10105,
+    "key": "Mari_Idol",
+    "label": "マリー（アイドル）",
+    "path_name": "mari_idol",
+    "base_name": "マリー",
+    "costume": "アイドル",
+    "icon_copied": true
+  },
+  {
+    "id": 10106,
+    "key": "Sakurako_Idol",
+    "label": "サクラコ（アイドル）",
+    "path_name": "sakurako_idol",
+    "base_name": "サクラコ",
+    "costume": "アイドル",
+    "icon_copied": true
+  },
+  {
+    "id": 16016,
+    "key": "Mine_Idol",
+    "label": "ミネ（アイドル）",
+    "path_name": "mine_idol",
+    "base_name": "ミネ",
+    "costume": "アイドル",
+    "icon_copied": true
+  },
+  {
+    "id": 10107,
+    "key": "Chiaki",
+    "label": "チアキ",
+    "path_name": "chiaki",
+    "base_name": "チアキ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20040,
+    "key": "Satsuki",
+    "label": "サツキ",
+    "path_name": "satsuki",
+    "base_name": "サツキ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10108,
+    "key": "Yuuka_Pajama",
+    "label": "ユウカ（パジャマ）",
+    "path_name": "yuuka_pajama",
+    "base_name": "ユウカ",
+    "costume": "パジャマ",
+    "icon_copied": true
+  },
+  {
+    "id": 10109,
+    "key": "Noa_Pajama",
+    "label": "ノア（パジャマ）",
+    "path_name": "noa_pajama",
+    "base_name": "ノア",
+    "costume": "パジャマ",
+    "icon_copied": true
+  },
+  {
+    "id": 10110,
+    "key": "Seia",
+    "label": "セイア",
+    "path_name": "seia",
+    "base_name": "セイア",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10112,
+    "key": "Asuna_Uniform",
+    "label": "アスナ（制服）",
+    "path_name": "asuna_uniform",
+    "base_name": "アスナ",
+    "costume": "制服",
+    "icon_copied": true
+  },
+  {
+    "id": 26014,
+    "key": "Karin_Uniform",
+    "label": "カリン（制服）",
+    "path_name": "karin_uniform",
+    "base_name": "カリン",
+    "costume": "制服",
+    "icon_copied": true
+  },
+  {
+    "id": 10111,
+    "key": "Neru_Uniform",
+    "label": "ネル（制服）",
+    "path_name": "neru_uniform",
+    "base_name": "ネル",
+    "costume": "制服",
+    "icon_copied": true
+  },
+  {
+    "id": 20041,
+    "key": "Rio",
+    "label": "リオ",
+    "path_name": "rio",
+    "base_name": "リオ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20042,
+    "key": "Maki_Camp",
+    "label": "マキ（キャンプ）",
+    "path_name": "maki_camp",
+    "base_name": "マキ",
+    "costume": "キャンプ",
+    "icon_copied": true
+  },
+  {
+    "id": 10113,
+    "key": "Sena_Casual",
+    "label": "セナ（私服）",
+    "path_name": "sena_casual",
+    "base_name": "セナ",
+    "costume": "私服",
+    "icon_copied": true
+  },
+  {
+    "id": 10114,
+    "key": "Juri_Parttime",
+    "label": "ジュリ（アルバイト）",
+    "path_name": "juri_parttime",
+    "base_name": "ジュリ",
+    "costume": "アルバイト",
+    "icon_copied": true
+  },
+  {
+    "id": 20043,
+    "key": "Izumi_Newyear",
+    "label": "イズミ（正月）",
+    "path_name": "izumi_newyear",
+    "base_name": "イズミ",
+    "costume": "正月",
+    "icon_copied": true
+  },
+  {
+    "id": 10115,
+    "key": "Rei",
+    "label": "レイ",
+    "path_name": "rei",
+    "base_name": "レイ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20044,
+    "key": "Sumire_Parttime",
+    "label": "スミレ（アルバイト）",
+    "path_name": "sumire_parttime",
+    "base_name": "スミレ",
+    "costume": "アルバイト",
+    "icon_copied": true
+  },
+  {
+    "id": 10116,
+    "key": "Saori_Dress",
+    "label": "サオリ（ドレス）",
+    "path_name": "saori_dress",
+    "base_name": "サオリ",
+    "costume": "ドレス",
+    "icon_copied": true
+  },
+  {
+    "id": 10117,
+    "key": "Hikari",
+    "label": "ヒカリ",
+    "path_name": "hikari",
+    "base_name": "ヒカリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10118,
+    "key": "Nozomi",
+    "label": "ノゾミ",
+    "path_name": "nozomi",
+    "base_name": "ノゾミ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 16017,
+    "key": "Aoba",
+    "label": "アオバ",
+    "path_name": "aoba",
+    "base_name": "アオバ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20045,
+    "key": "Pina_Guide",
+    "label": "フィーナ（ガイド）",
+    "path_name": "pina_guide",
+    "base_name": "フィーナ",
+    "costume": "ガイド",
+    "icon_copied": true
+  },
+  {
+    "id": 10119,
+    "key": "Nagusa",
+    "label": "ナグサ",
+    "path_name": "nagusa",
+    "base_name": "ナグサ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20046,
+    "key": "Niya",
+    "label": "ニヤ",
+    "path_name": "niya",
+    "base_name": "ニヤ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10120,
+    "key": "Natsu_Band",
+    "label": "ナツ（バンド）",
+    "path_name": "natsu_band",
+    "base_name": "ナツ",
+    "costume": "バンド",
+    "icon_copied": true
+  },
+  {
+    "id": 10121,
+    "key": "Yukari_Swimsuit",
+    "label": "ユカリ（水着）",
+    "path_name": "yukari_swimsuit",
+    "base_name": "ユカリ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 13014,
+    "key": "Renge_Swimsuit",
+    "label": "レンゲ（水着）",
+    "path_name": "renge_swimsuit",
+    "base_name": "レンゲ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 20047,
+    "key": "Kikyou_Swimsuit",
+    "label": "キキョウ（水着）",
+    "path_name": "kikyou_swimsuit",
+    "base_name": "キキョウ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10123,
+    "key": "Seia_Swimsuit",
+    "label": "セイア（水着）",
+    "path_name": "seia_swimsuit",
+    "base_name": "セイア",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10124,
+    "key": "Hasumi_Swimsuit",
+    "label": "ハスミ（水着）",
+    "path_name": "hasumi_swimsuit",
+    "base_name": "ハスミ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 26015,
+    "key": "Ichika_Swimsuit",
+    "label": "イチカ（水着）",
+    "path_name": "ichika_swimsuit",
+    "base_name": "イチカ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 20048,
+    "key": "Nagisa_Swimsuit",
+    "label": "ナギサ（水着）",
+    "path_name": "nagisa_swimsuit",
+    "base_name": "ナギサ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10122,
+    "key": "Mika_Swimsuit",
+    "label": "ミカ（水着）",
+    "path_name": "mika_swimsuit",
+    "base_name": "ミカ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10125,
+    "key": "Eri",
+    "label": "エリ",
+    "path_name": "eri",
+    "base_name": "エリ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10126,
+    "key": "Kanoe",
+    "label": "カノエ",
+    "path_name": "kanoe",
+    "base_name": "カノエ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20049,
+    "key": "Misaki_Swimsuit",
+    "label": "ミサキ（水着）",
+    "path_name": "misaki_swimsuit",
+    "base_name": "ミサキ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10127,
+    "key": "Miyo",
+    "label": "ミヨ",
+    "path_name": "miyo",
+    "base_name": "ミヨ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10128,
+    "key": "Fuyu",
+    "label": "フユ",
+    "path_name": "fuyu",
+    "base_name": "フユ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20050,
+    "key": "Ritsu",
+    "label": "リツ",
+    "path_name": "ritsu",
+    "base_name": "リツ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20051,
+    "key": "Reisa_Magical",
+    "label": "レイサ（マジカル）",
+    "path_name": "reisa_magical",
+    "base_name": "レイサ",
+    "costume": "マジカル",
+    "icon_copied": true
+  },
+  {
+    "id": 10129,
+    "key": "Suzumi_Magical",
+    "label": "スズミ（マジカル）",
+    "path_name": "suzumi_magical",
+    "base_name": "スズミ",
+    "costume": "マジカル",
+    "icon_copied": true
+  },
+  {
+    "id": 16018,
+    "key": "Rabu",
+    "label": "ラブ",
+    "path_name": "rabu",
+    "base_name": "ラブ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10130,
+    "key": "Subaru",
+    "label": "スバル",
+    "path_name": "subaru",
+    "base_name": "スバル",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10131,
+    "key": "Takane",
+    "label": "タカネ",
+    "path_name": "takane",
+    "base_name": "タカネ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20052,
+    "key": "Yakumo",
+    "label": "ヤクモ",
+    "path_name": "yakumo",
+    "base_name": "ヤクモ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10132,
+    "key": "Tsukuyo_Dress",
+    "label": "ツクヨ（ドレス）",
+    "path_name": "tsukuyo_dress",
+    "base_name": "ツクヨ",
+    "costume": "ドレス",
+    "icon_copied": true
+  },
+  {
+    "id": 20053,
+    "key": "Michiru_Dress",
+    "label": "ミチル（ドレス）",
+    "path_name": "michiru_dress",
+    "base_name": "ミチル",
+    "costume": "ドレス",
+    "icon_copied": true
+  },
+  {
+    "id": 10133,
+    "key": "Rio_Battle",
+    "label": "リオ（臨戦）",
+    "path_name": "rio_battle",
+    "base_name": "リオ",
+    "costume": "臨戦",
+    "icon_copied": true
+  },
+  {
+    "id": 16019,
+    "key": "Toki_Battle",
+    "label": "トキ（臨戦）",
+    "path_name": "toki_battle",
+    "base_name": "トキ",
+    "costume": "臨戦",
+    "icon_copied": true
+  },
+  {
+    "id": 20054,
+    "key": "Himari_Battle",
+    "label": "ヒマリ（臨戦）",
+    "path_name": "himari_battle",
+    "base_name": "ヒマリ",
+    "costume": "臨戦",
+    "icon_copied": true
+  },
+  {
+    "id": 10134,
+    "key": "Alice_Battle",
+    "label": "アリス（臨戦）",
+    "path_name": "aris_battle",
+    "base_name": "アリス",
+    "costume": "臨戦",
+    "icon_copied": true
+  },
+  {
+    "id": 10135,
+    "key": "Key",
+    "label": "ケイ",
+    "path_name": "kei",
+    "base_name": "ケイ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10136,
+    "key": "Eimi_Battle",
+    "label": "エイミ（臨戦）",
+    "path_name": "eimi_battle",
+    "base_name": "エイミ",
+    "costume": "臨戦",
+    "icon_copied": true
+  },
+  {
+    "id": 20055,
+    "key": "Yuzu_Battle",
+    "label": "ユズ（臨戦）",
+    "path_name": "yuzu_battle",
+    "base_name": "ユズ",
+    "costume": "臨戦",
+    "icon_copied": true
+  },
+  {
+    "id": 20056,
+    "key": "Koyuki_Pajama",
+    "label": "コユキ（パジャマ）",
+    "path_name": "koyuki_pajama",
+    "base_name": "コユキ",
+    "costume": "パジャマ",
+    "icon_copied": true
+  },
+  {
+    "id": 10137,
+    "key": "Konoka",
+    "label": "コノカ",
+    "path_name": "konoka",
+    "base_name": "コノカ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10138,
+    "key": "Rena",
+    "label": "レナ",
+    "path_name": "rena",
+    "base_name": "レナ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20057,
+    "key": "Akane_Uniform",
+    "label": "アカネ（制服）",
+    "path_name": "akane_uniform",
+    "base_name": "アカネ",
+    "costume": "制服",
+    "icon_copied": true
+  },
+  {
+    "id": 10139,
+    "key": "Niko",
+    "label": "ニコ",
+    "path_name": "niko",
+    "base_name": "ニコ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10140,
+    "key": "Kurumi",
+    "label": "クルミ",
+    "path_name": "kurumi",
+    "base_name": "クルミ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 16020,
+    "key": "Otogi",
+    "label": "オトギ",
+    "path_name": "otogi",
+    "base_name": "オトギ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 20058,
+    "key": "Erika",
+    "label": "エリカ",
+    "path_name": "erika",
+    "base_name": "エリカ",
+    "costume": "",
+    "icon_copied": true
+  },
+  {
+    "id": 10141,
+    "key": "Haruka_Dress",
+    "label": "ハルカ（ドレス）",
+    "path_name": "haruka_dress",
+    "base_name": "ハルカ",
+    "costume": "ドレス",
+    "icon_copied": true
+  },
+  {
+    "id": 20059,
+    "key": "Mutsuki_Dress",
+    "label": "ムツキ（ドレス）",
+    "path_name": "mutsuki_dress",
+    "base_name": "ムツキ",
+    "costume": "ドレス",
+    "icon_copied": true
+  },
+  {
+    "id": 10142,
+    "key": "Nagusa_Swimsuit",
+    "label": "ナグサ（水着）",
+    "path_name": "nagusa_swimsuit",
+    "base_name": "ナグサ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10143,
+    "key": "Shun_Swimsuit",
+    "label": "シュン（水着）",
+    "path_name": "shun_swimsuit",
+    "base_name": "シュン",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10144,
+    "key": "Shunling_Swimsuit",
+    "label": "シュン（水着）",
+    "path_name": "shunling_swimsuit",
+    "base_name": "シュン",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10145,
+    "key": "Kisaki_Swimsuit",
+    "label": "キサキ（水着）",
+    "path_name": "kisaki_swimsuit",
+    "base_name": "キサキ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10146,
+    "key": "Makoto_Swimsuit",
+    "label": "マコト（水着）",
+    "path_name": "makoto_swimsuit",
+    "base_name": "マコト",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10147,
+    "key": "Satsuki_Swimsuit",
+    "label": "サツキ（水着）",
+    "path_name": "satsuki_swimsuit",
+    "base_name": "サツキ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 26016,
+    "key": "Chiaki_Swimsuit",
+    "label": "チアキ（水着）",
+    "path_name": "chiaki_swimsuit",
+    "base_name": "チアキ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 10148,
+    "key": "Iroha_Swimsuit",
+    "label": "イロハ（水着）",
+    "path_name": "iroha_swimsuit",
+    "base_name": "イロハ",
+    "costume": "水着",
+    "icon_copied": true
+  },
+  {
+    "id": 20060,
+    "key": "Ibuki_Swimsuit",
+    "label": "イブキ（水着）",
+    "path_name": "ibuki_swimsuit",
+    "base_name": "イブキ",
+    "costume": "水着",
+    "icon_copied": true
+  }
+]

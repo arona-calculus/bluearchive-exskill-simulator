@@ -8,6 +8,7 @@ BA EX Skill Simulator - FastAPI Backend
 
 from __future__ import annotations
 
+import json
 import uuid
 from pathlib import Path
 from typing import Any, Dict, List, NamedTuple, Optional
@@ -69,6 +70,28 @@ BUILTINS: Dict[str, BuiltinEntry] = {
     "Miyako_Swimsuit": BuiltinEntry("ミヤコ(水着)",   GenericSpec),
     "Rio":             BuiltinEntry("リオ",          RioSpec),
 }
+
+_LIBRARY_PATH = Path(__file__).parent / "character_library" / "data" / "characters.json"
+
+
+def _load_generated_builtins() -> Dict[str, BuiltinEntry]:
+    """character_library/build_library.py が生成したキャラライブラリを読み込む。
+    未実装の生徒は GenericSpec を割り当てる(固有のEXスキル実装が必要な生徒は
+    上の BUILTINS に手動で追記し、専用の Spec クラスを割り当てること)。
+    """
+    if not _LIBRARY_PATH.exists():
+        return {}
+    with _LIBRARY_PATH.open(encoding="utf-8") as f:
+        entries = json.load(f)
+    return {
+        e["key"]: BuiltinEntry(e["label"], GenericSpec)
+        for e in entries
+        if e.get("key") and e.get("label")
+    }
+
+
+# 手動でカスタムSpecを割り当てた上のエントリを優先し、生成分で不足を補う
+BUILTINS = {**_load_generated_builtins(), **BUILTINS}
 
 NEEDS_TARGET: List[str] = ["Rio", "Alice_Battle"]
 
