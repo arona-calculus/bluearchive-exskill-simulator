@@ -1,1 +1,35 @@
-[]
+[
+  {
+    "id": 10149,
+    "key": "Kokoro",
+    "label": "ココロ",
+    "personal_name": "ココロ",
+    "path_name": "kokoro",
+    "base_name": null,
+    "costume": null,
+    "icon_copied": false,
+    "candidate_count": 0
+  },
+  {
+    "id": 10150,
+    "key": "Kotone",
+    "label": "コトネ",
+    "personal_name": "コトネ",
+    "path_name": "kotone",
+    "base_name": null,
+    "costume": null,
+    "icon_copied": false,
+    "candidate_count": 0
+  },
+  {
+    "id": 20061,
+    "key": "Kasumi_Swimsuit",
+    "label": "カスミ（水着）",
+    "personal_name": "カスミ",
+    "path_name": "kasumi_swimsuit",
+    "base_name": null,
+    "costume": null,
+    "icon_copied": false,
+    "candidate_count": 0
+  }
+]
