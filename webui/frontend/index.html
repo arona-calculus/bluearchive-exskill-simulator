@@ -286,6 +286,7 @@
     <span id="sim-info">-</span>
     <button class="btn btn-secondary btn-sm" onclick="toggleSavePanel()">保存</button>
     <button class="btn btn-secondary btn-sm" onclick="toggleLoadPanel()">ロード</button>
+    <button class="btn btn-secondary btn-sm" onclick="toggleSharePanel()">共有</button>
     <button class="btn btn-secondary btn-sm" onclick="toggleExportPanel()">エクスポート</button>
     <button class="btn btn-secondary btn-sm" onclick="triggerImport()">インポート</button>
     <input type="file" id="import-file-input" accept=".json" style="display:none" onchange="handleImportFile(this)">
@@ -301,6 +302,13 @@
   <div id="load-panel" class="side-panel" style="display:none">
     <div class="side-panel-title">セーブデータを読み込む</div>
     <div id="load-list"></div>
+  </div>
+  <div id="share-panel" class="side-panel" style="display:none">
+    <div class="side-panel-title">共有リンク</div>
+    <div class="side-panel-row">
+      <input id="share-link-input" class="side-panel-input" type="text" readonly style="max-width:520px;" onclick="this.select()">
+      <button class="btn btn-primary btn-sm" id="share-copy-btn" onclick="copyShareLink()">コピー</button>
+    </div>
   </div>
   <div id="export-panel" class="export-panel" style="display:none">
     <div class="export-panel-title">エクスポート</div>
@@ -356,6 +364,18 @@ async function init() {
       availableIcons = new Set(data.available);
     }
   } catch(e) {}
+
+  const hash = window.location.hash;
+  if (hash.indexOf('#share=') === 0) {
+    try {
+      const shareData = decodeShareData(hash.slice('#share='.length));
+      await loadSave(shareData, true);
+      return;
+    } catch(e) {
+      console.error('共有リンクの読み込みに失敗しました', e);
+    }
+  }
+
   renderSetupSlots();
 }
 
@@ -450,6 +470,9 @@ async function resetSession() {
   }
   sessionId = null; currentState = null; initialState = null;
   history = []; allCharacters = []; selectedSlot = null; frameComments = {}; frameCollapseOverride = {};
+  if (window.location.hash.indexOf('#share=') === 0) {
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
   document.getElementById('setup-screen').style.display = 'block';
   document.getElementById('sim-screen').style.display = 'none';
   document.getElementById('setup-error').classList.remove('visible');
@@ -856,8 +879,8 @@ function putSaves(saves) {
 
 function toggleSavePanel() {
   const sp = document.getElementById('save-panel');
-  const lp = document.getElementById('load-panel');
-  lp.style.display = 'none';
+  document.getElementById('load-panel').style.display = 'none';
+  document.getElementById('share-panel').style.display = 'none';
   sp.style.display = sp.style.display === 'none' ? 'flex' : 'none';
   if (sp.style.display !== 'none') {
     const inp = document.getElementById('save-name-input');
@@ -868,10 +891,77 @@ function toggleSavePanel() {
 
 function toggleLoadPanel() {
   const lp = document.getElementById('load-panel');
-  const sp = document.getElementById('save-panel');
-  sp.style.display = 'none';
+  document.getElementById('save-panel').style.display = 'none';
+  document.getElementById('share-panel').style.display = 'none';
   lp.style.display = lp.style.display === 'none' ? 'block' : 'none';
   if (lp.style.display !== 'none') renderLoadList();
+}
+
+// ===== SHARE LINK =====
+function encodeShareData(obj) {
+  const json = JSON.stringify(obj);
+  const bytes = new TextEncoder().encode(json);
+  let binary = '';
+  bytes.forEach(function(b) { binary += String.fromCharCode(b); });
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function decodeShareData(encoded) {
+  let b64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
+  while (b64.length % 4) b64 += '=';
+  const binary = atob(b64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  const json = new TextDecoder().decode(bytes);
+  return JSON.parse(json);
+}
+
+function buildShareUrl() {
+  const payload = {
+    name: '共有されたシミュレーション',
+    characters: allCharacters,
+    hand_size: handSize,
+    initial_state: initialState,
+    current_state: currentState,
+    history: history,
+    frame_comments: frameComments,
+  };
+  return window.location.origin + window.location.pathname + '#share=' + encodeShareData(payload);
+}
+
+function toggleSharePanel() {
+  const sp = document.getElementById('share-panel');
+  document.getElementById('save-panel').style.display = 'none';
+  document.getElementById('load-panel').style.display = 'none';
+  document.getElementById('export-panel').style.display = 'none';
+  sp.style.display = sp.style.display === 'none' ? 'flex' : 'none';
+  if (sp.style.display !== 'none') {
+    document.getElementById('share-link-input').value = buildShareUrl();
+  }
+}
+
+function copyShareLink() {
+  const input = document.getElementById('share-link-input');
+  input.select();
+  input.setSelectionRange(0, 99999);
+
+  const showCopied = function() {
+    const btn = document.getElementById('share-copy-btn');
+    if (!btn) return;
+    const orig = btn.textContent;
+    btn.textContent = 'コピーしました';
+    setTimeout(function() { btn.textContent = orig; }, 1500);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(input.value).then(showCopied).catch(function() {
+      document.execCommand('copy');
+      showCopied();
+    });
+  } else {
+    document.execCommand('copy');
+    showCopied();
+  }
 }
 
 function doSave() {
@@ -926,8 +1016,8 @@ function deleteSave(id) {
   renderLoadList();
 }
 
-async function loadSave(save) {
-  if (!confirm('"' + save.name + '" を読み込みますか？\n現在のセッションは破棄されます。')) return;
+async function loadSave(save, skipConfirm) {
+  if (!skipConfirm && !confirm('"' + save.name + '" を読み込みますか？\n現在のセッションは破棄されます。')) return;
 
   if (sessionId) {
     await fetch(API + '/api/session/' + sessionId, { method: 'DELETE' }).catch(function(){});
@@ -971,10 +1061,9 @@ async function loadSave(save) {
 // ===== EXPORT / IMPORT =====
 function toggleExportPanel() {
   const ep = document.getElementById('export-panel');
-  const sp = document.getElementById('save-panel');
-  const lp = document.getElementById('load-panel');
-  sp.style.display = 'none';
-  lp.style.display = 'none';
+  document.getElementById('save-panel').style.display = 'none';
+  document.getElementById('load-panel').style.display = 'none';
+  document.getElementById('share-panel').style.display = 'none';
   ep.style.display = ep.style.display === 'none' ? 'flex' : 'none';
   if (ep.style.display !== 'none') renderExportSaveList();
 }
