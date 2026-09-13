@@ -301,7 +301,9 @@ def serve_icon(filename: str):
         raise HTTPException(status_code=403)
     if not file_path.is_file():
         raise HTTPException(status_code=404)
-    return FileResponse(file_path)
+    # アイコンは差し替えが起こり得るため、ブラウザキャッシュを毎回検証させる
+    # (ETag/Last-Modifiedによりコンテンツが変わっていなければ304で済む)
+    return FileResponse(file_path, headers={"Cache-Control": "no-cache"})
 
 
 _frontend_dir = Path(__file__).parent.parent / "frontend"
