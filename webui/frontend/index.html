@@ -368,7 +368,7 @@ async function init() {
   const hash = window.location.hash;
   if (hash.indexOf('#share=') === 0) {
     try {
-      const shareData = decodeShareData(hash.slice('#share='.length));
+      const shareData = await decodeShareData(hash.slice('#share='.length));
       await loadSave(shareData, true);
       return;
     } catch(e) {
@@ -898,45 +898,84 @@ function toggleLoadPanel() {
 }
 
 // ===== SHARE LINK =====
-function encodeShareData(obj) {
-  const json = JSON.stringify(obj);
-  const bytes = new TextEncoder().encode(json);
+function bytesToBase64Url(bytes) {
   let binary = '';
   bytes.forEach(function(b) { binary += String.fromCharCode(b); });
   return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
-function decodeShareData(encoded) {
+function base64UrlToBytes(encoded) {
   let b64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
   while (b64.length % 4) b64 += '=';
   const binary = atob(b64);
   const bytes = new Uint8Array(binary.length);
   for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-  const json = new TextDecoder().decode(bytes);
-  return JSON.parse(json);
+  return bytes;
 }
 
-function buildShareUrl() {
-  const payload = {
+// 対応ブラウザではgzip圧縮してからbase64url化する(未対応なら無圧縮にフォールバック)。
+// 先頭1文字で圧縮有無を区別する('z'=gzip圧縮, 'r'=無圧縮)。
+async function encodeShareData(obj) {
+  const bytes = new TextEncoder().encode(JSON.stringify(obj));
+  if (typeof CompressionStream !== 'undefined') {
+    try {
+      const cs = new CompressionStream('gzip');
+      const writer = cs.writable.getWriter();
+      writer.write(bytes);
+      writer.close();
+      const buf = await new Response(cs.readable).arrayBuffer();
+      return 'z' + bytesToBase64Url(new Uint8Array(buf));
+    } catch(e) { /* フォールバックへ */ }
+  }
+  return 'r' + bytesToBase64Url(bytes);
+}
+
+async function decodeShareData(encoded) {
+  const mode = encoded.charAt(0);
+  const bytes = base64UrlToBytes(encoded.slice(1));
+  let finalBytes = bytes;
+  if (mode === 'z') {
+    const ds = new DecompressionStream('gzip');
+    const writer = ds.writable.getWriter();
+    writer.write(bytes);
+    writer.close();
+    const buf = await new Response(ds.readable).arrayBuffer();
+    finalBytes = new Uint8Array(buf);
+  }
+  return JSON.parse(new TextDecoder().decode(finalBytes));
+}
+
+function buildSharePayload() {
+  return {
     name: '共有されたシミュレーション',
     characters: allCharacters,
     hand_size: handSize,
     initial_state: initialState,
     current_state: currentState,
-    history: history,
+    // state_beforeは表示・復元のどこからも参照されないため共有データからは除外し、サイズを削減する
+    history: history.map(function(h) {
+      return { step: h.step, card: h.card, slot: h.slot, target: h.target, state_after: h.state_after };
+    }),
     frame_comments: frameComments,
   };
-  return window.location.origin + window.location.pathname + '#share=' + encodeShareData(payload);
 }
 
-function toggleSharePanel() {
+async function buildShareUrl() {
+  const encoded = await encodeShareData(buildSharePayload());
+  return window.location.origin + window.location.pathname + '#share=' + encoded;
+}
+
+async function toggleSharePanel() {
   const sp = document.getElementById('share-panel');
   document.getElementById('save-panel').style.display = 'none';
   document.getElementById('load-panel').style.display = 'none';
   document.getElementById('export-panel').style.display = 'none';
-  sp.style.display = sp.style.display === 'none' ? 'flex' : 'none';
-  if (sp.style.display !== 'none') {
-    document.getElementById('share-link-input').value = buildShareUrl();
+  const opening = sp.style.display === 'none';
+  sp.style.display = opening ? 'flex' : 'none';
+  if (opening) {
+    const input = document.getElementById('share-link-input');
+    input.value = '生成中...';
+    input.value = await buildShareUrl();
   }
 }
 
