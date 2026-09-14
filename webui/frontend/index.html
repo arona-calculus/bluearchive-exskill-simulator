@@ -177,6 +177,11 @@
   .pp-title { font-size: 0.82rem; color: var(--yellow); font-weight: 600; margin-bottom: 9px; }
   .pp-row { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
   .pp-row label { font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; }
+  .pp-row-multi { align-items: flex-start; }
+  .pp-multiselect { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .pp-multiselect label { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--text); white-space: normal; cursor: pointer; }
+  .pp-multiselect input[type=checkbox] { accent-color: var(--blue); }
+  .pp-multiselect input[type=checkbox]:disabled { opacity: 0.4; cursor: not-allowed; }
   .pp-select { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 5px 8px; font-size: 0.82rem; }
   .pp-select:focus { outline: none; border-color: var(--blue); }
   .pp-btns { display: flex; gap: 8px; }
@@ -338,6 +343,7 @@ let selectedSlot = null;
 let builtinInfo = { builtin: [], needs_target: [] };
 let BUILTIN_OPTIONS = [];
 let LABEL_TO_KEY = {};
+let VALUE_TO_ROLE = {}; // value(キー) -> "STRIKER"/"SPECIAL"/undefined
 let availableIcons = new Set();
 let frameComments = {}; // frameIdx → string
 let frameCollapseOverride = {}; // frameIdx → boolean (未設定なら「直近以外は折りたたむ」がデフォルト)
@@ -350,7 +356,11 @@ async function init() {
       builtinInfo = await res.json();
       BUILTIN_OPTIONS = builtinInfo.builtin; // [{ value, label }, ...]
       LABEL_TO_KEY = {};
-      BUILTIN_OPTIONS.forEach(function(o) { LABEL_TO_KEY[o.label] = o.value; });
+      VALUE_TO_ROLE = {};
+      BUILTIN_OPTIONS.forEach(function(o) {
+        LABEL_TO_KEY[o.label] = o.value;
+        if (o.role) VALUE_TO_ROLE[o.value] = o.role;
+      });
       const datalist = document.getElementById('builtin-datalist');
       datalist.innerHTML = BUILTIN_OPTIONS.map(function(o) {
         return '<option value="' + escHtml(o.label) + '">';
@@ -727,7 +737,10 @@ function buildEnvRow(env) {
 }
 
 function envLabel(key) {
-  const map = { hanako_gauge: 'ゲージ', alice_charge: 'チャージ', rio_copy_target: 'コピー先' };
+  const map = {
+    hanako_gauge: 'ゲージ', alice_charge: 'チャージ', rio_copy_target: 'コピー先',
+    ibuki_friends: 'お友達', ibuki_shells: '貝殻', ibuki_shell_flower: '貝殻のお花',
+  };
   return map[key] || key;
 }
 
@@ -740,6 +753,16 @@ function envChipVal(key, val) {
     const pct = Math.min(100, (val / 2) * 100);
     return '<div class="env-chip-gauge"><div class="env-chip-gauge-fill" style="width:' + pct + '%;background:#f87f7f"></div></div><span class="env-chip-val" style="color:#f87f7f">' + val + '/2</span>';
   }
+  if (key === 'ibuki_shells') {
+    const pct = Math.min(100, (val / 12) * 100);
+    return '<div class="env-chip-gauge"><div class="env-chip-gauge-fill" style="width:' + pct + '%;background:#e0a458"></div></div><span class="env-chip-val" style="color:#e0a458">' + val + '/12</span>';
+  }
+  if (key === 'ibuki_friends' && Array.isArray(val)) {
+    return '<span class="env-chip-val">' + escHtml(val.map(getDisplayName).join(' / ')) + '</span>';
+  }
+  if (key === 'ibuki_shell_flower') {
+    return '<span class="env-chip-val">' + (val ? '獲得済み' : 'なし') + '</span>';
+  }
   return '<span class="env-chip-val">' + escHtml(String(val)) + '</span>';
 }
 
@@ -749,8 +772,11 @@ function buildPlayPanel() {
 
   panel.innerHTML =
     '<div class="pp-title" id="pp-title">カードを選択してください</div>' +
-    '<div class="pp-row"><label id="pp-target-label">ターゲット</label>' +
+    '<div class="pp-row" id="pp-target-row"><label id="pp-target-label">ターゲット</label>' +
     '<select class="pp-select" id="target-select"><option value="">なし</option></select></div>' +
+    '<div class="pp-row pp-row-multi" id="pp-multiselect-row" style="display:none">' +
+    '<label id="pp-multiselect-label">対象</label>' +
+    '<div id="target-multiselect" class="pp-multiselect"></div></div>' +
     '<div class="pp-btns">' +
     '<button class="btn btn-primary btn-sm" onclick="confirmPlay()">プレイ</button>' +
     '<button class="btn btn-secondary btn-sm" onclick="cancelPlay()">キャンセル</button>' +
@@ -803,32 +829,80 @@ function selectCard(slot) {
   panel.classList.add('visible');
   document.getElementById('pp-title').textContent = getDisplayName(card);
 
+  const targetRow = document.getElementById('pp-target-row');
+  const multiRow = document.getElementById('pp-multiselect-row');
   const sel = document.getElementById('target-select');
-  sel.innerHTML = '<option value="">なし</option>';
 
-  const known = new Set(allCharacters.concat(currentState.hand || []).concat(currentState.deck || []));
-  known.forEach(function(name) {
-    if (name && name !== card) {
+  const known = Array.from(new Set(allCharacters.concat(currentState.hand || []).concat(currentState.deck || [])))
+    .filter(function(name) { return name && name !== card; });
+
+  const ibukiFriendsSet = currentState.env && currentState.env.ibuki_friends && currentState.env.ibuki_friends.length > 0;
+
+  if (card === 'Ibuki_Swimsuit' && !ibukiFriendsSet) {
+    // EX1: お友達を2人まで新規指定する(汎用の複数選択UI)。
+    // ストライカーのみ選択可能(SPECIALと判明しているキャラは除外。roleが不明な
+    // カスタム入力キャラは除外しない)。
+    const strikerCandidates = known.filter(function(name) { return VALUE_TO_ROLE[name] !== 'SPECIAL'; });
+    targetRow.style.display = 'none';
+    multiRow.style.display = 'flex';
+    document.getElementById('pp-multiselect-label').textContent = 'お友達 (2人、ストライカーのみ) *';
+    renderMultiSelectTargets('target-multiselect', strikerCandidates, 2);
+  } else if (card === 'Ibuki_Swimsuit' && ibukiFriendsSet) {
+    // EX2: 指定済みなので対象選択は不要
+    targetRow.style.display = 'none';
+    multiRow.style.display = 'none';
+  } else {
+    multiRow.style.display = 'none';
+    targetRow.style.display = 'flex';
+    sel.innerHTML = '<option value="">なし</option>';
+    known.forEach(function(name) {
       const opt = document.createElement('option');
       opt.value = name; opt.textContent = getDisplayName(name);
       sel.appendChild(opt);
-    }
-  });
+    });
 
-  const lbl = document.getElementById('pp-target-label');
-  if (card === 'Rio') {
-    lbl.textContent = 'コピー先 *';
-  } else if (card === 'Alice_Battle') {
-    lbl.textContent = 'ターゲット *';
-    const selfOpt = document.createElement('option');
-    selfOpt.value = 'Alice_Battle'; selfOpt.textContent = getDisplayName('Alice_Battle') + ' (自身)';
-    sel.insertBefore(selfOpt, sel.children[1]);
-  } else {
-    lbl.textContent = 'ターゲット';
+    const lbl = document.getElementById('pp-target-label');
+    if (card === 'Rio') {
+      lbl.textContent = 'コピー先 *';
+    } else if (card === 'Alice_Battle') {
+      lbl.textContent = 'ターゲット *';
+      const selfOpt = document.createElement('option');
+      selfOpt.value = 'Alice_Battle'; selfOpt.textContent = getDisplayName('Alice_Battle') + ' (自身)';
+      sel.insertBefore(selfOpt, sel.children[1]);
+    } else {
+      lbl.textContent = 'ターゲット';
+    }
   }
 
   const errEl = document.getElementById('sim-error');
   if (errEl) errEl.classList.remove('visible');
+}
+
+// 汎用の複数選択チェックボックスUI(最大maxCount件まで選択可能)。
+// 将来的に他の複数対象キャラが追加された場合も再利用できる。
+function renderMultiSelectTargets(containerId, candidates, maxCount) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  candidates.forEach(function(name) {
+    const label = document.createElement('label');
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.value = name;
+    cb.addEventListener('change', function() {
+      const checkedCount = container.querySelectorAll('input[type=checkbox]:checked').length;
+      container.querySelectorAll('input[type=checkbox]').forEach(function(c) {
+        c.disabled = !c.checked && checkedCount >= maxCount;
+      });
+    });
+    label.appendChild(cb);
+    label.appendChild(document.createTextNode(getDisplayName(name)));
+    container.appendChild(label);
+  });
+}
+
+function getMultiSelectValues(containerId) {
+  return Array.from(document.querySelectorAll('#' + containerId + ' input[type=checkbox]:checked'))
+    .map(function(cb) { return cb.value; });
 }
 
 function cancelPlay() {
@@ -841,12 +915,24 @@ function cancelPlay() {
 async function confirmPlay() {
   if (selectedSlot === null) return;
   const card = currentState.hand[selectedSlot];
-  const sel = document.getElementById('target-select');
-  const target = sel ? sel.value : '';
+  const multiRow = document.getElementById('pp-multiselect-row');
+  let target = '';
 
-  if (card === 'Rio' && !target) {
-    showError('sim-error', 'リオのコピー先を選択してください');
-    return;
+  if (multiRow && multiRow.style.display !== 'none') {
+    const values = getMultiSelectValues('target-multiselect');
+    if (card === 'Ibuki_Swimsuit' && values.length !== 2) {
+      showError('sim-error', 'お友達を2人選択してください');
+      return;
+    }
+    target = values.join(',');
+  } else {
+    const sel = document.getElementById('target-select');
+    target = sel ? sel.value : '';
+
+    if (card === 'Rio' && !target) {
+      showError('sim-error', 'リオのコピー先を選択してください');
+      return;
+    }
   }
 
   try {

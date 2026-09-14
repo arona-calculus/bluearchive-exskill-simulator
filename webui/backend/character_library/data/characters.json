@@ -7,6 +7,7 @@
     "path_name": "aru",
     "base_name": "アル",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -17,6 +18,7 @@
     "path_name": "eimi",
     "base_name": "エイミ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -27,6 +29,7 @@
     "path_name": "haruna",
     "base_name": "ハルナ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -37,6 +40,7 @@
     "path_name": "hifumi",
     "base_name": "ヒフミ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -47,6 +51,7 @@
     "path_name": "hina",
     "base_name": "ヒナ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -57,6 +62,7 @@
     "path_name": "hoshino",
     "base_name": "ホシノ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -67,6 +73,7 @@
     "path_name": "iori",
     "base_name": "イオリ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -77,6 +84,7 @@
     "path_name": "maki",
     "base_name": "マキ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -87,6 +95,7 @@
     "path_name": "neru",
     "base_name": "ネル",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -97,6 +106,7 @@
     "path_name": "izumi",
     "base_name": "イズミ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -107,6 +117,7 @@
     "path_name": "shiroko",
     "base_name": "シロコ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -117,6 +128,7 @@
     "path_name": "shun",
     "base_name": "シュン",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -127,6 +139,7 @@
     "path_name": "sumire",
     "base_name": "スミレ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -137,6 +150,7 @@
     "path_name": "tsurugi",
     "base_name": "ツルギ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -147,6 +161,7 @@
     "path_name": "akane",
     "base_name": "アカネ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -157,6 +172,7 @@
     "path_name": "chise",
     "base_name": "チセ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -167,6 +183,7 @@
     "path_name": "akari",
     "base_name": "アカリ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -177,6 +194,7 @@
     "path_name": "hasumi",
     "base_name": "ハスミ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -187,6 +205,7 @@
     "path_name": "nonomi",
     "base_name": "ノノミ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -197,6 +216,7 @@
     "path_name": "kayoko",
     "base_name": "カヨコ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -207,6 +227,7 @@
     "path_name": "mutsuki",
     "base_name": "ムツキ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -217,6 +238,7 @@
     "path_name": "junko",
     "base_name": "ジュンコ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -227,6 +249,7 @@
     "path_name": "serika",
     "base_name": "セリカ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -237,6 +260,7 @@
     "path_name": "tsubaki",
     "base_name": "ツバキ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -247,6 +271,7 @@
     "path_name": "yuuka",
     "base_name": "ユウカ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -257,6 +282,7 @@
     "path_name": "haruka",
     "base_name": "ハルカ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -267,6 +293,7 @@
     "path_name": "asuna",
     "base_name": "アスナ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -277,6 +304,7 @@
     "path_name": "kotori",
     "base_name": "コトリ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -287,6 +315,7 @@
     "path_name": "suzumi",
     "base_name": "スズミ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -297,6 +326,7 @@
     "path_name": "pina",
     "base_name": "フィーナ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -307,6 +337,7 @@
     "path_name": "hibiki",
     "base_name": "ヒビキ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -317,6 +348,7 @@
     "path_name": "karin",
     "base_name": "カリン",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -327,6 +359,7 @@
     "path_name": "saya",
     "base_name": "サヤ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -337,6 +370,7 @@
     "path_name": "airi",
     "base_name": "アイリ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -347,6 +381,7 @@
     "path_name": "fuuka",
     "base_name": "フウカ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -357,6 +392,7 @@
     "path_name": "hanae",
     "base_name": "ハナエ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -367,6 +403,7 @@
     "path_name": "hare",
     "base_name": "ハレ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -377,6 +414,7 @@
     "path_name": "utaha",
     "base_name": "ウタハ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -387,6 +425,7 @@
     "path_name": "ayane",
     "base_name": "アヤネ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -397,6 +436,7 @@
     "path_name": "chinatsu",
     "base_name": "チナツ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -407,6 +447,7 @@
     "path_name": "kotama",
     "base_name": "コタマ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -417,6 +458,7 @@
     "path_name": "juri",
     "base_name": "ジュリ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -427,6 +469,7 @@
     "path_name": "serina",
     "base_name": "セリナ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -437,6 +480,7 @@
     "path_name": "shimiko",
     "base_name": "シミコ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -447,6 +491,7 @@
     "path_name": "yoshimi",
     "base_name": "ヨシミ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -457,6 +502,7 @@
     "path_name": "mashiro",
     "base_name": "マシロ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -467,6 +513,7 @@
     "path_name": "izuna",
     "base_name": "イズナ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -477,6 +524,7 @@
     "path_name": "shizuko",
     "base_name": "シズコ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -487,6 +535,7 @@
     "path_name": "aris",
     "base_name": "アリス",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -497,6 +546,7 @@
     "path_name": "midori",
     "base_name": "ミドリ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -507,6 +557,7 @@
     "path_name": "momoi",
     "base_name": "モモイ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -517,6 +568,7 @@
     "path_name": "cherino",
     "base_name": "チェリノ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -527,6 +579,7 @@
     "path_name": "nodoka",
     "base_name": "ノドカ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -537,6 +590,7 @@
     "path_name": "yuzu",
     "base_name": "ユズ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -547,6 +601,7 @@
     "path_name": "azusa",
     "base_name": "アズサ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -557,6 +612,7 @@
     "path_name": "hanako",
     "base_name": "ハナコ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -567,6 +623,7 @@
     "path_name": "koharu",
     "base_name": "コハル",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -577,6 +634,7 @@
     "path_name": "azusa_swimsuit",
     "base_name": "アズサ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -587,6 +645,7 @@
     "path_name": "mashiro_swimsuit",
     "base_name": "マシロ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -597,6 +656,7 @@
     "path_name": "tsurugi_swimsuit",
     "base_name": "ツルギ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -607,6 +667,7 @@
     "path_name": "hifumi_swimsuit",
     "base_name": "ヒフミ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -617,6 +678,7 @@
     "path_name": "hina_swimsuit",
     "base_name": "ヒナ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -627,6 +689,7 @@
     "path_name": "iori_swimsuit",
     "base_name": "イオリ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -637,6 +700,7 @@
     "path_name": "izumi_swimsuit",
     "base_name": "イズミ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -647,6 +711,7 @@
     "path_name": "shiroko_cycling",
     "base_name": "シロコ",
     "costume": "ライディング",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -657,6 +722,7 @@
     "path_name": "shun_small",
     "base_name": "シュン",
     "costume": "幼女",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -667,6 +733,7 @@
     "path_name": "kirino",
     "base_name": "キリノ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -677,6 +744,7 @@
     "path_name": "saya_casual",
     "base_name": "サヤ",
     "costume": "私服",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -687,6 +755,7 @@
     "path_name": "neru_bunnygirl",
     "base_name": "ネル",
     "costume": "バニーガール",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -697,6 +766,7 @@
     "path_name": "karin_bunnygirl",
     "base_name": "カリン",
     "costume": "バニーガール",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -707,6 +777,7 @@
     "path_name": "asuna_bunnygirl",
     "base_name": "アスナ",
     "costume": "バニーガール",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -717,6 +788,7 @@
     "path_name": "natsu",
     "base_name": "ナツ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -727,6 +799,7 @@
     "path_name": "mari",
     "base_name": "マリー",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -737,6 +810,7 @@
     "path_name": "hatsune_miku",
     "base_name": "初音ミク",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -747,6 +821,7 @@
     "path_name": "ako",
     "base_name": "アコ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -757,6 +832,7 @@
     "path_name": "cherino_onsen",
     "base_name": "チェリノ",
     "costume": "温泉",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -767,6 +843,7 @@
     "path_name": "chinatsu_onsen",
     "base_name": "チナツ",
     "costume": "温泉",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -777,6 +854,7 @@
     "path_name": "tomoe",
     "base_name": "トモエ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -787,6 +865,7 @@
     "path_name": "nodoka_onsen",
     "base_name": "ノドカ",
     "costume": "温泉",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -797,6 +876,7 @@
     "path_name": "aru_newyear",
     "base_name": "アル",
     "costume": "正月",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -807,6 +887,7 @@
     "path_name": "mutsuki_newyear",
     "base_name": "ムツキ",
     "costume": "正月",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -817,6 +898,7 @@
     "path_name": "serika_newyear",
     "base_name": "セリカ",
     "costume": "正月",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -827,6 +909,7 @@
     "path_name": "wakamo",
     "base_name": "ワカモ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -837,6 +920,7 @@
     "path_name": "fubuki",
     "base_name": "フブキ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -847,6 +931,7 @@
     "path_name": "sena",
     "base_name": "セナ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -857,6 +942,7 @@
     "path_name": "chihiro",
     "base_name": "チヒロ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -867,6 +953,7 @@
     "path_name": "mimori",
     "base_name": "ミモリ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -877,6 +964,7 @@
     "path_name": "ui",
     "base_name": "ウイ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -887,6 +975,7 @@
     "path_name": "hinata",
     "base_name": "ヒナタ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -897,6 +986,7 @@
     "path_name": "marina",
     "base_name": "マリナ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -907,6 +997,7 @@
     "path_name": "miyako",
     "base_name": "ミヤコ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -917,6 +1008,7 @@
     "path_name": "saki",
     "base_name": "サキ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -927,6 +1019,7 @@
     "path_name": "miyu",
     "base_name": "ミユ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -937,6 +1030,7 @@
     "path_name": "kaede",
     "base_name": "カエデ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -947,6 +1041,7 @@
     "path_name": "iroha",
     "base_name": "イロハ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -957,6 +1052,7 @@
     "path_name": "michiru",
     "base_name": "ミチル",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -967,6 +1063,7 @@
     "path_name": "tsukuyo",
     "base_name": "ツクヨ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -977,6 +1074,7 @@
     "path_name": "misaki",
     "base_name": "ミサキ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -987,6 +1085,7 @@
     "path_name": "hiyori",
     "base_name": "ヒヨリ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -997,6 +1096,7 @@
     "path_name": "atsuko",
     "base_name": "アツコ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1007,6 +1107,7 @@
     "path_name": "wakamo_swimsuit",
     "base_name": "ワカモ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1017,6 +1118,7 @@
     "path_name": "nonomi_swimsuit",
     "base_name": "ノノミ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1027,6 +1129,7 @@
     "path_name": "ayane_swimsuit",
     "base_name": "アヤネ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1037,6 +1140,7 @@
     "path_name": "hoshino_swimsuit",
     "base_name": "ホシノ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1047,6 +1151,7 @@
     "path_name": "shizuko_swimsuit",
     "base_name": "シズコ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1057,6 +1162,7 @@
     "path_name": "izuna_swimsuit",
     "base_name": "イズナ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1067,6 +1173,7 @@
     "path_name": "chise_swimsuit",
     "base_name": "チセ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1077,6 +1184,7 @@
     "path_name": "saori",
     "base_name": "サオリ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1087,6 +1195,7 @@
     "path_name": "moe",
     "base_name": "モエ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1097,6 +1206,7 @@
     "path_name": "kazusa",
     "base_name": "カズサ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1107,6 +1217,7 @@
     "path_name": "kokona",
     "base_name": "ココナ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1117,6 +1228,7 @@
     "path_name": "utaha_cheerleader",
     "base_name": "ウタハ",
     "costume": "応援団",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1127,6 +1239,7 @@
     "path_name": "noa",
     "base_name": "ノア",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1137,6 +1250,7 @@
     "path_name": "hibiki_cheerleader",
     "base_name": "ヒビキ",
     "costume": "応援団",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1147,6 +1261,7 @@
     "path_name": "akane_bunnygirl",
     "base_name": "アカネ",
     "costume": "バニーガール",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1157,6 +1272,7 @@
     "path_name": "yuuka_track",
     "base_name": "ユウカ",
     "costume": "体操服",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1167,6 +1283,7 @@
     "path_name": "mari_track",
     "base_name": "マリー",
     "costume": "体操服",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1177,6 +1294,7 @@
     "path_name": "hasumi_track",
     "base_name": "ハスミ",
     "costume": "体操服",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1187,6 +1305,7 @@
     "path_name": "himari",
     "base_name": "ヒマリ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1197,6 +1316,7 @@
     "path_name": "shigure",
     "base_name": "シグレ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1207,6 +1327,7 @@
     "path_name": "serina_christmas",
     "base_name": "セリナ",
     "costume": "クリスマス",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1217,6 +1338,7 @@
     "path_name": "hanae_christmas",
     "base_name": "ハナエ",
     "costume": "クリスマス",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1227,6 +1349,7 @@
     "path_name": "haruna_newyear",
     "base_name": "ハルナ",
     "costume": "正月",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1237,6 +1360,7 @@
     "path_name": "fuuka_newyear",
     "base_name": "フウカ",
     "costume": "正月",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1247,6 +1371,7 @@
     "path_name": "junko_newyear",
     "base_name": "ジュンコ",
     "costume": "正月",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1257,6 +1382,7 @@
     "path_name": "mine",
     "base_name": "ミネ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1267,6 +1393,7 @@
     "path_name": "mika",
     "base_name": "ミカ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1277,6 +1404,7 @@
     "path_name": "megu",
     "base_name": "メグ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1287,6 +1415,7 @@
     "path_name": "kanna",
     "base_name": "カンナ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1297,6 +1426,7 @@
     "path_name": "sakurako",
     "base_name": "サクラコ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1307,6 +1437,7 @@
     "path_name": "toki",
     "base_name": "トキ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1317,6 +1448,7 @@
     "path_name": "nagisa",
     "base_name": "ナギサ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1327,6 +1459,7 @@
     "path_name": "koyuki",
     "base_name": "コユキ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1337,6 +1470,7 @@
     "path_name": "kayoko_newyear",
     "base_name": "カヨコ",
     "costume": "正月",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1347,6 +1481,7 @@
     "path_name": "haruka_newyear",
     "base_name": "ハルカ",
     "costume": "正月",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1357,6 +1492,7 @@
     "path_name": "kaho",
     "base_name": "カホ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1367,6 +1503,7 @@
     "path_name": "aris_maid",
     "base_name": "アリス",
     "costume": "メイド",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1377,6 +1514,7 @@
     "path_name": "toki_bunnygirl",
     "base_name": "トキ",
     "costume": "バニーガール",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1387,6 +1525,7 @@
     "path_name": "yuzu_maid",
     "base_name": "ユズ",
     "costume": "メイド",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1397,6 +1536,7 @@
     "path_name": "reisa",
     "base_name": "レイサ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1407,6 +1547,7 @@
     "path_name": "rumi",
     "base_name": "ルミ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1417,6 +1558,7 @@
     "path_name": "mina",
     "base_name": "ミナ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1427,6 +1569,7 @@
     "path_name": "minori",
     "base_name": "ミノリ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1437,6 +1580,7 @@
     "path_name": "miyako_swimsuit",
     "base_name": "ミヤコ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1447,6 +1591,7 @@
     "path_name": "saki_swimsuit",
     "base_name": "サキ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1457,6 +1602,7 @@
     "path_name": "miyu_swimsuit",
     "base_name": "ミユ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1467,6 +1613,7 @@
     "path_name": "shiroko_swimsuit",
     "base_name": "シロコ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1477,6 +1624,7 @@
     "path_name": "ui_swimsuit",
     "base_name": "ウイ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1487,6 +1635,7 @@
     "path_name": "hinata_swimsuit",
     "base_name": "ヒナタ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1497,6 +1646,7 @@
     "path_name": "koharu_swimsuit",
     "base_name": "コハル",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1507,6 +1657,7 @@
     "path_name": "hanako_swimsuit",
     "base_name": "ハナコ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1517,6 +1668,7 @@
     "path_name": "mimori_swimsuit",
     "base_name": "ミモリ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1527,6 +1679,7 @@
     "path_name": "meru",
     "base_name": "メル",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1537,6 +1690,7 @@
     "path_name": "momiji",
     "base_name": "モミジ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1547,6 +1701,7 @@
     "path_name": "kotori_cheerleader",
     "base_name": "コトリ",
     "costume": "応援団",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1557,6 +1712,7 @@
     "path_name": "haruna_track",
     "base_name": "ハルナ",
     "costume": "体操服",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1567,6 +1723,7 @@
     "path_name": "ichika",
     "base_name": "イチカ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1577,6 +1734,7 @@
     "path_name": "kasumi",
     "base_name": "カスミ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1587,6 +1745,7 @@
     "path_name": "shigure_onsen",
     "base_name": "シグレ",
     "costume": "温泉",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1597,6 +1756,7 @@
     "path_name": "misaka_mikoto",
     "base_name": "御坂美琴",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1607,6 +1767,7 @@
     "path_name": "shokuhou_misaki",
     "base_name": "食蜂操祈",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1617,6 +1778,7 @@
     "path_name": "saten_ruiko",
     "base_name": "佐天涙子",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1627,6 +1789,7 @@
     "path_name": "yukari",
     "base_name": "ユカリ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1637,6 +1800,7 @@
     "path_name": "renge",
     "base_name": "レンゲ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1647,6 +1811,7 @@
     "path_name": "kikyou",
     "base_name": "キキョウ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1657,6 +1822,7 @@
     "path_name": "eimi_swimsuit",
     "base_name": "エイミ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1667,6 +1833,7 @@
     "path_name": "kotama_camp",
     "base_name": "コタマ",
     "costume": "キャンプ",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1677,6 +1844,7 @@
     "path_name": "hare_camp",
     "base_name": "ハレ",
     "costume": "キャンプ",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1687,6 +1855,7 @@
     "path_name": "ako_dress",
     "base_name": "アコ",
     "costume": "ドレス",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1697,6 +1866,7 @@
     "path_name": "ibuki",
     "base_name": "イブキ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1707,6 +1877,7 @@
     "path_name": "makoto",
     "base_name": "マコト",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1717,6 +1888,7 @@
     "path_name": "hina_dress",
     "base_name": "ヒナ",
     "costume": "ドレス",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1727,6 +1899,7 @@
     "path_name": "kayoko_dress",
     "base_name": "カヨコ",
     "costume": "ドレス",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1737,6 +1910,7 @@
     "path_name": "aru_dress",
     "base_name": "アル",
     "costume": "ドレス",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1747,6 +1921,7 @@
     "path_name": "akari_newyear",
     "base_name": "アカリ",
     "costume": "正月",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1757,6 +1932,7 @@
     "path_name": "umika",
     "base_name": "ウミカ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1767,6 +1943,7 @@
     "path_name": "tsubaki_guide",
     "base_name": "ツバキ",
     "costume": "ガイド",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1777,6 +1954,7 @@
     "path_name": "kazusa_band",
     "base_name": "カズサ",
     "costume": "バンド",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1787,6 +1965,7 @@
     "path_name": "yoshimi_band",
     "base_name": "ヨシミ",
     "costume": "バンド",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1797,6 +1976,7 @@
     "path_name": "airi_band",
     "base_name": "アイリ",
     "costume": "バンド",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1807,6 +1987,7 @@
     "path_name": "kirara",
     "base_name": "キララ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1817,6 +1998,7 @@
     "path_name": "momoi_maid",
     "base_name": "モモイ",
     "costume": "メイド",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1827,6 +2009,7 @@
     "path_name": "midori_maid",
     "base_name": "ミドリ",
     "costume": "メイド",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1837,6 +2020,7 @@
     "path_name": "serika_swimsuit",
     "base_name": "セリカ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1847,6 +2031,7 @@
     "path_name": "kanna_swimsuit",
     "base_name": "カンナ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1857,6 +2042,7 @@
     "path_name": "fubuki_swimsuit",
     "base_name": "フブキ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1867,6 +2053,7 @@
     "path_name": "kirino_swimsuit",
     "base_name": "キリノ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1877,6 +2064,7 @@
     "path_name": "moe_swimsuit",
     "base_name": "モエ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1887,6 +2075,7 @@
     "path_name": "hoshino_battle_tank",
     "base_name": "ホシノ",
     "costume": "臨戦",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1897,6 +2086,7 @@
     "path_name": "hoshino_battle_dealer",
     "base_name": "ホシノ",
     "costume": "臨戦",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1907,6 +2097,7 @@
     "path_name": "shiroko_terror",
     "base_name": "シロコ＊テラー",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1917,6 +2108,7 @@
     "path_name": "atsuko_swimsuit",
     "base_name": "アツコ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1927,6 +2119,7 @@
     "path_name": "saori_swimsuit",
     "base_name": "サオリ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1937,6 +2130,7 @@
     "path_name": "hiyori_swimsuit",
     "base_name": "ヒヨリ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1947,6 +2141,7 @@
     "path_name": "marina_qipao",
     "base_name": "マリナ",
     "costume": "チーパオ",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1957,6 +2152,7 @@
     "path_name": "tomoe_qipao",
     "base_name": "トモエ",
     "costume": "チーパオ",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1967,6 +2163,7 @@
     "path_name": "reijo",
     "base_name": "レイジョ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1977,6 +2174,7 @@
     "path_name": "kisaki",
     "base_name": "キサキ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -1987,6 +2185,7 @@
     "path_name": "mari_idol",
     "base_name": "マリー",
     "costume": "アイドル",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -1997,6 +2196,7 @@
     "path_name": "sakurako_idol",
     "base_name": "サクラコ",
     "costume": "アイドル",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2007,6 +2207,7 @@
     "path_name": "mine_idol",
     "base_name": "ミネ",
     "costume": "アイドル",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2017,6 +2218,7 @@
     "path_name": "chiaki",
     "base_name": "チアキ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2027,6 +2229,7 @@
     "path_name": "satsuki",
     "base_name": "サツキ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2037,6 +2240,7 @@
     "path_name": "yuuka_pajama",
     "base_name": "ユウカ",
     "costume": "パジャマ",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2047,6 +2251,7 @@
     "path_name": "noa_pajama",
     "base_name": "ノア",
     "costume": "パジャマ",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2057,6 +2262,7 @@
     "path_name": "seia",
     "base_name": "セイア",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2067,6 +2273,7 @@
     "path_name": "asuna_uniform",
     "base_name": "アスナ",
     "costume": "制服",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2077,6 +2284,7 @@
     "path_name": "karin_uniform",
     "base_name": "カリン",
     "costume": "制服",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2087,6 +2295,7 @@
     "path_name": "neru_uniform",
     "base_name": "ネル",
     "costume": "制服",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2097,6 +2306,7 @@
     "path_name": "rio",
     "base_name": "リオ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2107,6 +2317,7 @@
     "path_name": "maki_camp",
     "base_name": "マキ",
     "costume": "キャンプ",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2117,6 +2328,7 @@
     "path_name": "sena_casual",
     "base_name": "セナ",
     "costume": "私服",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2127,6 +2339,7 @@
     "path_name": "juri_parttime",
     "base_name": "ジュリ",
     "costume": "アルバイト",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2137,6 +2350,7 @@
     "path_name": "izumi_newyear",
     "base_name": "イズミ",
     "costume": "正月",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2147,6 +2361,7 @@
     "path_name": "rei",
     "base_name": "レイ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2157,6 +2372,7 @@
     "path_name": "sumire_parttime",
     "base_name": "スミレ",
     "costume": "アルバイト",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2167,6 +2383,7 @@
     "path_name": "saori_dress",
     "base_name": "サオリ",
     "costume": "ドレス",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2177,6 +2394,7 @@
     "path_name": "hikari",
     "base_name": "ヒカリ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2187,6 +2405,7 @@
     "path_name": "nozomi",
     "base_name": "ノゾミ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2197,6 +2416,7 @@
     "path_name": "aoba",
     "base_name": "アオバ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2207,6 +2427,7 @@
     "path_name": "pina_guide",
     "base_name": "フィーナ",
     "costume": "ガイド",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2217,6 +2438,7 @@
     "path_name": "nagusa",
     "base_name": "ナグサ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2227,6 +2449,7 @@
     "path_name": "niya",
     "base_name": "ニヤ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2237,6 +2460,7 @@
     "path_name": "natsu_band",
     "base_name": "ナツ",
     "costume": "バンド",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2247,6 +2471,7 @@
     "path_name": "yukari_swimsuit",
     "base_name": "ユカリ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2257,6 +2482,7 @@
     "path_name": "renge_swimsuit",
     "base_name": "レンゲ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2267,6 +2493,7 @@
     "path_name": "kikyou_swimsuit",
     "base_name": "キキョウ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2277,6 +2504,7 @@
     "path_name": "seia_swimsuit",
     "base_name": "セイア",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2287,6 +2515,7 @@
     "path_name": "hasumi_swimsuit",
     "base_name": "ハスミ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2297,6 +2526,7 @@
     "path_name": "ichika_swimsuit",
     "base_name": "イチカ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2307,6 +2537,7 @@
     "path_name": "nagisa_swimsuit",
     "base_name": "ナギサ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2317,6 +2548,7 @@
     "path_name": "mika_swimsuit",
     "base_name": "ミカ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2327,6 +2559,7 @@
     "path_name": "eri",
     "base_name": "エリ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2337,6 +2570,7 @@
     "path_name": "kanoe",
     "base_name": "カノエ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2347,6 +2581,7 @@
     "path_name": "misaki_swimsuit",
     "base_name": "ミサキ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2357,6 +2592,7 @@
     "path_name": "miyo",
     "base_name": "ミヨ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2367,6 +2603,7 @@
     "path_name": "fuyu",
     "base_name": "フユ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2377,6 +2614,7 @@
     "path_name": "ritsu",
     "base_name": "リツ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2387,6 +2625,7 @@
     "path_name": "reisa_magical",
     "base_name": "レイサ",
     "costume": "マジカル",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2397,6 +2636,7 @@
     "path_name": "suzumi_magical",
     "base_name": "スズミ",
     "costume": "マジカル",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2407,6 +2647,7 @@
     "path_name": "rabu",
     "base_name": "ラブ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2417,6 +2658,7 @@
     "path_name": "subaru",
     "base_name": "スバル",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2427,6 +2669,7 @@
     "path_name": "takane",
     "base_name": "タカネ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2437,6 +2680,7 @@
     "path_name": "yakumo",
     "base_name": "ヤクモ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2447,6 +2691,7 @@
     "path_name": "tsukuyo_dress",
     "base_name": "ツクヨ",
     "costume": "ドレス",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2457,6 +2702,7 @@
     "path_name": "michiru_dress",
     "base_name": "ミチル",
     "costume": "ドレス",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2467,6 +2713,7 @@
     "path_name": "rio_battle",
     "base_name": "リオ",
     "costume": "臨戦",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2477,6 +2724,7 @@
     "path_name": "toki_battle",
     "base_name": "トキ",
     "costume": "臨戦",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2487,6 +2735,7 @@
     "path_name": "himari_battle",
     "base_name": "ヒマリ",
     "costume": "臨戦",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2497,6 +2746,7 @@
     "path_name": "aris_battle",
     "base_name": "アリス",
     "costume": "臨戦",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2507,6 +2757,7 @@
     "path_name": "kei",
     "base_name": "ケイ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2517,6 +2768,7 @@
     "path_name": "eimi_battle",
     "base_name": "エイミ",
     "costume": "臨戦",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2527,6 +2779,7 @@
     "path_name": "yuzu_battle",
     "base_name": "ユズ",
     "costume": "臨戦",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2537,6 +2790,7 @@
     "path_name": "koyuki_pajama",
     "base_name": "コユキ",
     "costume": "パジャマ",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2547,6 +2801,7 @@
     "path_name": "konoka",
     "base_name": "コノカ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2557,6 +2812,7 @@
     "path_name": "rena",
     "base_name": "レナ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2567,6 +2823,7 @@
     "path_name": "akane_uniform",
     "base_name": "アカネ",
     "costume": "制服",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2577,6 +2834,7 @@
     "path_name": "niko",
     "base_name": "ニコ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2587,6 +2845,7 @@
     "path_name": "kurumi",
     "base_name": "クルミ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2597,6 +2856,7 @@
     "path_name": "otogi",
     "base_name": "オトギ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2607,6 +2867,7 @@
     "path_name": "erika",
     "base_name": "エリカ",
     "costume": "",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2617,6 +2878,7 @@
     "path_name": "haruka_dress",
     "base_name": "ハルカ",
     "costume": "ドレス",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2627,6 +2889,7 @@
     "path_name": "mutsuki_dress",
     "base_name": "ムツキ",
     "costume": "ドレス",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2637,6 +2900,7 @@
     "path_name": "nagusa_swimsuit",
     "base_name": "ナグサ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2647,6 +2911,7 @@
     "path_name": "shun_swimsuit",
     "base_name": "シュン",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2657,6 +2922,7 @@
     "path_name": "shunling_swimsuit",
     "base_name": "シュン",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2667,6 +2933,7 @@
     "path_name": "kisaki_swimsuit",
     "base_name": "キサキ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2677,6 +2944,7 @@
     "path_name": "makoto_swimsuit",
     "base_name": "マコト",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2687,6 +2955,7 @@
     "path_name": "satsuki_swimsuit",
     "base_name": "サツキ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2697,6 +2966,7 @@
     "path_name": "chiaki_swimsuit",
     "base_name": "チアキ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2707,6 +2977,7 @@
     "path_name": "iroha_swimsuit",
     "base_name": "イロハ",
     "costume": "水着",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2717,6 +2988,7 @@
     "path_name": "ibuki_swimsuit",
     "base_name": "イブキ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   },
   {
@@ -2727,6 +2999,7 @@
     "path_name": "kokoro",
     "base_name": "ココロ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2737,6 +3010,7 @@
     "path_name": "kotone",
     "base_name": "コトネ",
     "costume": "",
+    "role": "STRIKER",
     "icon_copied": true
   },
   {
@@ -2747,6 +3021,7 @@
     "path_name": "kasumi_swimsuit",
     "base_name": "カスミ",
     "costume": "水着",
+    "role": "SPECIAL",
     "icon_copied": true
   }
 ]

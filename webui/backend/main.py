@@ -25,6 +25,7 @@ from ba_exsim.core.state import State
 from ba_exsim.specs.alice_battle import AliceBattleSpec
 from ba_exsim.specs.generic import GenericSpec
 from ba_exsim.specs.hanako_swimsuit import HanakoSwimsuitSpec
+from ba_exsim.specs.ibuki_swimsuit import IbukiSwimsuitSpec
 from ba_exsim.specs.rio import RioCopySpec, RioSpec
 # main.py の app 定義部分
 app = FastAPI(title="BA ExSkill Simulator API", root_path="/exsim")
@@ -42,6 +43,7 @@ sessions: Dict[str, Dict] = {}
 class BuiltinEntry(NamedTuple):
     label: str
     spec: type
+    role: Optional[str] = None  # "STRIKER" / "SPECIAL" (character_library由来、不明ならNone)
 
 
 BUILTINS: Dict[str, BuiltinEntry] = {
@@ -65,6 +67,7 @@ BUILTINS: Dict[str, BuiltinEntry] = {
     "Hoshino_Swimsuit":BuiltinEntry("ホシノ(水着)",   GenericSpec),
     "Hoshino_Battle_Attack": BuiltinEntry("ホシノ(臨戦)[攻撃型]",   GenericSpec),
     "Hoshino_Battle_Defence": BuiltinEntry("ホシノ(臨戦)[防御型]",   GenericSpec),
+    "Ibuki_Swimsuit":  BuiltinEntry("イブキ(水着)",     IbukiSwimsuitSpec),
     "Mine":            BuiltinEntry("ミネ",           GenericSpec),
     "Miyako":          BuiltinEntry("ミヤコ",         GenericSpec),
     "Miyako_Swimsuit": BuiltinEntry("ミヤコ(水着)",   GenericSpec),
@@ -84,28 +87,44 @@ def _load_generated_builtins() -> Dict[str, BuiltinEntry]:
     with _LIBRARY_PATH.open(encoding="utf-8") as f:
         entries = json.load(f)
     return {
-        e["key"]: BuiltinEntry(e["label"], GenericSpec)
+        e["key"]: BuiltinEntry(e["label"], GenericSpec, role=e.get("role"))
         for e in entries
         if e.get("key") and e.get("label")
     }
 
 
 # 手動でカスタムSpecを割り当てた上のエントリを優先し、生成分で不足を補う
-BUILTINS = {**_load_generated_builtins(), **BUILTINS}
+_GENERATED_BUILTINS = _load_generated_builtins()
+BUILTINS = {**_GENERATED_BUILTINS, **BUILTINS}
 
-NEEDS_TARGET: List[str] = ["Rio", "Alice_Battle"]
+# 手動定義24件にはroleが無いため、生成データ側からroleだけを補完する
+for _key, _entry in list(BUILTINS.items()):
+    if _entry.role is None and _key in _GENERATED_BUILTINS:
+        BUILTINS[_key] = _entry._replace(role=_GENERATED_BUILTINS[_key].role)
+
+NEEDS_TARGET: List[str] = ["Rio", "Alice_Battle", "Ibuki_Swimsuit"]
 
 
 def build_specs(characters: List[str]) -> List[CharacterSpec]:
     specs: List[CharacterSpec] = []
     seen: set = set()
+    character_roles = {
+        name: BUILTINS[name].role
+        for name in characters
+        if name in BUILTINS and BUILTINS[name].role
+    }
     for name in characters:
         if name in seen:
             continue
         seen.add(name)
         if name in BUILTINS:
             spec_cls = BUILTINS[name].spec
-            specs.append(spec_cls(name) if spec_cls is GenericSpec else spec_cls())
+            if spec_cls is GenericSpec:
+                specs.append(spec_cls(name))
+            elif spec_cls is IbukiSwimsuitSpec:
+                specs.append(spec_cls(character_roles=character_roles))
+            else:
+                specs.append(spec_cls())
         else:
             specs.append(GenericSpec(name))
     if "Rio" in seen:
@@ -146,7 +165,7 @@ class PlayRequest(BaseModel):
 def get_specs():
     return {
         "builtin": [
-            {"value": k, "label": v.label}
+            {"value": k, "label": v.label, "role": v.role}
             for k, v in BUILTINS.items()
         ],
         "needs_target": NEEDS_TARGET,

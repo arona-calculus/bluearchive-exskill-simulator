@@ -151,6 +151,7 @@ def build(
             "path_name": path_name,
             "base_name": match.get("base_name") if match else None,
             "costume": match.get("costume") if match else None,
+            "role": match.get("role") if match else None,
             "icon_copied": icon_copied,
         }
         library.append(record)
