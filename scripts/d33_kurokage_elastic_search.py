@@ -1,3 +1,12 @@
+"""
+d33 クロカゲ: ハナコ(水着)/ヒカリ/アル/セイア/ミチル/リオ編成の
+有効なEXスキル使用順序を総当たり(順列探索)で見つけるためのスクリプト。
+
+pytestの正規テストではない(アサーションを持たず、各順列を実行して
+例外の有無を表示するだけ)。実行方法:
+  uv run python scripts/d33_kurokage_elastic_search.py
+"""
+
 from __future__ import annotations
 import itertools
 from ba_exsim.core.simulator import Simulator
