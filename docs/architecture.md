@@ -64,11 +64,27 @@ Registry + Engine の配線を隠すファサード。`initialize_state` / `play
 
 固有ロジックを持つのはこの4体のみで、それ以外は全て `GenericSpec`
 （挙動は常にサイクルするだけだが、`cost`/`role` は後述の `character_library` 由来の実データを持つ）。
-`rio.py` × `hanako_swimsuit.py` の組み合わせテスト（`test_rio_hanako.py`, `test_kurokage_tl.py`）
+`rio.py` × `hanako_swimsuit.py` の組み合わせシナリオ（`rio_hanako/`, `kurokage/`）
 まで揃っており、フック機構が複数生徒の相互作用（パッシブ誘発・代理実行・割り込みドローの重なり）
-に耐えることは検証済み。`test_kurokage_tl.py` は特定ボス（黒影/Kurokage）の実際のTLをそのまま
-再現する回帰テスト。似た総当り探索ツール `scripts/d33_kurokage_elastic_search.py` は
+に耐えることは検証済み。`kurokage/` は特定ボス（黒影/Kurokage）の実際のTLをそのまま
+再現する回帰シナリオ。似た総当り探索ツール `scripts/d33_kurokage_elastic_search.py` は
 pytestの回帰テストではなく、TL候補を広く探索するためのスクリプトなので `tests/` には置いていない。
+
+## テストと検証データ（`tests/`）
+
+動作検証に使うデータ（編成・初期の手札+山札順・手順・各ステップの期待値）は、テストコードに直接書かず
+`tests/data/scenarios/` 以下にTOMLで置く（1ファイル = 1シナリオ）。`test_scenarios.py` が全ファイルを
+1件ずつのテストとして実行するので、**シナリオの追加はTOMLを1つ置くだけ**でよい。
+
+- 実行と照合は `tests/scenario.py`。`slot` のステップは `Simulator.play`、`card` だけのステップは
+  `Simulator.play_by_name` で実行する。消費コストは使用前の状態で評価する（webuiの `/play` と同じ規約）。
+- 生徒のSpecは、固有Specを持つ4体（`CUSTOM_SPECS`）以外は `GenericSpec`。コスト・役割は
+  シナリオの `[overrides.<生徒>]` で与え、生成データ（`characters.json`）には依存しない（再生成しても壊れない）。
+- 期待値は書いた項目だけを照合する（`cards` / `hand` / `deck` / `hand_excludes` / `env` / `env_none` /
+  `cost` / `cost_unknown` / `error`）。TOMLにはnullが無いので、Noneの検査は `env_none` / `cost_unknown` で書く。
+  未知のキーは書き間違いとみなしてロード時にエラーにする。
+- 全ステップ共通の不変条件として、カードの消失・重複が無いこと（代理カードは元の生徒に戻して比較）を毎回検査する。
+- 独自のSpecクラスが必要なテスト（`test_hanako.py` の `MockProxySpec`）や、`State` 単体のテストは Python のまま残す。
 
 ## キャラクターライブラリ生成（`webui/backend/character_library/`）
 

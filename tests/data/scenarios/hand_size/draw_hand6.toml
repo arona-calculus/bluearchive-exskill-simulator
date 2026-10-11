@@ -1,0 +1,13 @@
+title = "hand_size=6 で手札中央のカードを使ってもカードが消えない"
+description = """
+共有リンクで報告された実際のバグ(hand_size=6 でヒフミを使うと、ヒナが手札からも山札からも
+消失した)の再現。山札の先頭(index=hand_size)が正しく引かれること。
+カードの消失・重複は全シナリオ共通の不変条件として scenario.py が毎ステップ検査する。
+"""
+hand_size = 6
+cards = ["Aru_Dress", "Eimi", "Haruna", "Hifumi", "Hina", "Hoshino", "Iori", "Maki", "Neru", "Izumi"]
+
+[[steps]]
+slot = 3
+card = "Hifumi"
+expect = { hand = ["Aru_Dress", "Eimi", "Haruna", "Iori", "Hina", "Hoshino"], deck = ["Maki", "Neru", "Izumi", "Hifumi"] }

@@ -1,0 +1,8 @@
+title = "GenericSpec の基本サイクル"
+description = "使ったカードは山札の末尾へ、空いたスロットには山札の先頭が入る。"
+cards = ["A", "B", "C", "D", "E", "F"]
+
+[[steps]]
+slot = 0
+card = "A"
+expect = { cards = ["D", "B", "C", "E", "F", "A"] }

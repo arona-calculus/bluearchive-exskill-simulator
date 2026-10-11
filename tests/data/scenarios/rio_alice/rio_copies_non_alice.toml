@@ -1,0 +1,24 @@
+title = "アリスが手札にいる状態でリオがアリス以外をコピーしても、チャージは変化しない"
+cards = ["Rio", "Alice_Battle", "Mutsuki", "Kayoko", "Haruka", "Hoshino"]
+env = { alice_charge = 1 }
+
+[[steps]]
+slot = 0
+card = "Rio"
+target = "Mutsuki"
+note = "リオがムツキをコピー。アリスのチャージは変化しない"
+expect = { cards = ["Rio_Copy", "Alice_Battle", "Mutsuki", "Kayoko", "Haruka", "Hoshino"], env = { rio_copy_target = "Mutsuki", alice_charge = 1 } }
+
+[[steps]]
+slot = 0
+card = "Rio_Copy"
+target = "Enemy"
+note = "Rio_Copy がムツキのEXを代理実行。リオが山札の末尾に戻り、チャージは変化しない"
+expect = { cards = ["Kayoko", "Alice_Battle", "Mutsuki", "Haruka", "Hoshino", "Rio"], env = { alice_charge = 1 }, env_none = ["rio_copy_target"] }
+
+[[steps]]
+slot = 1
+card = "Alice_Battle"
+target = "Alice_Battle"
+note = "アリス本人が自身対象: チャージ+1(2)、手札に留まる"
+expect = { cards = ["Kayoko", "Alice_Battle", "Mutsuki", "Haruka", "Hoshino", "Rio"], env = { alice_charge = 2 } }

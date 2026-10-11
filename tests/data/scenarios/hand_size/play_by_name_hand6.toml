@@ -1,0 +1,10 @@
+title = "play_by_name が実際の手札サイズで手札を探す"
+description = """
+Simulator.play_by_name は hand_size=3 決め打ちではなく、index 3 以降の手札にいるキャラも見つけられること。
+(slot を書かず card だけのステップは play_by_name で実行される。ミネは手札の index 3)
+"""
+hand_size = 6
+cards = ["Aru", "Eri", "Kisaki", "Mine", "Miyako", "Seia"]
+
+[[steps]]
+card = "Mine"

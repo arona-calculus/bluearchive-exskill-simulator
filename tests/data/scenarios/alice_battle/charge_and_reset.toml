@@ -1,0 +1,49 @@
+title = "アリス(臨戦) チャージの蓄積とリセット"
+description = """
+- 自身を対象にEXを使うとチャージが増え、手札に留まる。
+- チャージの上限は2。
+- 敵を対象にEXを使うとチャージがリセットされ、通常通りサイクルする。
+"""
+cards = ["Alice_Battle", "Aru", "Mutsuki", "Kayoko"]
+env = { alice_charge = 0 }
+
+[[steps]]
+slot = 0
+card = "Alice_Battle"
+target = "Alice_Battle"
+note = "自身対象: チャージ1、手札に留まる"
+expect = { cards = ["Alice_Battle", "Aru", "Mutsuki", "Kayoko"], env = { alice_charge = 1 } }
+
+[[steps]]
+slot = 0
+card = "Alice_Battle"
+target = "Alice_Battle"
+note = "自身対象: チャージ2(上限)"
+expect = { cards = ["Alice_Battle", "Aru", "Mutsuki", "Kayoko"], env = { alice_charge = 2 } }
+
+[[steps]]
+slot = 0
+card = "Alice_Battle"
+target = "Alice_Battle"
+note = "上限で自身対象: チャージ2のまま"
+expect = { cards = ["Alice_Battle", "Aru", "Mutsuki", "Kayoko"], env = { alice_charge = 2 } }
+
+[[steps]]
+slot = 0
+card = "Alice_Battle"
+target = "Enemy"
+note = "敵対象: チャージがリセットされ、山札の末尾へサイクル"
+expect = { cards = ["Kayoko", "Aru", "Mutsuki", "Alice_Battle"], env = { alice_charge = 0 } }
+
+[[steps]]
+slot = 0
+card = "Kayoko"
+note = "カヨコを使い、アリスを手札に戻す"
+expect = { cards = ["Alice_Battle", "Aru", "Mutsuki", "Kayoko"] }
+
+[[steps]]
+slot = 0
+card = "Alice_Battle"
+target = "Enemy"
+note = "チャージ0で敵対象: 通常通りサイクル"
+expect = { cards = ["Kayoko", "Aru", "Mutsuki", "Alice_Battle"], env = { alice_charge = 0 } }

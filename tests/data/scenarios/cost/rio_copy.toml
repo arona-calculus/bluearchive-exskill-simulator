@@ -1,0 +1,55 @@
+title = "リオ(コピー)の消費コストは「コピー元のコスト - 1」(最低0)"
+description = """
+rio_copy_target は RioCopySpec.apply_effect 自身がクリアするため、コストは使用前の状態で評価する
+(webui の play_and_record と同じ規約。scenario.py もこれに従う)。
+アル(4)→3、エリ(1)→0(負にならない)、コスト不明のキサキ→不明、の3通りを続けて確認する。
+"""
+cards = ["Rio", "Aru", "Eri", "Kisaki"]
+
+[overrides.Rio]
+cost = 2
+
+[overrides.Aru]
+cost = 4
+
+[overrides.Eri]
+cost = 1
+
+[[steps]]
+card = "Rio"
+target = "Aru"
+note = "リオ自身のコスト"
+expect = { cost = 2 }
+
+[[steps]]
+card = "Rio_Copy"
+note = "アル(4)のコピー → 3"
+expect = { cost = 3 }
+
+[[steps]]
+card = "Kisaki"
+note = "リオを手札に戻す"
+expect = { hand = ["Rio", "Aru", "Eri"] }
+
+[[steps]]
+card = "Rio"
+target = "Eri"
+
+[[steps]]
+card = "Rio_Copy"
+note = "エリ(1)のコピー → 0(負にならない)"
+expect = { cost = 0 }
+
+[[steps]]
+card = "Kisaki"
+note = "リオを手札に戻す"
+expect = { hand = ["Rio", "Aru", "Eri"] }
+
+[[steps]]
+card = "Rio"
+target = "Kisaki"
+
+[[steps]]
+card = "Rio_Copy"
+note = "コスト不明のキサキのコピー → 不明"
+expect = { cost_unknown = true }

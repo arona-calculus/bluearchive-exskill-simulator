@@ -1,0 +1,16 @@
+title = "イブキ(水着)のお友達は STRIKER 同士なら指定できる"
+cards = ["Ibuki_Swimsuit", "Aru", "Eri", "Kisaki", "Unknown_Custom"]
+
+[overrides.Aru]
+role = "STRIKER"
+
+[overrides.Kisaki]
+role = "STRIKER"
+
+[overrides.Eri]
+role = "SPECIAL"
+
+[[steps]]
+card = "Ibuki_Swimsuit"
+target = "Aru,Kisaki"
+expect = { env = { ibuki_friends = ["Aru", "Kisaki"] } }

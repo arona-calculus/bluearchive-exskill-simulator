@@ -1,0 +1,52 @@
+title = "リオ × 水着ハナコ"
+description = """
+- リオがハナコを対象にEXを使うと Rio_Copy に変身する。
+- ハナコが手札にいる場合、Rio_Copy がハナコのEXを代理実行してもゲージは増減しない。
+- 代理実行のあと Rio_Copy は正常にサイクルし、リオが山札の末尾に戻る。
+- ハナコ本人はゲージ100以上でEXを使うと、ゲージを消費して手札に留まる。
+"""
+cards = ["Rio", "Hanako_Swimsuit", "Aru", "Kisaki", "Kikyou", "Sena"]
+env = { hanako_gauge = 0 }
+
+[[steps]]
+slot = 2
+card = "Aru"
+note = "パッシブでゲージ40"
+expect = { cards = ["Rio", "Hanako_Swimsuit", "Kisaki", "Kikyou", "Sena", "Aru"], env = { hanako_gauge = 40 } }
+
+[[steps]]
+slot = 0
+card = "Rio"
+target = "Hanako_Swimsuit"
+note = "リオがハナコをコピーして Rio_Copy に変身。リオは代理カードではないのでパッシブでゲージ80"
+expect = { cards = ["Rio_Copy", "Hanako_Swimsuit", "Kisaki", "Kikyou", "Sena", "Aru"], env = { rio_copy_target = "Hanako_Swimsuit", hanako_gauge = 80 } }
+
+[[steps]]
+slot = 0
+card = "Rio_Copy"
+note = "ハナコが手札にいてゲージ80<100: ゲージ増減なし。リオが山札の末尾に戻る"
+expect = { cards = ["Kikyou", "Hanako_Swimsuit", "Kisaki", "Sena", "Aru", "Rio"], env = { hanako_gauge = 80 }, env_none = ["rio_copy_target"] }
+
+[[steps]]
+slot = 0
+card = "Kikyou"
+note = "ゲージ120"
+expect = { cards = ["Sena", "Hanako_Swimsuit", "Kisaki", "Aru", "Rio", "Kikyou"], env = { hanako_gauge = 120 } }
+
+[[steps]]
+slot = 0
+card = "Sena"
+note = "ゲージ160"
+expect = { cards = ["Aru", "Hanako_Swimsuit", "Kisaki", "Rio", "Kikyou", "Sena"], env = { hanako_gauge = 160 } }
+
+[[steps]]
+slot = 1
+card = "Hanako_Swimsuit"
+note = "ゲージ160: 100消費して手札に留まる(60)"
+expect = { cards = ["Aru", "Hanako_Swimsuit", "Kisaki", "Rio", "Kikyou", "Sena"], env = { hanako_gauge = 60 } }
+
+[[steps]]
+slot = 1
+card = "Hanako_Swimsuit"
+note = "ゲージ60<100: 通常サイクル"
+expect = { cards = ["Aru", "Rio", "Kisaki", "Kikyou", "Sena", "Hanako_Swimsuit"], env = { hanako_gauge = 60 } }

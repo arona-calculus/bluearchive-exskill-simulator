@@ -47,7 +47,9 @@ class IbukiSwimsuitSpec(CharacterSpec):
             # EX1: お友達を指定する(最大2人、カンマ区切り、ストライカーのみ)
             new_friends = tuple(name for name in target.split(",") if name)
             non_strikers = [
-                name for name in new_friends if self.character_roles.get(name) == "SPECIAL"
+                name
+                for name in new_friends
+                if self.character_roles.get(name) == "SPECIAL"
             ]
             if non_strikers:
                 raise ValueError(

@@ -1,0 +1,65 @@
+title = "イブキ(水着)の基本挙動"
+description = """
+1. EX1でお友達2人を指定すると、イブキ自身は次のドローで即座に手札へ戻る(手札の並びが変わらない)。
+2. お友達がカードを使うたびに貝殻を3個獲得する。
+3. 貝殻が12個に達すると「貝殻のお花」を獲得し(貝殻は0に戻る)、以降は貝殻が増えない。
+4. お友達以外のカードを使っても貝殻は増えない。
+5. EX2(指定済み)の使用では状態が変わらず、通常通りサイクルする。
+"""
+cards = ["Ibuki_Swimsuit", "Aru", "Eri", "Kisaki", "Mine", "Miyako"]
+
+[[steps]]
+card = "Ibuki_Swimsuit"
+target = "Aru,Eri"
+note = "EX1: アルとエリをお友達に指定。イブキは即座に手札へ戻る"
+expect = { cards = ["Ibuki_Swimsuit", "Aru", "Eri", "Kisaki", "Mine", "Miyako"], env = { ibuki_friends = ["Aru", "Eri"], ibuki_shells = 0, ibuki_shell_flower = false } }
+
+[[steps]]
+card = "Aru"
+note = "お友達: 貝殻3"
+expect = { env = { ibuki_shells = 3 } }
+
+[[steps]]
+card = "Eri"
+note = "お友達: 貝殻6"
+expect = { env = { ibuki_shells = 6 } }
+
+[[steps]]
+card = "Kisaki"
+note = "お友達以外: 貝殻は増えない"
+expect = { env = { ibuki_shells = 6 } }
+
+[[steps]]
+card = "Miyako"
+note = "お友達以外: 貝殻は増えない"
+expect = { env = { ibuki_shells = 6 } }
+
+[[steps]]
+card = "Aru"
+note = "お友達: 貝殻9"
+expect = { env = { ibuki_shells = 9 } }
+
+[[steps]]
+card = "Eri"
+note = "お友達: 貝殻12に達してお花を獲得し、貝殻は0に戻る"
+expect = { env = { ibuki_shells = 0, ibuki_shell_flower = true } }
+
+[[steps]]
+card = "Kisaki"
+note = "お友達以外"
+expect = { env = { ibuki_shells = 0, ibuki_shell_flower = true } }
+
+[[steps]]
+card = "Miyako"
+note = "お友達以外"
+expect = { env = { ibuki_shells = 0, ibuki_shell_flower = true } }
+
+[[steps]]
+card = "Aru"
+note = "お花の獲得後は、お友達が使っても貝殻は増えない"
+expect = { env = { ibuki_shells = 0, ibuki_shell_flower = true } }
+
+[[steps]]
+card = "Ibuki_Swimsuit"
+note = "EX2: お友達は変わらず、通常のサイクルで手札から抜ける"
+expect = { env = { ibuki_friends = ["Aru", "Eri"] }, hand_excludes = ["Ibuki_Swimsuit"] }

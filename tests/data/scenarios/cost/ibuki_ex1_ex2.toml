@@ -1,0 +1,23 @@
+title = "イブキ(水着)のコストは EX1(お友達未指定)と EX2(指定済み)で切り替わる"
+cards = ["Ibuki_Swimsuit", "Aru", "Eri", "Kisaki"]
+
+[overrides.Ibuki_Swimsuit]
+cost = 0
+extra_cost = 3
+
+[overrides.Aru]
+role = "STRIKER"
+
+[overrides.Eri]
+role = "STRIKER"
+
+[[steps]]
+card = "Ibuki_Swimsuit"
+target = "Aru,Eri"
+note = "EX1: cost"
+expect = { cost = 0 }
+
+[[steps]]
+card = "Ibuki_Swimsuit"
+note = "EX2: extra_cost(EX1のあとイブキは即座に手札へ戻っている)"
+expect = { cost = 3 }

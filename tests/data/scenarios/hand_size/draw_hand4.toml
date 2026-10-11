@@ -1,0 +1,8 @@
+title = "hand_size=4 でもカードが消えない"
+hand_size = 4
+cards = ["Aru_Dress", "Eimi", "Haruna", "Hifumi", "Hina", "Hoshino"]
+
+[[steps]]
+slot = 3
+card = "Hifumi"
+expect = { hand = ["Aru_Dress", "Eimi", "Haruna", "Hina"], deck = ["Hoshino", "Hifumi"] }

@@ -1,0 +1,14 @@
+title = "GenericSpec は与えられたコストをそのまま返す(未指定なら不明)"
+cards = ["Aru", "Eri", "Kisaki", "Mine"]
+
+[overrides.Aru]
+cost = 4
+
+[[steps]]
+card = "Aru"
+expect = { cost = 4 }
+
+[[steps]]
+card = "Eri"
+note = "コスト未指定"
+expect = { cost_unknown = true }

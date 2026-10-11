@@ -1,0 +1,24 @@
+title = "リオ × アリス(臨戦) 条件付きで手札に留まるキャラのコピー"
+cards = ["Rio", "Alice_Battle", "Mutsuki", "Kayoko", "Haruka", "Hoshino"]
+env = { alice_charge = 0 }
+
+[[steps]]
+slot = 0
+card = "Rio"
+target = "Alice_Battle"
+note = "リオが Rio_Copy に変身(コピー対象: アリス)。サイクルせずパッシブのみ"
+expect = { cards = ["Rio_Copy", "Alice_Battle", "Mutsuki", "Kayoko", "Haruka", "Hoshino"], env = { rio_copy_target = "Alice_Battle", alice_charge = 0 } }
+
+[[steps]]
+slot = 0
+card = "Rio_Copy"
+target = "Alice_Battle"
+note = "Rio_Copy がアリスを対象に使用: チャージ+1。Rio_Copy はサイクルしてリオに戻る"
+expect = { cards = ["Kayoko", "Alice_Battle", "Mutsuki", "Haruka", "Hoshino", "Rio"], env = { alice_charge = 1 } }
+
+[[steps]]
+slot = 1
+card = "Alice_Battle"
+target = "Enemy"
+note = "アリスが敵を対象に使用: チャージを消費してサイクル"
+expect = { cards = ["Kayoko", "Haruka", "Mutsuki", "Hoshino", "Rio", "Alice_Battle"], env = { alice_charge = 0 }, env_none = ["rio_copy_target"] }

@@ -1,0 +1,24 @@
+title = "リオが手札にいてもアリス本人の自己対象は影響を受けない"
+cards = ["Alice_Battle", "Rio", "Mutsuki", "Kayoko", "Haruka", "Hoshino"]
+env = { alice_charge = 0 }
+
+[[steps]]
+slot = 0
+card = "Alice_Battle"
+target = "Alice_Battle"
+note = "自身対象: チャージ+1、手札に留まる"
+expect = { cards = ["Alice_Battle", "Rio", "Mutsuki", "Kayoko", "Haruka", "Hoshino"], env = { alice_charge = 1 } }
+
+[[steps]]
+slot = 0
+card = "Alice_Battle"
+target = "Alice_Battle"
+note = "自身対象: チャージ+1(上限2)、手札に留まる"
+expect = { cards = ["Alice_Battle", "Rio", "Mutsuki", "Kayoko", "Haruka", "Hoshino"], env = { alice_charge = 2 } }
+
+[[steps]]
+slot = 0
+card = "Alice_Battle"
+target = "Enemy"
+note = "敵対象: チャージを消費して通常サイクル"
+expect = { cards = ["Kayoko", "Rio", "Mutsuki", "Haruka", "Hoshino", "Alice_Battle"], env = { alice_charge = 0 } }

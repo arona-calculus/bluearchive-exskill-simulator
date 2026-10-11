@@ -1,0 +1,52 @@
+title = "黒影 フェーズ3: アル ハナコ キキョウ セナ キサキ リオ"
+description = """
+黒影(d33)の実戦TLの再現(Step 16-22)。
+ハナコが2連続で手札に留まる → ゲージ切れでサイクル → リオがコピー →
+コピーが代理実行(ハナコが手札にいるため即ドローは不発)。
+終了時: hanako_gauge=80、ハナコは山札の中。
+"""
+cards = ["Aru", "Hanako_Swimsuit", "Kikyou", "Sena", "Kisaki", "Rio"]
+env = { hanako_gauge = 160 }
+
+[[steps]]
+slot = 2
+card = "Kikyou"
+note = "Step 16: ゲージ200(上限)"
+expect = { cards = ["Aru", "Hanako_Swimsuit", "Sena", "Kisaki", "Rio", "Kikyou"], env = { hanako_gauge = 200 } }
+
+[[steps]]
+slot = 1
+card = "Hanako_Swimsuit"
+note = "Step 17: 1連目、ゲージ100消費して手札に留まる"
+expect = { env = { hanako_gauge = 100 } }
+
+[[steps]]
+slot = 1
+card = "Hanako_Swimsuit"
+note = "Step 18: 2連目、ゲージ100消費して手札に留まる"
+expect = { env = { hanako_gauge = 0 } }
+
+[[steps]]
+slot = 0
+card = "Aru"
+note = "Step 19: ゲージ40"
+expect = { env = { hanako_gauge = 40 } }
+
+[[steps]]
+slot = 1
+card = "Hanako_Swimsuit"
+note = "Step 20: 3連目、ゲージ不足で通常サイクル"
+expect = { cards = ["Kisaki", "Rio", "Sena", "Kikyou", "Aru", "Hanako_Swimsuit"], env = { hanako_gauge = 40 } }
+
+[[steps]]
+slot = 1
+card = "Rio"
+target = "Hanako_Swimsuit"
+note = "Step 21: リオ → Rio_Copy、ゲージ80"
+expect = { cards = ["Kisaki", "Rio_Copy", "Sena", "Kikyou", "Aru", "Hanako_Swimsuit"], env = { hanako_gauge = 80 } }
+
+[[steps]]
+slot = 1
+card = "Rio_Copy"
+note = "Step 22: ハナコが手札にいるため即ドロー不発、ゲージ80を維持"
+expect = { cards = ["Kisaki", "Kikyou", "Sena", "Aru", "Hanako_Swimsuit", "Rio"], env = { hanako_gauge = 80 } }

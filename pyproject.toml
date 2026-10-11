@@ -5,6 +5,7 @@ description = "Timeline Simulator for Blue Archive: An algebraic engine for EX s
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "black>=26.3.1",
     "typing-extensions>=4.12.0",
 ]
 

@@ -1,0 +1,82 @@
+title = "黒影 フェーズ5: ハナコ セナ キサキ リオ→ハナコ アル ハナコ…"
+description = """
+黒影(d33)の実戦TLの再現(Step 29-40)。
+即ドローされたハナコを消化 → ゲージを積み上げ → リオがコピー →
+ハナコが手札に留まったあとゲージ切れ。
+終了時: hanako_gauge=80、ハナコは山札の末尾。
+"""
+cards = ["Hanako_Swimsuit", "Kikyou", "Aru", "Sena", "Kisaki", "Rio"]
+env = { hanako_gauge = 0 }
+
+[[steps]]
+slot = 0
+card = "Hanako_Swimsuit"
+note = "Step 29: 即ドロー後、ゲージ切れでサイクル"
+expect = { env = { hanako_gauge = 0 } }
+
+[[steps]]
+slot = 0
+card = "Sena"
+note = "Step 30: ゲージ40"
+expect = { env = { hanako_gauge = 40 } }
+
+[[steps]]
+slot = 0
+card = "Kisaki"
+note = "Step 31: ゲージ80"
+expect = { cards = ["Rio", "Kikyou", "Aru", "Hanako_Swimsuit", "Sena", "Kisaki"], env = { hanako_gauge = 80 } }
+
+[[steps]]
+slot = 0
+card = "Rio"
+target = "Hanako_Swimsuit"
+note = "Step 32: リオ → Rio_Copy、ゲージ120"
+expect = { cards = ["Rio_Copy", "Kikyou", "Aru", "Hanako_Swimsuit", "Sena", "Kisaki"], env = { hanako_gauge = 120 } }
+
+[[steps]]
+slot = 2
+card = "Aru"
+note = "Step 33: ゲージ160"
+expect = { env = { hanako_gauge = 160 } }
+
+[[steps]]
+slot = 2
+card = "Hanako_Swimsuit"
+note = "Step 34: ゲージ100消費、手札に留まる"
+expect = { cards = ["Rio_Copy", "Kikyou", "Hanako_Swimsuit", "Sena", "Kisaki", "Aru"], env = { hanako_gauge = 60 } }
+
+[[steps]]
+slot = 1
+card = "Kikyou"
+note = "Step 35: ゲージ100"
+expect = { env = { hanako_gauge = 100 } }
+
+[[steps]]
+slot = 1
+card = "Sena"
+note = "Step 36: ゲージ140"
+expect = { env = { hanako_gauge = 140 } }
+
+[[steps]]
+slot = 1
+card = "Kisaki"
+note = "Step 37: ゲージ180"
+expect = { cards = ["Rio_Copy", "Aru", "Hanako_Swimsuit", "Kikyou", "Sena", "Kisaki"], env = { hanako_gauge = 180 } }
+
+[[steps]]
+slot = 0
+card = "Rio_Copy"
+note = "Step 38: ハナコが手札にいるため即ドロー不発、ゲージ180を維持"
+expect = { env = { hanako_gauge = 180 } }
+
+[[steps]]
+slot = 2
+card = "Hanako_Swimsuit"
+note = "Step 39: ゲージ100消費、手札に留まる"
+expect = { env = { hanako_gauge = 80 } }
+
+[[steps]]
+slot = 2
+card = "Hanako_Swimsuit"
+note = "Step 40: ゲージ不足で通常サイクル"
+expect = { cards = ["Kikyou", "Aru", "Sena", "Kisaki", "Rio", "Hanako_Swimsuit"], env = { hanako_gauge = 80 } }

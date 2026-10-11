@@ -1,0 +1,14 @@
+title = "リオ 通常キャラ(アル)のコピー"
+description = "リオはその場で Rio_Copy に変身し、Rio_Copy を使うとサイクルしてリオに戻る。"
+cards = ["Rio", "Aru", "Mutsuki", "Kayoko"]
+
+[[steps]]
+card = "Rio"
+target = "Aru"
+note = "リオが即座に Rio_Copy に変身(コピー対象: アル)"
+expect = { cards = ["Rio_Copy", "Aru", "Mutsuki", "Kayoko"], env = { rio_copy_target = "Aru" } }
+
+[[steps]]
+card = "Rio_Copy"
+note = "Rio_Copy を使用: サイクルしてリオに戻り、山札の末尾へ"
+expect = { cards = ["Kayoko", "Aru", "Mutsuki", "Rio"], env_none = ["rio_copy_target"] }

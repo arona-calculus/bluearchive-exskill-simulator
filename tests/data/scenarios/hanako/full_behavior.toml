@@ -1,0 +1,54 @@
+title = "水着ハナコの基本挙動"
+description = """
+1. ゲージ不足時は通常通りサイクルする。
+2. 他キャラのEX使用でゲージが+40される(上限200)。
+3. ゲージが100以上なら、100消費して手札に留まる。
+4. ゲージ量に応じて、サイクルと手札留まりが切り替わる。
+"""
+cards = ["Hanako_Swimsuit", "Aru", "Mutsuki", "Kayoko", "Haruka", "Hoshino"]
+env = { hanako_gauge = 0 }
+
+[[steps]]
+card = "Hanako_Swimsuit"
+note = "ゲージ0: 通常サイクル"
+expect = { cards = ["Kayoko", "Aru", "Mutsuki", "Haruka", "Hoshino", "Hanako_Swimsuit"], env = { hanako_gauge = 0 } }
+
+[[steps]]
+card = "Aru"
+note = "パッシブでゲージ40"
+expect = { cards = ["Kayoko", "Haruka", "Mutsuki", "Hoshino", "Hanako_Swimsuit", "Aru"], env = { hanako_gauge = 40 } }
+
+[[steps]]
+card = "Mutsuki"
+note = "ゲージ80"
+expect = { cards = ["Kayoko", "Haruka", "Hoshino", "Hanako_Swimsuit", "Aru", "Mutsuki"], env = { hanako_gauge = 80 } }
+
+[[steps]]
+card = "Kayoko"
+note = "ゲージ120"
+expect = { cards = ["Hanako_Swimsuit", "Haruka", "Hoshino", "Aru", "Mutsuki", "Kayoko"], env = { hanako_gauge = 120 } }
+
+[[steps]]
+card = "Haruka"
+note = "ゲージ160"
+expect = { cards = ["Hanako_Swimsuit", "Aru", "Hoshino", "Mutsuki", "Kayoko", "Haruka"], env = { hanako_gauge = 160 } }
+
+[[steps]]
+card = "Hoshino"
+note = "ゲージ200(上限)"
+expect = { cards = ["Hanako_Swimsuit", "Aru", "Mutsuki", "Kayoko", "Haruka", "Hoshino"], env = { hanako_gauge = 200 } }
+
+[[steps]]
+card = "Hanako_Swimsuit"
+note = "ゲージ200: 100消費して手札に留まる"
+expect = { cards = ["Hanako_Swimsuit", "Aru", "Mutsuki", "Kayoko", "Haruka", "Hoshino"], env = { hanako_gauge = 100 } }
+
+[[steps]]
+card = "Hanako_Swimsuit"
+note = "ゲージ100: ちょうど足りるので、100消費して手札に留まる"
+expect = { cards = ["Hanako_Swimsuit", "Aru", "Mutsuki", "Kayoko", "Haruka", "Hoshino"], env = { hanako_gauge = 0 } }
+
+[[steps]]
+card = "Hanako_Swimsuit"
+note = "ゲージ0: 再び通常サイクル"
+expect = { cards = ["Kayoko", "Aru", "Mutsuki", "Haruka", "Hoshino", "Hanako_Swimsuit"], env = { hanako_gauge = 0 } }

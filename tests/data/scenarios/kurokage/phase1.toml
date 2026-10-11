@@ -1,0 +1,70 @@
+title = "黒影 フェーズ1: ハナコ セナ キキョウ アル リオ キサキ"
+description = """
+黒影(d33)の実戦TLの再現(Step 1-10)。
+ハナコがゲージ不足でサイクル → ゲージを積み上げ → リオがコピー →
+コピーが代理実行(ゲージ増減なし) → ハナコが2連続で手札に留まる → ゲージ切れでサイクル。
+終了時: hanako_gauge=0、ハナコは山札の末尾。
+"""
+cards = ["Hanako_Swimsuit", "Sena", "Kikyou", "Aru", "Rio", "Kisaki"]
+env = { hanako_gauge = 0 }
+
+[[steps]]
+slot = 1
+card = "Sena"
+note = "Step 1: ゲージ40"
+expect = { cards = ["Hanako_Swimsuit", "Aru", "Kikyou", "Rio", "Kisaki", "Sena"], env = { hanako_gauge = 40 } }
+
+[[steps]]
+slot = 0
+card = "Hanako_Swimsuit"
+note = "Step 2: ゲージ不足で通常サイクル"
+expect = { cards = ["Rio", "Aru", "Kikyou", "Kisaki", "Sena", "Hanako_Swimsuit"], env = { hanako_gauge = 40 } }
+
+[[steps]]
+slot = 1
+card = "Aru"
+note = "Step 3: ゲージ80"
+expect = { cards = ["Rio", "Kisaki", "Kikyou", "Sena", "Hanako_Swimsuit", "Aru"], env = { hanako_gauge = 80 } }
+
+[[steps]]
+slot = 1
+card = "Kisaki"
+note = "Step 4: ゲージ120"
+expect = { cards = ["Rio", "Sena", "Kikyou", "Hanako_Swimsuit", "Aru", "Kisaki"], env = { hanako_gauge = 120 } }
+
+[[steps]]
+slot = 1
+card = "Sena"
+note = "Step 5: ゲージ160"
+expect = { cards = ["Rio", "Hanako_Swimsuit", "Kikyou", "Aru", "Kisaki", "Sena"], env = { hanako_gauge = 160 } }
+
+[[steps]]
+slot = 0
+card = "Rio"
+target = "Hanako_Swimsuit"
+note = "Step 6: リオ → Rio_Copy、ゲージ200(上限)"
+expect = { cards = ["Rio_Copy", "Hanako_Swimsuit", "Kikyou", "Aru", "Kisaki", "Sena"], env = { hanako_gauge = 200 } }
+
+[[steps]]
+slot = 0
+card = "Rio_Copy"
+note = "Step 7: Rio_Copy が代理実行、ゲージ200を維持"
+expect = { cards = ["Aru", "Hanako_Swimsuit", "Kikyou", "Kisaki", "Sena", "Rio"], env = { hanako_gauge = 200 } }
+
+[[steps]]
+slot = 1
+card = "Hanako_Swimsuit"
+note = "Step 8: ゲージ100消費、手札に留まる"
+expect = { cards = ["Aru", "Hanako_Swimsuit", "Kikyou", "Kisaki", "Sena", "Rio"], env = { hanako_gauge = 100 } }
+
+[[steps]]
+slot = 1
+card = "Hanako_Swimsuit"
+note = "Step 9: ゲージ100消費、手札に留まる"
+expect = { cards = ["Aru", "Hanako_Swimsuit", "Kikyou", "Kisaki", "Sena", "Rio"], env = { hanako_gauge = 0 } }
+
+[[steps]]
+slot = 1
+card = "Hanako_Swimsuit"
+note = "Step 10: ゲージ切れで通常サイクル"
+expect = { cards = ["Aru", "Kisaki", "Kikyou", "Sena", "Rio", "Hanako_Swimsuit"], env = { hanako_gauge = 0 } }
