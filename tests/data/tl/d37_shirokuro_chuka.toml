@@ -1,13 +1,13 @@
 title = "d37 市街地シロクロ 軽装備Torment 中華リバエン(冒頭7手)"
 description = """
 出典: souriki/season/d37_ShiroKuro/d37_ShiroKuro.md の「中華リバエン」の冒頭7行。
-手順列は、MCP の動作確認時に Claude がラフTLを解釈したもの。次の仮定を置いており、まだ本人の確認を経ていない(verified = false):
+手順列は Claude がラフTLを解釈したもので、次の解釈は本人確認済み(2026-10-12):
 - 「イブキ」= イブキ(水着)。最初のEX1でのお友達は イロハ(水着)・エイミ(臨戦)
-- 「ホシノ」= ホシノ(臨戦)[攻撃型]、「エイミ」= エイミ(臨戦)、「イロハ」= イロハ(水着)
-- 「リオ」の次の「11 Cイロハ」は、リオがイロハ(水着)をコピーし、そのコピーをコスト11で使う意味
-- 初期の手札+山札順は書かれていないため、find_initial_orders の候補の1つを使っている
+- 「ホシノ」= ホシノ(臨戦)[防御型]、「エイミ」= エイミ(臨戦)、「イロハ」= イロハ(水着)
+- 「リオ」の次の「11 Cイロハ」は、リオがイロハ(水着)をコピーし、そのコピーを使う意味(「11」は note に残す)
+初期の手札+山札順はTLに書かれていないため、find_initial_orders の候補の1つを使っている(この部分は未確認)。
 """
-verified = false
+verified = true
 rough_tl = """
 3:54.7 イブキ
 3:45.7 ホシノ
@@ -17,7 +17,7 @@ rough_tl = """
 ココロ
 ASAP イロハ
 """
-cards = ["Ibuki_Swimsuit", "Hoshino_Battle_Attack", "Rio", "Iroha_Swimsuit", "Kokoro", "Eimi_Battle"]
+cards = ["Ibuki_Swimsuit", "Hoshino_Battle_Defence", "Rio", "Iroha_Swimsuit", "Kokoro", "Eimi_Battle"]
 
 [[steps]]
 card = "イブキ(水着)"
@@ -26,8 +26,9 @@ note = "3:54.7"
 expect = { cost = 0, env = { ibuki_friends = ["Iroha_Swimsuit", "Eimi_Battle"] } }
 
 [[steps]]
-card = "Hoshino_Battle_Attack"
+card = "Hoshino_Battle_Defence"
 note = "3:45.7"
+expect = { cost = 4 }
 
 [[steps]]
 card = "Rio"
@@ -53,4 +54,4 @@ note = "ASAP"
 
 [expect]
 ok = true
-total_cost = 20
+total_cost = 18
