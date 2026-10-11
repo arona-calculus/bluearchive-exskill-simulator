@@ -14,6 +14,9 @@ webui = [
     "fastapi[standard]>=0.115.0",
     "uvicorn[standard]>=0.30.0",
 ]
+mcp = [
+    "mcp>=2.3",
+]
 
 [build-system]
 requires = ["setuptools>=61.0"]
@@ -32,3 +35,7 @@ dev = [
     "black>=24.0.0",
     "flake8>=7.0.0",
 ]
+
+[tool.pytest.ini_options]
+# tests/ から webui.backend.* を import できるようにする
+pythonpath = ["."]

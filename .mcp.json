@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ba-exsim": {
+      "command": "uv",
+      "args": ["run", "--extra", "mcp", "python", "-m", "webui.backend.mcp_server"]
+    }
+  }
+}

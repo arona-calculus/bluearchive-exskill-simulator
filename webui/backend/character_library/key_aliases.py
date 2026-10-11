@@ -1,11 +1,11 @@
 """SchaleDBのPathName由来キーと、webui側で手動キュレーション済みのキーとで
 表記が異なるために同一キャラが重複登録されてしまうものの対応表。
 
-build_library.py(アイコンコピー時の重複防止)と main.py(BUILTINSマージ時の
+build_library.py(アイコンコピー時の重複防止)と catalog.py(BUILTINSマージ時の
 重複防止)の両方から参照する、唯一の対応表。
 
 キー: build_library.py が PathName から機械的に生成するキー
-値: webui/backend/main.py の BUILTINS で手動定義されているキー
+値: webui/backend/catalog.py の BUILTINS で手動定義されているキー
 """
 
 from __future__ import annotations

@@ -118,13 +118,16 @@ pytestの回帰テストではなく、TL候補を広く探索するためのス
    `ExtraSkills[0].Cost` の末尾）を抽出して `character_library/data/characters.json` に書き出す。
    同時にアイコン本体を `webui/assets/icons/` にコピーする（既存アイコンは上書きしない。
    手動キュレーション済みの生徒を保護するため）。
-3. `main.py` 起動時に `characters.json` を読み込み、固有Specを持つ生徒（上の表）はそちらを優先、
+3. `catalog.py` の import 時に `characters.json` を読み込み、固有Specを持つ生徒（上の表）はそちらを優先、
    それ以外は `role`/`cost`/`extra_cost` 付きの `GenericSpec` として `BUILTINS` を構成する。
 
-生徒固有のEXスキル実装（新規Specクラス）が必要になった場合は `main.py` の `BUILTINS` に
+生徒固有のEXスキル実装（新規Specクラス）が必要になった場合は `catalog.py` の `BUILTINS` に
 直接追記する。それ以外のメタデータ（アイコン・役割・コスト）は再生成で追従する。
 
 ## インタラクティブUI（`webui/`）
+
+生徒カタログ（`BUILTINS` / `NEEDS_TARGET` / `build_specs`）と、1手実行して `history` エントリを作る
+`play_and_record` は `webui/backend/catalog.py` にあり、FastAPIに依存しない（MCPサーバーと共有するため）。
 
 `webui/backend/main.py`（FastAPI）が `Simulator` をセッションベースのHTTP APIとして公開し、
 `webui/frontend/index.html` から生徒アイコン付きで手動操作できる。生徒固有の表示は
@@ -132,7 +135,28 @@ pytestの回帰テストではなく、TL候補を広く探索するためのス
 対象指定の形式はカード選択時に `/api/session/{id}/target_input/{slot}`（`CharacterSpec.target_input`）に従う。
 消費コスト・累計消費コストは `/play` 実行時にバックエンド側
 （`SpecRegistry.evaluate_cost`）で計算し、`history` の各エントリに保存する。
-現状は**人間が1手ずつ操作するための確認ツール**であり、探索・最適化の機能は持たない。
+webui自体は**人間が1手ずつ操作するための確認ツール**であり、探索・最適化の機能は持たない。
+
+## MCPサーバー（`webui/backend/mcp_server.py`）
+
+LLMエージェント（Claude Code等）からexsimを呼ぶための入口。ラフに書かれたTLの解釈はLLMに任せ、
+サーバーは正規化済みの手順列を厳密に実行して結果を返す。状態は持たない。
+
+```
+uv run --extra mcp python -m webui.backend.mcp_server   # stdio。リポジトリ直下の .mcp.json にも登録済み
+```
+
+| ツール | 内容 |
+|---|---|
+| `list_characters(query)` | 生徒カタログの検索（キー・表示名の部分一致）。ラフな名前を正規のキーに対応付けるのに使う |
+| `simulate_tl(characters, steps, ...)` | 初期の手札+山札順と手順列を実行し、各ステップの手札・ゲージ・コスト、破綻地点、webuiの共有リンクを返す |
+| `find_initial_orders(characters, steps, ...)` | 手順列と矛盾しない初期順を総当りで探す（8枚まで。手札内の並びは同一視する） |
+
+中核ロジックはMCPに依存しない `webui/backend/tl_import.py` にあり、`mcp_server.py` は薄いアダプタである。
+- 名前は キー / 表示名（全角括弧・空白の揺れも許容）のどちらでも受け付け、未知の名前には候補を返す。
+- リオのコピー使用は元の名前（`Rio`）で指定してよい（手札上の代理カード `Rio_Copy` に解決する）。
+- 結果は webui の既存の共有リンク形式（`#share=` + gzip + base64url）にして返すので、開けばそのままwebuiに読み込まれる
+  （リンク先は環境変数 `EXSIM_BASE_URL`、既定は `http://localhost:8000/`）。手順の `note` はwebuiのコメント欄に入る。
 
 ## 姉妹リポジトリとの関係
 
@@ -147,5 +171,5 @@ pytestの回帰テストではなく、TL候補を広く探索するためのス
   再実装したもの（Powell法）。
 
 いずれも「操作列（どの手をどの順で打つか）」という**離散的な組み合わせ**を
-探索する機能は持たない。`ba_exsim` が今後担うのはその部分であり、
+探索する機能は持たない。`ba_exsim`（とそれをMCP経由で使うLLMエージェント）が今後担うのはその部分であり、
 役割は重複しない（[roadmap.md](roadmap.md) 参照）。
