@@ -25,11 +25,20 @@ class IbukiSwimsuitSpec(CharacterSpec):
 
     character_roles: 名前 -> "STRIKER"/"SPECIAL" の対応表(webui側でBUILTINSから構築)。
     セッション中は変化しない静的情報なので、可変なstate.envではなくSpec自身が保持する。
+
+    cost: EX1「イブキのお友達！」の消費コスト。extra_cost: EX2「どれがいいかな？」の
+    消費コスト。どちらもセッション中不変の静的値なのでSpec自身が保持する。
     """
 
-    def __init__(self, character_roles: Optional[Dict[str, str]] = None):
-        super().__init__("Ibuki_Swimsuit")
+    def __init__(
+        self,
+        character_roles: Optional[Dict[str, str]] = None,
+        cost: Optional[int] = None,
+        extra_cost: Optional[int] = None,
+    ):
+        super().__init__("Ibuki_Swimsuit", cost=cost)
         self.character_roles = character_roles or {}
+        self.extra_cost = extra_cost
 
     def apply_effect(self, state: State, k: int, target: str = "") -> State:
         friends = state.get_env("ibuki_friends")
@@ -73,3 +82,10 @@ class IbukiSwimsuitSpec(CharacterSpec):
         if shells >= SHELLS_FOR_FLOWER:
             return state.update(ibuki_shells=0, ibuki_shell_flower=True)
         return state.update(ibuki_shells=shells)
+
+    def get_cost(self, state: State) -> Optional[int]:
+        # お友達指定済み(EX2「どれがいいかな？」)ならextra_cost、
+        # 未指定(EX1「イブキのお友達！」)ならcostを返す。
+        if state.get_env("ibuki_friends"):
+            return self.extra_cost
+        return self.cost

@@ -1,11 +1,12 @@
 from __future__ import annotations
+from typing import Optional
 from ba_exsim.core.spec import CharacterSpec
 from ba_exsim.core.state import State
 
 
 class AliceBattleSpec(CharacterSpec):
-    def __init__(self):
-        super().__init__(name="Alice_Battle")
+    def __init__(self, cost: Optional[int] = None):
+        super().__init__(name="Alice_Battle", cost=cost)
 
     def should_cycle(self, state: State, k: int, target: str = "") -> bool:
         return target != self.name

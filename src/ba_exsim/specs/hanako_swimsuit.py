@@ -5,8 +5,8 @@ from ba_exsim.core.state import State
 
 
 class HanakoSwimsuitSpec(CharacterSpec):
-    def __init__(self):
-        super().__init__("Hanako_Swimsuit")
+    def __init__(self, cost: Optional[int] = None):
+        super().__init__("Hanako_Swimsuit", cost=cost)
 
     def should_cycle(self, state: State, k: int, target: str = "") -> bool:
         # 代理実行時（スロットkが自分でない）はRio_Copy側のshould_cycleに委ねる
@@ -26,7 +26,7 @@ class HanakoSwimsuitSpec(CharacterSpec):
 
         else:
             # 代理実行（Rio_Copy等）: 自身が手札にいない かつ ゲージ十分なら即ドロー要請
-            hanako_in_hand = self.name in state.cards[:3]
+            hanako_in_hand = self.name in state.hand
             if hanako_in_hand or gauge < 100:
                 return state
             return state.update(

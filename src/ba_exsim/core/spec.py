@@ -10,9 +10,10 @@ class CharacterSpec:
     子クラス（各キャラ）は必要なフックだけをオーバーライド（上書き）して実装する。
     """
 
-    def __init__(self, name: str, is_proxy: bool = False):
+    def __init__(self, name: str, is_proxy: bool = False, cost: Optional[int] = None):
         self.name = name
         self.is_proxy = is_proxy
+        self.cost = cost  # このカードの基本消費コスト(lv5時点、不明ならNone)
 
     def should_cycle(self, state: State, k: int, target: str = "") -> bool:
         """
@@ -57,3 +58,11 @@ class CharacterSpec:
         戻り値: 更新されたState
         """
         return state
+
+    def get_cost(self, state: State) -> Optional[int]:
+        """
+        このカードを「今」使った場合の消費コストを返す（コピー元に応じて変わる
+        リオ(コピー)や、形態によって変わるイブキ(水着)のEX2等はオーバーライドする）。
+        不明な場合は None。
+        """
+        return self.cost

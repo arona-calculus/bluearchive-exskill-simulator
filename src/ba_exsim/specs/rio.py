@@ -4,8 +4,8 @@ from ba_exsim.core.state import State
 
 
 class RioSpec(CharacterSpec):
-    def __init__(self):
-        super().__init__("Rio")
+    def __init__(self, cost: Optional[int] = None):
+        super().__init__("Rio", cost=cost)
 
     def should_cycle(self, state: State, k: int, target: str = "") -> bool:
         # 手札の中でトークンに変化するため、破棄・ドローを行わない
@@ -52,3 +52,15 @@ class RioCopySpec(CharacterSpec):
 
     def get_discard_transform(self, state: State) -> Optional[str]:
         return "Rio"
+
+    def get_cost(self, state: State) -> Optional[int]:
+        # コピー先キャラの消費コスト - 1 (最低0)。
+        # rio_copy_targetはapply_effectで自分自身がクリアするため、
+        # 必ずプレイ前のstateで呼び出すこと。
+        target_spec = self._get_target_spec(state)
+        if not target_spec:
+            return None
+        target_cost = target_spec.get_cost(state)
+        if target_cost is None:
+            return None
+        return max(0, target_cost - 1)

@@ -129,6 +129,18 @@ def build(
         candidates = by_name.get(name, [])
         match = resolve_match(entry, candidates)
 
+        # EXスキルの消費コスト(最大レベル時点、SchaleDBのSkills.Ex.Costは
+        # レベル1〜5の配列なので末尾=lv5の値を採用する)
+        ex_skill = entry.get("Skills", {}).get("Ex", {})
+        ex_cost_list = ex_skill.get("Cost") or []
+        ex_cost_max = ex_cost_list[-1] if ex_cost_list else None
+
+        # 変身後スキル(ExtraSkills、例: イブキ(水着)のEX2「どれがいいかな？」、
+        # ネル(制服)等)がある場合、そちらのコストも併せて記録する。先頭の1件のみ対象。
+        extra_skills = ex_skill.get("ExtraSkills") or []
+        extra_cost_list = extra_skills[0].get("Cost") if extra_skills else None
+        ex_extra_cost_max = extra_cost_list[-1] if extra_cost_list else None
+
         icon_copied = False
         if key and match and match.get("icon_file"):
             src = scrape_icon_dir / Path(match["icon_file"]).name
@@ -152,6 +164,8 @@ def build(
             "base_name": match.get("base_name") if match else None,
             "costume": match.get("costume") if match else None,
             "role": match.get("role") if match else None,
+            "ex_cost_max": ex_cost_max,
+            "ex_extra_cost_max": ex_extra_cost_max,
             "icon_copied": icon_copied,
         }
         library.append(record)
@@ -160,7 +174,7 @@ def build(
         if icon_copied:
             copied += 1
 
-    # ラベルの重複を解消する(例: 双子キャラ「シュン(水着)」「シュエリン(水着)」は
+    # ラベルの重複を解消する(例: 「シュン(水着)」「シュエリン(水着)」は
     # SchaleDBのName列がどちらも同じで、PersonalNameでしか区別できない)
     label_counts: Dict[str, int] = {}
     for r in library:

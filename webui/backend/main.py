@@ -44,6 +44,8 @@ class BuiltinEntry(NamedTuple):
     label: str
     spec: type
     role: Optional[str] = None  # "STRIKER" / "SPECIAL" (character_library由来、不明ならNone)
+    cost: Optional[int] = None  # EXスキル消費コスト(lv5時点、character_library由来、不明ならNone)
+    extra_cost: Optional[int] = None  # 変身後スキル(ExtraSkills)の消費コスト。無いキャラはNone
 
 
 BUILTINS: Dict[str, BuiltinEntry] = {
@@ -87,7 +89,10 @@ def _load_generated_builtins() -> Dict[str, BuiltinEntry]:
     with _LIBRARY_PATH.open(encoding="utf-8") as f:
         entries = json.load(f)
     return {
-        e["key"]: BuiltinEntry(e["label"], GenericSpec, role=e.get("role"))
+        e["key"]: BuiltinEntry(
+            e["label"], GenericSpec,
+            role=e.get("role"), cost=e.get("ex_cost_max"), extra_cost=e.get("ex_extra_cost_max"),
+        )
         for e in entries
         if e.get("key") and e.get("label")
     }
@@ -97,10 +102,15 @@ def _load_generated_builtins() -> Dict[str, BuiltinEntry]:
 _GENERATED_BUILTINS = _load_generated_builtins()
 BUILTINS = {**_GENERATED_BUILTINS, **BUILTINS}
 
-# 手動定義24件にはroleが無いため、生成データ側からroleだけを補完する
+# 手動定義24件にはrole/costが無いため、生成データ側から補完する
 for _key, _entry in list(BUILTINS.items()):
-    if _entry.role is None and _key in _GENERATED_BUILTINS:
-        BUILTINS[_key] = _entry._replace(role=_GENERATED_BUILTINS[_key].role)
+    if _key in _GENERATED_BUILTINS:
+        _generated_entry = _GENERATED_BUILTINS[_key]
+        BUILTINS[_key] = _entry._replace(
+            role=_entry.role if _entry.role is not None else _generated_entry.role,
+            cost=_entry.cost if _entry.cost is not None else _generated_entry.cost,
+            extra_cost=_entry.extra_cost if _entry.extra_cost is not None else _generated_entry.extra_cost,
+        )
 
 NEEDS_TARGET: List[str] = ["Rio", "Alice_Battle", "Ibuki_Swimsuit"]
 
@@ -118,13 +128,16 @@ def build_specs(characters: List[str]) -> List[CharacterSpec]:
             continue
         seen.add(name)
         if name in BUILTINS:
-            spec_cls = BUILTINS[name].spec
+            entry = BUILTINS[name]
+            spec_cls = entry.spec
             if spec_cls is GenericSpec:
-                specs.append(spec_cls(name))
+                specs.append(spec_cls(name, cost=entry.cost))
             elif spec_cls is IbukiSwimsuitSpec:
-                specs.append(spec_cls(character_roles=character_roles))
+                specs.append(spec_cls(
+                    character_roles=character_roles, cost=entry.cost, extra_cost=entry.extra_cost,
+                ))
             else:
-                specs.append(spec_cls())
+                specs.append(spec_cls(cost=entry.cost))
         else:
             specs.append(GenericSpec(name))
     if "Rio" in seen:
@@ -132,18 +145,16 @@ def build_specs(characters: List[str]) -> List[CharacterSpec]:
     return specs
 
 
-def state_to_dict(state, hand_size: int = 3) -> Dict[str, Any]:
+def state_to_dict(state) -> Dict[str, Any]:
     return {
-        "hand": list(state.cards[:hand_size]),
-        "deck": list(state.cards[hand_size:]),
+        "hand": list(state.hand),
+        "deck": list(state.deck),
         "env": {k: v for k, v in state.env.items() if v is not None},
     }
 
 
 class SessionCreate(BaseModel):
     characters: List[str]
-    # NOTE: コアエンジン (state.draw_card) は現在 hand_size=3 を前提とした実装。
-    # 他の値を指定した場合の動作保証はエンジン側の対応待ち。
     hand_size: int = 3
     env: Optional[Dict[str, Any]] = None
     # セーブデータからの復元用
@@ -192,14 +203,14 @@ def create_session(body: SessionCreate):
 
     if body.restore_current:
         # セーブデータからの復元: まず仮初期化してからstateを上書き
-        sim.initialize_state(tuple(body.characters), env={})
+        sim.initialize_state(tuple(body.characters), env={}, hand_size=body.hand_size)
         cards = tuple(body.restore_current["hand"] + body.restore_current["deck"])
-        sim.state = State(cards=cards, env=body.restore_current.get("env", {}))
-        initial_state = body.restore_initial or state_to_dict(sim.state, body.hand_size)
+        sim.state = State(cards=cards, env=body.restore_current.get("env", {}), hand_size=body.hand_size)
+        initial_state = body.restore_initial or state_to_dict(sim.state)
         history = body.restore_history or []
     else:
-        state = sim.initialize_state(tuple(body.characters), env=body.env or {})
-        initial_state = state_to_dict(state, body.hand_size)
+        state = sim.initialize_state(tuple(body.characters), env=body.env or {}, hand_size=body.hand_size)
+        initial_state = state_to_dict(state)
         history = []
 
     session_id = str(uuid.uuid4())
@@ -212,7 +223,7 @@ def create_session(body: SessionCreate):
     }
     return {
         "session_id": session_id,
-        "state": state_to_dict(sim.state, body.hand_size),
+        "state": state_to_dict(sim.state),
         "characters": body.characters,
         "hand_size": body.hand_size,
         "initial_state": initial_state,
@@ -229,7 +240,7 @@ def get_session(session_id: str):
     hand_size = session["hand_size"]
     return {
         "session_id": session_id,
-        "state": state_to_dict(sim.state, hand_size),
+        "state": state_to_dict(sim.state),
         "characters": session["characters"],
         "hand_size": hand_size,
         "initial_state": session["initial_state"],
@@ -248,13 +259,21 @@ def play_card(session_id: str, body: PlayRequest):
     if not (0 <= body.slot < hand_size):
         raise HTTPException(status_code=400, detail=f"スロットは0~{hand_size - 1}の範囲です")
 
-    state_before = state_to_dict(sim.state, hand_size)
+    state_before = state_to_dict(sim.state)
     played_card = sim.state.cards[body.slot]
+
+    # コストはプレイ前のstateに対して評価する(リオ(コピー)はapply_effect自身が
+    # rio_copy_targetをクリアするため、プレイ後では参照できなくなるキャラがいる)
+    spec = sim.registry.get(played_card)
+    step_cost = spec.get_cost(sim.state) if spec else None
 
     try:
         new_state = sim.play(body.slot, target=body.target)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+    prev_cumulative_cost = session["history"][-1]["cumulative_cost"] if session["history"] else 0
+    cumulative_cost = prev_cumulative_cost + (step_cost or 0)
 
     entry = {
         "step": len(session["history"]) + 1,
@@ -262,11 +281,13 @@ def play_card(session_id: str, body: PlayRequest):
         "slot": body.slot,
         "target": body.target,
         "state_before": state_before,
-        "state_after": state_to_dict(new_state, hand_size),
+        "state_after": state_to_dict(new_state),
+        "cost": step_cost,
+        "cumulative_cost": cumulative_cost,
     }
     session["history"].append(entry)
     return {
-        "state": state_to_dict(new_state, hand_size),
+        "state": state_to_dict(new_state),
         "history": session["history"],
         "played_card": played_card,
     }
@@ -293,11 +314,11 @@ def rewind_session(session_id: str, body: RewindRequest):
         raise HTTPException(status_code=400, detail="無効なフレーム番号です")
 
     cards = tuple(s["hand"] + s["deck"])
-    sim.state = State(cards=cards, env=s.get("env", {}))
+    sim.state = State(cards=cards, env=s.get("env", {}), hand_size=hand_size)
     session["history"] = new_history
 
     return {
-        "state": state_to_dict(sim.state, hand_size),
+        "state": state_to_dict(sim.state),
         "history": new_history,
         "initial_state": session["initial_state"],
     }

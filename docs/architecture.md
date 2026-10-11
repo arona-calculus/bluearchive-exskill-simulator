@@ -13,8 +13,12 @@ EXを誰に使うか）を適用すると、ゲーム内実装に沿った次の
 
 ### `State`（`state.py`）
 - `frozen=True` の immutable dataclass。
-- `cards: Tuple[Optional[str], ...]` — 手札3枚 + 山札を1本のタプルで表現する。
-  慣習として `cards[:3]` が手札、`cards[3]` が次にドローされる山札の一番上。
+- `cards: Tuple[Optional[str], ...]` — 手札 + 山札を1本のタプルで表現する。
+- `hand_size: int`（デフォルト3）— 手札枚数。`cards`上の手札/山札の境界はこの値に基づく。
+- `hand` / `deck` — `cards[:hand_size]` / `cards[hand_size:]` を返す導出プロパティ。
+  手札/山札の境界が必要な箇所は**必ずこちらを使い、`cards`を生でスライスしない**こと
+  （過去に`cards[:3]`等の決め打ちが複数箇所に重複し、`hand_size!=3`でカードが消失する
+  バグを生んだため）。
 - `env: Dict[str, Any]` — ゲージ・対象・保留フラグなど生徒固有の状態を自由に持たせる汎用領域
   （例: `alice_charge`, `hanako_gauge`, `rio_copy_target`, `pending_force_draw`）。
 - ミューテーションは `update()` / `discard_card()` / `draw_card()` の3メソッドのみを経由し、

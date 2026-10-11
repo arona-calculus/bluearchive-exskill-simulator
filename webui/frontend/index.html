@@ -94,7 +94,6 @@
   .step-action-icon.grayscale { filter: grayscale(100%); opacity: 0.7; }
   .step-action-info { min-width: 0; }
   .step-action-name { font-size: 0.76rem; font-weight: 700; color: #7fc8f8; line-height: 1.2; word-break: break-word; }
-  .step-action-target { font-size: 0.66rem; color: var(--text-muted); margin-top: 1px; word-break: break-word; }
 
   /* main: menu (vertical, fixed position) | deck state (collapsible) | memo */
   .step-main { flex: 1; min-width: 0; display: flex; align-items: flex-start; gap: 14px; }
@@ -465,8 +464,6 @@ async function startSession() {
 
     document.getElementById('setup-screen').style.display = 'none';
     document.getElementById('sim-screen').style.display = 'block';
-    document.getElementById('sim-info').textContent =
-      '手札 ' + handSize + '枚 / 総 ' + allCharacters.length + '枚';
 
     renderTimeline();
   } catch(e) {
@@ -493,6 +490,14 @@ async function resetSession() {
 function renderTimeline() {
   const tl = document.getElementById('timeline');
   tl.innerHTML = '';
+
+  // コスト・累計コストはバックエンド(CharacterSpec.get_cost)が計算済みで、
+  // 各historyエントリの cost / cumulative_cost にそのまま入っている。
+  const totalCost = history.length ? (history[history.length - 1].cumulative_cost || 0) : 0;
+  const infoEl = document.getElementById('sim-info');
+  if (infoEl) {
+    infoEl.textContent = '手札 ' + handSize + '枚 / 総 ' + allCharacters.length + '枚 / 累計消費コスト ' + totalCost;
+  }
 
   // All frames (initial + all history results)
   const totalFrames = history.length + 1; // frame 0 = initial, frame N = after step N
@@ -616,8 +621,8 @@ function buildFrame(state, stepNum, frameNum, entry, isLast) {
 
   body.appendChild(cardsRow);
 
-  // env (right of deck, vertical)
-  const envDiv = buildEnvRow(state.env || {});
+  // env + アクション詳細(対象・コスト)バッジ (right of deck, vertical)
+  const envDiv = buildStepChips(state.env || {}, entry);
   if (envDiv) body.appendChild(envDiv);
 
   main.appendChild(body);
@@ -642,7 +647,10 @@ function buildActionBlock(actionEntry, isInitial) {
     return div;
   }
 
-  const icon = getIconSrc(actionEntry.card, (actionEntry.state_after && actionEntry.state_after.env) || {});
+  // state_afterではなくstate_beforeのenvを使う: Rio_Copyはプレイと同時に自身で
+  // rio_copy_targetをクリアするため、プレイ後のenvを見るとコピー先が消えて
+  // generic(EMPTY)にフォールバックしてしまう。プレイ時点の状態を見れば正しく解決できる。
+  const icon = getIconSrc(actionEntry.card, (actionEntry.state_before && actionEntry.state_before.env) || {});
 
   const iconWrap = document.createElement('div');
   iconWrap.className = 'step-action-icon-wrap';
@@ -659,12 +667,6 @@ function buildActionBlock(actionEntry, isInitial) {
   nameEl.className = 'step-action-name';
   nameEl.textContent = getDisplayName(actionEntry.card);
   info.appendChild(nameEl);
-  if (actionEntry.target) {
-    const targetEl = document.createElement('div');
-    targetEl.className = 'step-action-target';
-    targetEl.textContent = '→ ' + getDisplayName(actionEntry.target);
-    info.appendChild(targetEl);
-  }
 
   div.appendChild(iconWrap);
   div.appendChild(info);
@@ -721,16 +723,37 @@ function buildCommentArea(frameNum) {
   return wrap;
 }
 
-function buildEnvRow(env) {
-  const keys = Object.keys(env);
-  if (keys.length === 0) return null;
+// 状態バッジ欄: そのステップで実行したアクション(対象・コスト)のチップと、
+// 結果状態(state.env)のチップ(ゲージ等)を、同じ.env-chip形状でまとめて表示する。
+function buildStepChips(env, actionEntry) {
+  const chips = [];
+
+  if (actionEntry && actionEntry.target) {
+    // カンマ区切り(複数対象、例: イブキのお友達指定)を分割してそれぞれ翻訳してから結合する
+    const targetLabel = actionEntry.target.split(',')
+      .filter(function(n) { return n; })
+      .map(getDisplayName)
+      .join(' / ');
+    chips.push({ label: '対象', html: '<span class="env-chip-val">' + escHtml(targetLabel) + '</span>' });
+  }
+  if (actionEntry && actionEntry.cost !== undefined) {
+    const costText = (actionEntry.cost === null) ? '?' : actionEntry.cost;
+    const cumulativeText = (actionEntry.cumulative_cost === null || actionEntry.cumulative_cost === undefined) ? '?' : actionEntry.cumulative_cost;
+    chips.push({ label: 'コスト', html: '<span class="env-chip-val">' + costText + ' (累計 ' + cumulativeText + ')</span>' });
+  }
+
+  Object.keys(env).forEach(function(key) {
+    chips.push({ label: envLabel(key), html: envChipVal(key, env[key]) });
+  });
+
+  if (chips.length === 0) return null;
+
   const div = document.createElement('div');
   div.className = 'step-env';
-  keys.forEach(function(key) {
-    const val = env[key];
+  chips.forEach(function(c) {
     const chip = document.createElement('div');
     chip.className = 'env-chip';
-    chip.innerHTML = '<span class="env-chip-label">' + escHtml(envLabel(key)) + '</span>' + envChipVal(key, val);
+    chip.innerHTML = '<span class="env-chip-label">' + escHtml(c.label) + '</span>' + c.html;
     div.appendChild(chip);
   });
   return div;
@@ -1038,9 +1061,16 @@ function buildSharePayload() {
     hand_size: handSize,
     initial_state: initialState,
     current_state: currentState,
-    // state_beforeは表示・復元のどこからも参照されないため共有データからは除外し、サイズを削減する
+    // state_before.hand/deckは表示・復元のどこからも参照されないため除外しサイズを削減するが、
+    // state_before.envはRio_Copyのアイコン解決・コスト計算(いずれもプレイ前のenvが必要)に
+    // 使われるため、envだけは残す。
     history: history.map(function(h) {
-      return { step: h.step, card: h.card, slot: h.slot, target: h.target, state_after: h.state_after };
+      return {
+        step: h.step, card: h.card, slot: h.slot, target: h.target,
+        state_before: h.state_before ? { env: h.state_before.env } : undefined,
+        state_after: h.state_after,
+        cost: h.cost, cumulative_cost: h.cumulative_cost,
+      };
     }),
     frame_comments: frameComments,
   };
@@ -1176,7 +1206,6 @@ async function loadSave(save, skipConfirm) {
     document.getElementById('setup-screen').style.display = 'none';
     document.getElementById('sim-screen').style.display = 'block';
     document.getElementById('load-panel').style.display = 'none';
-    document.getElementById('sim-info').textContent = '手札 ' + handSize + '枚 / 総 ' + allCharacters.length + '枚';
     renderTimeline();
   } catch(e) {
     alert('通信エラー: ' + e.message);

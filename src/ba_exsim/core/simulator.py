@@ -17,10 +17,10 @@ class Simulator:
         self.state = None
 
     def initialize_state(
-        self, initial_cards: Tuple[str, ...], env: dict = None
+        self, initial_cards: Tuple[str, ...], env: dict = None, hand_size: int = 3
     ) -> State:
         """初期盤面をセットアップする"""
-        self.state = State(cards=initial_cards, env=env or {})
+        self.state = State(cards=initial_cards, env=env or {}, hand_size=hand_size)
         return self.state
 
     def play(self, k: int, target: str = "") -> State:
@@ -35,7 +35,7 @@ class Simulator:
 
     def play_by_name(self, char_name: str, target: str = "") -> State:
         """(テスト用便利関数) 手札の中から名前で探して使用する"""
-        hand = self.state.cards[:3]
+        hand = self.state.hand
         if char_name not in hand:
             raise ValueError(f"{char_name} は手札 {hand} にありません！")
 

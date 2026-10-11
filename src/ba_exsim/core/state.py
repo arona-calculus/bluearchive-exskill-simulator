@@ -12,9 +12,20 @@ class State:
 
     cards: Tuple[Optional[str], ...]
     env: Dict[str, Any] = field(default_factory=dict)
+    hand_size: int = 3
 
     def get_env(self, key: str, default: Any = None) -> Any:
         return self.env.get(key, default)
+
+    @property
+    def hand(self) -> Tuple[Optional[str], ...]:
+        """手札(cardsの先頭hand_size枚)。生のcardsを直接スライスせず、常にこちらを使う。"""
+        return self.cards[: self.hand_size]
+
+    @property
+    def deck(self) -> Tuple[Optional[str], ...]:
+        """山札(cardsの残り)。生のcardsを直接スライスせず、常にこちらを使う。"""
+        return self.cards[self.hand_size :]
 
     def update(self, cards: Tuple[Optional[str], ...] = None, **kwargs) -> State:
         """
@@ -51,7 +62,7 @@ class State:
             cards_list.remove(force_card)
             cards_list[k] = force_card
         else:
-            top_card = cards_list.pop(3)
+            top_card = cards_list.pop(self.hand_size)
             cards_list[k] = top_card
 
         return replace(self, cards=tuple(cards_list))

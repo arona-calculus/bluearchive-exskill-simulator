@@ -8,6 +8,8 @@
     "base_name": "アル",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -19,6 +21,8 @@
     "base_name": "エイミ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -30,6 +34,8 @@
     "base_name": "ハルナ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -41,6 +47,8 @@
     "base_name": "ヒフミ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -52,6 +60,8 @@
     "base_name": "ヒナ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 7,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -63,6 +73,8 @@
     "base_name": "ホシノ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -74,6 +86,8 @@
     "base_name": "イオリ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -85,6 +99,8 @@
     "base_name": "マキ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -96,6 +112,8 @@
     "base_name": "ネル",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -107,6 +125,8 @@
     "base_name": "イズミ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -118,6 +138,8 @@
     "base_name": "シロコ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -129,6 +151,8 @@
     "base_name": "シュン",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -140,6 +164,8 @@
     "base_name": "スミレ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -151,6 +177,8 @@
     "base_name": "ツルギ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -162,6 +190,8 @@
     "base_name": "アカネ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -173,6 +203,8 @@
     "base_name": "チセ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -184,6 +216,8 @@
     "base_name": "アカリ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -195,6 +229,8 @@
     "base_name": "ハスミ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -206,6 +242,8 @@
     "base_name": "ノノミ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -217,6 +255,8 @@
     "base_name": "カヨコ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -228,6 +268,8 @@
     "base_name": "ムツキ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -239,6 +281,8 @@
     "base_name": "ジュンコ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -250,6 +294,8 @@
     "base_name": "セリカ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -261,6 +307,8 @@
     "base_name": "ツバキ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -272,6 +320,8 @@
     "base_name": "ユウカ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -283,6 +333,8 @@
     "base_name": "ハルカ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -294,6 +346,8 @@
     "base_name": "アスナ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -305,6 +359,8 @@
     "base_name": "コトリ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -316,6 +372,8 @@
     "base_name": "スズミ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -327,6 +385,8 @@
     "base_name": "フィーナ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -338,6 +398,8 @@
     "base_name": "ヒビキ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -349,6 +411,8 @@
     "base_name": "カリン",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -360,6 +424,8 @@
     "base_name": "サヤ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -371,6 +437,8 @@
     "base_name": "アイリ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -382,6 +450,8 @@
     "base_name": "フウカ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -393,6 +463,8 @@
     "base_name": "ハナエ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -404,6 +476,8 @@
     "base_name": "ハレ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -415,6 +489,8 @@
     "base_name": "ウタハ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -426,6 +502,8 @@
     "base_name": "アヤネ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -437,6 +515,8 @@
     "base_name": "チナツ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -448,6 +528,8 @@
     "base_name": "コタマ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -459,6 +541,8 @@
     "base_name": "ジュリ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -470,6 +554,8 @@
     "base_name": "セリナ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -481,6 +567,8 @@
     "base_name": "シミコ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -492,6 +580,8 @@
     "base_name": "ヨシミ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -503,6 +593,8 @@
     "base_name": "マシロ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -514,6 +606,8 @@
     "base_name": "イズナ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -525,6 +619,8 @@
     "base_name": "シズコ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -536,6 +632,8 @@
     "base_name": "アリス",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -547,6 +645,8 @@
     "base_name": "ミドリ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -558,6 +658,8 @@
     "base_name": "モモイ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -569,6 +671,8 @@
     "base_name": "チェリノ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -580,6 +684,8 @@
     "base_name": "ノドカ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -591,6 +697,8 @@
     "base_name": "ユズ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -602,6 +710,8 @@
     "base_name": "アズサ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -613,6 +723,8 @@
     "base_name": "ハナコ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -624,6 +736,8 @@
     "base_name": "コハル",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -635,6 +749,8 @@
     "base_name": "アズサ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -646,6 +762,8 @@
     "base_name": "マシロ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -657,6 +775,8 @@
     "base_name": "ツルギ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -668,6 +788,8 @@
     "base_name": "ヒフミ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 10,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -679,6 +801,8 @@
     "base_name": "ヒナ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -690,6 +814,8 @@
     "base_name": "イオリ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -701,6 +827,8 @@
     "base_name": "イズミ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -712,6 +840,8 @@
     "base_name": "シロコ",
     "costume": "ライディング",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -723,6 +853,8 @@
     "base_name": "シュン",
     "costume": "幼女",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -734,6 +866,8 @@
     "base_name": "キリノ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -745,6 +879,8 @@
     "base_name": "サヤ",
     "costume": "私服",
     "role": "SPECIAL",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -756,6 +892,8 @@
     "base_name": "ネル",
     "costume": "バニーガール",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -767,6 +905,8 @@
     "base_name": "カリン",
     "costume": "バニーガール",
     "role": "STRIKER",
+    "ex_cost_max": 7,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -778,6 +918,8 @@
     "base_name": "アスナ",
     "costume": "バニーガール",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -789,6 +931,8 @@
     "base_name": "ナツ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -800,6 +944,8 @@
     "base_name": "マリー",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -811,6 +957,8 @@
     "base_name": "初音ミク",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -822,6 +970,8 @@
     "base_name": "アコ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -833,6 +983,8 @@
     "base_name": "チェリノ",
     "costume": "温泉",
     "role": "SPECIAL",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -844,6 +996,8 @@
     "base_name": "チナツ",
     "costume": "温泉",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -855,6 +1009,8 @@
     "base_name": "トモエ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -866,6 +1022,8 @@
     "base_name": "ノドカ",
     "costume": "温泉",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -877,6 +1035,8 @@
     "base_name": "アル",
     "costume": "正月",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -888,6 +1048,8 @@
     "base_name": "ムツキ",
     "costume": "正月",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -899,6 +1061,8 @@
     "base_name": "セリカ",
     "costume": "正月",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -910,6 +1074,8 @@
     "base_name": "ワカモ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -921,6 +1087,8 @@
     "base_name": "フブキ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -932,6 +1100,8 @@
     "base_name": "セナ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -943,6 +1113,8 @@
     "base_name": "チヒロ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -954,6 +1126,8 @@
     "base_name": "ミモリ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -965,6 +1139,8 @@
     "base_name": "ウイ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -976,6 +1152,8 @@
     "base_name": "ヒナタ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -987,6 +1165,8 @@
     "base_name": "マリナ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -998,6 +1178,8 @@
     "base_name": "ミヤコ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1009,6 +1191,8 @@
     "base_name": "サキ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1020,6 +1204,8 @@
     "base_name": "ミユ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1031,6 +1217,8 @@
     "base_name": "カエデ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1042,6 +1230,8 @@
     "base_name": "イロハ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1053,6 +1243,8 @@
     "base_name": "ミチル",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1064,6 +1256,8 @@
     "base_name": "ツクヨ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1075,6 +1269,8 @@
     "base_name": "ミサキ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1086,6 +1282,8 @@
     "base_name": "ヒヨリ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1097,6 +1295,8 @@
     "base_name": "アツコ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1108,6 +1308,8 @@
     "base_name": "ワカモ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1119,6 +1321,8 @@
     "base_name": "ノノミ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1130,6 +1334,8 @@
     "base_name": "アヤネ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1141,6 +1347,8 @@
     "base_name": "ホシノ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1152,6 +1360,8 @@
     "base_name": "シズコ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1163,6 +1373,8 @@
     "base_name": "イズナ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1174,6 +1386,8 @@
     "base_name": "チセ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1185,6 +1399,8 @@
     "base_name": "サオリ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1196,6 +1412,8 @@
     "base_name": "モエ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1207,6 +1425,8 @@
     "base_name": "カズサ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1218,6 +1438,8 @@
     "base_name": "ココナ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1229,6 +1451,8 @@
     "base_name": "ウタハ",
     "costume": "応援団",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1240,6 +1464,8 @@
     "base_name": "ノア",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1251,6 +1477,8 @@
     "base_name": "ヒビキ",
     "costume": "応援団",
     "role": "STRIKER",
+    "ex_cost_max": 7,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1262,6 +1490,8 @@
     "base_name": "アカネ",
     "costume": "バニーガール",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1273,6 +1503,8 @@
     "base_name": "ユウカ",
     "costume": "体操服",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1284,6 +1516,8 @@
     "base_name": "マリー",
     "costume": "体操服",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1295,6 +1529,8 @@
     "base_name": "ハスミ",
     "costume": "体操服",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1306,6 +1542,8 @@
     "base_name": "ヒマリ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1317,6 +1555,8 @@
     "base_name": "シグレ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1328,6 +1568,8 @@
     "base_name": "セリナ",
     "costume": "クリスマス",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1339,6 +1581,8 @@
     "base_name": "ハナエ",
     "costume": "クリスマス",
     "role": "SPECIAL",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1350,6 +1594,8 @@
     "base_name": "ハルナ",
     "costume": "正月",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1361,6 +1607,8 @@
     "base_name": "フウカ",
     "costume": "正月",
     "role": "SPECIAL",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1372,6 +1620,8 @@
     "base_name": "ジュンコ",
     "costume": "正月",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1383,6 +1633,8 @@
     "base_name": "ミネ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1394,6 +1646,8 @@
     "base_name": "ミカ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1405,6 +1659,8 @@
     "base_name": "メグ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1416,6 +1672,8 @@
     "base_name": "カンナ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1427,6 +1685,8 @@
     "base_name": "サクラコ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1438,6 +1698,8 @@
     "base_name": "トキ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": 5,
     "icon_copied": true
   },
   {
@@ -1449,6 +1711,8 @@
     "base_name": "ナギサ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1460,6 +1724,8 @@
     "base_name": "コユキ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1471,6 +1737,8 @@
     "base_name": "カヨコ",
     "costume": "正月",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1482,6 +1750,8 @@
     "base_name": "ハルカ",
     "costume": "正月",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1493,6 +1763,8 @@
     "base_name": "カホ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1504,6 +1776,8 @@
     "base_name": "アリス",
     "costume": "メイド",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1515,6 +1789,8 @@
     "base_name": "トキ",
     "costume": "バニーガール",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1526,6 +1802,8 @@
     "base_name": "ユズ",
     "costume": "メイド",
     "role": "SPECIAL",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1537,6 +1815,8 @@
     "base_name": "レイサ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1548,6 +1828,8 @@
     "base_name": "ルミ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1559,6 +1841,8 @@
     "base_name": "ミナ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1570,6 +1854,8 @@
     "base_name": "ミノリ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1581,6 +1867,8 @@
     "base_name": "ミヤコ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1592,6 +1880,8 @@
     "base_name": "サキ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1603,6 +1893,8 @@
     "base_name": "ミユ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1614,6 +1906,8 @@
     "base_name": "シロコ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1625,6 +1919,8 @@
     "base_name": "ウイ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1636,6 +1932,8 @@
     "base_name": "ヒナタ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1647,6 +1945,8 @@
     "base_name": "コハル",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1658,6 +1958,8 @@
     "base_name": "ハナコ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1669,6 +1971,8 @@
     "base_name": "ミモリ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1680,6 +1984,8 @@
     "base_name": "メル",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1691,6 +1997,8 @@
     "base_name": "モミジ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1702,6 +2010,8 @@
     "base_name": "コトリ",
     "costume": "応援団",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1713,6 +2023,8 @@
     "base_name": "ハルナ",
     "costume": "体操服",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1724,6 +2036,8 @@
     "base_name": "イチカ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1735,6 +2049,8 @@
     "base_name": "カスミ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1746,6 +2062,8 @@
     "base_name": "シグレ",
     "costume": "温泉",
     "role": "SPECIAL",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1757,6 +2075,8 @@
     "base_name": "御坂美琴",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1768,6 +2088,8 @@
     "base_name": "食蜂操祈",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1779,6 +2101,8 @@
     "base_name": "佐天涙子",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1790,6 +2114,8 @@
     "base_name": "ユカリ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 7,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1801,6 +2127,8 @@
     "base_name": "レンゲ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1812,6 +2140,8 @@
     "base_name": "キキョウ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1823,6 +2153,8 @@
     "base_name": "エイミ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1834,6 +2166,8 @@
     "base_name": "コタマ",
     "costume": "キャンプ",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1845,6 +2179,8 @@
     "base_name": "ハレ",
     "costume": "キャンプ",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1856,6 +2192,8 @@
     "base_name": "アコ",
     "costume": "ドレス",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1867,6 +2205,8 @@
     "base_name": "イブキ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": 5,
     "icon_copied": true
   },
   {
@@ -1878,6 +2218,8 @@
     "base_name": "マコト",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1889,6 +2231,8 @@
     "base_name": "ヒナ",
     "costume": "ドレス",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": 0,
     "icon_copied": true
   },
   {
@@ -1900,6 +2244,8 @@
     "base_name": "カヨコ",
     "costume": "ドレス",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1911,6 +2257,8 @@
     "base_name": "アル",
     "costume": "ドレス",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1922,6 +2270,8 @@
     "base_name": "アカリ",
     "costume": "正月",
     "role": "SPECIAL",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1933,6 +2283,8 @@
     "base_name": "ウミカ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1944,6 +2296,8 @@
     "base_name": "ツバキ",
     "costume": "ガイド",
     "role": "SPECIAL",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1955,6 +2309,8 @@
     "base_name": "カズサ",
     "costume": "バンド",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1966,6 +2322,8 @@
     "base_name": "ヨシミ",
     "costume": "バンド",
     "role": "STRIKER",
+    "ex_cost_max": 10,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1977,6 +2335,8 @@
     "base_name": "アイリ",
     "costume": "バンド",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1988,6 +2348,8 @@
     "base_name": "キララ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -1999,6 +2361,8 @@
     "base_name": "モモイ",
     "costume": "メイド",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2010,6 +2374,8 @@
     "base_name": "ミドリ",
     "costume": "メイド",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2021,6 +2387,8 @@
     "base_name": "セリカ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2032,6 +2400,8 @@
     "base_name": "カンナ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2043,6 +2413,8 @@
     "base_name": "フブキ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2054,6 +2426,8 @@
     "base_name": "キリノ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2065,6 +2439,8 @@
     "base_name": "モエ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2076,6 +2452,8 @@
     "base_name": "ホシノ",
     "costume": "臨戦",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2087,6 +2465,8 @@
     "base_name": "ホシノ",
     "costume": "臨戦",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2098,6 +2478,8 @@
     "base_name": "シロコ＊テラー",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2109,6 +2491,8 @@
     "base_name": "アツコ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2120,6 +2504,8 @@
     "base_name": "サオリ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 7,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2131,6 +2517,8 @@
     "base_name": "ヒヨリ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2142,6 +2530,8 @@
     "base_name": "マリナ",
     "costume": "チーパオ",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2153,6 +2543,8 @@
     "base_name": "トモエ",
     "costume": "チーパオ",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2164,6 +2556,8 @@
     "base_name": "レイジョ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2175,6 +2569,8 @@
     "base_name": "キサキ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2186,6 +2582,8 @@
     "base_name": "マリー",
     "costume": "アイドル",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2197,6 +2595,8 @@
     "base_name": "サクラコ",
     "costume": "アイドル",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2208,6 +2608,8 @@
     "base_name": "ミネ",
     "costume": "アイドル",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2219,6 +2621,8 @@
     "base_name": "チアキ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2230,6 +2634,8 @@
     "base_name": "サツキ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2241,6 +2647,8 @@
     "base_name": "ユウカ",
     "costume": "パジャマ",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2252,6 +2660,8 @@
     "base_name": "ノア",
     "costume": "パジャマ",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": 3,
     "icon_copied": true
   },
   {
@@ -2263,6 +2673,8 @@
     "base_name": "セイア",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2274,6 +2686,8 @@
     "base_name": "アスナ",
     "costume": "制服",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2285,6 +2699,8 @@
     "base_name": "カリン",
     "costume": "制服",
     "role": "SPECIAL",
+    "ex_cost_max": 7,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2296,6 +2712,8 @@
     "base_name": "ネル",
     "costume": "制服",
     "role": "STRIKER",
+    "ex_cost_max": 1,
+    "ex_extra_cost_max": 4,
     "icon_copied": true
   },
   {
@@ -2307,6 +2725,8 @@
     "base_name": "リオ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2318,6 +2738,8 @@
     "base_name": "マキ",
     "costume": "キャンプ",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2329,6 +2751,8 @@
     "base_name": "セナ",
     "costume": "私服",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2340,6 +2764,8 @@
     "base_name": "ジュリ",
     "costume": "アルバイト",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2351,6 +2777,8 @@
     "base_name": "イズミ",
     "costume": "正月",
     "role": "SPECIAL",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2362,6 +2790,8 @@
     "base_name": "レイ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2373,6 +2803,8 @@
     "base_name": "スミレ",
     "costume": "アルバイト",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2384,6 +2816,8 @@
     "base_name": "サオリ",
     "costume": "ドレス",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2395,6 +2829,8 @@
     "base_name": "ヒカリ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2406,6 +2842,8 @@
     "base_name": "ノゾミ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2417,6 +2855,8 @@
     "base_name": "アオバ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2428,6 +2868,8 @@
     "base_name": "フィーナ",
     "costume": "ガイド",
     "role": "SPECIAL",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2439,6 +2881,8 @@
     "base_name": "ナグサ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2450,6 +2894,8 @@
     "base_name": "ニヤ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2461,6 +2907,8 @@
     "base_name": "ナツ",
     "costume": "バンド",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2472,6 +2920,8 @@
     "base_name": "ユカリ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2483,6 +2933,8 @@
     "base_name": "レンゲ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2494,6 +2946,8 @@
     "base_name": "キキョウ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2505,6 +2959,8 @@
     "base_name": "セイア",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2516,6 +2972,8 @@
     "base_name": "ハスミ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2527,6 +2985,8 @@
     "base_name": "イチカ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2538,6 +2998,8 @@
     "base_name": "ナギサ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2549,6 +3011,8 @@
     "base_name": "ミカ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": 2,
     "icon_copied": true
   },
   {
@@ -2560,6 +3024,8 @@
     "base_name": "エリ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2571,6 +3037,8 @@
     "base_name": "カノエ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2582,6 +3050,8 @@
     "base_name": "ミサキ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2593,6 +3063,8 @@
     "base_name": "ミヨ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2604,6 +3076,8 @@
     "base_name": "フユ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2615,6 +3089,8 @@
     "base_name": "リツ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2626,6 +3102,8 @@
     "base_name": "レイサ",
     "costume": "マジカル",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2637,6 +3115,8 @@
     "base_name": "スズミ",
     "costume": "マジカル",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2648,6 +3128,8 @@
     "base_name": "ラブ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": 4,
     "icon_copied": true
   },
   {
@@ -2659,6 +3141,8 @@
     "base_name": "スバル",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2670,6 +3154,8 @@
     "base_name": "タカネ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2681,6 +3167,8 @@
     "base_name": "ヤクモ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2692,6 +3180,8 @@
     "base_name": "ツクヨ",
     "costume": "ドレス",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2703,6 +3193,8 @@
     "base_name": "ミチル",
     "costume": "ドレス",
     "role": "SPECIAL",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2714,6 +3206,8 @@
     "base_name": "リオ",
     "costume": "臨戦",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2725,6 +3219,8 @@
     "base_name": "トキ",
     "costume": "臨戦",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2736,6 +3232,8 @@
     "base_name": "ヒマリ",
     "costume": "臨戦",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2747,6 +3245,8 @@
     "base_name": "アリス",
     "costume": "臨戦",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": 4,
     "icon_copied": true
   },
   {
@@ -2758,6 +3258,8 @@
     "base_name": "ケイ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2769,6 +3271,8 @@
     "base_name": "エイミ",
     "costume": "臨戦",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2780,6 +3284,8 @@
     "base_name": "ユズ",
     "costume": "臨戦",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2791,6 +3297,8 @@
     "base_name": "コユキ",
     "costume": "パジャマ",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2802,6 +3310,8 @@
     "base_name": "コノカ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2813,6 +3323,8 @@
     "base_name": "レナ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2824,6 +3336,8 @@
     "base_name": "アカネ",
     "costume": "制服",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2835,6 +3349,8 @@
     "base_name": "ニコ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2846,6 +3362,8 @@
     "base_name": "クルミ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2857,6 +3375,8 @@
     "base_name": "オトギ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2868,6 +3388,8 @@
     "base_name": "エリカ",
     "costume": "",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2879,6 +3401,8 @@
     "base_name": "ハルカ",
     "costume": "ドレス",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2890,6 +3414,8 @@
     "base_name": "ムツキ",
     "costume": "ドレス",
     "role": "SPECIAL",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2901,6 +3427,8 @@
     "base_name": "ナグサ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2912,6 +3440,8 @@
     "base_name": "シュン",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": 3,
     "icon_copied": true
   },
   {
@@ -2923,6 +3453,8 @@
     "base_name": "シュン",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2934,6 +3466,8 @@
     "base_name": "キサキ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": 0,
     "icon_copied": true
   },
   {
@@ -2945,6 +3479,8 @@
     "base_name": "マコト",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2956,6 +3492,8 @@
     "base_name": "サツキ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2967,6 +3505,8 @@
     "base_name": "チアキ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2978,6 +3518,8 @@
     "base_name": "イロハ",
     "costume": "水着",
     "role": "STRIKER",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -2989,6 +3531,8 @@
     "base_name": "イブキ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 0,
+    "ex_extra_cost_max": 3,
     "icon_copied": true
   },
   {
@@ -3000,6 +3544,8 @@
     "base_name": "ココロ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": 2,
     "icon_copied": true
   },
   {
@@ -3011,6 +3557,8 @@
     "base_name": "コトネ",
     "costume": "",
     "role": "STRIKER",
+    "ex_cost_max": 2,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   },
   {
@@ -3022,6 +3570,8 @@
     "base_name": "カスミ",
     "costume": "水着",
     "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
     "icon_copied": true
   }
 ]
