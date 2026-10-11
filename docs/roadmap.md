@@ -35,8 +35,9 @@
 ### 1. 制約スキーマの定義
 「TL制約」をデータとして表現する形式を先に固める（JSON/dataclass等）。想定する要素:
 - 特定ステップまでの最低ゲージ/チャージ条件
-- コスト予算の充足（`bluearchive-timeline-simulator/core/cost_validator.py` の
-  ロジックが参考になるが、生徒別コストデータを持つ本リポジトリ用に作り直しが必要）
+- コスト予算の充足（生徒別コスト・累計消費コストは `CharacterSpec.get_cost` /
+  `character_library` 経由で既に取得できる。`bluearchive-timeline-simulator/core/cost_validator.py`
+  の予算チェックロジックを、この値を使う形に移植すればよい）
 - 対象指定の制約（誰を対象にできる/できないか）
 - 最大ターン数・最大時間
 - 終端条件（`State.env` に対する述語としてのゴール状態）

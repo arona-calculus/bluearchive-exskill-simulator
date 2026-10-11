@@ -27,7 +27,7 @@ from ba_exsim.specs.generic import GenericSpec
 from ba_exsim.specs.hanako_swimsuit import HanakoSwimsuitSpec
 from ba_exsim.specs.ibuki_swimsuit import IbukiSwimsuitSpec
 from ba_exsim.specs.rio import RioCopySpec, RioSpec
-# main.py の app 定義部分
+
 app = FastAPI(title="BA ExSkill Simulator API", root_path="/exsim")
 
 app.add_middleware(
