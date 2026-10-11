@@ -117,6 +117,7 @@ def simulate_tl(
                 "cost": h["cost"],
                 "cumulative_cost": h["cumulative_cost"],
                 "hand_after": h["state_after"]["hand"],
+                "deck_after": h["state_after"]["deck"],
                 "env_after": h["state_after"]["env"],
             }
             for h in result.history

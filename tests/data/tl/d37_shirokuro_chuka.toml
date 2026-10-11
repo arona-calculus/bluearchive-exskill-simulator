@@ -1,0 +1,56 @@
+title = "d37 市街地シロクロ 軽装備Torment 中華リバエン(冒頭7手)"
+description = """
+出典: souriki/season/d37_ShiroKuro/d37_ShiroKuro.md の「中華リバエン」の冒頭7行。
+手順列は、MCP の動作確認時に Claude がラフTLを解釈したもの。次の仮定を置いており、まだ本人の確認を経ていない(verified = false):
+- 「イブキ」= イブキ(水着)。最初のEX1でのお友達は イロハ(水着)・エイミ(臨戦)
+- 「ホシノ」= ホシノ(臨戦)[攻撃型]、「エイミ」= エイミ(臨戦)、「イロハ」= イロハ(水着)
+- 「リオ」の次の「11 Cイロハ」は、リオがイロハ(水着)をコピーし、そのコピーをコスト11で使う意味
+- 初期の手札+山札順は書かれていないため、find_initial_orders の候補の1つを使っている
+"""
+verified = false
+rough_tl = """
+3:54.7 イブキ
+3:45.7 ホシノ
+リオ
+11 Cイロハ
+イブキ
+ココロ
+ASAP イロハ
+"""
+cards = ["Ibuki_Swimsuit", "Hoshino_Battle_Attack", "Rio", "Iroha_Swimsuit", "Kokoro", "Eimi_Battle"]
+
+[[steps]]
+card = "イブキ(水着)"
+target = "Iroha_Swimsuit,Eimi_Battle"
+note = "3:54.7"
+expect = { cost = 0, env = { ibuki_friends = ["Iroha_Swimsuit", "Eimi_Battle"] } }
+
+[[steps]]
+card = "Hoshino_Battle_Attack"
+note = "3:45.7"
+
+[[steps]]
+card = "Rio"
+target = "Iroha_Swimsuit"
+expect = { env = { rio_copy_target = "Iroha_Swimsuit" } }
+
+[[steps]]
+card = "Rio"
+note = "11 Cイロハ(リオのコピーの使用)"
+expect = { cost = 3 }
+
+[[steps]]
+card = "Ibuki_Swimsuit"
+note = "EX2"
+expect = { cost = 3 }
+
+[[steps]]
+card = "Kokoro"
+
+[[steps]]
+card = "Iroha_Swimsuit"
+note = "ASAP"
+
+[expect]
+ok = true
+total_cost = 20

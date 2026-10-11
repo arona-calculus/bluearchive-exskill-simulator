@@ -20,6 +20,7 @@ from dataclasses import dataclass
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 from ba_exsim.core.simulator import Simulator
+from ba_exsim.core.spec import CharacterSpec
 from webui.backend.catalog import (
     BUILTINS,
     NEEDS_TARGET,
@@ -182,13 +183,15 @@ def run_tl(
     steps: List[Step],
     hand_size: int = 3,
     env: Optional[Dict[str, Any]] = None,
+    specs: Optional[List[CharacterSpec]] = None,
 ) -> RunResult:
     """正規化済みの編成(=初期の手札+山札順)と手順列を実行する。
 
     途中で破綻した場合(使おうとした生徒が手札に無い、対象指定が不正等)は
     そこで止め、それまでの履歴と error を返す。
+    specs を省略すると webui と同じ生徒カタログから組み立てる(テストでは差し替える)。
     """
-    sim = Simulator(build_specs(characters))
+    sim = Simulator(specs if specs is not None else build_specs(characters))
     sim.initialize_state(tuple(characters), env=dict(env or {}), hand_size=hand_size)
     result = RunResult(
         characters=list(characters),

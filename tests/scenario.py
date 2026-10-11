@@ -2,6 +2,8 @@
 tests/data/ 以下のTOMLシナリオ(編成・初期の手札+山札順・手順・期待値)を読み込み、実行・照合する共通部品。
 
 - data/scenarios/: エンジンの回帰シナリオ。run_engine() で Simulator を直接駆動する。
+- data/tl/: 実戦のラフTL(原文付き)。webui の実カタログを使い、tl_import.run_tl や MCP 経由で実行して
+  check_tl_result() で照合する(test_tl_import.py / scripts/mcp_smoke.py)。
 
 スキーマは load() 内の *_KEYS を参照。未知のキーは書き間違いとみなしてロード時にエラーにする。
 """
@@ -25,6 +27,7 @@ from ba_exsim.specs.yuzu_battle import YuzuBattleSpec
 
 DATA_DIR = Path(__file__).parent / "data"
 SCENARIO_DIR = DATA_DIR / "scenarios"
+TL_DIR = DATA_DIR / "tl"
 
 # 固有Specを割り当てる生徒(webui の BUILTINS のうち GenericSpec 以外のもの)。それ以外は GenericSpec。
 # 生成データ(characters.json)には依存しないので、再生成してもシナリオは壊れない
@@ -45,7 +48,10 @@ STEP_EXPECT_KEYS = {
     "cards", "hand", "deck", "hand_excludes", "env", "env_none",
     "cost", "cost_unknown", "error", "error_match",
 }
-FINAL_EXPECT_KEYS = {"total_cost", "cards", "hand", "deck", "hand_excludes", "env", "env_none"}
+FINAL_EXPECT_KEYS = {
+    "total_cost", "cards", "hand", "deck", "hand_excludes", "env", "env_none",
+    "ok", "error_step",  # data/tl 用: 最後まで実行できたか / どのステップで止まるか
+}
 OVERRIDE_KEYS = {"cost", "extra_cost", "role"}
 
 
@@ -278,3 +284,67 @@ def run_engine(scenario: Scenario) -> Simulator:
             f"{scenario.id}: 累計コストが違います (期待: {final['total_cost']}, 実際: {total_cost})"
         )
     return sim
+
+
+# ---------------------------------------------------------------------------
+# data/tl: tl_import.run_tl / MCP simulate_tl の結果の照合
+# ---------------------------------------------------------------------------
+
+
+def step_inputs(scenario: Scenario, keep_slot: bool = True) -> List[Dict[str, Any]]:
+    """MCP の simulate_tl(や tl_import.Step)にそのまま渡せる形の手順列。"""
+    steps = []
+    for step in scenario.steps:
+        d: Dict[str, Any] = {"card": step.card, "target": step.target, "note": step.note}
+        if keep_slot and step.slot is not None:
+            d["slot"] = step.slot
+        steps.append(d)
+    return steps
+
+
+def _actual(hand: List[Any], deck: List[Any], env: Dict[str, Any]) -> Dict[str, Any]:
+    return {
+        "cards": list(hand) + list(deck),
+        "hand": list(hand),
+        "deck": list(deck),
+        "env": {k: _plain(v) for k, v in env.items()},
+    }
+
+
+def check_tl_result(
+    scenario: Scenario,
+    ok: bool,
+    error: Optional[Dict[str, Any]],
+    steps: List[Dict[str, Any]],
+    final_state: Dict[str, Any],
+) -> None:
+    """実行結果をシナリオの期待値と照合する。
+
+    steps: 実行できたステップの [{"cost", "hand", "deck", "env"}](使用後の状態)。
+    final_state: {"hand", "deck", "env"}。
+    """
+    final = scenario.expect
+    if "ok" in final:
+        assert ok == final["ok"], f"{scenario.id}: ok={ok} (期待: {final['ok']}) error={error}"
+    if "error_step" in final:
+        got = error["step"] if error else None
+        assert got == final["error_step"], (
+            f"{scenario.id}: 停止ステップ {got} (期待: {final['error_step']}) error={error}"
+        )
+
+    total_cost = 0
+    for i, (step, out) in enumerate(zip(scenario.steps, steps), start=1):
+        ctx = f"{scenario.id} step {i}" + (f" ({step.note})" if step.note else "")
+        check_cost(ctx, step.expect, out["cost"])
+        check_state(ctx, step.expect, _actual(out["hand"], out["deck"], out["env"]))
+        total_cost += out["cost"] or 0
+
+    check_state(
+        f"{scenario.id} 最終状態",
+        final,
+        _actual(final_state["hand"], final_state["deck"], final_state["env"]),
+    )
+    if "total_cost" in final:
+        assert total_cost == final["total_cost"], (
+            f"{scenario.id}: 累計コストが違います (期待: {final['total_cost']}, 実際: {total_cost})"
+        )

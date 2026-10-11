@@ -105,6 +105,9 @@ pytestの回帰テストではなく、TL候補を広く探索するためのス
   未知のキーは書き間違いとみなしてロード時にエラーにする。
 - 全ステップ共通の不変条件として、カードの消失・重複が無いこと（代理カードは元の生徒に戻して比較）を毎回検査する。
 - 独自のSpecクラスが必要なテスト（`test_hanako.py` の `MockProxySpec`）や、`State` 単体のテストは Python のまま残す。
+- `tests/data/tl/` には実戦のラフTL（原文 `rough_tl` 付き、表示名混じり）を置く。webuiの実カタログを使い、
+  `tl_import.run_tl` / MCP 経由で実行して `check_tl_result` で照合する。解釈が本人未確認のものは `verified = false` にする。
+- `test_tl_import.py` は、エンジンの全シナリオを同じSpecで `run_tl` 経由でも実行し、エンジン直結と結果が一致することを確かめる。
 
 ## キャラクターライブラリ生成（`webui/backend/character_library/`）
 
@@ -157,6 +160,9 @@ uv run --extra mcp python -m webui.backend.mcp_server   # stdio。リポジト�
 - リオのコピー使用は元の名前（`Rio`）で指定してよい（手札上の代理カード `Rio_Copy` に解決する）。
 - 結果は webui の既存の共有リンク形式（`#share=` + gzip + base64url）にして返すので、開けばそのままwebuiに読み込まれる
   （リンク先は環境変数 `EXSIM_BASE_URL`、既定は `http://localhost:8000/`）。手順の `note` はwebuiのコメント欄に入る。
+
+実際にサーバーをstdioで起動しての確認は `uv run --extra mcp python scripts/mcp_smoke.py`
+（`tests/data/tl/` の全ケースを `simulate_tl` に流して期待値と照合し、各ケースの share_url を表示する）。
 
 ## 姉妹リポジトリとの関係
 
