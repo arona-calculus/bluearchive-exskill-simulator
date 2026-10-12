@@ -1,0 +1,44 @@
+title = "ユズ(臨戦) 手札に残るEXでも回数を消費する / 対象指定のエラー"
+description = """
+- ハナコ(水着)がゲージを使って手札に残る使い方でも、EX使用なので半減され回数を消費する。
+- 対象なし、ユズ自身への使用はエラー(状態は変わらない)。
+"""
+cards = ["Yuzu_Battle", "Hanako_Swimsuit", "Aru", "Eri"]
+env = { hanako_gauge = 200 }
+
+[overrides.Yuzu_Battle]
+cost = 4
+
+[overrides.Hanako_Swimsuit]
+cost = 3
+
+[[steps]]
+card = "Yuzu_Battle"
+note = "対象なし"
+expect = { error = "ValueError", error_match = "対象" }
+
+[[steps]]
+card = "Yuzu_Battle"
+target = "Yuzu_Battle"
+note = "自身は対象にできない"
+expect = { error = "ValueError", error_match = "自身" }
+
+[[steps]]
+card = "Yuzu_Battle"
+target = "Hanako_Swimsuit"
+expect = { cost = 4, cards = ["Eri", "Hanako_Swimsuit", "Aru", "Yuzu_Battle"], env = { yuzu_cost_down = { Hanako_Swimsuit = 3 } } }
+
+[[steps]]
+card = "Hanako_Swimsuit"
+note = "ゲージ200で手札に残る: 3 → 2"
+expect = { cost = 2, cards = ["Eri", "Hanako_Swimsuit", "Aru", "Yuzu_Battle"], env = { hanako_gauge = 100, yuzu_cost_down = { Hanako_Swimsuit = 2 } } }
+
+[[steps]]
+card = "Hanako_Swimsuit"
+note = "ゲージ100で手札に残る"
+expect = { cost = 2, env = { hanako_gauge = 0, yuzu_cost_down = { Hanako_Swimsuit = 1 } } }
+
+[[steps]]
+card = "Hanako_Swimsuit"
+note = "ゲージ0で通常通りサイクル。3回目で効果が切れる"
+expect = { cost = 2, cards = ["Eri", "Yuzu_Battle", "Aru", "Hanako_Swimsuit"], env_none = ["yuzu_cost_down"] }

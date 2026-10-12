@@ -784,6 +784,11 @@ function envChipVal(disp, val, env) {
     const names = Array.isArray(val) ? val : [val];
     return '<span class="env-chip-val">' + escHtml(names.map(getDisplayName).join(' / ')) + '</span>';
   }
+  if (disp.kind === 'counts') {
+    // 値は {生徒: 残り回数}
+    const text = Object.keys(val).map(function(name) { return getDisplayName(name) + ' 残' + val[name]; }).join(' / ');
+    return '<span class="env-chip-val">' + escHtml(text) + '</span>';
+  }
   return '<span class="env-chip-val">' + escHtml(String(val)) + '</span>';
 }
 

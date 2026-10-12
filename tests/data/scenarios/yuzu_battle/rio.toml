@@ -1,0 +1,63 @@
+title = "ユズ(臨戦) × リオ(臨戦)"
+description = """
+- リオに付けた半減は、リオ本体のEX(コピー作成)にもリオ(コピー)の使用にも掛かり、どちらも回数を消費する。
+- リオ(コピー)のコストは「コピー元のコスト - 1」を求めてから半減する: アル(5) → 4 → 2。
+- リオがユズをコピーした場合、リオ(コピー)でユズの効果を付与できる。リオ自身は対象にできない。
+"""
+cards = ["Yuzu_Battle", "Rio", "Aru", "Eri"]
+
+[overrides.Yuzu_Battle]
+cost = 4
+
+[overrides.Rio]
+cost = 3
+
+[overrides.Aru]
+cost = 5
+
+[overrides.Eri]
+cost = 2
+
+[[steps]]
+card = "Yuzu_Battle"
+target = "Rio"
+expect = { cost = 4, cards = ["Eri", "Rio", "Aru", "Yuzu_Battle"], env = { yuzu_cost_down = { Rio = 3 } } }
+
+[[steps]]
+card = "Rio"
+target = "Aru"
+note = "リオ本体のEX: 3 → 2"
+expect = { cost = 2, hand = ["Eri", "Rio_Copy", "Aru"], env = { yuzu_cost_down = { Rio = 2 } } }
+
+[[steps]]
+card = "Rio_Copy"
+note = "アル(5)のコピー: 5 - 1 = 4 → 半減で2"
+expect = { cost = 2, cards = ["Eri", "Yuzu_Battle", "Aru", "Rio"], env = { yuzu_cost_down = { Rio = 1 } } }
+
+[[steps]]
+card = "Aru"
+note = "コピー元のアル自身は効果を持たない"
+expect = { cost = 5, cards = ["Eri", "Yuzu_Battle", "Rio", "Aru"] }
+
+[[steps]]
+card = "Rio"
+target = "Yuzu_Battle"
+note = "3回目で効果が切れる: 3 → 2"
+expect = { cost = 2, env_none = ["yuzu_cost_down"] }
+
+[[steps]]
+card = "Rio_Copy"
+target = "Rio"
+note = "ユズのコピーでもリオ自身は対象にできない"
+expect = { error = "ValueError", error_match = "自身" }
+
+[[steps]]
+card = "Rio_Copy"
+target = "Eri"
+note = "ユズ(4)のコピー: 4 - 1 = 3。エリに付与"
+expect = { cost = 3, env = { yuzu_cost_down = { Eri = 3 } } }
+
+[[steps]]
+card = "Eri"
+note = "2 → 1"
+expect = { cost = 1, env = { yuzu_cost_down = { Eri = 2 } } }

@@ -1,0 +1,68 @@
+title = "ユズ(臨戦) 複数の生徒への付与、掛け直し、切り捨て"
+description = """
+- 別の生徒(エリ)に使っても、前に付けたアルの残り回数はそのまま残る。
+- 同じ生徒(アル)に使い直すと、残り回数は3回に戻る(上書き)。
+- 減少値は小数点以下切り捨て: コスト5 → 減少2で3、コスト1 → 減少0で1。
+"""
+hand_size = 4
+cards = ["Yuzu_Battle", "Aru", "Eri", "Mine", "Kisaki"]
+
+[overrides.Yuzu_Battle]
+cost = 4
+
+[overrides.Aru]
+cost = 4
+
+[overrides.Eri]
+cost = 5
+
+[overrides.Mine]
+cost = 3
+
+[overrides.Kisaki]
+cost = 1
+
+[[steps]]
+card = "Yuzu_Battle"
+target = "Aru"
+expect = { cost = 4, env = { yuzu_cost_down = { Aru = 3 } } }
+
+[[steps]]
+card = "Kisaki"
+note = "ユズを手札に戻す"
+expect = { cost = 1, hand = ["Yuzu_Battle", "Aru", "Eri", "Mine"] }
+
+[[steps]]
+card = "Aru"
+expect = { cost = 2, env = { yuzu_cost_down = { Aru = 2 } } }
+
+[[steps]]
+card = "Yuzu_Battle"
+target = "Eri"
+note = "エリにも付与。アルの残り2回はそのまま"
+expect = { env = { yuzu_cost_down = { Aru = 2, Eri = 3 } } }
+
+[[steps]]
+card = "Eri"
+note = "コスト5 → 減少2(2.5を切り捨て)で3"
+expect = { cost = 3, env = { yuzu_cost_down = { Aru = 2, Eri = 2 } } }
+
+[[steps]]
+card = "Yuzu_Battle"
+target = "Aru"
+note = "アルに掛け直すと3回に戻る"
+expect = { env = { yuzu_cost_down = { Aru = 3, Eri = 2 } } }
+
+[[steps]]
+card = "Aru"
+expect = { cost = 2, env = { yuzu_cost_down = { Aru = 2, Eri = 2 } } }
+
+[[steps]]
+card = "Yuzu_Battle"
+target = "Kisaki"
+expect = { env = { yuzu_cost_down = { Aru = 2, Eri = 2, Kisaki = 3 } } }
+
+[[steps]]
+card = "Kisaki"
+note = "コスト1 → 減少0(0.5を切り捨て)で1。回数は消費する"
+expect = { cost = 1, env = { yuzu_cost_down = { Aru = 2, Eri = 2, Kisaki = 2 } } }

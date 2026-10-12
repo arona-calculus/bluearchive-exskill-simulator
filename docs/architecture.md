@@ -35,8 +35,13 @@ EXを誰に使うか）を適用すると、ゲーム内実装に沿った次の
 6. `on_passive` — 他キャラのEX使用時に誘発するパッシブ
 7. `get_cost` — 「今」使った場合の消費コストを返す（コピー元に応じて変わるリオ(コピー)や、
    形態によって変わるイブキ(水着)のEX2などはオーバーライドする。既定値は `self.cost`）
+8. `modify_cost` — 他の生徒のEXの消費コストを変化させる効果（ユズ(臨戦)のコスト半減など）。
+   各カードの `get_cost` の後に全specへ順に問い合わせる（`SpecRegistry.evaluate_cost`）
 
 サブクラスは必要なフックだけをオーバーライドする。
+
+`owner` は「そのカードを使う生徒」で、通常は自分自身。リオ(コピー)は `owner="Rio"` で、
+コピーの使用はリオのEXとして扱う（リオに付いたユズ(臨戦)のコスト半減が掛かり、回数も消費する）。
 
 加えて、webui向けの表示・入力形式を宣言する（シミュレーションの挙動には影響しない。型は `display.py`）:
 
@@ -59,7 +64,8 @@ EXを誰に使うか）を適用すると、ゲーム内実装に沿った次の
 ### `SpecRegistry`（`registry.py`）
 名前→`CharacterSpec` の辞書。初期化時に各 spec へ自分自身への参照を注入し
 （`spec.registry`）、リオがコピー対象のspecを動的に引けるようにしている。
-`evaluate_draw_intercepts` / `apply_passives` は全specに問い合わせるファンアウト処理。
+`evaluate_draw_intercepts` / `apply_passives` / `evaluate_cost` は全specに問い合わせるファンアウト処理。
+消費コストは必ず `evaluate_cost` で求める（カード単体の `get_cost` だと他の生徒の効果が掛からない）。
 
 ### `Simulator`（`simulator.py`）
 Registry + Engine の配線を隠すファサード。`initialize_state` / `play` / `play_by_name` を提供し、
@@ -74,8 +80,9 @@ Registry + Engine の配線を隠すファサード。`initialize_state` / `play
 | `rio.py` | `RioSpec`（自己を `Rio_Copy` に書き換え、非サイクル）+ `RioCopySpec`（`is_proxy=True`。Registry経由でコピー対象のspecを引き、その `apply_effect` を代理実行し、破棄時に `Rio` へ戻る）。コピースキルの中核ロジック。 |
 | `hanako_swimsuit.py` | ゲージ制の居座り（自己使用時: ゲージ100以上で消費して手札維持）、Rioコピー等の代理実行時は「保留強制ドロー」を発行、他キャラのEX使用（非proxy限定）でゲージ+40（上限200）のパッシブ加算。 |
 | `ibuki_swimsuit.py` | 2段階EX。EX1でお友達（味方ストライカー最大2人）を指定し即時再ドロー、以降EX2として振る舞う。お友達がカードを使用する度に「貝殻」蓄積のパッシブ（12個で以降増加しない）。コストもEX1/EX2で異なる（`get_cost`）。 |
+| `yuzu_battle.py` | EXで自身以外の味方1人に「コスト半減（EXスキルの使用3回分、減少値は切り捨て）」を付与。生徒ごとに `{生徒: 残り回数}` で持ち、同じ生徒への掛け直しは3回に戻す。半減は `modify_cost`、回数の消費は `on_passive`。 |
 
-固有ロジックを持つのはこの4体のみで、それ以外は全て `GenericSpec`
+固有ロジックを持つのはこの5体のみで、それ以外は全て `GenericSpec`
 （挙動は常にサイクルするだけだが、`cost`/`role` は後述の `character_library` 由来の実データを持つ）。
 `rio.py` × `hanako_swimsuit.py` の組み合わせシナリオ（`rio_hanako/`, `kurokage/`）
 まで揃っており、フック機構が複数生徒の相互作用（パッシブ誘発・代理実行・割り込みドローの重なり）
@@ -91,7 +98,7 @@ pytestの回帰テストではなく、TL候補を広く探索するためのス
 
 - 実行と照合は `tests/scenario.py`。`slot` のステップは `Simulator.play`、`card` だけのステップは
   `Simulator.play_by_name` で実行する。消費コストは使用前の状態で評価する（webuiの `/play` と同じ規約）。
-- 生徒のSpecは、固有Specを持つ4体（`CUSTOM_SPECS`）以外は `GenericSpec`。コスト・役割は
+- 生徒のSpecは、固有Specを持つ5体（`CUSTOM_SPECS`）以外は `GenericSpec`。コスト・役割は
   シナリオの `[overrides.<生徒>]` で与え、生成データ（`characters.json`）には依存しない（再生成しても壊れない）。
 - 期待値は書いた項目だけを照合する（`cards` / `hand` / `deck` / `hand_excludes` / `env` / `env_none` /
   `cost` / `cost_unknown` / `error`）。TOMLにはnullが無いので、Noneの検査は `env_none` / `cost_unknown` で書く。
@@ -124,7 +131,7 @@ pytestの回帰テストではなく、TL候補を広く探索するためのス
 `/api/specs` の `env_displays`・`card_displays`（各Specの `ENV_DISPLAYS`・`CARD_DISPLAYS` を集めたもの）に、
 対象指定の形式はカード選択時に `/api/session/{id}/target_input/{slot}`（`CharacterSpec.target_input`）に従う。
 消費コスト・累計消費コストは `/play` 実行時にバックエンド側
-（`CharacterSpec.get_cost`）で計算し、`history` の各エントリに保存する。
+（`SpecRegistry.evaluate_cost`）で計算し、`history` の各エントリに保存する。
 現状は**人間が1手ずつ操作するための確認ツール**であり、探索・最適化の機能は持たない。
 
 ## 姉妹リポジトリとの関係

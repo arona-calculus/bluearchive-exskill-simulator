@@ -38,7 +38,8 @@ class RioSpec(CharacterSpec):
 
 class RioCopySpec(CharacterSpec):
     def __init__(self):
-        super().__init__("Rio_Copy", is_proxy=True)
+        # コピーの使用はリオのEXとして扱う(ユズ(臨戦)のコスト半減など、リオに付いた効果が掛かる)
+        super().__init__("Rio_Copy", is_proxy=True, owner="Rio")
 
     def _get_target_spec(self, state: State) -> Optional[CharacterSpec]:
         # 環境変数に記録されたターゲット名から、Registry経由で動的にSpecを取得する。

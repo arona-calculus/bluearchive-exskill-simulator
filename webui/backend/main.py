@@ -28,6 +28,7 @@ from ba_exsim.specs.generic import GenericSpec
 from ba_exsim.specs.hanako_swimsuit import HanakoSwimsuitSpec
 from ba_exsim.specs.ibuki_swimsuit import IbukiSwimsuitSpec
 from ba_exsim.specs.rio import RioCopySpec, RioSpec
+from ba_exsim.specs.yuzu_battle import YuzuBattleSpec
 
 app = FastAPI(title="BA ExSkill Simulator API", root_path="/exsim")
 
@@ -75,6 +76,7 @@ BUILTINS: Dict[str, BuiltinEntry] = {
     "Miyako":          BuiltinEntry("ミヤコ",         GenericSpec),
     "Miyako_Swimsuit": BuiltinEntry("ミヤコ(水着)",   GenericSpec),
     "Rio":             BuiltinEntry("リオ",          RioSpec),
+    "Yuzu_Battle":     BuiltinEntry("ユズ(臨戦)",     YuzuBattleSpec),
 }
 
 _LIBRARY_PATH = Path(__file__).parent / "character_library" / "data" / "characters.json"
@@ -280,8 +282,7 @@ def play_card(session_id: str, body: PlayRequest):
 
     # コストはプレイ前のstateに対して評価する(リオ(コピー)はapply_effect自身が
     # rio_copy_targetをクリアするため、プレイ後では参照できなくなるキャラがいる)
-    spec = sim.registry.get(played_card)
-    step_cost = spec.get_cost(sim.state) if spec else None
+    step_cost = sim.registry.evaluate_cost(sim.state, played_card)
 
     try:
         new_state = sim.play(body.slot, target=body.target)

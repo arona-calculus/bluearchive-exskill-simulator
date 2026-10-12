@@ -19,10 +19,19 @@ class CharacterSpec:
     # このSpecが生み出す、BUILTINSに無いカード（リオ(コピー)等）の表示方法
     CARD_DISPLAYS: Tuple[CardDisplay, ...] = ()
 
-    def __init__(self, name: str, is_proxy: bool = False, cost: Optional[int] = None):
+    def __init__(
+        self,
+        name: str,
+        is_proxy: bool = False,
+        cost: Optional[int] = None,
+        owner: Optional[str] = None,
+    ):
         self.name = name
         self.is_proxy = is_proxy
         self.cost = cost  # このカードの基本消費コスト(lv5時点、不明ならNone)
+        # このカードを使う生徒。通常は自分自身だが、リオ(コピー)はリオのEXとして扱う
+        # (生徒に付く効果、例えばユズ(臨戦)のコスト半減の判定に使う)
+        self.owner = owner or name
 
     def should_cycle(self, state: State, k: int, target: str = "") -> bool:
         """
@@ -75,6 +84,14 @@ class CharacterSpec:
         不明な場合は None。
         """
         return self.cost
+
+    def modify_cost(self, state: State, student: str, cost: int) -> int:
+        """
+        生徒 student のEXの消費コスト cost を、このSpecの効果で変化させる（ユズ(臨戦)の
+        コスト半減など、他の生徒のコストに掛かる効果用）。student はカードの owner。
+        各カードの get_cost の後に、Registry が全Specに順に問い合わせる。
+        """
+        return cost
 
     def target_input(self, state: State) -> TargetInput:
         """

@@ -21,6 +21,7 @@ from ba_exsim.specs.generic import GenericSpec
 from ba_exsim.specs.hanako_swimsuit import HanakoSwimsuitSpec
 from ba_exsim.specs.ibuki_swimsuit import IbukiSwimsuitSpec
 from ba_exsim.specs.rio import RioCopySpec, RioSpec
+from ba_exsim.specs.yuzu_battle import YuzuBattleSpec
 
 DATA_DIR = Path(__file__).parent / "data"
 SCENARIO_DIR = DATA_DIR / "scenarios"
@@ -32,6 +33,7 @@ CUSTOM_SPECS: Dict[str, type] = {
     "Hanako_Swimsuit": HanakoSwimsuitSpec,
     "Ibuki_Swimsuit": IbukiSwimsuitSpec,
     "Rio": RioSpec,
+    "Yuzu_Battle": YuzuBattleSpec,
 }
 
 TOP_KEYS = {
@@ -244,8 +246,7 @@ def run_engine(scenario: Scenario) -> Simulator:
                 assert card == step.card, f"{ctx}: スロット{step.slot}は {card} で、{step.card} ではありません"
         else:
             card = step.card
-        spec = sim.registry.get(card)
-        cost = spec.get_cost(sim.state) if spec else None
+        cost = sim.registry.evaluate_cost(sim.state, card)
 
         try:
             if step.slot is not None:

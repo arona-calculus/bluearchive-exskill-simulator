@@ -1,0 +1,60 @@
+title = "ユズ(臨戦) コスト半減はEX使用3回分で切れる"
+description = """
+- ユズのEXでアルにコスト半減(3回分)を付ける。アルのEX(4)は2になる。
+- 効果を持たないエリのEXは半減されず、回数も減らない。
+- 3回使うと効果が切れ、4回目のアルは元のコスト(4)に戻る。
+"""
+cards = ["Yuzu_Battle", "Aru", "Eri", "Mine"]
+
+[overrides.Yuzu_Battle]
+cost = 4
+
+[overrides.Aru]
+cost = 4
+
+[overrides.Eri]
+cost = 5
+
+[overrides.Mine]
+cost = 3
+
+[[steps]]
+card = "Yuzu_Battle"
+target = "Aru"
+note = "ユズ自身のコストは半減されない"
+expect = { cost = 4, cards = ["Mine", "Aru", "Eri", "Yuzu_Battle"], env = { yuzu_cost_down = { Aru = 3 } } }
+
+[[steps]]
+card = "Aru"
+note = "1回目: 4 → 2"
+expect = { cost = 2, env = { yuzu_cost_down = { Aru = 2 } } }
+
+[[steps]]
+card = "Eri"
+note = "効果を持たない生徒は半減されず、アルの回数も減らない"
+expect = { cost = 5, env = { yuzu_cost_down = { Aru = 2 } } }
+
+[[steps]]
+card = "Aru"
+note = "2回目"
+expect = { cost = 2, env = { yuzu_cost_down = { Aru = 1 } } }
+
+[[steps]]
+card = "Mine"
+expect = { cost = 3 }
+
+[[steps]]
+card = "Aru"
+note = "3回目で効果が切れる"
+expect = { cost = 2, env_none = ["yuzu_cost_down"] }
+
+[[steps]]
+card = "Mine"
+
+[[steps]]
+card = "Aru"
+note = "効果切れ後は元のコスト"
+expect = { cost = 4 }
+
+[expect]
+total_cost = 25

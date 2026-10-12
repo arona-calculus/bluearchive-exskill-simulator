@@ -30,3 +30,19 @@ class SpecRegistry:
         for spec in self.specs.values():
             state = spec.on_passive(state, active_char, target)
         return state
+
+    def evaluate_cost(self, state: State, card: str) -> Optional[int]:
+        """cardを「今」使った場合の消費コスト。カード自身の get_cost に、全Specの
+        modify_cost（ユズ(臨戦)のコスト半減など）を重ねる。不明ならNone。
+
+        リオ(コピー)等は効果適用で状態が変わるため、必ず使用前のstateで呼ぶこと。
+        """
+        spec = self.get(card)
+        if spec is None:
+            return None
+        cost = spec.get_cost(state)
+        if cost is None:
+            return None
+        for other in self.specs.values():
+            cost = other.modify_cost(state, spec.owner, cost)
+        return cost
