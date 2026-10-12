@@ -38,6 +38,19 @@ EXを誰に使うか）を適用すると、ゲーム内実装に沿った次の
 
 サブクラスは必要なフックだけをオーバーライドする。
 
+加えて、webui向けの表示・入力形式を宣言する（シミュレーションの挙動には影響しない。型は `display.py`）:
+
+- `ENV_DISPLAYS`（クラス属性）— そのSpecが書き込む `env` キーを状態バッジとしてどう表示するか
+  （ゲージ・生徒名・非表示など）。履歴の各ステップは `env` しか保存しないため、表示は宣言と
+  `env` の値だけで決まる静的な宣言にしている。
+- `CARD_DISPLAYS`（クラス属性）— そのSpecが生み出す、`BUILTINS` に無いカード（`Rio_Copy`）の
+  表示名とアイコンの決め方。
+- `target_input(state)` — 「今」使う場合の対象指定の形式（1人選択/複数選択/なし、必須か、
+  候補から外す役割など）。イブキ(水着)のEX1/EX2のように状態で変わるためメソッドにしている。
+
+フロントエンド（`index.html`）はこれらを汎用的に描画するだけで、生徒ごとの分岐を持たない。
+新しい生徒の固有表示が必要になったら、Specにこれらを書けば足りる。
+
 ### `GameEngine`（`engine.py`）
 `play_card(state, k, target)` が上記フックを固定順序で呼び出す。
 `should_cycle` を**効果適用前の状態**で評価する点が実装上の要点で、
@@ -107,8 +120,10 @@ pytestの回帰テストではなく、TL候補を広く探索するためのス
 ## インタラクティブUI（`webui/`）
 
 `webui/backend/main.py`（FastAPI）が `Simulator` をセッションベースのHTTP APIとして公開し、
-`webui/frontend/index.html` から生徒アイコン付きで手動操作できる。対象指定が必要な生徒は
-`NEEDS_TARGET` に列挙する。消費コスト・累計消費コストは `/play` 実行時にバックエンド側
+`webui/frontend/index.html` から生徒アイコン付きで手動操作できる。生徒固有の表示は
+`/api/specs` の `env_displays`・`card_displays`（各Specの `ENV_DISPLAYS`・`CARD_DISPLAYS` を集めたもの）に、
+対象指定の形式はカード選択時に `/api/session/{id}/target_input/{slot}`（`CharacterSpec.target_input`）に従う。
+消費コスト・累計消費コストは `/play` 実行時にバックエンド側
 （`CharacterSpec.get_cost`）で計算し、`history` の各エントリに保存する。
 現状は**人間が1手ずつ操作するための確認ツール**であり、探索・最適化の機能は持たない。
 

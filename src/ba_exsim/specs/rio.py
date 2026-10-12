@@ -1,9 +1,18 @@
-from typing import Optional, Tuple
+from typing import Optional
+from ba_exsim.core.display import CardDisplay, EnvDisplay, TargetInput
 from ba_exsim.core.spec import CharacterSpec
 from ba_exsim.core.state import State
 
 
 class RioSpec(CharacterSpec):
+    ENV_DISPLAYS = (
+        EnvDisplay("rio_copy_target", "コピー先", kind="characters"),
+    )
+    # 使用すると手札の自分自身が Rio_Copy に変わる。アイコンはコピー先の生徒をグレースケールで表示する
+    CARD_DISPLAYS = (
+        CardDisplay("Rio_Copy", "リオ(コピー)", icon_env_key="rio_copy_target", grayscale=True),
+    )
+
     def __init__(self, cost: Optional[int] = None):
         super().__init__("Rio", cost=cost)
 
@@ -19,6 +28,11 @@ class RioSpec(CharacterSpec):
         # ターゲット情報を環境変数に保存しつつ、カード配列を更新
         return state.update(
             cards=tuple(cards), rio_copy_target=target if target else None
+        )
+
+    def target_input(self, state: State) -> TargetInput:
+        return TargetInput(
+            label="コピー先", required=True, error="リオのコピー先を選択してください"
         )
 
 

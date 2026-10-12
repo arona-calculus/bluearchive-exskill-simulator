@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import Optional, Tuple
 
+from .display import CardDisplay, EnvDisplay, TargetInput
 from .state import State
 
 
@@ -8,7 +9,15 @@ class CharacterSpec:
     """
     スキル実行のパイプラインに対するフックを提供する基底クラス。
     子クラス（各キャラ）は必要なフックだけをオーバーライド（上書き）して実装する。
+
+    ENV_DISPLAYS / CARD_DISPLAYS / target_input は webui 向けの表示・入力形式の宣言で、
+    シミュレーションの挙動には影響しない（display.py 参照）。
     """
+
+    # このSpecが書き込む env キーの表示方法
+    ENV_DISPLAYS: Tuple[EnvDisplay, ...] = ()
+    # このSpecが生み出す、BUILTINSに無いカード（リオ(コピー)等）の表示方法
+    CARD_DISPLAYS: Tuple[CardDisplay, ...] = ()
 
     def __init__(self, name: str, is_proxy: bool = False, cost: Optional[int] = None):
         self.name = name
@@ -66,3 +75,10 @@ class CharacterSpec:
         不明な場合は None。
         """
         return self.cost
+
+    def target_input(self, state: State) -> TargetInput:
+        """
+        このカードを「今」使う場合の対象指定の形式を返す（形態によって変わる
+        イブキ(水着)等はオーバーライドする）。既定は任意の1人選択。
+        """
+        return TargetInput()

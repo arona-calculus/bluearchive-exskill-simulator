@@ -1,5 +1,6 @@
 from __future__ import annotations
 from typing import Dict, Optional, Tuple
+from ba_exsim.core.display import EnvDisplay, TargetInput
 from ba_exsim.core.spec import CharacterSpec
 from ba_exsim.core.state import State
 
@@ -29,6 +30,17 @@ class IbukiSwimsuitSpec(CharacterSpec):
     cost: EX1「イブキのお友達！」の消費コスト。extra_cost: EX2「どれがいいかな？」の
     消費コスト。どちらもセッション中不変の静的値なのでSpec自身が保持する。
     """
+
+    ENV_DISPLAYS = (
+        EnvDisplay("ibuki_friends", "お友達", kind="characters"),
+        # お花獲得時に貝殻は0へ戻るが、強化は永続なので満タンのまま表示する
+        EnvDisplay(
+            "ibuki_shells", "貝殻", kind="gauge", max=SHELLS_FOR_FLOWER, color="#e0a458",
+            complete_key="ibuki_shell_flower", complete_text="お花獲得",
+        ),
+        EnvDisplay("ibuki_shell_flower", kind="hidden"),  # 貝殻のバッジに統合
+        EnvDisplay("ibuki_pending_force_draw", kind="hidden"),
+    )
 
     def __init__(
         self,
@@ -84,6 +96,18 @@ class IbukiSwimsuitSpec(CharacterSpec):
         if shells >= SHELLS_FOR_FLOWER:
             return state.update(ibuki_shells=0, ibuki_shell_flower=True)
         return state.update(ibuki_shells=shells)
+
+    def target_input(self, state: State) -> TargetInput:
+        if state.get_env("ibuki_friends"):
+            return TargetInput(mode="none")  # EX2: 指定済みなので対象選択は不要
+        return TargetInput(
+            mode="multi",
+            label="お友達 (2人、ストライカーのみ)",
+            required=True,
+            count=2,
+            error="お友達を2人選択してください",
+            exclude_roles=("SPECIAL",),
+        )
 
     def get_cost(self, state: State) -> Optional[int]:
         # お友達指定済み(EX2「どれがいいかな？」)ならextra_cost、

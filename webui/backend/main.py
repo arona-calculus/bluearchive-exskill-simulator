@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import uuid
+from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Dict, List, NamedTuple, Optional
 
@@ -174,12 +175,17 @@ class PlayRequest(BaseModel):
 
 @app.get("/api/specs")
 def get_specs():
+    # 生徒固有の表示(ゲージ等の状態バッジ、リオ(コピー)等のカード)は各Specの宣言から集める。
+    # フロントエンドはこれを汎用的に描画するだけで、生徒ごとの分岐を持たない
+    spec_classes = {entry.spec for entry in BUILTINS.values()}
     return {
         "builtin": [
             {"value": k, "label": v.label, "role": v.role}
             for k, v in BUILTINS.items()
         ],
         "needs_target": NEEDS_TARGET,
+        "env_displays": {d.key: asdict(d) for cls in spec_classes for d in cls.ENV_DISPLAYS},
+        "card_displays": {d.card: asdict(d) for cls in spec_classes for d in cls.CARD_DISPLAYS},
     }
 
 
@@ -246,6 +252,20 @@ def get_session(session_id: str):
         "initial_state": session["initial_state"],
         "history": session["history"],
     }
+
+
+@app.get("/api/session/{session_id}/target_input/{slot}")
+def get_target_input(session_id: str, slot: int):
+    """手札スロットslotのカードを「今」使う場合の対象指定の形式(CharacterSpec.target_input)"""
+    if session_id not in sessions:
+        raise HTTPException(status_code=404, detail="セッションが見つかりません")
+    sim = sessions[session_id]["sim"]
+    if not (0 <= slot < sim.state.hand_size):
+        raise HTTPException(status_code=400, detail=f"スロットは0~{sim.state.hand_size - 1}の範囲です")
+    spec = sim.registry.get(sim.state.cards[slot])
+    if spec is None:
+        raise HTTPException(status_code=400, detail="スロットにカードがありません")
+    return asdict(spec.target_input(sim.state))
 
 
 @app.post("/api/session/{session_id}/play")

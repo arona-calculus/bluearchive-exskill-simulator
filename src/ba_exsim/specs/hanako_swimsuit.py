@@ -1,10 +1,16 @@
 from __future__ import annotations
 from typing import Optional, Tuple
+from ba_exsim.core.display import EnvDisplay
 from ba_exsim.core.spec import CharacterSpec
 from ba_exsim.core.state import State
 
 
 class HanakoSwimsuitSpec(CharacterSpec):
+    ENV_DISPLAYS = (
+        EnvDisplay("hanako_gauge", "ゲージ", kind="gauge", max=200),
+        EnvDisplay("pending_force_draw", kind="hidden"),
+    )
+
     def __init__(self, cost: Optional[int] = None):
         super().__init__("Hanako_Swimsuit", cost=cost)
 

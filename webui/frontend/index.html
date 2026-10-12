@@ -339,10 +339,13 @@ let allCharacters = [];
 let handSize = 3;
 let initialState = null;
 let selectedSlot = null;
-let builtinInfo = { builtin: [], needs_target: [] };
+let builtinInfo = { builtin: [], needs_target: [], env_displays: {}, card_displays: {} };
 let BUILTIN_OPTIONS = [];
 let LABEL_TO_KEY = {};
 let VALUE_TO_ROLE = {}; // value(キー) -> "STRIKER"/"SPECIAL"/undefined
+// 生徒固有の表示は各Specの宣言(ba_exsim/core/display.py)に従い、ここでは生徒ごとに分岐しない
+let ENV_DISPLAYS = {};  // envキー -> 状態バッジの表示宣言(EnvDisplay)
+let CARD_DISPLAYS = {}; // カード名 -> BUILTINSに無いカード(リオ(コピー)等)の表示宣言(CardDisplay)
 let availableIcons = new Set();
 let frameComments = {}; // frameIdx → string
 let frameCollapseOverride = {}; // frameIdx → boolean (未設定なら「直近以外は折りたたむ」がデフォルト)
@@ -354,6 +357,8 @@ async function init() {
     if (res.ok) {
       builtinInfo = await res.json();
       BUILTIN_OPTIONS = builtinInfo.builtin; // [{ value, label }, ...]
+      ENV_DISPLAYS = builtinInfo.env_displays || {};
+      CARD_DISPLAYS = builtinInfo.card_displays || {};
       LABEL_TO_KEY = {};
       VALUE_TO_ROLE = {};
       BUILTIN_OPTIONS.forEach(function(o) {
@@ -395,7 +400,7 @@ document.getElementById('hand-size').addEventListener('input', renderSetupSlots)
 function getDisplayName(name) {
   const opt = BUILTIN_OPTIONS.find(function(o) { return o.value === name; });
   if (opt) return opt.label;
-  if (name === 'Rio_Copy') return 'リオ(コピー)';
+  if (CARD_DISPLAYS[name]) return CARD_DISPLAYS[name].label;
   return name;
 }
 
@@ -674,13 +679,13 @@ function buildActionBlock(actionEntry, isInitial) {
 }
 
 function getIconSrc(name, env) {
-  if (name === 'Rio_Copy') {
-    const target = (env && env.rio_copy_target) || '';
-    const iconName = target && availableIcons.has(target) ? target : 'generic';
-    return { src: BASE + '/assets/icons/' + iconName + '.png', grayscale: true };
-  }
-  const iconName = availableIcons.has(name) ? name : 'generic';
-  return { src: BASE + '/assets/icons/' + iconName + '.png', grayscale: false };
+  // リオ(コピー)等はCARD_DISPLAYSの宣言に従い、envが指す生徒(コピー先)のアイコンで代用する
+  const disp = CARD_DISPLAYS[name];
+  const iconName = (disp && disp.icon_env_key) ? ((env && env[disp.icon_env_key]) || '') : name;
+  return {
+    src: BASE + '/assets/icons/' + (availableIcons.has(iconName) ? iconName : 'generic') + '.png',
+    grayscale: !!(disp && disp.grayscale),
+  };
 }
 
 function buildCard(name, slot, interactive, wasPlayed, env) {
@@ -743,7 +748,9 @@ function buildStepChips(env, actionEntry) {
   }
 
   Object.keys(env).forEach(function(key) {
-    chips.push({ label: envLabel(key), html: envChipVal(key, env[key]) });
+    const disp = ENV_DISPLAYS[key] || { kind: 'text' };
+    if (disp.kind === 'hidden') return;
+    chips.push({ label: disp.label || key, html: envChipVal(disp, env[key], env) });
   });
 
   if (chips.length === 0) return null;
@@ -759,32 +766,23 @@ function buildStepChips(env, actionEntry) {
   return div;
 }
 
-function envLabel(key) {
-  const map = {
-    hanako_gauge: 'ゲージ', alice_charge: 'チャージ', rio_copy_target: 'コピー先',
-    ibuki_friends: 'お友達', ibuki_shells: '貝殻', ibuki_shell_flower: '貝殻のお花',
-  };
-  return map[key] || key;
-}
-
-function envChipVal(key, val) {
-  if (key === 'hanako_gauge') {
-    const pct = Math.min(100, (val / 200) * 100);
-    return '<div class="env-chip-gauge"><div class="env-chip-gauge-fill" style="width:' + pct + '%"></div></div><span class="env-chip-val">' + val + '/200</span>';
+// 状態バッジの値部分。dispはENV_DISPLAYSの宣言(EnvDisplay)
+function envChipVal(disp, val, env) {
+  if (disp.kind === 'gauge') {
+    // complete_keyが立っていれば、値が0に戻っていても満タン扱い(イブキの貝殻のお花等)
+    const complete = !!(disp.complete_key && env[disp.complete_key]);
+    const pct = complete ? 100 : Math.min(100, (val / disp.max) * 100);
+    const text = complete
+      ? (disp.max + '/' + disp.max + ' ' + (disp.complete_text || '')).trim()
+      : val + '/' + disp.max;
+    const fillStyle = 'width:' + pct + '%' + (disp.color ? ';background:' + disp.color : '');
+    const valStyle = disp.color ? ' style="color:' + disp.color + '"' : '';
+    return '<div class="env-chip-gauge"><div class="env-chip-gauge-fill" style="' + fillStyle + '"></div></div>' +
+      '<span class="env-chip-val"' + valStyle + '>' + escHtml(text) + '</span>';
   }
-  if (key === 'alice_charge') {
-    const pct = Math.min(100, (val / 2) * 100);
-    return '<div class="env-chip-gauge"><div class="env-chip-gauge-fill" style="width:' + pct + '%;background:#f87f7f"></div></div><span class="env-chip-val" style="color:#f87f7f">' + val + '/2</span>';
-  }
-  if (key === 'ibuki_shells') {
-    const pct = Math.min(100, (val / 12) * 100);
-    return '<div class="env-chip-gauge"><div class="env-chip-gauge-fill" style="width:' + pct + '%;background:#e0a458"></div></div><span class="env-chip-val" style="color:#e0a458">' + val + '/12</span>';
-  }
-  if (key === 'ibuki_friends' && Array.isArray(val)) {
-    return '<span class="env-chip-val">' + escHtml(val.map(getDisplayName).join(' / ')) + '</span>';
-  }
-  if (key === 'ibuki_shell_flower') {
-    return '<span class="env-chip-val">' + (val ? '獲得済み' : 'なし') + '</span>';
+  if (disp.kind === 'characters') {
+    const names = Array.isArray(val) ? val : [val];
+    return '<span class="env-chip-val">' + escHtml(names.map(getDisplayName).join(' / ')) + '</span>';
   }
   return '<span class="env-chip-val">' + escHtml(String(val)) + '</span>';
 }
@@ -834,13 +832,22 @@ async function rewindToFrame(frameNum) {
 }
 
 // ===== PLAY =====
-function selectCard(slot) {
+// 対象指定の形式は、カードのSpecが「今」の状態から決める(CharacterSpec.target_input)。
+// 取得できなかった場合は任意の1人選択とみなす
+const DEFAULT_TARGET_INPUT = {
+  mode: 'single', label: 'ターゲット', required: false, error: '', count: 1, include_self: false, exclude_roles: [],
+};
+let selectedTargetInput = null; // 選択中カードの対象指定の形式(取得するまではnull)
+let targetInputRequestId = 0;
+
+async function selectCard(slot) {
   const card = currentState.hand[slot];
   if (!card) return;
 
   if (selectedSlot === slot) { cancelPlay(); return; }
 
   selectedSlot = slot;
+  selectedTargetInput = null;
 
   // Update card highlights
   document.querySelectorAll('.card.interactive').forEach(function(c) {
@@ -855,50 +862,50 @@ function selectCard(slot) {
   const targetRow = document.getElementById('pp-target-row');
   const multiRow = document.getElementById('pp-multiselect-row');
   const sel = document.getElementById('target-select');
+  targetRow.style.display = 'none';
+  multiRow.style.display = 'none';
 
-  const known = Array.from(new Set(allCharacters.concat(currentState.hand || []).concat(currentState.deck || [])))
-    .filter(function(name) { return name && name !== card; });
+  const errEl = document.getElementById('sim-error');
+  if (errEl) errEl.classList.remove('visible');
 
-  const ibukiFriendsSet = currentState.env && currentState.env.ibuki_friends && currentState.env.ibuki_friends.length > 0;
+  const requestId = ++targetInputRequestId;
+  let input = DEFAULT_TARGET_INPUT;
+  try {
+    const res = await fetch(API + '/api/session/' + sessionId + '/target_input/' + slot);
+    if (res.ok) input = await res.json();
+  } catch(e) {}
+  // 応答待ちの間に別のカードが選ばれた・選択が解除された場合は捨てる
+  if (requestId !== targetInputRequestId || selectedSlot !== slot) return;
+  selectedTargetInput = input;
 
-  if (card === 'Ibuki_Swimsuit' && !ibukiFriendsSet) {
-    // EX1: お友達を2人まで新規指定する(汎用の複数選択UI)。
-    // ストライカーのみ選択可能(SPECIALと判明しているキャラは除外。roleが不明な
-    // カスタム入力キャラは除外しない)。
-    const strikerCandidates = known.filter(function(name) { return VALUE_TO_ROLE[name] !== 'SPECIAL'; });
-    targetRow.style.display = 'none';
+  // 役割が不明な生徒(カスタム入力など)はexclude_rolesで除外しない
+  const excludeRoles = input.exclude_roles || [];
+  const candidates = Array.from(new Set(allCharacters.concat(currentState.hand || []).concat(currentState.deck || [])))
+    .filter(function(name) {
+      return name && name !== card && excludeRoles.indexOf(VALUE_TO_ROLE[name]) < 0;
+    });
+  const label = input.label + (input.required ? ' *' : '');
+
+  if (input.mode === 'multi') {
     multiRow.style.display = 'flex';
-    document.getElementById('pp-multiselect-label').textContent = 'お友達 (2人、ストライカーのみ) *';
-    renderMultiSelectTargets('target-multiselect', strikerCandidates, 2);
-  } else if (card === 'Ibuki_Swimsuit' && ibukiFriendsSet) {
-    // EX2: 指定済みなので対象選択は不要
-    targetRow.style.display = 'none';
-    multiRow.style.display = 'none';
-  } else {
-    multiRow.style.display = 'none';
+    document.getElementById('pp-multiselect-label').textContent = label;
+    renderMultiSelectTargets('target-multiselect', candidates, input.count);
+  } else if (input.mode === 'single') {
     targetRow.style.display = 'flex';
+    document.getElementById('pp-target-label').textContent = label;
     sel.innerHTML = '<option value="">なし</option>';
-    known.forEach(function(name) {
+    if (input.include_self) {
+      const selfOpt = document.createElement('option');
+      selfOpt.value = card; selfOpt.textContent = getDisplayName(card) + ' (自身)';
+      sel.appendChild(selfOpt);
+    }
+    candidates.forEach(function(name) {
       const opt = document.createElement('option');
       opt.value = name; opt.textContent = getDisplayName(name);
       sel.appendChild(opt);
     });
-
-    const lbl = document.getElementById('pp-target-label');
-    if (card === 'Rio') {
-      lbl.textContent = 'コピー先 *';
-    } else if (card === 'Alice_Battle') {
-      lbl.textContent = 'ターゲット *';
-      const selfOpt = document.createElement('option');
-      selfOpt.value = 'Alice_Battle'; selfOpt.textContent = getDisplayName('Alice_Battle') + ' (自身)';
-      sel.insertBefore(selfOpt, sel.children[1]);
-    } else {
-      lbl.textContent = 'ターゲット';
-    }
   }
-
-  const errEl = document.getElementById('sim-error');
-  if (errEl) errEl.classList.remove('visible');
+  // mode === 'none' は対象選択なし
 }
 
 // 汎用の複数選択チェックボックスUI(最大maxCount件まで選択可能)。
@@ -936,24 +943,22 @@ function cancelPlay() {
 }
 
 async function confirmPlay() {
-  if (selectedSlot === null) return;
-  const card = currentState.hand[selectedSlot];
-  const multiRow = document.getElementById('pp-multiselect-row');
+  if (selectedSlot === null || !selectedTargetInput) return;
+  const input = selectedTargetInput;
   let target = '';
 
-  if (multiRow && multiRow.style.display !== 'none') {
+  if (input.mode === 'multi') {
     const values = getMultiSelectValues('target-multiselect');
-    if (card === 'Ibuki_Swimsuit' && values.length !== 2) {
-      showError('sim-error', 'お友達を2人選択してください');
+    if (input.required && values.length !== input.count) {
+      showError('sim-error', input.error || ('対象を' + input.count + '人選択してください'));
       return;
     }
     target = values.join(',');
-  } else {
+  } else if (input.mode === 'single') {
     const sel = document.getElementById('target-select');
     target = sel ? sel.value : '';
-
-    if (card === 'Rio' && !target) {
-      showError('sim-error', 'リオのコピー先を選択してください');
+    if (input.required && !target) {
+      showError('sim-error', input.error || '対象を選択してください');
       return;
     }
   }
