@@ -113,9 +113,6 @@ for _key, _entry in list(BUILTINS.items()):
             extra_cost=_entry.extra_cost if _entry.extra_cost is not None else _generated_entry.extra_cost,
         )
 
-NEEDS_TARGET: List[str] = ["Rio", "Alice_Battle", "Ibuki_Swimsuit"]
-
-
 def build_specs(characters: List[str]) -> List[CharacterSpec]:
     specs: List[CharacterSpec] = []
     seen: set = set()
@@ -183,7 +180,6 @@ def get_specs():
             {"value": k, "label": v.label, "role": v.role}
             for k, v in BUILTINS.items()
         ],
-        "needs_target": NEEDS_TARGET,
         "env_displays": {d.key: asdict(d) for cls in spec_classes for d in cls.ENV_DISPLAYS},
         "card_displays": {d.card: asdict(d) for cls in spec_classes for d in cls.CARD_DISPLAYS},
     }
