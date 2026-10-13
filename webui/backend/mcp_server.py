@@ -5,18 +5,26 @@ BA EX Skill Simulator - MCPサーバー
 webuiの共有リンク(#share=)としてexsimに読み込ませるためのもの。
 状態は持たない(webuiの起動も不要。リンクを開く時だけwebuiが動いていればよい)。
 
-起動方法(stdio):
+起動方法:
   cd bluearchive-exskill-simulator
-  uv run --extra mcp python -m webui.backend.mcp_server
+  uv run --extra mcp python -m webui.backend.mcp_server          # stdio(手元の Claude Code 用)
+  uv run --extra mcp python -m webui.backend.mcp_server --http   # HTTP(リモートMCP。既定 127.0.0.1:8765/mcp)
 
-共有リンクの宛先は環境変数 EXSIM_BASE_URL で変更できる(既定: http://localhost:8000/)。
+環境変数:
+  EXSIM_BASE_URL            共有リンクの宛先(既定: http://localhost:8000/)
+  EXSIM_MCP_ALLOWED_HOSTS   HTTP時に受け付ける Host ヘッダー(カンマ区切り。例: example.com)。
+                            リバースプロキシの後ろでは公開ドメインを指定しないと 421 で拒否される
+  EXSIM_MCP_ALLOWED_ORIGINS HTTP時に受け付ける Origin ヘッダー(カンマ区切り。ブラウザから直接呼ばれる場合のみ)
 """
 
 from __future__ import annotations
 
+import argparse
+import os
 from typing import Any, Dict, List, Optional
 
 from mcp.server.mcpserver import MCPServer
+from mcp.server.transport_security import TransportSecuritySettings
 from pydantic import BaseModel, Field
 
 from webui.backend import tl_import
@@ -136,5 +144,47 @@ def import_rough_tl(tl_text: str) -> str:
     return f"{INSTRUCTIONS}\n以下のTLをexsimに読み込んでください。\n\n```\n{tl_text}\n```"
 
 
+def _env_list(name: str) -> List[str]:
+    return [v.strip() for v in os.environ.get(name, "").split(",") if v.strip()]
+
+
+def transport_security() -> Optional[TransportSecuritySettings]:
+    """HTTP時の Host/Origin ヘッダーの検査(DNSリバインディング対策)。
+
+    指定が無ければ SDK の既定(localhost で待ち受ける時は localhost 宛てだけを受け付ける)に任せる。
+    """
+    hosts, origins = _env_list("EXSIM_MCP_ALLOWED_HOSTS"), _env_list("EXSIM_MCP_ALLOWED_ORIGINS")
+    if not hosts and not origins:
+        return None
+    return TransportSecuritySettings(
+        allowed_hosts=["127.0.0.1:*", "localhost:*", "[::1]:*", *hosts],
+        allowed_origins=["http://127.0.0.1:*", "http://localhost:*", "http://[::1]:*", *origins],
+    )
+
+
+def main(argv: Optional[List[str]] = None) -> None:
+    parser = argparse.ArgumentParser(description="exsim の MCPサーバー")
+    parser.add_argument("--http", action="store_true", help="stdio ではなく HTTP(Streamable HTTP)で待ち受ける")
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--path", default="/mcp")
+    args = parser.parse_args(argv)
+
+    if not args.http:
+        mcp.run()
+        return
+    # ツールは状態を持たないので、セッションを持たない形にする
+    # (リバースプロキシの後ろでも、サーバーの再起動をまたいでも、そのまま呼べる)
+    mcp.run(
+        transport="streamable-http",
+        host=args.host,
+        port=args.port,
+        streamable_http_path=args.path,
+        stateless_http=True,
+        json_response=True,
+        transport_security=transport_security(),
+    )
+
+
 if __name__ == "__main__":
-    mcp.run()
+    main()

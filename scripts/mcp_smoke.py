@@ -1,38 +1,52 @@
 """
-MCPサーバーを stdio で実際に起動し、tests/data/tl/*.toml の実戦TLを simulate_tl に流して
+MCPサーバーを実際に呼び、tests/data/tl/*.toml の実戦TLを simulate_tl に流して
 期待値と照合する動作確認スクリプト。各ケースの share_url も表示する(開くとwebuiに読み込まれる)。
 
-pytestの対象ではない(サーバーを子プロセスで起動するため)。実行方法:
-  uv run --extra mcp python scripts/mcp_smoke.py            # 全ケース
+pytestの対象ではない(サーバーを子プロセスで起動する/起動済みのサーバーに繋ぐため)。実行方法:
+  uv run --extra mcp python scripts/mcp_smoke.py            # stdio で起動して全ケース
   uv run --extra mcp python scripts/mcp_smoke.py d37_shirokuro_chuka
+  uv run --extra mcp python scripts/mcp_smoke.py --url http://127.0.0.1:8765/mcp   # 起動済みのHTTPサーバー
 """
 
 from __future__ import annotations
 
+import argparse
 import asyncio
 import json
 import sys
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
+from mcp.client.streamable_http import streamable_http_client
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tests"))
 from scenario import TL_DIR, check_tl_result, load, step_inputs  # noqa: E402
 
 
-async def main(names: list[str]) -> int:
+@asynccontextmanager
+async def connect(url: str | None):
+    if url:
+        async with streamable_http_client(url) as (read, write):
+            yield read, write
+        return
+    params = StdioServerParameters(
+        command=sys.executable, args=["-m", "webui.backend.mcp_server"], cwd=str(ROOT)
+    )
+    async with stdio_client(params) as (read, write):
+        yield read, write
+
+
+async def main(names: list[str], url: str | None = None) -> int:
     paths = [p for p in sorted(TL_DIR.glob("*.toml")) if not names or p.stem in names]
     if not paths:
         print(f"ケースが見つかりません: {names or TL_DIR}")
         return 1
 
-    params = StdioServerParameters(
-        command=sys.executable, args=["-m", "webui.backend.mcp_server"], cwd=str(ROOT)
-    )
     failed = 0
-    async with stdio_client(params) as (read, write), ClientSession(read, write) as session:
+    async with connect(url) as (read, write), ClientSession(read, write) as session:
         await session.initialize()
         tools = [t.name for t in (await session.list_tools()).tools]
         print(f"tools: {tools}")
@@ -69,4 +83,8 @@ async def main(names: list[str]) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(1 if asyncio.run(main(sys.argv[1:])) else 0)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("names", nargs="*", help="実行するケース名(省略で全ケース)")
+    parser.add_argument("--url", help="起動済みのHTTPサーバーのURL(省略で stdio で起動する)")
+    args = parser.parse_args()
+    sys.exit(1 if asyncio.run(main(args.names, args.url)) else 0)

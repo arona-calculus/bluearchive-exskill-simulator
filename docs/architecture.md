@@ -146,8 +146,22 @@ LLMエージェント（Claude Code等）からexsimを呼ぶための入口。�
 サーバーは正規化済みの手順列を厳密に実行して結果を返す。状態は持たない。
 
 ```
-uv run --extra mcp python -m webui.backend.mcp_server   # stdio。リポジトリ直下の .mcp.json にも登録済み
+uv run --extra mcp python -m webui.backend.mcp_server          # stdio。リポジトリ直下の .mcp.json にも登録済み
+uv run --extra mcp python -m webui.backend.mcp_server --http   # HTTP(Streamable HTTP)。既定 127.0.0.1:8765/mcp
 ```
+
+HTTP は、VPSに置いて claude.ai / Claude アプリのカスタムコネクタ（リモートMCP）として登録するためのもの。
+TLの解釈は利用者自身の Claude が行い、サーバーはシミュレーションしかしないので、Claude の費用はかからない。
+ツールは状態を持たないため、セッションを持たない形（stateless・JSON応答）で待ち受ける。
+
+| 環境変数 | 内容 |
+|---|---|
+| `EXSIM_BASE_URL` | 共有リンクの宛先。VPSでは公開している webui のURL（例: `https://example.com/exsim/`） |
+| `EXSIM_MCP_ALLOWED_HOSTS` | HTTP時に受け付ける Host ヘッダー（カンマ区切り）。localhost で待ち受けると SDK が localhost 宛て以外を 421 で拒否するため、リバースプロキシの後ろでは公開ドメインを指定する |
+| `EXSIM_MCP_ALLOWED_ORIGINS` | HTTP時に受け付ける Origin ヘッダー（ブラウザから直接呼ばれる場合のみ必要） |
+
+`GET /mcp` はサーバーからの通知用のストリームを開いたままにするため、死活監視には使えない
+（`POST` で `{"jsonrpc":"2.0","id":1,"method":"ping"}` を送る）。
 
 | ツール | 内容 |
 |---|---|
@@ -165,6 +179,7 @@ uv run --extra mcp python -m webui.backend.mcp_server   # stdio。リポジト�
 
 実際にサーバーをstdioで起動しての確認は `uv run --extra mcp python scripts/mcp_smoke.py`
 （`tests/data/tl/` の全ケースを `simulate_tl` に流して期待値と照合し、各ケースの share_url を表示する）。
+起動済みのHTTPサーバーには `--url http://127.0.0.1:8765/mcp` を付けて同じ確認ができる。
 
 ## 姉妹リポジトリとの関係
 
