@@ -152,13 +152,13 @@ uv run --extra mcp python -m webui.backend.mcp_server --http   # HTTP単体(動�
 
 **リモートMCP（webuiに同居）**: webui（`main.py`）は `mcp` パッケージがあれば `/mcp` で MCP を Streamable HTTP で
 公開する。VPSでは webui をそのまま動かすだけで、claude.ai / Claude アプリのカスタムコネクタとして
-`https://<ドメイン>/exsim/mcp` を登録できる（常駐プロセスもリバースプロキシの経路も増やさない）。
+`https://<ドメイン>/mcp`（`/exsim` の下で公開しているなら `/exsim/mcp`）を登録できる（常駐プロセスもリバースプロキシの経路も増やさない）。
 TLの解釈は利用者自身の Claude が行い、サーバーはシミュレーションしかしないので、Claude の費用はかからない。
 ツールは状態を持たないため、セッションを持たない形（stateless・JSON応答）で待ち受ける。
 同期関数のツールはSDKがスレッドで実行するので、重い探索でも webui の応答は止まらない。
 
 共有リンクの宛先は、`EXSIM_BASE_URL` が無ければリクエストから推定する（`X-Forwarded-Proto`・`Host`、
-パスの前置きは `X-Forwarded-Prefix` か FastAPI の `root_path`=`/exsim`。localhost 宛てなら `http://<host>/`）。
+パスの前置きは `X-Forwarded-Prefix` か、`/exsim/mcp` 宛てに届いたなら `/exsim`。localhost 宛てなら `http://`）。
 
 | 環境変数 | 内容 |
 |---|---|

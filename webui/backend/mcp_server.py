@@ -141,12 +141,15 @@ def simulate_tl(
     }
 
 
+WEBUI_PREFIX = "/exsim"
+
+
 def public_base_url(ctx: Optional[Context]) -> Optional[str]:
     """HTTPで呼ばれた時に、共有リンクの宛先(webuiの公開URL)をリクエストから推定する。
 
     EXSIM_BASE_URL が設定されていればそちらを優先する(None を返し、share_url に任せる)。
-    stdio ではリクエストヘッダーが無いので推定しない。webuiに同居している場合、公開時の
-    パスの前置き(/exsim)は FastAPI の root_path から分かる(localhost 宛てなら前置きなし)。
+    stdio ではリクエストヘッダーが無いので推定しない。パスの前置きは X-Forwarded-Prefix か、
+    リクエストが /exsim/mcp 宛てに届いたかで決める(webuiは / と /exsim/ のどちらでも動く)。
     """
     if os.environ.get("EXSIM_BASE_URL") or ctx is None or not ctx.headers:
         return None
@@ -158,9 +161,11 @@ def public_base_url(ctx: Optional[Context]) -> Optional[str]:
     scheme = headers.get("x-forwarded-proto", "").split(",")[0].strip() or ("http" if local else "https")
     prefix = headers.get("x-forwarded-prefix")
     if prefix is None:
+        # FastAPI の root_path(/exsim)は公開時の前置きとは限らない(ドメイン直下で公開している場合もある)
+        # ので、実際に /exsim/mcp 宛てに届いた時だけ前置きを付ける
         request = getattr(ctx.request_context, "request", None)
-        root_path = request.scope.get("root_path", "") if request is not None else ""
-        prefix = "" if local else root_path
+        path = request.scope.get("path", "") if request is not None else ""
+        prefix = WEBUI_PREFIX if path.startswith(WEBUI_PREFIX + "/") else ""
     return f"{scheme}://{host}{prefix.rstrip('/')}/"
 
 

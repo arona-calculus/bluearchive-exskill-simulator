@@ -49,8 +49,14 @@ def test_webui_serves_mcp_with_public_share_url(monkeypatch) -> None:
     headers = {**MCP_HEADERS, "Host": "exsim.example.com", "X-Forwarded-Proto": "https"}
 
     with TestClient(main.app) as client:
-        res = client.post("/mcp", json=SIMULATE_CALL, headers=headers)
+        at_root = client.post("/mcp", json=SIMULATE_CALL, headers=headers)
+        under_exsim = client.post("/exsim/mcp", json=SIMULATE_CALL, headers=headers)
 
-    out = json.loads(res.json()["result"]["content"][0]["text"])
-    assert out["ok"]
-    assert out["share_url"].startswith("https://exsim.example.com/exsim/#share=")
+    def share_url(res):
+        out = json.loads(res.json()["result"]["content"][0]["text"])
+        assert out["ok"]
+        return out["share_url"]
+
+    # ドメイン直下で公開している場合と、/exsim/ の下で公開している場合
+    assert share_url(at_root).startswith("https://exsim.example.com/#share=")
+    assert share_url(under_exsim).startswith("https://exsim.example.com/exsim/#share=")
