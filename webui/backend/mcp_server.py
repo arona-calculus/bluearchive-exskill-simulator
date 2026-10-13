@@ -8,12 +8,14 @@ webuiの共有リンク(#share=)としてexsimに読み込ませるためのも�
 起動方法:
   cd bluearchive-exskill-simulator
   uv run --extra mcp python -m webui.backend.mcp_server          # stdio(手元の Claude Code 用)
-  uv run --extra mcp python -m webui.backend.mcp_server --http   # HTTP(リモートMCP。既定 127.0.0.1:8765/mcp)
+  uv run --extra mcp python -m webui.backend.mcp_server --http   # HTTP単体(動作確認用。既定 127.0.0.1:8765/mcp)
+リモートMCPとして公開する時は webui(main.py)に同居させる: webui を起動すれば /mcp で待ち受ける。
 
 環境変数:
-  EXSIM_BASE_URL            共有リンクの宛先(既定: http://localhost:8000/)
-  EXSIM_MCP_ALLOWED_HOSTS   HTTP時に受け付ける Host ヘッダー(カンマ区切り。例: example.com)。
-                            リバースプロキシの後ろでは公開ドメインを指定しないと 421 で拒否される
+  EXSIM_BASE_URL            共有リンクの宛先。未設定なら、HTTPではリクエストの Host 等から推定し、
+                            stdio では http://localhost:8000/ にする
+  EXSIM_MCP_ALLOWED_HOSTS   HTTP時に受け付ける Host ヘッダー(カンマ区切り)。HTTP単体でリバースプロキシの
+                            後ろに置く時は公開ドメインを指定しないと 421 で拒否される(webui同居では不要)
   EXSIM_MCP_ALLOWED_ORIGINS HTTP時に受け付ける Origin ヘッダー(カンマ区切り。ブラウザから直接呼ばれる場合のみ)
 """
 
@@ -23,7 +25,7 @@ import argparse
 import os
 from typing import Any, Dict, List, Optional
 
-from mcp.server.mcpserver import MCPServer
+from mcp.server.mcpserver import Context, MCPServer
 from mcp.server.transport_security import TransportSecuritySettings
 from pydantic import BaseModel, Field
 
@@ -103,6 +105,7 @@ def simulate_tl(
     hand_size: int = 3,
     title: str = "MCPで取り込んだTL",
     env: Optional[Dict[str, Any]] = None,
+    ctx: Optional[Context] = None,
 ) -> Dict[str, Any]:
     """TLを実行し、各ステップの手札・ゲージ・コストと、exsimで開ける共有リンクを返す。
 
@@ -134,8 +137,31 @@ def simulate_tl(
             for h in result.history
         ],
         "final_state": result.current_state,
-        "share_url": tl_import.share_url(save),
+        "share_url": tl_import.share_url(save, public_base_url(ctx)),
     }
+
+
+def public_base_url(ctx: Optional[Context]) -> Optional[str]:
+    """HTTPで呼ばれた時に、共有リンクの宛先(webuiの公開URL)をリクエストから推定する。
+
+    EXSIM_BASE_URL が設定されていればそちらを優先する(None を返し、share_url に任せる)。
+    stdio ではリクエストヘッダーが無いので推定しない。webuiに同居している場合、公開時の
+    パスの前置き(/exsim)は FastAPI の root_path から分かる(localhost 宛てなら前置きなし)。
+    """
+    if os.environ.get("EXSIM_BASE_URL") or ctx is None or not ctx.headers:
+        return None
+    headers = ctx.headers
+    host = headers.get("x-forwarded-host") or headers.get("host")
+    if not host:
+        return None
+    local = host.startswith(("localhost", "127.0.0.1", "[::1]"))
+    scheme = headers.get("x-forwarded-proto", "").split(",")[0].strip() or ("http" if local else "https")
+    prefix = headers.get("x-forwarded-prefix")
+    if prefix is None:
+        request = getattr(ctx.request_context, "request", None)
+        root_path = request.scope.get("root_path", "") if request is not None else ""
+        prefix = "" if local else root_path
+    return f"{scheme}://{host}{prefix.rstrip('/')}/"
 
 
 @mcp.prompt()
@@ -148,18 +174,39 @@ def _env_list(name: str) -> List[str]:
     return [v.strip() for v in os.environ.get(name, "").split(",") if v.strip()]
 
 
-def transport_security() -> Optional[TransportSecuritySettings]:
+def transport_security(in_webui: bool = False) -> Optional[TransportSecuritySettings]:
     """HTTP時の Host/Origin ヘッダーの検査(DNSリバインディング対策)。
 
-    指定が無ければ SDK の既定(localhost で待ち受ける時は localhost 宛てだけを受け付ける)に任せる。
+    指定が無ければ、単体起動では SDK の既定(localhost で待ち受ける時は localhost 宛てだけを受け付ける)に任せる。
+    webuiに同居する場合は公開サイトの一部なので検査しない(SDKの既定のままだと、リバースプロキシ経由の
+    公開ドメイン宛てが 421 になる。ツールはシミュレーションだけで、秘密も副作用も無い)。
     """
     hosts, origins = _env_list("EXSIM_MCP_ALLOWED_HOSTS"), _env_list("EXSIM_MCP_ALLOWED_ORIGINS")
-    if not hosts and not origins:
-        return None
-    return TransportSecuritySettings(
-        allowed_hosts=["127.0.0.1:*", "localhost:*", "[::1]:*", *hosts],
-        allowed_origins=["http://127.0.0.1:*", "http://localhost:*", "http://[::1]:*", *origins],
+    if hosts or origins:
+        return TransportSecuritySettings(
+            allowed_hosts=["127.0.0.1:*", "localhost:*", "[::1]:*", *hosts],
+            allowed_origins=["http://127.0.0.1:*", "http://localhost:*", "http://[::1]:*", *origins],
+        )
+    if in_webui:
+        return TransportSecuritySettings(enable_dns_rebinding_protection=False)
+    return None
+
+
+# ツールは状態を持たないので、セッションを持たない形にする
+# (リバースプロキシの後ろでも、サーバーの再起動をまたいでも、そのまま呼べる)
+HTTP_OPTIONS = {"stateless_http": True, "json_response": True}
+
+
+def webui_routes() -> list:
+    """webui(FastAPI)に同居させるための /mcp のルート。
+
+    VPSでは webui をそのまま動かせばリモートMCPも公開される(プロセスもプロキシの経路も増やさない)。
+    リクエストを捌くには mcp.session_manager.run() を webui の lifespan で回しておくこと。
+    """
+    app = mcp.streamable_http_app(
+        streamable_http_path="/mcp", transport_security=transport_security(in_webui=True), **HTTP_OPTIONS
     )
+    return list(app.routes)
 
 
 def main(argv: Optional[List[str]] = None) -> None:
@@ -173,16 +220,13 @@ def main(argv: Optional[List[str]] = None) -> None:
     if not args.http:
         mcp.run()
         return
-    # ツールは状態を持たないので、セッションを持たない形にする
-    # (リバースプロキシの後ろでも、サーバーの再起動をまたいでも、そのまま呼べる)
     mcp.run(
         transport="streamable-http",
         host=args.host,
         port=args.port,
         streamable_http_path=args.path,
-        stateless_http=True,
-        json_response=True,
         transport_security=transport_security(),
+        **HTTP_OPTIONS,
     )
 
 

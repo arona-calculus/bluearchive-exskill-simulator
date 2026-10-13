@@ -4,11 +4,15 @@ BA EX Skill Simulator - FastAPI Backend
 起動方法:
   cd bluearchive-exskill-simulator
   uv run --extra webui uvicorn webui.backend.main:app --reload --port 8000
+
+mcp パッケージが入っていれば、リモートMCP(mcp_server.py)も /mcp で同居して公開される。
 """
 
 from __future__ import annotations
 
+import logging
 import uuid
+from contextlib import asynccontextmanager
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -28,7 +32,24 @@ from webui.backend.catalog import (
     state_to_dict,
 )
 
-app = FastAPI(title="BA ExSkill Simulator API", root_path="/exsim")
+try:
+    from webui.backend import mcp_server
+except ImportError:  # mcp パッケージが無い環境では /mcp を出さないだけにする
+    mcp_server = None
+    logging.getLogger(__name__).warning("mcp パッケージが無いため、/mcp(リモートMCP)は無効です")
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    if mcp_server is None:
+        yield
+        return
+    # /mcp のリクエストを捌くために MCP のセッションマネージャーを回しておく
+    async with mcp_server.mcp.session_manager.run():
+        yield
+
+
+app = FastAPI(title="BA ExSkill Simulator API", root_path="/exsim", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -229,6 +250,10 @@ def serve_icon(filename: str):
     # (ETag/Last-Modifiedによりコンテンツが変わっていなければ304で済む)
     return FileResponse(file_path, headers={"Cache-Control": "no-cache"})
 
+
+if mcp_server is not None:
+    # 静的ファイルの "/" より先に登録する(後だと "/" に吸われる)
+    app.router.routes.extend(mcp_server.webui_routes())
 
 _frontend_dir = Path(__file__).parent.parent / "frontend"
 if _frontend_dir.exists():

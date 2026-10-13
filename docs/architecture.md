@@ -147,18 +147,24 @@ LLMエージェント（Claude Code等）からexsimを呼ぶための入口。�
 
 ```
 uv run --extra mcp python -m webui.backend.mcp_server          # stdio。リポジトリ直下の .mcp.json にも登録済み
-uv run --extra mcp python -m webui.backend.mcp_server --http   # HTTP(Streamable HTTP)。既定 127.0.0.1:8765/mcp
+uv run --extra mcp python -m webui.backend.mcp_server --http   # HTTP単体(動作確認用)。既定 127.0.0.1:8765/mcp
 ```
 
-HTTP は、VPSに置いて claude.ai / Claude アプリのカスタムコネクタ（リモートMCP）として登録するためのもの。
+**リモートMCP（webuiに同居）**: webui（`main.py`）は `mcp` パッケージがあれば `/mcp` で MCP を Streamable HTTP で
+公開する。VPSでは webui をそのまま動かすだけで、claude.ai / Claude アプリのカスタムコネクタとして
+`https://<ドメイン>/exsim/mcp` を登録できる（常駐プロセスもリバースプロキシの経路も増やさない）。
 TLの解釈は利用者自身の Claude が行い、サーバーはシミュレーションしかしないので、Claude の費用はかからない。
 ツールは状態を持たないため、セッションを持たない形（stateless・JSON応答）で待ち受ける。
+同期関数のツールはSDKがスレッドで実行するので、重い探索でも webui の応答は止まらない。
+
+共有リンクの宛先は、`EXSIM_BASE_URL` が無ければリクエストから推定する（`X-Forwarded-Proto`・`Host`、
+パスの前置きは `X-Forwarded-Prefix` か FastAPI の `root_path`=`/exsim`。localhost 宛てなら `http://<host>/`）。
 
 | 環境変数 | 内容 |
 |---|---|
-| `EXSIM_BASE_URL` | 共有リンクの宛先。VPSでは公開している webui のURL（例: `https://example.com/exsim/`） |
-| `EXSIM_MCP_ALLOWED_HOSTS` | HTTP時に受け付ける Host ヘッダー（カンマ区切り）。localhost で待ち受けると SDK が localhost 宛て以外を 421 で拒否するため、リバースプロキシの後ろでは公開ドメインを指定する |
-| `EXSIM_MCP_ALLOWED_ORIGINS` | HTTP時に受け付ける Origin ヘッダー（ブラウザから直接呼ばれる場合のみ必要） |
+| `EXSIM_BASE_URL` | 共有リンクの宛先を固定する（例: `https://example.com/exsim/`）。推定が合わない時だけ設定する |
+| `EXSIM_MCP_ALLOWED_HOSTS` | 受け付ける Host ヘッダー（カンマ区切り）。HTTP単体で localhost に待ち受けると SDK が localhost 宛て以外を 421 で拒否するため、プロキシの後ろに置くなら公開ドメインを指定する。webui同居では Host を検査しない（指定すれば検査する） |
+| `EXSIM_MCP_ALLOWED_ORIGINS` | 受け付ける Origin ヘッダー（ブラウザから直接呼ばれる場合のみ必要） |
 
 `GET /mcp` はサーバーからの通知用のストリームを開いたままにするため、死活監視には使えない
 （`POST` で `{"jsonrpc":"2.0","id":1,"method":"ping"}` を送る）。
