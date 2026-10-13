@@ -14,6 +14,7 @@ from webui.backend.tl_import import (
     build_save,
     encode_share,
     find_initial_orders,
+    list_characters,
     normalize_inputs,
     resolve_name,
     run_tl,
@@ -149,6 +150,28 @@ def test_run_tl_no_warning_for_ibuki_ex2() -> None:
 
     assert result.ok, result.error
     assert result.notes == {}
+
+
+def test_run_tl_no_warning_for_alice_enemy_target() -> None:
+    # アリス(臨戦)は未指定 = 敵対象で正しい使い方なので、書き漏れ扱いしない
+    chars, steps = normalize_inputs(
+        ["Alice_Battle", "Aru", "Kisaki", "Sena"],
+        [Step("Alice_Battle", target="Alice_Battle"), Step("Alice_Battle")],
+        3,
+    )
+    result = run_tl(chars, steps)
+
+    assert result.ok, result.error
+    assert result.notes == {}
+
+
+def test_list_characters_needs_target_follows_spec() -> None:
+    needs = {c["key"]: c["needs_target"] for c in list_characters()}
+
+    assert needs["Rio"] is True
+    assert needs["Ibuki_Swimsuit"] is True  # 初期状態はお友達未指定のEX1
+    assert needs["Alice_Battle"] is False
+    assert needs["Aru"] is False
 
 
 @pytest.mark.parametrize("path", sorted(sc.TL_DIR.glob("*.toml")), ids=lambda p: p.stem)

@@ -93,8 +93,6 @@ for _key, _entry in list(BUILTINS.items()):
             extra_cost=_entry.extra_cost if _entry.extra_cost is not None else _generated_entry.extra_cost,
         )
 
-NEEDS_TARGET: List[str] = ["Rio", "Alice_Battle", "Ibuki_Swimsuit"]
-
 
 def build_specs(characters: List[str]) -> List[CharacterSpec]:
     specs: List[CharacterSpec] = []

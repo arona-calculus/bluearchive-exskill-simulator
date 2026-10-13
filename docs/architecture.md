@@ -129,7 +129,7 @@ pytestの回帰テストではなく、TL候補を広く探索するためのス
 
 ## インタラクティブUI（`webui/`）
 
-生徒カタログ（`BUILTINS` / `NEEDS_TARGET` / `build_specs`）と、1手実行して `history` エントリを作る
+生徒カタログ（`BUILTINS` / `build_specs`）と、1手実行して `history` エントリを作る
 `play_and_record` は `webui/backend/catalog.py` にあり、FastAPIに依存しない（MCPサーバーと共有するため）。
 
 `webui/backend/main.py`（FastAPI）が `Simulator` をセッションベースのHTTP APIとして公開し、
@@ -158,6 +158,8 @@ uv run --extra mcp python -m webui.backend.mcp_server   # stdio。リポジト�
 中核ロジックはMCPに依存しない `webui/backend/tl_import.py` にあり、`mcp_server.py` は薄いアダプタである。
 - 名前は キー / 表示名（全角括弧・空白の揺れも許容）のどちらでも受け付け、未知の名前には候補を返す。
 - リオのコピー使用は元の名前（`Rio`）で指定してよい（手札上の代理カード `Rio_Copy` に解決する）。
+- 対象が必須か（`list_characters` の `needs_target`、対象未指定の警告）は webui と同じく
+  `CharacterSpec.target_input(state).required` に従う（アリス(臨戦)の未指定 = 敵対象は警告しない）。
 - 結果は webui の既存の共有リンク形式（`#share=` + gzip + base64url）にして返すので、開けばそのままwebuiに読み込まれる
   （リンク先は環境変数 `EXSIM_BASE_URL`、既定は `http://localhost:8000/`）。手順の `note` はwebuiのコメント欄に入る。
 

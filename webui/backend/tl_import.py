@@ -21,9 +21,9 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 from ba_exsim.core.simulator import Simulator
 from ba_exsim.core.spec import CharacterSpec
+from ba_exsim.core.state import State
 from webui.backend.catalog import (
     BUILTINS,
-    NEEDS_TARGET,
     build_specs,
     play_and_record,
     state_to_dict,
@@ -107,11 +107,17 @@ def list_characters(query: str = "") -> List[Dict[str, Any]]:
                 "role": entry.role,
                 "cost": entry.cost,
                 "extra_cost": entry.extra_cost,
-                "needs_target": key in NEEDS_TARGET,
+                "needs_target": _initially_needs_target(key),
                 "custom_spec": entry.spec.__name__ != "GenericSpec",
             }
         )
     return result
+
+
+def _initially_needs_target(key: str) -> bool:
+    # 編成前の一覧なので、初期状態(イブキ(水着)ならお友達未指定のEX1)で使う場合の宣言を見る
+    spec = build_specs([key])[0]
+    return spec.target_input(State(cards=(key,))).required
 
 
 # ---------------------------------------------------------------------------
@@ -238,12 +244,10 @@ def run_tl(
 
 
 def _needs_target(sim: Simulator, card: str) -> bool:
-    if card not in NEEDS_TARGET:
-        return False
-    # イブキ(水着)はお友達指定済み(EX2)なら対象不要
-    if card == "Ibuki_Swimsuit" and sim.state.get_env("ibuki_friends"):
-        return False
-    return True
+    # 対象が必須かは各Specの宣言(target_input)に従う。イブキ(水着)のEX1/EX2のように
+    # 状態で変わるものがあるため「今」の状態で判定する(アリス(臨戦)は未指定 = 敵対象で必須ではない)
+    spec = sim.registry.get(card)
+    return spec is not None and spec.target_input(sim.state).required
 
 
 def _error(index: int, step: Step, sim: Simulator, reason: str) -> Dict[str, Any]:

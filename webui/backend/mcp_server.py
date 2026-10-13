@@ -43,7 +43,10 @@ class StepInput(BaseModel):
     )
     target: str = Field(
         "",
-        description="対象。リオのコピー先、アリス(臨戦)の対象、イブキ(水着)のお友達(カンマ区切り最大2人)など",
+        description=(
+            "対象。リオのコピー先、アリス(臨戦)のチャージ(自身=Alice_Battle。敵対象なら空)、"
+            "イブキ(水着)のお友達(カンマ区切り最大2人)など"
+        ),
     )
     slot: Optional[int] = Field(
         None, description="手札スロット(0始まり)を明示する場合のみ。通常は card で指定する"
