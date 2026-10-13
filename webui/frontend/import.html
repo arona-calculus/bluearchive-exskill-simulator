@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TL取り込み - BA EX Skill Simulator</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d1117; --surface: #161b22; --surface2: #21262d; --border: #30363d;
+    --blue: #3d8bcd; --blue-light: #58a6ff; --blue-dark: #1f5a8a;
+    --green: #3fb950; --yellow: #d29922; --red: #f85149;
+    --text: #e6edf3; --text-muted: #8b949e;
+  }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  header {
+    background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px; display: flex; align-items: center; gap: 12px;
+  }
+  header h1 { font-size: 1.1rem; font-weight: 700; color: var(--blue-light); }
+  header span { color: var(--text-muted); font-size: 0.85rem; }
+  header a { margin-left: auto; color: var(--blue-light); font-size: 0.85rem; text-decoration: none; }
+  header a:hover { text-decoration: underline; }
+
+  .btn { padding: 7px 18px; border-radius: 7px; border: none; cursor: pointer; font-size: 0.875rem; font-weight: 600; transition: opacity 0.12s, transform 0.1s; text-decoration: none; display: inline-block; }
+  .btn:hover { opacity: 0.82; } .btn:active { transform: scale(0.97); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .btn-primary { background: var(--blue); color: #fff; }
+  .btn-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+
+  main { max-width: 760px; margin: 32px auto; padding: 0 16px 48px; }
+  .page-title { font-size: 1.15rem; font-weight: 600; color: var(--blue-light); margin-bottom: 8px; }
+  .lead { color: var(--text-muted); font-size: 0.875rem; line-height: 1.7; margin-bottom: 20px; }
+
+  .field-label { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.8rem; color: var(--text-muted); margin: 16px 0 6px; }
+  .counter.over { color: var(--red); }
+  textarea {
+    width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text); padding: 10px 12px; font-size: 0.85rem; line-height: 1.55; resize: vertical;
+  }
+  textarea:focus { outline: none; border-color: var(--blue); }
+  #tl-text { font-family: Consolas, 'Courier New', monospace; min-height: 320px; }
+
+  .actions { display: flex; align-items: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+  .actions[hidden] { display: none; }
+  .hint { color: var(--text-muted); font-size: 0.78rem; }
+
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-top: 20px; }
+  .panel[hidden] { display: none; }
+  .progress-head { display: flex; align-items: center; gap: 10px; font-size: 0.875rem; }
+  .spinner { width: 14px; height: 14px; border: 2px solid var(--border); border-top-color: var(--blue-light); border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #elapsed { margin-left: auto; color: var(--text-muted); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+  #progress-log { list-style: none; margin-top: 10px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; }
+  #progress-log li:last-child { color: var(--text); }
+
+  .status-badge { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 10px; margin-bottom: 10px; }
+  .status-badge.ok { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.4); }
+  .status-badge.partial { background: rgba(210,153,34,0.15); color: var(--yellow); border: 1px solid rgba(210,153,34,0.4); }
+  .status-badge.none { background: rgba(248,81,73,0.12); color: var(--red); border: 1px solid rgba(248,81,73,0.4); }
+  #summary { white-space: pre-wrap; font-size: 0.875rem; line-height: 1.7; }
+  #stop-reason { margin-top: 10px; font-size: 0.8rem; color: var(--yellow); }
+  #result-actions { margin-top: 14px; }
+
+  .error-msg { color: var(--red); font-size: 0.85rem; padding: 8px 12px; background: rgba(248,81,73,0.1); border: 1px solid rgba(248,81,73,0.4); border-radius: 6px; margin-top: 16px; }
+  .error-msg[hidden] { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>BA EX Skill Simulator</h1>
+  <span>TL取り込み</span>
+  <a id="sim-link" href="./">シミュレーターへ</a>
+</header>
+
+<main>
+  <div class="page-title">TLを貼り付けて読み込む</div>
+  <p class="lead">
+    ラフに書いたTLを貼ると、Claudeが生徒名・対象・初期の手札順を読み取り、exsimで開ける形にします。<br>
+    1回に数十秒〜数分かかります。読み取れなかった点や仮定した点は、結果に表示されます。
+  </p>
+
+  <div id="disabled-msg" class="error-msg" hidden>このサーバーではTL取り込みが無効です(APIキーが設定されていません)。</div>
+
+  <label class="field-label" for="tl-text"><span>TL</span><span id="counter" class="counter"></span></label>
+  <textarea id="tl-text" spellcheck="false" placeholder="編成順　　：クルミ アリス(臨戦) オトギ ニコ | イブキ(水着) ユズ(臨戦)
+開始スキル：イブキ クルミ ユズ オトギ ニコ
+
+Auto      イブキ
+Auto      クルミ
+ASAP      ユズ　　[オトギ]
+4:10.500  オトギ　[船体]
+…"></textarea>
+
+  <label class="field-label" for="notes"><span>補足(任意): 通称や前提など</span></label>
+  <textarea id="notes" rows="3" placeholder="例: カジコ=シロコ(水着)、イブキのお友達はアリスとオトギ"></textarea>
+
+  <div class="actions">
+    <button id="run-btn" class="btn btn-primary">読み込む</button>
+    <span class="hint">貼った内容はこのブラウザに保存され、次に開いた時に残ります。</span>
+  </div>
+
+  <div id="error-msg" class="error-msg" hidden></div>
+
+  <section id="progress-panel" class="panel" hidden>
+    <div class="progress-head"><div class="spinner"></div><span>読み取り中…</span><span id="elapsed"></span></div>
+    <ul id="progress-log"></ul>
+  </section>
+
+  <section id="result-panel" class="panel" hidden>
+    <div id="status-badge" class="status-badge"></div>
+    <div id="summary"></div>
+    <div id="stop-reason" hidden></div>
+    <div id="result-actions" class="actions">
+      <a id="open-btn" class="btn btn-primary" href="#">exsimで開く</a>
+      <button id="copy-btn" class="btn btn-secondary">リンクをコピー</button>
+    </div>
+  </section>
+</main>
+
+<script>
+const BASE = window.location.pathname.startsWith('/exsim') ? '/exsim' : '';
+const DRAFT_KEY = 'exsim-tl-import-draft';
+const POLL_MS = 1500;
+
+const $ = (id) => document.getElementById(id);
+let maxChars = 6000;
+let pollTimer = null;
+let elapsedTimer = null;
+let shareUrl = '';
+
+$('sim-link').href = BASE + '/';
+
+function loadDraft() {
+  try {
+    const draft = JSON.parse(localStorage.getItem(DRAFT_KEY) || '{}');
+    $('tl-text').value = draft.tl || '';
+    $('notes').value = draft.notes || '';
+  } catch (e) { /* 保存領域が使えない環境では何もしない */ }
+}
+
+function saveDraft() {
+  try {
+    localStorage.setItem(DRAFT_KEY, JSON.stringify({ tl: $('tl-text').value, notes: $('notes').value }));
+  } catch (e) { /* 同上 */ }
+}
+
+function updateCounter() {
+  const used = $('tl-text').value.length + $('notes').value.length;
+  $('counter').textContent = used + ' / ' + maxChars;
+  $('counter').classList.toggle('over', used > maxChars);
+}
+
+function showError(message) {
+  $('error-msg').textContent = message;
+  $('error-msg').hidden = !message;
+}
+
+function setRunning(running) {
+  $('run-btn').disabled = running;
+  $('progress-panel').hidden = !running;
+  clearInterval(elapsedTimer);
+  if (running) {
+    const started = Date.now();
+    $('elapsed').textContent = '0秒';
+    elapsedTimer = setInterval(() => {
+      $('elapsed').textContent = Math.floor((Date.now() - started) / 1000) + '秒';
+    }, 1000);
+  }
+}
+
+function renderProgress(lines) {
+  const log = $('progress-log');
+  log.replaceChildren(...lines.map((line) => {
+    const li = document.createElement('li');
+    li.textContent = line;
+    return li;
+  }));
+}
+
+function renderResult(result) {
+  const badge = $('status-badge');
+  if (!result.simulated) {
+    badge.className = 'status-badge none';
+    badge.textContent = '読み込めませんでした';
+  } else if (result.ok) {
+    badge.className = 'status-badge ok';
+    badge.textContent = '最後まで回りました';
+  } else {
+    badge.className = 'status-badge partial';
+    badge.textContent = (result.error ? result.error.step + '手目' : '途中') + 'で止まりました';
+  }
+  $('summary').textContent = result.summary || '';
+
+  const stop = $('stop-reason');
+  stop.hidden = !(result.simulated && !result.ok && result.error);
+  if (!stop.hidden) stop.textContent = '停止理由: ' + result.error.reason;
+
+  shareUrl = result.share ? window.location.origin + BASE + '/#share=' + result.share : '';
+  $('result-actions').hidden = !shareUrl;
+  $('open-btn').href = shareUrl || '#';
+  $('result-panel').hidden = false;
+}
+
+async function apiError(res) {
+  try {
+    const body = await res.json();
+    if (body && body.detail) return typeof body.detail === 'string' ? body.detail : JSON.stringify(body.detail);
+  } catch (e) { /* JSONでない応答 */ }
+  return '読み込みを開始できませんでした(' + res.status + ')';
+}
+
+async function run() {
+  showError('');
+  $('result-panel').hidden = true;
+  renderProgress([]);
+  saveDraft();
+
+  let res;
+  try {
+    res = await fetch(BASE + '/api/tl_import', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tl_text: $('tl-text').value, notes: $('notes').value }),
+    });
+  } catch (e) {
+    showError('サーバーに接続できませんでした。');
+    return;
+  }
+  if (!res.ok) {
+    showError(await apiError(res));
+    return;
+  }
+  const { job_id } = await res.json();
+  setRunning(true);
+  poll(job_id);
+}
+
+async function poll(jobId) {
+  let job;
+  try {
+    const res = await fetch(BASE + '/api/tl_import/' + jobId);
+    if (!res.ok) {
+      setRunning(false);
+      showError(await apiError(res));
+      return;
+    }
+    job = await res.json();
+  } catch (e) {
+    // 一時的な通信エラーは待って再試行する
+    pollTimer = setTimeout(() => poll(jobId), POLL_MS * 2);
+    return;
+  }
+  renderProgress(job.progress || []);
+  if (job.status === 'running') {
+    pollTimer = setTimeout(() => poll(jobId), POLL_MS);
+    return;
+  }
+  setRunning(false);
+  if (job.status === 'error') {
+    showError(job.error);
+  } else {
+    renderResult(job.result);
+  }
+}
+
+$('run-btn').addEventListener('click', run);
+$('copy-btn').addEventListener('click', async () => {
+  if (!shareUrl) return;
+  try {
+    await navigator.clipboard.writeText(shareUrl);
+    $('copy-btn').textContent = 'コピーしました';
+    setTimeout(() => { $('copy-btn').textContent = 'リンクをコピー'; }, 1500);
+  } catch (e) {
+    window.prompt('このリンクをコピーしてください', shareUrl);
+  }
+});
+for (const id of ['tl-text', 'notes']) {
+  $(id).addEventListener('input', () => { updateCounter(); saveDraft(); });
+}
+
+(async function init() {
+  loadDraft();
+  try {
+    const res = await fetch(BASE + '/api/tl_import/status');
+    const status = await res.json();
+    maxChars = status.max_chars || maxChars;
+    if (!status.enabled) {
+      $('disabled-msg').hidden = false;
+      $('run-btn').disabled = true;
+    }
+  } catch (e) { /* 状態が取れなくても入力はできるようにしておく */ }
+  updateCounter();
+})();
+</script>
+</body>
+</html>

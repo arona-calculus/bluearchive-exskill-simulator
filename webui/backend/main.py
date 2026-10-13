@@ -17,7 +17,7 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -25,6 +25,7 @@ from pydantic import BaseModel
 
 from ba_exsim.core.simulator import Simulator
 from ba_exsim.core.state import State
+from webui.backend import tl_import_jobs
 from webui.backend.catalog import (
     BUILTINS,
     build_specs,
@@ -233,6 +234,52 @@ def rewind_session(session_id: str, body: RewindRequest):
 def delete_session(session_id: str):
     sessions.pop(session_id, None)
     return {"ok": True}
+
+
+# ---------------------------------------------------------------------------
+# TL取り込み(import.html): ラフなTLを Claude API で解釈し、共有リンクの形で返す
+# ---------------------------------------------------------------------------
+
+tl_jobs = tl_import_jobs.JobStore()
+
+# TL取り込みで使ったトークン数やAPIエラーを、uvicornのログと並べて出す
+# (uvicornは自分のロガーにしかハンドラを付けないため、そのままでは INFO が出ない)
+_backend_logger = logging.getLogger("webui.backend")
+if not _backend_logger.handlers:
+    _handler = logging.StreamHandler()
+    _handler.setFormatter(logging.Formatter("%(levelname)s:     %(name)s: %(message)s"))
+    _backend_logger.addHandler(_handler)
+    _backend_logger.setLevel(logging.INFO)
+
+
+class TLImportRequest(BaseModel):
+    tl_text: str
+    notes: str = ""
+
+
+@app.get("/api/tl_import/status")
+def tl_import_status():
+    return {"enabled": tl_import_jobs.enabled(), "max_chars": tl_import_jobs.MAX_CHARS}
+
+
+@app.post("/api/tl_import")
+def start_tl_import(body: TLImportRequest, request: Request):
+    if not tl_import_jobs.enabled():
+        raise HTTPException(status_code=503, detail="このサーバーではTL取り込みが無効です(APIキー未設定)")
+    ip = request.client.host if request.client else "unknown"
+    try:
+        job_id = tl_jobs.submit(body.tl_text, body.notes, ip)
+    except tl_import_jobs.LimitError as e:
+        raise HTTPException(status_code=e.status, detail=e.message)
+    return {"job_id": job_id}
+
+
+@app.get("/api/tl_import/{job_id}")
+def get_tl_import(job_id: str):
+    job = tl_jobs.get(job_id)
+    if job is None:
+        raise HTTPException(status_code=404, detail="取り込みが見つかりません(期限切れの可能性があります)")
+    return job
 
 
 _assets_dir = Path(__file__).parent.parent / "assets"

@@ -22,6 +22,8 @@
   }
   header h1 { font-size: 1.1rem; font-weight: 700; color: var(--blue-light); }
   header span { color: var(--text-muted); font-size: 0.85rem; }
+  header a { margin-left: auto; color: var(--blue-light); font-size: 0.85rem; text-decoration: none; }
+  header a:hover { text-decoration: underline; }
 
   .btn { padding: 7px 18px; border-radius: 7px; border: none; cursor: pointer; font-size: 0.875rem; font-weight: 600; transition: opacity 0.12s, transform 0.1s; }
   .btn:hover { opacity: 0.82; } .btn:active { transform: scale(0.97); }
@@ -256,6 +258,7 @@
 <header>
   <h1>BA EX Skill Simulator</h1>
   <span>Blue Archive EXスキル シミュレーター</span>
+  <a id="tl-import-link" href="import.html">TLを貼って読み込む</a>
 </header>
 
 <!-- SETUP SCREEN -->
@@ -331,6 +334,7 @@
 <script>
 const BASE = window.location.pathname.startsWith('/exsim') ? '/exsim' : '';
 const API = BASE;
+document.getElementById('tl-import-link').href = BASE + '/import.html';
 
 let sessionId = null;
 let currentState = null;

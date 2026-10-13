@@ -175,7 +175,8 @@ TLの解釈は利用者自身の Claude が行い、サーバーはシミュレ�
 | `simulate_tl(characters, steps, ...)` | 初期の手札+山札順と手順列を実行し、各ステップの手札・ゲージ・コスト、破綻地点、webuiの共有リンクを返す |
 | `find_initial_orders(characters, steps, ...)` | 手順列と矛盾しない初期順を総当りで探す（8枚まで。手札内の並びは同一視する） |
 
-中核ロジックはMCPに依存しない `webui/backend/tl_import.py` にあり、`mcp_server.py` は薄いアダプタである。
+中核ロジックはMCPに依存しない `webui/backend/tl_import.py` に、ツールの中身と指示文は
+下のTL取り込みページと共有する `webui/backend/tl_tools.py` にあり、`mcp_server.py` は薄いアダプタである。
 - 名前は キー / 表示名（全角括弧・空白の揺れも許容）のどちらでも受け付け、未知の名前には候補を返す。
 - リオのコピー使用は元の名前（`Rio`）で指定してよい（手札上の代理カード `Rio_Copy` に解決する）。
 - 対象が必須か（`list_characters` の `needs_target`、対象未指定の警告）は webui と同じく
@@ -186,6 +187,34 @@ TLの解釈は利用者自身の Claude が行い、サーバーはシミュレ�
 実際にサーバーをstdioで起動しての確認は `uv run --extra mcp python scripts/mcp_smoke.py`
 （`tests/data/tl/` の全ケースを `simulate_tl` に流して期待値と照合し、各ケースの share_url を表示する）。
 起動済みのHTTPサーバーには `--url http://127.0.0.1:8765/mcp` を付けて同じ確認ができる。
+
+## TL取り込みページ（`webui/frontend/import.html`）
+
+チャットを使わずに、webui上でラフなTLを貼るだけでexsimに読み込むためのページ。
+サーバー（`webui/backend/tl_agent.py`）が Claude API に上のMCPと同じツール・指示文（`tl_tools.py`）を使わせ、
+最後に実行した `simulate_tl` の結果を共有リンクの形でページに返す。利用者には質問できないため、
+曖昧な点は Claude が妥当な解釈で進め、仮定した点を報告に書く（ページの「補足」欄で前提を渡せる）。
+
+- APIキーはサーバーの持ち主のもの（`ANTHROPIC_API_KEY`）を全利用者で共有する。未設定ならページは無効表示になる。
+- 解釈には数十秒〜数分かかるので、`POST /api/tl_import` はジョブを作って即座に返し、
+  ページは `GET /api/tl_import/{job_id}` で進捗と結果をポーリングする（`tl_import_jobs.py`）。
+- 費用の上限として、入力の長さ・IPごとの回数・1日の総数・同時実行数・1回あたりの往復回数を制限する。
+  制限はプロセス内にしか持たないため、uvicorn はワーカー1つで動かす。リバースプロキシの後ろでは
+  `--proxy-headers` を付けないと、IPごとの制限が利用者全員で共通になる。
+
+| 環境変数 | 既定値 | 内容 |
+|---|---|---|
+| `ANTHROPIC_API_KEY` | （なし） | Claude APIのキー。未設定なら取り込みは無効 |
+| `EXSIM_TL_IMPORT_MODEL` | `claude-opus-5-5` | 使うモデル |
+| `EXSIM_TL_IMPORT_EFFORT` | `medium` | 考える深さ（`low`〜`max`）。上げるほど正確だが高くなる |
+| `EXSIM_TL_IMPORT_MAX_TURNS` | `12` | 1回の取り込みで Claude に投げるリクエスト数の上限 |
+| `EXSIM_TL_IMPORT_MAX_CHARS` | `6000` | TLと補足の合計文字数の上限 |
+| `EXSIM_TL_IMPORT_PER_IP_PER_HOUR` | `10` | IPごとの1時間あたりの回数 |
+| `EXSIM_TL_IMPORT_PER_DAY` | `100` | サーバー全体の1日あたりの回数 |
+| `EXSIM_TL_IMPORT_MAX_CONCURRENT` | `2` | 同時に実行する取り込みの数 |
+
+安全性の判定で断られた場合は、Anthropic推奨の別モデルでサーバー側で再試行させている（`fallbacks: "default"`）。
+1回の取り込みで使ったトークン数はサーバーのログ（`webui.backend.tl_agent`）に出る。
 
 ## 姉妹リポジトリとの関係
 
