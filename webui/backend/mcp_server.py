@@ -93,10 +93,16 @@ def public_base_url(ctx: Optional[Context]) -> Optional[str]:
     return f"{scheme}://{host}{prefix.rstrip('/')}/"
 
 
+# TLは引数で受け取らず、利用者にチャットへそのまま貼ってもらう。引数で渡すと Claude Code では
+# 空白で切れ、claude.ai の入力欄では改行が失われることがある(改行は「//」コメントの終わりなど解釈に効く)
 @mcp.prompt()
-def import_rough_tl(tl_text: str) -> str:
-    """ラフに書いたTLをexsimに読み込む"""
-    return f"{INSTRUCTIONS}\n以下のTLをexsimに読み込んでください。\n\n```\n{tl_text}\n```"
+def import_tl_from_text() -> str:
+    """TLの読み込み手順を会話に添える(TLはチャットにそのまま貼る)"""
+    return (
+        f"{INSTRUCTIONS}\n"
+        "チャットに貼られたTLをexsimに読み込んでください。"
+        "TLがまだ無ければ、改行を保ったままチャットに貼るよう頼んでください。"
+    )
 
 
 def _env_list(name: str) -> List[str]:

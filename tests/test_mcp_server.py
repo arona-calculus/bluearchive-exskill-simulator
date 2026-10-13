@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import json
 
 import pytest
@@ -20,6 +21,22 @@ SIMULATE_CALL = {
         "arguments": {"characters": ["Aru", "Kisaki", "Sena", "Mutsuki"], "steps": [{"card": "アル"}]},
     },
 }
+
+
+def test_prompt_takes_no_tl_argument() -> None:
+    # TLを引数で渡すと空白や改行で崩れるため、プロンプトは手順を添えるだけにする
+    prompts = asyncio.run(mcp_server.mcp.list_prompts())
+    assert [(p.name, p.arguments or []) for p in prompts] == [("import_tl_from_text", [])]
+
+    result = asyncio.run(mcp_server.mcp.get_prompt("import_tl_from_text"))
+    assert mcp_server.INSTRUCTIONS in result.messages[0].content.text
+
+
+def test_tool_descriptions_carry_tl_reading_rules() -> None:
+    # 指示文を渡さないクライアントでも、TLの読み方がツールの説明から伝わる
+    tools = {t.name: t.description for t in asyncio.run(mcp_server.mcp.list_tools())}
+    assert "「リオ → X」がコピー" in tools["simulate_tl"]
+    assert "略記" in tools["list_characters"]
 
 
 def test_transport_security_defaults_to_sdk(monkeypatch) -> None:

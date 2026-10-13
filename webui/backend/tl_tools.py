@@ -14,20 +14,15 @@ from pydantic import BaseModel, Field
 from webui.backend import tl_import
 from webui.backend.tl_import import Step, TLError
 
+# TLの読み方はツールの説明(simulate_tl)に置き、指示文には流れだけを書く。
+# サーバーの指示文(instructions)をモデルに渡すかはMCPクライアント次第だが、ツールの説明は必ず渡るため
 INSTRUCTIONS = """\
 ブルーアーカイブのEXスキル手札サイクル(exsim)のシミュレータ。ラフなTLをexsimに読み込むときの手順:
-1. TLに登場する生徒を list_characters で正規のキーに対応付ける
-   (「Cイロハ」「水着ハナコ」のような略記は query に素の名前を入れて候補から選ぶ)。
-2. TLを「誰のEXを・誰を対象に使うか」の手順列に直す。時刻・AUTO/ASAP・コメント等は note に残す。
-   EX使用でない行(デバフ付与タイミングのメモ等)は直前の手順の note にまとめる。
-   リオは「リオ → X」がコピー(target=X)、その後の単なる「リオ」はコピーの使用(targetなし)。
-   アリス(臨戦)の「チャージ」は自身対象(target=Alice_Battle)、敵(部位名など)を狙う使用は targetなし。
-   「×2」のような回数の指定は、同じ手順を回数分並べる。
-3. 初期の手札+山札順は「開始スキル」の行や名前に付いた番号で示されていることが多い。
-   書かれていなければ find_initial_orders で候補を探す。
+1. TLに登場する生徒を list_characters で正規のキーに対応付ける。
+2. TLを「誰のEXを・誰を対象に使うか」の手順列に直す(読み方は simulate_tl の説明にある)。
+3. 初期の手札+山札順が書かれていなければ find_initial_orders で候補を探す。
 4. simulate_tl で実行し、返ってきた share_url をユーザーに渡す(開くとexsimに読み込まれる)。
    途中で破綻した場合は error に手札状況が入るので、TLの読み違いかTL自体の誤りかを判断して報告する。
-   生徒の退場(「〇〇落ち」)はexsimで表現できないため、その手前までを実行し、残りは最後の手順の note に書く。
 """
 
 DESCRIPTIONS = {
@@ -35,20 +30,30 @@ DESCRIPTIONS = {
 exsimに登録されている生徒の一覧を返す。
 
 query を指定するとキー・表示名の部分一致で絞り込む(例: "イロハ" で通常/水着などの衣装違いが全て出る)。
+TLの略記(「Cイロハ」「水着ハナコ」等)は query に素の名前を入れ、候補から衣装を選ぶ。
 custom_spec=True の生徒は固有のEX挙動(ゲージ・コピー等)が実装済み、False は常にサイクルするだけ。
 needs_target=True の生徒は対象指定が必要。
 """,
     "find_initial_orders": """\
 手順列と矛盾しない初期の手札+山札順を総当りで探す(8枚まで)。
 
+steps は simulate_tl と同じ形式(TLの読み方も simulate_tl の説明のとおり)。
 手札内の並びはサイクルに影響しないので、手札部分の並べ替えは同一視して数える。
 完走する順が無い場合は best_partial に最も先まで進めた順と、止まった地点の手札を返す。
 """,
     "simulate_tl": """\
 TLを実行し、各ステップの手札・ゲージ・コストと、exsimで開ける共有リンクを返す。
 
-characters は初期の手札+山札の順(先頭 hand_size 枚が手札)。
+characters は初期の手札+山札の順(先頭 hand_size 枚が手札)。TLでは「開始スキル」の行や
+名前に付いた番号で示されていることが多い。書かれていなければ find_initial_orders で候補を探す。
+steps はラフなTLを「誰のEXを・誰を対象に使うか」の手順列に直したもの。TLの読み方:
+- 時刻・AUTO/ASAP・コメント等は note に残す。EX使用でない行(デバフ付与タイミングのメモ等)は直前の手順の note にまとめる。
+- リオは「リオ → X」がコピー(target=X)、その後の単なる「リオ」はコピーの使用(targetなし)。
+- アリス(臨戦)の「チャージ」は自身対象(target=Alice_Battle)、敵(部位名など)を狙う使用は targetなし。
+- 「×2」のような回数の指定は、同じ手順を回数分並べる。
+- 生徒の退場(「〇〇落ち」)はexsimで表現できないため、その手前までを実行し、残りは最後の手順の note に書く。
 途中で破綻した場合もそこまでの履歴で share_url を返す(exsim上で続きを手動で確認できる)。
+error の手札状況から、TLの読み違いかTL自体の誤りかを判断する。
 env は初期のゲージ等(例: {"hanako_gauge": 100})を与える場合のみ。
 """,
 }
