@@ -3573,5 +3573,83 @@
     "ex_cost_max": 3,
     "ex_extra_cost_max": null,
     "icon_copied": true
+  },
+  {
+    "id": 10151,
+    "key": "Anna",
+    "label": "アンナ",
+    "personal_name": "アンナ",
+    "path_name": "anna",
+    "base_name": "アンナ",
+    "costume": "",
+    "role": "STRIKER",
+    "ex_cost_max": 6,
+    "ex_extra_cost_max": null,
+    "icon_copied": true
+  },
+  {
+    "id": 20062,
+    "key": "Erina",
+    "label": "エリナ",
+    "personal_name": "エリナ",
+    "path_name": "erina",
+    "base_name": "エリナ",
+    "costume": "",
+    "role": "SPECIAL",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
+    "icon_copied": true
+  },
+  {
+    "id": 10152,
+    "key": "Tsumugi",
+    "label": "ツムギ",
+    "personal_name": "ツムギ",
+    "path_name": "tsumugi",
+    "base_name": "ツムギ",
+    "costume": "",
+    "role": "STRIKER",
+    "ex_cost_max": 3,
+    "ex_extra_cost_max": null,
+    "icon_copied": true
+  },
+  {
+    "id": 10153,
+    "key": "Hifumi_Racing",
+    "label": "ヒフミ（レーシング）",
+    "personal_name": "ヒフミ",
+    "path_name": "hifumi_racing",
+    "base_name": "ヒフミ",
+    "costume": "レーシング",
+    "role": "STRIKER",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": null,
+    "icon_copied": true
+  },
+  {
+    "id": 20063,
+    "key": "Azusa_Racing",
+    "label": "アズサ（レーシング）",
+    "personal_name": "アズサ",
+    "path_name": "azusa_racing",
+    "base_name": "アズサ",
+    "costume": "レーシング",
+    "role": "SPECIAL",
+    "ex_cost_max": 4,
+    "ex_extra_cost_max": null,
+    "icon_copied": true
+  },
+  {
+    "id": 26017,
+    "key": "Rana",
+    "label": "ラナ",
+    "personal_name": "ラナ",
+    "path_name": "rana",
+    "base_name": "ラナ",
+    "costume": "",
+    "role": "SPECIAL",
+    "ex_cost_max": 5,
+    "ex_extra_cost_max": 5,
+    "icon_copied": true
   }
 ]
